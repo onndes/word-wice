@@ -7,11 +7,11 @@ import { HOME_ROUTE, LOGIN_ROUTE } from '../utils/consts'
 
 const AppRouter = () => {
     const { isAuth } = useAuth()
-
+    
     return isAuth ? (
         <Routes>
             {privateRoutes.map(({ path, Component }) => (
-                <Route key={path} path={path} component={Component} />
+                <Route key={path} path={path} element={Component} />
             ))}
             <Route path="*" element={<Navigate to={HOME_ROUTE} replace />} />
         </Routes>

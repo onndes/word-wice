@@ -5,15 +5,20 @@ export const getAuthUser = createAsyncThunk('user/getAuthUser', async () => {
     const auth = getAuth()
     const provider = new GoogleAuthProvider()
     const { user } = await signInWithPopup(auth, provider)
+
+    localStorage.setItem('userData', JSON.stringify(user))
+
     return user
 })
 
+const userData = JSON.parse(localStorage.getItem('userData'))
+
 const initialState = {
-    displayName: null,
-    photoURL: null,
-    email: null,
-    token: null,
-    id: null,
+    displayName: userData?.displayName || null,
+    photoURL: userData?.photoURL || null,
+    email: userData?.email || null,
+    token: userData?.accessToken || null,
+    id: userData?.uid || null,
     isLoading: false,
     error: null,
 }
@@ -28,6 +33,7 @@ const userSlice = createSlice({
             state.id = action.payload.id
         },
         removeUser(state) {
+            localStorage.removeItem('userData', JSON.stringify('userData'))
             state.displayName = null
             state.photoURL = null
             state.email = null
