@@ -7,6 +7,7 @@ import { DRAWER_WIDTH } from '../utils/consts'
 import AppRouter from './AppRouter'
 import MyAppBar from './MyAppBar'
 import { MyDrawer, DrawerHeader } from './MyDrawer'
+import { useAuth } from '../hooks/useAuth'
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -29,7 +30,9 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 
 export default function Layout() {
     const [open, setOpen] = React.useState(true)
-    const user = false
+    
+    const { isAuth } = useAuth()
+
     const handleDrawerOpen = () => {
         setOpen(true)
     }
@@ -43,14 +46,14 @@ export default function Layout() {
             <CssBaseline />
             <MyAppBar
                 handleDrawerOpen={handleDrawerOpen}
-                open={open && user}
-                user={user}
+                open={open && isAuth}
+                user={isAuth}
             />
             <MyDrawer
                 handleDrawerClose={handleDrawerClose}
-                open={open && user}
+                open={open && isAuth}
             />
-            <Main open={open && user}>
+            <Main open={open && isAuth}>
                 <DrawerHeader />
                 <AppRouter />
             </Main>

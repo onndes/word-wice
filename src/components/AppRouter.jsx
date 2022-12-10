@@ -1,13 +1,14 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
+import { useAuth } from '../hooks/useAuth'
 
 import { privateRoutes, publicRoutes } from '../routes'
 import { HOME_ROUTE, LOGIN_ROUTE } from '../utils/consts'
 
 const AppRouter = () => {
-    const user = false
+    const { isAuth } = useAuth()
 
-    return user ? (
+    return isAuth ? (
         <Routes>
             {privateRoutes.map(({ path, Component }) => (
                 <Route key={path} path={path} component={Component} />

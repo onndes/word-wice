@@ -1,9 +1,11 @@
+import { useDispatch } from 'react-redux'
 import MuiAppBar from '@mui/material/AppBar'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Box, Button, IconButton, Toolbar, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
-
 import { DRAWER_WIDTH } from '../utils/consts'
+import { useAuth } from '../hooks/useAuth'
+import { removeUser } from '../redux/slices/userSlice'
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
@@ -23,6 +25,9 @@ const AppBar = styled(MuiAppBar, {
 }))
 
 export default function MyAppBar({ handleDrawerOpen, open }) {
+    const dispatch = useDispatch()
+    const { isAuth, email } = useAuth()
+
     return (
         <AppBar position="fixed" open={open}>
             <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -38,11 +43,25 @@ export default function MyAppBar({ handleDrawerOpen, open }) {
                             <MenuIcon />
                         </IconButton>
                     )}
-                    <Typography variant="h6" noWrap component="div">
+                    <Typography variant="h6" noWrap component="p">
                         MyVocabulary
                     </Typography>
                 </Box>
-                <Button color="inherit">Login</Button>
+                {isAuth ? (
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Typography variant="p" noWrap component="p" mr={2}>
+                            {email}
+                        </Typography>
+                        <Button
+                            color="inherit"
+                            onClick={() => dispatch(removeUser())}
+                        >
+                            Log out
+                        </Button>
+                    </Box>
+                ) : (
+                    <Button color="inherit">Login</Button>
+                )}
             </Toolbar>
         </AppBar>
     )
