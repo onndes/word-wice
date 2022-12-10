@@ -4,15 +4,14 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import Divider from '@mui/material/Divider'
 import Drawer from '@mui/material/Drawer'
 import IconButton from '@mui/material/IconButton'
-import List from '@mui/material/List'
 
-import HomeIcon from '@mui/icons-material/Home'
+
 import { styled, useTheme } from '@mui/material/styles'
 
 import ButtonToggleTheme from './ButtonToggleTheme'
-import ListItemDrawer from './ListItemDrawer'
 
 import { DRAWER_WIDTH } from '../utils/consts'
+import DrawerMenu from './DrawerMenu'
 
 export const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -51,11 +50,7 @@ export function MyDrawer({ handleDrawerClose, open }) {
             <Divider />
             <ButtonToggleTheme />
             <Divider />
-            <List>
-                <ListItemDrawer text="Home">
-                    <HomeIcon />
-                </ListItemDrawer>
-            </List>
+            <DrawerMenu />
         </Drawer>
     )
 }

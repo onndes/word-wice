@@ -1,6 +1,13 @@
 import Home from './pages/Home'
+import LearnWords from './pages/LearnWords'
 import Login from './pages/Login'
-import { HOME_ROUTE, LOGIN_ROUTE } from './utils/consts'
+import Vocabulary from './pages/Vocabulary'
+import {
+    HOME_ROUTE,
+    LEARN_WORDS_ROUTE,
+    LOGIN_ROUTE,
+    VOCABULARY_ROUTE,
+} from './utils/consts'
 
 export const publicRoutes = [
     {
@@ -12,5 +19,13 @@ export const privateRoutes = [
     {
         path: HOME_ROUTE,
         Component: <Home />,
+    },
+    {
+        path: VOCABULARY_ROUTE,
+        Component: <Vocabulary />,
+    },
+    {
+        path: LEARN_WORDS_ROUTE,
+        Component: <LearnWords />,
     },
 ]
