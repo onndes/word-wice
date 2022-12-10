@@ -1,7 +1,6 @@
-import { CssBaseline, ThemeProvider, Button } from '@mui/material'
-import Grid from '@mui/material/Grid'
-import MyAppBar from './components/MyAppBar'
-import MyDrawer from './components/MyDrawer'
+import * as React from 'react'
+import { CssBaseline, ThemeProvider } from '@mui/material'
+import Layout from './components/Layout'
 import { ColorModeContext, useMode } from './theme/theme'
 
 function App() {
@@ -10,18 +9,7 @@ function App() {
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <div>
-                    <MyDrawer />
-                </div>
-
-                {/* <Grid container className="App" style={{ minWidth: '100%' }}>
-                    <Grid item style={{ minWidth: '200px' }} md={2}>
-                        App
-                    </Grid>
-                    <Grid item md={10}>
-                        <MyAppBar />
-                    </Grid>
-                </Grid> */}
+                <Layout />
             </ThemeProvider>
         </ColorModeContext.Provider>
     )

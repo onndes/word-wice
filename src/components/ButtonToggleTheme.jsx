@@ -1,8 +1,9 @@
-import { Box, Button, IconButton } from '@mui/material'
 import React from 'react'
+import { Box, IconButton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
+
 import { ColorModeContext } from '../theme/theme'
 
 export default function ButtonToggleTheme() {
@@ -36,7 +37,6 @@ export default function ButtonToggleTheme() {
                     )}
                 </IconButton>
             </Box>
-            
         </Box>
     )
 }

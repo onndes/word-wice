@@ -1,10 +1,10 @@
+import React from 'react'
 import {
     ListItem,
     ListItemButton,
     ListItemIcon,
     ListItemText,
 } from '@mui/material'
-import React from 'react'
 
 export default function ListItemDrawer({ children, text }) {
     return (
