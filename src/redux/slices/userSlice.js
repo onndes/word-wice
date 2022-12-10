@@ -11,6 +11,13 @@ export const getAuthUser = createAsyncThunk('user/getAuthUser', async () => {
     return user
 })
 
+export const logOutUser = createAsyncThunk('user/logOutUser', async () => {
+    const auth = getAuth()
+    await auth.signOut()
+    
+    localStorage.removeItem('userData', JSON.stringify('userData'))
+})
+
 const userData = JSON.parse(localStorage.getItem('userData'))
 
 const initialState = {
@@ -42,6 +49,7 @@ const userSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
+        // getAuthUser
         builder.addCase(getAuthUser.pending, (state) => {
             state.isLoading = true
             state.displayName = null
@@ -59,6 +67,23 @@ const userSlice = createSlice({
             state.id = action.payload.uid
         })
         builder.addCase(getAuthUser.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.error
+        })
+
+        // logOutUser
+        builder.addCase(logOutUser.pending, (state) => {
+            state.isLoading = true
+        })
+        builder.addCase(logOutUser.fulfilled, (state) => {
+            state.isLoading = false
+            state.displayName = null
+            state.photoURL = null
+            state.email = null
+            state.token = null
+            state.id = null
+        })
+        builder.addCase(logOutUser.rejected, (state, action) => {
             state.isLoading = false
             state.error = action.error
         })

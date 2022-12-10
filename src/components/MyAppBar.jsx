@@ -5,7 +5,7 @@ import { Box, Button, IconButton, Toolbar, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { DRAWER_WIDTH } from '../utils/consts'
 import { useAuth } from '../hooks/useAuth'
-import { removeUser } from '../redux/slices/userSlice'
+import { logOutUser } from '../redux/slices/userSlice'
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
@@ -32,7 +32,7 @@ export default function MyAppBar({ handleDrawerOpen, open }) {
         <AppBar position="fixed" open={open}>
             <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    {open && (
+                    {isAuth && (
                         <IconButton
                             color="inherit"
                             aria-label="open drawer"
@@ -54,7 +54,7 @@ export default function MyAppBar({ handleDrawerOpen, open }) {
                         </Typography>
                         <Button
                             color="inherit"
-                            onClick={() => dispatch(removeUser())}
+                            onClick={() => dispatch(logOutUser())}
                         >
                             Log out
                         </Button>
