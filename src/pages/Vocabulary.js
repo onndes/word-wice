@@ -1,7 +1,8 @@
 import React from 'react'
+import AddWord from '../components/AddWord'
 
 const Vocabulary = () => {
-    return <div>Vocabulary</div>
+    return <AddWord/>
 }
 
 export default Vocabulary

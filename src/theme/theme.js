@@ -111,6 +111,13 @@ export const themeSettings = (mode) => {
                 fontSize: 14,
             },
         },
+        components: {
+            TextField: {
+                defaultProps: {
+                    color: 'red',
+                },
+            },
+        },
     }
 }
 
