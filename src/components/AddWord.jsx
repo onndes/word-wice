@@ -17,15 +17,18 @@ const AddWord = () => {
         reset()
     }
 
-    useEffect(() => {
-      
-    }, [formData])
+    useEffect(() => {}, [formData])
 
     return (
         <Box
             component="form"
             sx={{
-                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                '& .MuiTextField-root': {
+                    m: 1,
+                    width: '25ch',
+                },
+                display: 'flex',
+                alignItems: 'top'
             }}
             onSubmit={handleSubmit((data) => onSubmit(data))}
         >

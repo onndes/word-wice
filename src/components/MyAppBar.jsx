@@ -1,7 +1,7 @@
-import { useDispatch } from 'react-redux'
 import MuiAppBar from '@mui/material/AppBar'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Box, Button, IconButton, Toolbar, Typography } from '@mui/material'
+import { useDispatch } from 'react-redux'
 import { styled } from '@mui/material/styles'
 import { DRAWER_WIDTH } from '../utils/consts'
 import { useAuth } from '../hooks/useAuth'

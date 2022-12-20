@@ -19,7 +19,6 @@ export default function Login() {
                 <Box>
                     <Button
                         variant="contained"
-                        color="neutral"
                         sx={{ fontSize: '18px' }}
                         onClick={() => dispatch(getAuthUser())}
                     >

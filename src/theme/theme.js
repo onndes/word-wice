@@ -71,25 +71,6 @@ export const themeSettings = (mode) => {
     return {
         palette: {
             mode,
-            ...(mode === 'dark'
-                ? {
-                      primary: {
-                          main: colors.primary.DEFAULT,
-                      },
-                      neutral: {
-                          dark: colors.black[500],
-                          light: colors.white[100],
-                      },
-                  }
-                : {
-                      primary: {
-                          main: colors.white.DEFAULT,
-                      },
-                      neutral: {
-                          dark: colors.black[500],
-                          light: colors.white[100],
-                      },
-                  }),
         },
         typography: {
             fontFamily: ['Poppins', 'sans-serif'].join(','),
@@ -109,13 +90,6 @@ export const themeSettings = (mode) => {
             p: {
                 fontFamily: ['Poppins', 'sans-serif'].join(','),
                 fontSize: 14,
-            },
-        },
-        components: {
-            TextField: {
-                defaultProps: {
-                    color: 'red',
-                },
             },
         },
     }
