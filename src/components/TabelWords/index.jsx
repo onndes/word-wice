@@ -6,13 +6,18 @@ import Switch from '@mui/material/Switch'
 import Table from '@mui/material/Table'
 import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
-import PropTypes from 'prop-types'
+import { useTheme } from '@mui/material'
+
 import { rows } from './data'
 import TableBodyWords from './TableBodyWords'
 import TableToolbar from './TableToolbar'
 import TableHeadWords from './TableHeadWords'
+import { tokens } from '../../theme/theme'
 
 export default function TableWords() {
+    const theme = useTheme()
+    const colors = tokens(theme.palette.mode)
+
     const [order, setOrder] = React.useState('asc')
     const [orderBy, setOrderBy] = React.useState('calories')
     const [selected, setSelected] = React.useState([])
@@ -76,7 +81,9 @@ export default function TableWords() {
 
     return (
         <Box sx={{ width: '100%' }}>
-            <Paper sx={{ width: '100%', mb: 2 }}>
+            <Paper
+                sx={{ width: '100%', mb: 2, background: colors.primary[400] }}
+            >
                 <TableToolbar numSelected={selected.length} />
                 <TableContainer>
                     <Table
@@ -116,7 +123,11 @@ export default function TableWords() {
             </Paper>
             <FormControlLabel
                 control={
-                    <Switch checked={dense} onChange={handleChangeDense} />
+                    <Switch
+                        color="secondary"
+                        checked={dense}
+                        onChange={handleChangeDense}
+                    />
                 }
                 label="Dense padding"
             />

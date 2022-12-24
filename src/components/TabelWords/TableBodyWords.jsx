@@ -3,6 +3,7 @@ import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import Checkbox from '@mui/material/Checkbox'
 import TableBody from '@mui/material/TableBody'
+
 import { rows } from './data'
 import { getComparator, stableSort } from './utils'
 
@@ -39,7 +40,7 @@ const TableBodyWords = ({
                         >
                             <TableCell padding="checkbox">
                                 <Checkbox
-                                    color="primary"
+                                    color="secondary"
                                     checked={isItemSelected}
                                     inputProps={{
                                         'aria-labelledby': labelId,

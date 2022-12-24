@@ -1,6 +1,6 @@
 import React from 'react'
 import AddWord from '../components/AddWord'
-import TableWords from '../components/TabelWords/TableWords'
+import TableWords from '../components/TabelWords'
 
 const Vocabulary = () => {
     return (

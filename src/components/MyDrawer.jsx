@@ -10,6 +10,7 @@ import ButtonToggleTheme from './ButtonToggleTheme'
 
 import { DRAWER_WIDTH } from '../utils/consts'
 import DrawerMenu from './DrawerMenu'
+import { tokens } from '../theme/theme'
 
 export const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -22,6 +23,7 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
 
 export function MyDrawer({ handleDrawerClose, open }) {
     const theme = useTheme()
+    const colors = tokens(theme.palette.mode)
     return (
         <Drawer
             sx={{
@@ -30,13 +32,15 @@ export function MyDrawer({ handleDrawerClose, open }) {
                 '& .MuiDrawer-paper': {
                     width: DRAWER_WIDTH,
                     boxSizing: 'border-box',
+                    backgroundColor: colors.primary[400],
                 },
+                paper: {},
             }}
             variant="persistent"
             anchor="left"
             open={open}
         >
-            <DrawerHeader>
+            <DrawerHeader color="secondary">
                 <IconButton onClick={handleDrawerClose}>
                     {theme.direction === 'ltr' ? (
                         <ChevronLeftIcon />

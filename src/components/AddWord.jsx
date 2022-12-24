@@ -28,7 +28,7 @@ const AddWord = () => {
                     width: '25ch',
                 },
                 display: 'flex',
-                alignItems: 'top'
+                alignItems: 'top',
             }}
             onSubmit={handleSubmit((data) => onSubmit(data))}
         >
@@ -37,14 +37,13 @@ const AddWord = () => {
             <MyInput control={control} label="Translation" name="translation" />
 
             <Button
+                color="secondary"
                 variant="contained"
-                color="primary"
                 type="submit"
                 sx={{
                     height: '50px',
                     width: '100px',
-                    fontSize: 20,
-
+                    fontSize: '18px',
                     mt: '10px',
                 }}
             >

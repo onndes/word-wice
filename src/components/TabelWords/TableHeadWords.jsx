@@ -26,7 +26,7 @@ const headCells = [
         numeric: true,
         disablePadding: false,
         label: 'Translate',
-    }
+    },
     // {
     //     id: 'carbs',
     //     numeric: true,
@@ -60,7 +60,7 @@ const TableHeadWords = (props) => {
             <TableRow>
                 <TableCell padding="checkbox">
                     <Checkbox
-                        color="primary"
+                        color="secondary"
                         indeterminate={
                             numSelected > 0 && numSelected < rowCount
                         }

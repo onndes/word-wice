@@ -10,8 +10,9 @@ export default function MyInput({ label, name, control }) {
             defaultValue=""
             name={name}
             render={({ field, fieldState: { error } }) => (
-                <Box sx={{minHeight: '100px'}}>
+                <Box sx={{ minHeight: '100px' }}>
                     <TextField
+                    variant="filled"
                         label={label}
                         error={!!error}
                         helperText={error ? error.message : null}

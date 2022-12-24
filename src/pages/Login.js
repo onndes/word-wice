@@ -1,9 +1,12 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Container, Grid, Button, Box } from '@mui/material'
+import { Container, Grid, Button, Box, useTheme } from '@mui/material'
 import { getAuthUser } from '../redux/slices/userSlice'
+import { tokens } from '../theme/theme'
 
 export default function Login() {
+    const theme = useTheme()
+    const colors = tokens(theme.palette.mode)
     const dispatch = useDispatch()
     return (
         <Container>
@@ -19,7 +22,14 @@ export default function Login() {
                 <Box>
                     <Button
                         variant="contained"
-                        sx={{ fontSize: '18px' }}
+                        sx={{
+                            backgroundColor: colors.blueAccent[700],
+                            color: colors.grey[100],
+                            fontSize: '20px',
+                            '&:hover': {
+                              backgroundColor: colors.blueAccent[800]
+                            },
+                        }}
                         onClick={() => dispatch(getAuthUser())}
                     >
                         login with google
