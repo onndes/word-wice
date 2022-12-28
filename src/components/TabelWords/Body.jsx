@@ -4,10 +4,9 @@ import TableRow from '@mui/material/TableRow'
 import Checkbox from '@mui/material/Checkbox'
 import TableBody from '@mui/material/TableBody'
 
-import { rows } from './data'
-import { getComparator, stableSort } from './utils'
+import { getComparator, stableSort } from '../../utils/utilsTable'
 
-const TableBodyWords = ({
+const Body = ({
     order,
     orderBy,
     page,
@@ -16,26 +15,27 @@ const TableBodyWords = ({
     handleClick,
     emptyRows,
     dense,
+    words,
 }) => {
     return (
         <TableBody>
             {/* if you don't need to support IE11, 
             you can replace the `stableSort` call with:
             rows.sort(getComparator(order, orderBy)).slice() */}
-            {stableSort(rows, getComparator(order, orderBy))
+            {stableSort(words, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                    const isItemSelected = isSelected(row.name)
+                    const isItemSelected = isSelected(row.word)
                     const labelId = `enhanced-table-checkbox-${index}`
 
                     return (
                         <TableRow
                             hover
-                            onClick={(event) => handleClick(event, row.name)}
+                            onClick={(event) => handleClick(event, row.word)}
                             role="checkbox"
                             aria-checked={isItemSelected}
                             tabIndex={-1}
-                            key={row.name}
+                            key={row.word}
                             selected={isItemSelected}
                         >
                             <TableCell padding="checkbox">
@@ -53,12 +53,12 @@ const TableBodyWords = ({
                                 scope="row"
                                 padding="none"
                             >
-                                {row.name}
+                                {row.word}
                             </TableCell>
-                            <TableCell align="right">{row.calories}</TableCell>
-                            <TableCell align="right">{row.fat}</TableCell>
-                            {/* <TableCell align="right">{row.carbs}</TableCell> */}
-                            {/* <TableCell align="right">{row.protein}</TableCell> */}
+                            <TableCell align="right">{row.translate}</TableCell>
+                            <TableCell align="right">
+                                {row.transcription}
+                            </TableCell>
                         </TableRow>
                     )
                 })}
@@ -75,4 +75,4 @@ const TableBodyWords = ({
     )
 }
 
-export default TableBodyWords
+export default Body

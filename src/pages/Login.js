@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Container, Grid, Button, Box, useTheme } from '@mui/material'
-import { getAuthUser } from '../redux/slices/userSlice'
+import { getAuthUser } from '../redux/slices/userSlice/userAsync'
 import { tokens } from '../theme/theme'
 
 export default function Login() {

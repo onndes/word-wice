@@ -28,13 +28,3 @@ function descendingComparator(a, b, orderBy) {
     }
     return 0
 }
-
-export function createData(name, calories, fat, carbs, protein) {
-    return {
-        name,
-        calories,
-        fat,
-        carbs,
-        protein,
-    }
-}

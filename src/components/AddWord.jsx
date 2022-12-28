@@ -33,8 +33,8 @@ const AddWord = () => {
             onSubmit={handleSubmit((data) => onSubmit(data))}
         >
             <MyInput control={control} label="Word" name="word" />
-            <MyInput control={control} label="Transcript" name="transcript" />
             <MyInput control={control} label="Translation" name="translation" />
+            <MyInput control={control} label="Transcript" name="transcript" />
 
             <Button
                 color="secondary"

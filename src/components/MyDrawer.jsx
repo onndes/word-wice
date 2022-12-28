@@ -24,17 +24,19 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
 export function MyDrawer({ handleDrawerClose, open }) {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
+
     return (
         <Drawer
             sx={{
                 width: DRAWER_WIDTH,
                 flexShrink: 0,
-                '& .MuiDrawer-paper': {
+            }}
+            PaperProps={{
+                sx: {
                     width: DRAWER_WIDTH,
                     boxSizing: 'border-box',
                     backgroundColor: colors.primary[400],
                 },
-                paper: {},
             }}
             variant="persistent"
             anchor="left"

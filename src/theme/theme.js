@@ -166,6 +166,13 @@ export const themeSettings = (mode) => {
                     },
                 },
             },
+            MuiList: {
+                styleOverrides: {
+                    root: {
+                        background: colors.primary[400],
+                    },
+                },
+            },
         },
         typography: {
             fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),

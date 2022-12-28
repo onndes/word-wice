@@ -13,7 +13,7 @@ import { styled } from '@mui/material/styles'
 
 import { DRAWER_WIDTH } from '../utils/consts'
 import { useAuth } from '../hooks/useAuth'
-import { logOutUser } from '../redux/slices/userSlice'
+import { logOutUser } from '../redux/slices/userSlice/userAsync'
 import { tokens } from '../theme/theme'
 
 const AppBar = styled(MuiAppBar, {

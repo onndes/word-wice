@@ -16,32 +16,20 @@ const headCells = [
         label: 'Word',
     },
     {
-        id: 'transcription',
-        numeric: true,
-        disablePadding: false,
-        label: 'Transcription',
-    },
-    {
         id: 'translate',
         numeric: true,
         disablePadding: false,
         label: 'Translate',
     },
-    // {
-    //     id: 'carbs',
-    //     numeric: true,
-    //     disablePadding: false,
-    //     label: 'Carbs(g)',
-    // },
-    // {
-    //     id: 'protein',
-    //     numeric: true,
-    //     disablePadding: false,
-    //     label: 'Protein(g)',
-    // },
+    {
+        id: 'transcription',
+        numeric: true,
+        disablePadding: false,
+        label: 'Transcription',
+    },
 ]
 
-const TableHeadWords = (props) => {
+const Head = (props) => {
     const {
         onSelectAllClick,
         order,
@@ -99,7 +87,7 @@ const TableHeadWords = (props) => {
     )
 }
 
-TableHeadWords.propTypes = {
+Head.propTypes = {
     numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
     onSelectAllClick: PropTypes.func.isRequired,
@@ -108,4 +96,4 @@ TableHeadWords.propTypes = {
     rowCount: PropTypes.number.isRequired,
 }
 
-export default TableHeadWords
+export default Head

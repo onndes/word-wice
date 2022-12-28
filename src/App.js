@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 import Layout from './components/Layout'
 import { ColorModeContext, useMode } from './theme/theme'
-import { removeUser } from './redux/slices/userSlice'
+import { removeUser } from './redux/slices/userSlice/userSlice'
 
 function App() {
     const [theme, colorMode] = useMode()

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useSelector } from 'react-redux'
 import Box from '@mui/material/Box'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Paper from '@mui/material/Paper'
@@ -8,24 +9,24 @@ import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
 import { useTheme } from '@mui/material'
 
-import { rows } from './data'
-import TableBodyWords from './TableBodyWords'
-import TableToolbar from './TableToolbar'
-import TableHeadWords from './TableHeadWords'
+import TableBodyWords from './Body'
+import TableToolbar from './MyToolbar'
+import TableHeadWords from './Head'
 import { tokens } from '../../theme/theme'
 
 export default function TableWords() {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
+    const words = useSelector(({words}) => words.words)
 
     const [order, setOrder] = React.useState('asc')
-    const [orderBy, setOrderBy] = React.useState('calories')
+    const [orderBy, setOrderBy] = React.useState('word')
     const [selected, setSelected] = React.useState([])
     const [page, setPage] = React.useState(0)
     const [dense, setDense] = React.useState(false)
     const [rowsPerPage, setRowsPerPage] = React.useState(5)
 
-    const handleRequestSort = (event, property) => {
+    const handleRequestSort = (_, property) => {
         const isAsc = orderBy === property && order === 'asc'
         setOrder(isAsc ? 'desc' : 'asc')
         setOrderBy(property)
@@ -33,7 +34,7 @@ export default function TableWords() {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = rows.map((n) => n.name)
+            const newSelected = words.map((n) => n.name)
             setSelected(newSelected)
             return
         }
@@ -60,7 +61,7 @@ export default function TableWords() {
         setSelected(newSelected)
     }
 
-    const handleChangePage = (event, newPage) => {
+    const handleChangePage = (_, newPage) => {
         setPage(newPage)
     }
 
@@ -75,14 +76,18 @@ export default function TableWords() {
 
     const isSelected = (name) => selected.indexOf(name) !== -1
 
-    // Avoid a layout jump when reaching the last page with empty rows.
+    // Avoid a layout jump when reaching the last page with empty words.
     const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0
+        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - words.length) : 0
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', maxWidth: 800 }}>
             <Paper
-                sx={{ width: '100%', mb: 2, background: colors.primary[400] }}
+                sx={{
+                    width: '100%',
+                    mb: 2,
+                    background: colors.primary[400],
+                }}
             >
                 <TableToolbar numSelected={selected.length} />
                 <TableContainer>
@@ -97,9 +102,10 @@ export default function TableWords() {
                             orderBy={orderBy}
                             onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
-                            rowCount={rows.length}
+                            rowCount={words.length}
                         />
                         <TableBodyWords
+                            words={words}
                             order={order}
                             orderBy={orderBy}
                             page={page}
@@ -114,7 +120,7 @@ export default function TableWords() {
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={rows.length}
+                    count={words.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}
