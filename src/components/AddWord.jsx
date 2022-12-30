@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { Box, Button } from '@mui/material'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { schemaFormAddWord } from '../utils/schemaFormAddWord'
 import MyInput from './MyInput'
-import { addWords } from '../redux/slices/wordsSlice/wordsSlice'
+import { addWords } from '../redux/slices/wordsSlice/wordsAsync'
 
 const AddWord = () => {
     const dispatch = useDispatch()
-    const { isLoading } = useSelector(({ words }) => words)
     const [formData, setFormData] = useState(null)
     const { handleSubmit, control, reset } = useForm({
         resolver: yupResolver(schemaFormAddWord),

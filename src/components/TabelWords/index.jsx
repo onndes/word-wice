@@ -13,7 +13,7 @@ import TableBodyWords from './Body'
 import TableToolbar from './MyToolbar'
 import TableHeadWords from './Head'
 import { tokens } from '../../theme/theme'
-import { fetchWords } from '../../redux/slices/wordsSlice/wordsSlice'
+import { fetchWords } from '../../redux/slices/wordsSlice/wordsAsync'
 
 export default function TableWords() {
     const dispatch = useDispatch()
