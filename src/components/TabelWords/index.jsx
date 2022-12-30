@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Box from '@mui/material/Box'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Paper from '@mui/material/Paper'
@@ -13,11 +13,13 @@ import TableBodyWords from './Body'
 import TableToolbar from './MyToolbar'
 import TableHeadWords from './Head'
 import { tokens } from '../../theme/theme'
+import { fetchWords } from '../../redux/slices/wordsSlice/wordsSlice'
 
 export default function TableWords() {
+    const dispatch = useDispatch()
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
-    const words = useSelector(({words}) => words.words)
+    const words = useSelector(({ words }) => words.words)
 
     const [order, setOrder] = React.useState('asc')
     const [orderBy, setOrderBy] = React.useState('word')
@@ -40,6 +42,10 @@ export default function TableWords() {
         }
         setSelected([])
     }
+
+    React.useEffect(() => {
+        dispatch(fetchWords())
+    }, [])
 
     const handleClick = (event, name) => {
         const selectedIndex = selected.indexOf(name)

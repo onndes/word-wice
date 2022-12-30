@@ -17,9 +17,13 @@ function App() {
         if (!user) dispatch(removeUser())
     })
 
+    React.useEffect(() => {
+      
+    }, [])
+
     return (
         <ColorModeContext.Provider value={colorMode}>
-            <ThemeProvider theme={theme} >
+            <ThemeProvider theme={theme}>
                 <CssBaseline enableColorScheme />
                 <Layout />
             </ThemeProvider>

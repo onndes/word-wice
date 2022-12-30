@@ -23,7 +23,6 @@ const userSlice = createSlice({
             state.id = action.payload.id
         },
         removeUser(state) {
-            localStorage.removeItem('userData', JSON.stringify('userData'))
             state.displayName = null
             state.photoURL = null
             state.email = null
@@ -58,14 +57,7 @@ const userSlice = createSlice({
         builder.addCase(logOutUser.pending, (state) => {
             state.isLoading = true
         })
-        builder.addCase(logOutUser.fulfilled, (state) => {
-            state.isLoading = false
-            state.displayName = null
-            state.photoURL = null
-            state.email = null
-            state.token = null
-            state.id = null
-        })
+        builder.addCase(logOutUser.fulfilled, () => initialState)
         builder.addCase(logOutUser.rejected, (state, action) => {
             state.isLoading = false
             state.error = action.error

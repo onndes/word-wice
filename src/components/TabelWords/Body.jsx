@@ -55,9 +55,11 @@ const Body = ({
                             >
                                 {row.word}
                             </TableCell>
-                            <TableCell align="right">{row.translate}</TableCell>
                             <TableCell align="right">
-                                {row.transcription}
+                                {row.translation}
+                            </TableCell>
+                            <TableCell align="right">
+                                {row.transcript}
                             </TableCell>
                         </TableRow>
                     )
