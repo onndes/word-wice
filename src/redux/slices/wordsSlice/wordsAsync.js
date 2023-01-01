@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore'
+import translate from 'translate'
 import { db } from '../../../firebase'
 
 export const fetchWords = createAsyncThunk(
@@ -27,3 +28,8 @@ export const addWords = createAsyncThunk(
         }
     }
 )
+
+export const translateWord = async (word, from, to) => {
+    const text = await translate(word, { from, to, engine: 'google' })
+    return text
+}
