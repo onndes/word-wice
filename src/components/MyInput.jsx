@@ -12,10 +12,11 @@ export default function MyInput({ label, name, control }) {
             render={({ field, fieldState: { error } }) => (
                 <Box sx={{ minHeight: '100px' }}>
                     <TextField
-                    variant="filled"
+                        variant="filled"
                         label={label}
                         error={!!error}
                         helperText={error ? error.message : null}
+                        autoComplete='off'
                         {...field}
                     />
                 </Box>
