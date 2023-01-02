@@ -9,17 +9,27 @@ import { addWords, translateWord } from '../redux/slices/wordsSlice/wordsAsync'
 import { schemaFormAddWord } from '../utils/schemaFormAddWord'
 import MyInput from './MyInput'
 import MyAlertDialogSlide from './MyAlertDialogSlide'
+import { formAddWordProps } from '../utils/consts'
 
 const AddWord = () => {
     const dispatch = useDispatch()
     const [formData, setFormData] = useState(null)
-    const { handleSubmit, control, reset, getValues, setValue } = useForm({
-        resolver: yupResolver(schemaFormAddWord),
-    })
+
+    const { handleSubmit, control, reset, getValues, setValue, watch } =
+        useForm({
+            resolver: yupResolver(schemaFormAddWord),
+        })
+        
+    const [activeButtonTranslate, setActiveButtonTranslate] =
+        React.useState(false)
     const [openModalTranslate, setOpenModalTranslate] = React.useState(false)
     const [confirmTranslate, setConfirmTranslate] = React.useState(false)
     const [hideConfirmTranslate, setHideConfirmTranslate] =
         React.useState(false)
+
+    const watchFields = watch(['word', 'translation'])
+
+    const { word, translation, transcription } = formAddWordProps
 
     const onSubmit = (data) => {
         setFormData(data)
@@ -53,18 +63,28 @@ const AddWord = () => {
         const wordEng = getValues().word
         const wordRu = getValues().translation
         if (!wordRu && wordEng) {
-            setValue('translation', '')
+            setValue(translation.name, '')
             translateWord(wordEng, 'en', 'ru').then((e) =>
-                setValue('translation', e)
+                setValue(translation.name, e)
             )
         } else if (!wordEng && wordRu) {
-            setValue('word', '')
+            setValue(word.name, '')
             translateWord(wordRu, 'ru', 'en').then((e) => {
-                setValue('word', e)
+                setValue(word.name, e)
             })
         }
         setConfirmTranslate(false)
     }
+
+    useEffect(() => {
+        const wordEng = getValues().word
+        const wordRu = getValues().translation
+        if (wordEng && wordRu) {
+            setActiveButtonTranslate(true)
+        } else {
+            setActiveButtonTranslate(false)
+        }
+    }, [watchFields])
 
     return (
         <Box
@@ -79,9 +99,10 @@ const AddWord = () => {
             }}
             onSubmit={handleSubmit((data) => onSubmit(data))}
         >
-            <MyInput control={control} label="Word" name="word" />
+            <MyInput control={control} label={word.label} name={word.name} />
             <Box m={2} alignItems="center">
                 <IconButton
+                    disabled={activeButtonTranslate}
                     aria-label="translate"
                     color="secondary"
                     onClick={handleClickButtonTranslate}
@@ -89,8 +110,16 @@ const AddWord = () => {
                     <GTranslateIcon />
                 </IconButton>
             </Box>
-            <MyInput control={control} label="Translation" name="translation" />
-            <MyInput control={control} label="Transcript" name="transcript" />
+            <MyInput
+                control={control}
+                label={translation.label}
+                name={translation.name}
+            />
+            <MyInput
+                control={control}
+                label={transcription.label}
+                name={transcription.name}
+            />
 
             <Button
                 color="secondary"

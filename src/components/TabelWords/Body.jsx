@@ -59,7 +59,7 @@ const Body = ({
                                 {row.translation}
                             </TableCell>
                             <TableCell align="right">
-                                {row.transcript}
+                                {row.transcription}
                             </TableCell>
                         </TableRow>
                     )

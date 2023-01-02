@@ -9,3 +9,18 @@ export const isLoading = {
     ADD_WORDS: 'ADD_WORDS',
     FETCH_WORDS: 'FETCH_WORDS',
 }
+
+export const formAddWordProps = {
+    word: {
+        label: 'Word',
+        name: 'word',
+    },
+    translation: {
+        label: 'Translation',
+        name: 'translation',
+    },
+    transcription: {
+        label: 'Transcription',
+        name: 'transcription',
+    },
+}
