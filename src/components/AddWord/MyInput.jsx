@@ -1,9 +1,13 @@
 import * as React from 'react'
 import TextField from '@mui/material/TextField'
 import { Controller } from 'react-hook-form'
-import { Box } from '@mui/material'
+import { Box, useTheme } from '@mui/material'
+import { tokens } from '../../theme/theme'
 
 export default function MyInput({ label, name, control }) {
+    const theme = useTheme()
+    const colors = tokens(theme.palette.mode)
+
     return (
         <Controller
             control={control}
@@ -16,7 +20,17 @@ export default function MyInput({ label, name, control }) {
                         label={label}
                         error={!!error}
                         helperText={error ? error.message : null}
-                        autoComplete='off'
+                        autoComplete="off"
+                        sx={{
+                            '& .Mui-focused.MuiInputLabel-root': {
+                                color: colors.grey[400],
+                                fontSize: 14,
+                            },
+                            '& .Mui-focused.MuiInputLabel-root.Mui-error': {
+                                color: 'red',
+                                fontSize: 14,
+                            },
+                        }}
                         {...field}
                     />
                 </Box>

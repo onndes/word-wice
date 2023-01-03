@@ -5,11 +5,14 @@ import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import GTranslateIcon from '@mui/icons-material/GTranslate'
 
-import { addWords, translateWord } from '../redux/slices/wordsSlice/wordsAsync'
-import { schemaFormAddWord } from '../utils/schemaFormAddWord'
+import {
+    addWords,
+    translateWord,
+} from '../../redux/slices/wordsSlice/wordsAsync'
+import { schemaFormAddWord } from '../../utils/schemaFormAddWord'
 import MyInput from './MyInput'
-import MyAlertDialogSlide from './MyAlertDialogSlide'
-import { formAddWordProps } from '../utils/consts'
+import MyAlertDialogSlide from '../MyAlertDialogSlide'
+import { formAddWordProps } from '../../utils/consts'
 
 const AddWord = () => {
     const dispatch = useDispatch()
@@ -19,7 +22,7 @@ const AddWord = () => {
         useForm({
             resolver: yupResolver(schemaFormAddWord),
         })
-        
+
     const [activeButtonTranslate, setActiveButtonTranslate] =
         React.useState(false)
     const [openModalTranslate, setOpenModalTranslate] = React.useState(false)
