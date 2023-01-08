@@ -8,6 +8,7 @@ export const DRAWER_WIDTH = 240
 export const isLoading = {
     ADD_WORDS: 'ADD_WORDS',
     FETCH_WORDS: 'FETCH_WORDS',
+    DELETE_WORDS: 'DELETE_WORDS',
 }
 
 export const formAddWordProps = {

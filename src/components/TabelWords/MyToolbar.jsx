@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import FilterListIcon from '@mui/icons-material/FilterList'
 
-const MyToolbar = ({ numSelected }) => {
+const MyToolbar = ({ numSelected, handleDelete }) => {
     return (
         <Toolbar
             sx={{
@@ -45,7 +45,7 @@ const MyToolbar = ({ numSelected }) => {
 
             {numSelected > 0 ? (
                 <Tooltip title="Delete">
-                    <IconButton>
+                    <IconButton onClick={handleDelete}>
                         <DeleteIcon />
                     </IconButton>
                 </Tooltip>

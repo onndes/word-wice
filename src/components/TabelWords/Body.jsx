@@ -24,18 +24,18 @@ const Body = ({
             rows.sort(getComparator(order, orderBy)).slice() */}
             {stableSort(words, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                    const isItemSelected = isSelected(row.word)
-                    const labelId = `enhanced-table-checkbox-${index}`
+                .map((row) => {
+                    const isItemSelected = isSelected(row.id)
+                    const labelId = row.id
 
                     return (
                         <TableRow
                             hover
-                            onClick={(event) => handleClick(event, row.word)}
+                            onClick={(event) => handleClick(event, row)}
                             role="checkbox"
                             aria-checked={isItemSelected}
                             tabIndex={-1}
-                            key={row.word}
+                            key={row.id}
                             selected={isItemSelected}
                         >
                             <TableCell padding="checkbox">
@@ -55,10 +55,10 @@ const Body = ({
                             >
                                 {row.word}
                             </TableCell>
-                            <TableCell align="right">
+                            <TableCell align="left">
                                 {row.translation}
                             </TableCell>
-                            <TableCell align="right">
+                            <TableCell align="left">
                                 {row.transcription}
                             </TableCell>
                         </TableRow>

@@ -4,12 +4,16 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import GTranslateIcon from '@mui/icons-material/GTranslate'
+import { nanoid } from 'nanoid'
 
-import { addWords, translateWord } from '../redux/slices/wordsSlice/wordsAsync'
-import { schemaFormAddWord } from '../utils/schemaFormAddWord'
+import {
+    addWords,
+    translateWord,
+} from '../../redux/slices/wordsSlice/wordsAsync'
+import { schemaFormAddWord } from '../../utils/schemaFormAddWord'
 import MyInput from './MyInput'
-import MyAlertDialogSlide from './MyAlertDialogSlide'
-import { formAddWordProps } from '../utils/consts'
+import MyAlertDialogSlide from '../MyAlertDialogSlide'
+import { formAddWordProps } from '../../utils/consts'
 
 const AddWord = () => {
     const dispatch = useDispatch()
@@ -19,7 +23,7 @@ const AddWord = () => {
         useForm({
             resolver: yupResolver(schemaFormAddWord),
         })
-        
+
     const [activeButtonTranslate, setActiveButtonTranslate] =
         React.useState(false)
     const [openModalTranslate, setOpenModalTranslate] = React.useState(false)
@@ -38,7 +42,7 @@ const AddWord = () => {
 
     useEffect(() => {
         if (formData) {
-            dispatch(addWords(formData))
+            dispatch(addWords({ ...formData, id: nanoid() }))
         }
     }, [formData])
 

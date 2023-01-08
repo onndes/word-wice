@@ -9,17 +9,20 @@ import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
 import { useTheme } from '@mui/material'
 
-import TableBodyWords from './Body'
-import TableToolbar from './MyToolbar'
-import TableHeadWords from './Head'
+import Body from './Body'
+import MyToolbar from './MyToolbar'
+import Head from './Head'
 import { tokens } from '../../theme/theme'
-import { fetchWords } from '../../redux/slices/wordsSlice/wordsAsync'
+import {
+    deleteWords,
+    fetchWords,
+} from '../../redux/slices/wordsSlice/wordsAsync'
 
 export default function TableWords() {
     const dispatch = useDispatch()
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
-    const words = useSelector(({ words }) => words.words)
+    const { words, isLoading } = useSelector(({ words }) => words)
 
     const [order, setOrder] = React.useState('asc')
     const [orderBy, setOrderBy] = React.useState('word')
@@ -36,8 +39,7 @@ export default function TableWords() {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelected = words.map((n) => n.name)
-            setSelected(newSelected)
+            setSelected(words)
             return
         }
         setSelected([])
@@ -47,12 +49,12 @@ export default function TableWords() {
         dispatch(fetchWords())
     }, [])
 
-    const handleClick = (event, name) => {
-        const selectedIndex = selected.indexOf(name)
+    const handleClick = (event, word) => {
+        const selectedIndex = selected.indexOf(word)
         let newSelected = []
 
         if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, name)
+            newSelected = newSelected.concat(selected, word)
         } else if (selectedIndex === 0) {
             newSelected = newSelected.concat(selected.slice(1))
         } else if (selectedIndex === selected.length - 1) {
@@ -80,7 +82,14 @@ export default function TableWords() {
         setDense(event.target.checked)
     }
 
-    const isSelected = (name) => selected.indexOf(name) !== -1
+    const handleClickDeleteWords = () => {
+        selected.forEach((el) => {
+            dispatch(deleteWords(el))
+        })
+        setSelected([])
+    }
+
+    const isSelected = (wordId) => selected.some((el) => el.id === wordId)
 
     // Avoid a layout jump when reaching the last page with empty words.
     const emptyRows =
@@ -95,14 +104,17 @@ export default function TableWords() {
                     background: colors.primary[400],
                 }}
             >
-                <TableToolbar numSelected={selected.length} />
+                <MyToolbar
+                    numSelected={selected.length}
+                    handleDelete={handleClickDeleteWords}
+                />
                 <TableContainer>
                     <Table
                         sx={{ minWidth: 750 }}
                         aria-labelledby="tableTitle"
                         size={dense ? 'small' : 'medium'}
                     >
-                        <TableHeadWords
+                        <Head
                             numSelected={selected.length}
                             order={order}
                             orderBy={orderBy}
@@ -110,7 +122,7 @@ export default function TableWords() {
                             onRequestSort={handleRequestSort}
                             rowCount={words.length}
                         />
-                        <TableBodyWords
+                        <Body
                             words={words}
                             order={order}
                             orderBy={orderBy}

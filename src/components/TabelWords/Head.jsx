@@ -17,13 +17,13 @@ const headCells = [
     },
     {
         id: 'translate',
-        numeric: true,
+        numeric: false,
         disablePadding: false,
         label: 'Translate',
     },
     {
         id: 'transcription',
-        numeric: true,
+        numeric: false,
         disablePadding: false,
         label: 'Transcription',
     },

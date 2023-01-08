@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { isLoading } from '../../../utils/consts'
 import { addIsLoading, removeIsLoading } from '../../../utils/updateLoading'
-import { addWords, fetchWords } from './wordsAsync'
+import { addWords, deleteWords, fetchWords } from './wordsAsync'
 
 const initialState = {
     words: [],
@@ -38,6 +38,18 @@ const wordsSlice = createSlice({
         })
         builder.addCase(addWords.rejected, (state, action) => {
             state.isLoading = removeIsLoading(isLoading.ADD_WORDS, state)
+            state.error = action.payload
+        })
+
+        builder.addCase(deleteWords.pending, (state) => {
+            state.isLoading = addIsLoading(isLoading.DELETE_WORDS, state)
+        })
+        builder.addCase(deleteWords.fulfilled, (state, { payload }) => {
+            state.isLoading = removeIsLoading(isLoading.DELETE_WORDS, state)
+            state.words = state.words.filter(({ id }) => id !== payload.id)
+        })
+        builder.addCase(deleteWords.rejected, (state, action) => {
+            state.isLoading = removeIsLoading(isLoading.DELETE_WORDS, state)
             state.error = action.payload
         })
     },

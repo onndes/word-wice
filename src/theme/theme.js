@@ -162,7 +162,10 @@ export const themeSettings = (mode) => {
             MuiTableHead: {
                 styleOverrides: {
                     root: {
-                        background: colors.blueAccent[700],
+                        background:
+                            mode === 'dark'
+                                ? colors.primary[500]
+                                : 'white',
                     },
                 },
             },
