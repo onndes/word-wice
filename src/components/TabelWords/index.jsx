@@ -13,6 +13,8 @@ import Body from './Body'
 import MyToolbar from './MyToolbar'
 import Head from './Head'
 import { tokens } from '../../theme/theme'
+// eslint-disable-next-line max-len
+import { setRowsPerPage } from '../../redux/slices/settingsAppSlice/settingsAppSlice'
 import {
     deleteWords,
     fetchWords,
@@ -22,14 +24,17 @@ export default function TableWords() {
     const dispatch = useDispatch()
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
-    const { words, isLoading } = useSelector(({ words }) => words)
+    const { words } = useSelector(({ words }) => words)
+    const { rowsPerPage } = useSelector(
+        ({ settingsApp }) => settingsApp.tableVocabulary
+    )
 
     const [order, setOrder] = React.useState('asc')
     const [orderBy, setOrderBy] = React.useState('word')
     const [selected, setSelected] = React.useState([])
     const [page, setPage] = React.useState(0)
     const [dense, setDense] = React.useState(false)
-    const [rowsPerPage, setRowsPerPage] = React.useState(5)
+    // const [rowsPerPage, setRowsPerPage] = React.useState(5)
 
     const handleRequestSort = (_, property) => {
         const isAsc = orderBy === property && order === 'asc'
@@ -74,7 +79,8 @@ export default function TableWords() {
     }
 
     const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10))
+        // dispatch()
+        dispatch(setRowsPerPage(parseInt(event.target.value, 10)))
         setPage(0)
     }
 
