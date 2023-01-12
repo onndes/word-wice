@@ -55,6 +55,9 @@ const wordsSlice = createSlice({
     },
 })
 
+export const selectLoading = (loading) => (state) =>
+    state.words.isLoading.some((l) => l === loading)
+
 export const { resetStateWords } = wordsSlice.actions
 
 export default wordsSlice.reducer

@@ -5,6 +5,7 @@ import Checkbox from '@mui/material/Checkbox'
 import TableBody from '@mui/material/TableBody'
 
 import { getComparator, stableSort } from '../../utils/utilsTable'
+import LinearIndeterminate from '../LinearIndeterminate'
 
 const Body = ({
     order,
@@ -16,6 +17,7 @@ const Body = ({
     emptyRows,
     dense,
     words,
+    isLoading,
 }) => {
     return (
         <TableBody>
@@ -64,6 +66,17 @@ const Body = ({
                         </TableRow>
                     )
                 })}
+            {isLoading && !words.length && (
+                <TableRow
+                    style={{
+                        height: (dense ? 33 : 53) * emptyRows,
+                    }}
+                >
+                    <TableCell colSpan={6}>
+                        <LinearIndeterminate />
+                    </TableCell>
+                </TableRow>
+            )}
             {emptyRows > 0 && (
                 <TableRow
                     style={{

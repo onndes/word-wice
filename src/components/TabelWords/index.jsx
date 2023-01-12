@@ -19,12 +19,17 @@ import {
     deleteWords,
     fetchWords,
 } from '../../redux/slices/wordsSlice/wordsAsync'
+import { selectLoading } from '../../redux/slices/wordsSlice/wordsSlice'
+import { isLoading } from '../../utils/consts'
 
 export default function TableWords() {
     const dispatch = useDispatch()
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
     const { words } = useSelector(({ words }) => words)
+    const isLoadingFetchWords = useSelector(
+        selectLoading(isLoading.FETCH_WORDS)
+    )
     const { rowsPerPage } = useSelector(
         ({ settingsApp }) => settingsApp.tableVocabulary
     )
@@ -138,6 +143,7 @@ export default function TableWords() {
                             handleClick={handleClick}
                             emptyRows={emptyRows}
                             dense={dense}
+                            isLoading={isLoadingFetchWords}
                         />
                     </Table>
                 </TableContainer>
