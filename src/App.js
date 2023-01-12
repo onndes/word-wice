@@ -5,27 +5,30 @@ import { useDispatch } from 'react-redux'
 
 import Layout from './components/Layout'
 import { ColorModeContext, useMode } from './theme/theme'
-import { removeUser } from './redux/slices/userSlice/userSlice'
+import { removeUser, setUser } from './redux/slices/userSlice/userSlice'
+import LoaderPage from './components/LoaderPage/LoaderPage'
 
 function App() {
     const [theme, colorMode] = useMode()
+    const [isAuth, setIsAuth] = React.useState(false)
     const dispatch = useDispatch()
 
     const auth = getAuth()
 
     onAuthStateChanged(auth, (user) => {
-        if (!user) dispatch(removeUser())
+        if (!user) {
+            dispatch(removeUser())
+        } else {
+            dispatch(setUser(user))
+        }
+        setIsAuth(true)
     })
-
-    React.useEffect(() => {
-      
-    }, [])
 
     return (
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
                 <CssBaseline enableColorScheme />
-                <Layout />
+                {isAuth ? <Layout /> : <LoaderPage />}
             </ThemeProvider>
         </ColorModeContext.Provider>
     )

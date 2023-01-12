@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getAuthUser, logOutUser } from './userAsync'
 
-const userData = JSON.parse(localStorage.getItem('userData'))
-
 const initialState = {
-    displayName: userData?.displayName || null,
-    photoURL: userData?.photoURL || null,
-    email: userData?.email || null,
-    token: userData?.accessToken || null,
-    id: userData?.uid || null,
+    displayName: null,
+    photoURL: null,
+    email: null,
+    token: null,
+    id: null,
     isLoading: false,
     error: null,
 }
@@ -18,9 +16,11 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser(state, action) {
+            state.displayName = action.payload.displayName
+            state.photoURL = action.payload.photoURL
             state.email = action.payload.email
-            state.token = action.payload.token
-            state.id = action.payload.id
+            state.token = action.payload.accessToken
+            state.id = action.payload.uid
         },
         removeUser(state) {
             state.displayName = null
@@ -50,7 +50,7 @@ const userSlice = createSlice({
         })
         builder.addCase(getAuthUser.rejected, (state, action) => {
             state.isLoading = false
-            state.error = action.error
+            state.error = action.payload
         })
 
         // logOutUser
@@ -60,7 +60,7 @@ const userSlice = createSlice({
         builder.addCase(logOutUser.fulfilled, () => initialState)
         builder.addCase(logOutUser.rejected, (state, action) => {
             state.isLoading = false
-            state.error = action.error
+            state.error = action.payload
         })
     },
 })
