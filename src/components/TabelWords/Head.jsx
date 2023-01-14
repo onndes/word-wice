@@ -14,28 +14,30 @@ const headCells = [
         numeric: false,
         disablePadding: true,
         label: 'Word',
-        with: '30%',
     },
     {
         id: 'translate',
         numeric: false,
         disablePadding: false,
         label: 'Translate',
-        with: '30%',
+    },
+    {
+        id: 'knowledge',
+        numeric: false,
+        disablePadding: false,
+        label: 'Knowledge',
     },
     {
         id: 'transcription',
         numeric: false,
         disablePadding: false,
         label: 'Transcription',
-        with: '20%'
     },
     {
         id: 'dateCreated',
         numeric: false,
         disablePadding: false,
         label: 'Date created',
-        with: '20%'
     },
 ]
 

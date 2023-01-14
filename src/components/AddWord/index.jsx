@@ -14,7 +14,7 @@ import {
 import { schemaFormAddWord } from '../../utils/schemaFormAddWord'
 import MyInput from './MyInput'
 import MyAlertDialogSlide from '../MyAlertDialogSlide'
-import { formAddWordProps } from '../../utils/consts'
+import { formAddWordProps, knowWord } from '../../utils/consts'
 
 const AddWord = () => {
     const dispatch = useDispatch()
@@ -48,6 +48,10 @@ const AddWord = () => {
                     ...formData,
                     id: nanoid(),
                     dateCreated: Timestamp.fromDate(new Date()),
+                    knowledge: knowWord.A0.code,
+                    dateLearned: null,
+                    countRepeat: 0,
+                    imgUrl: null
                 })
             )
         }

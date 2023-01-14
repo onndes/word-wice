@@ -25,3 +25,46 @@ export const formAddWordProps = {
         name: 'transcription',
     },
 }
+
+export const knowWord = {
+    A0: {
+        code: 'A0',
+        tittle: 'No know',
+        color: '#757575',
+    },
+    A1: {
+        code: 'A1',
+        tittle: 'Low',
+        color: '#cddc39',
+    },
+    A2: {
+        code: 'A2',
+        tittle: 'Low+',
+        color: '#afb42b',
+    },
+    B1: {
+        code: 'B1',
+        tittle: 'Medium',
+        color: '#fb8c00',
+    },
+    B2: {
+        code: 'B2',
+        tittle: 'Height',
+        color: '#43a047',
+    },
+    C1: {
+        code: 'B2',
+        tittle: 'Know',
+        color: '#42a5f5',
+    },
+    C2: {
+        code: 'B2',
+        tittle: 'Know+',
+        color: '#1565c0',
+    },
+    D1: {
+        code: 'D1',
+        tittle: 'Learned',
+        color: '#5e35b1',
+    },
+}

@@ -107,7 +107,7 @@ export default function TableWords() {
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - words.length) : 0
 
     return (
-        <Box sx={{ width: '100%', maxWidth: 800 }}>
+        <Box sx={{ width: '100%', maxWidth: 1200 }}>
             <Paper
                 sx={{
                     width: '100%',

@@ -4,9 +4,11 @@ import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import Checkbox from '@mui/material/Checkbox'
 import TableBody from '@mui/material/TableBody'
+import { Box } from '@mui/material'
 
 import { getComparator, stableSort } from '../../utils/utilsTable'
 import LinearIndeterminate from '../LinearIndeterminate'
+import { knowWord } from '../../utils/consts'
 
 const Body = ({
     order,
@@ -55,7 +57,6 @@ const Body = ({
                                 />
                             </TableCell>
                             <TableCell
-                                width="30%"
                                 component="th"
                                 id={labelId}
                                 scope="row"
@@ -63,15 +64,28 @@ const Body = ({
                             >
                                 {row.word}
                             </TableCell>
-                            <TableCell width="30%" align="left">
+                            <TableCell align="left">
                                 {row.translation}
                             </TableCell>
-                            <TableCell width="20%" align="left">
+                            <TableCell align="left">
+                                <Box
+                                    sx={{
+                                        background:
+                                            knowWord[row.knowledge].color,
+                                        padding: '3px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        maxWidth: '100px',
+                                        borderRadius: '10px'
+                                    }}
+                                >
+                                    {knowWord[row.knowledge].tittle}
+                                </Box>
+                            </TableCell>
+                            <TableCell align="left">
                                 {row.transcription}
                             </TableCell>
-                            <TableCell width="20%" align="left">
-                                {date}
-                            </TableCell>
+                            <TableCell align="left">{date}</TableCell>
                         </TableRow>
                     )
                 })}
