@@ -34,8 +34,8 @@ export default function TableWords() {
         ({ settingsApp }) => settingsApp.tableVocabulary
     )
 
-    const [order, setOrder] = React.useState('asc')
-    const [orderBy, setOrderBy] = React.useState('word')
+    const [order, setOrder] = React.useState('desc')
+    const [orderBy, setOrderBy] = React.useState('dateCreated')
     const [selected, setSelected] = React.useState([])
     const [page, setPage] = React.useState(0)
     const [dense, setDense] = React.useState(false)
@@ -121,7 +121,6 @@ export default function TableWords() {
                 />
                 <TableContainer>
                     <Table
-                        sx={{ minWidth: 750 }}
                         aria-labelledby="tableTitle"
                         size={dense ? 'small' : 'medium'}
                     >

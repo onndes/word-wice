@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import GTranslateIcon from '@mui/icons-material/GTranslate'
 import { nanoid } from 'nanoid'
+import { Timestamp } from 'firebase/firestore'
 
 import {
     addWords,
@@ -42,7 +43,13 @@ const AddWord = () => {
 
     useEffect(() => {
         if (formData) {
-            dispatch(addWords({ ...formData, id: nanoid() }))
+            dispatch(
+                addWords({
+                    ...formData,
+                    id: nanoid(),
+                    dateCreated: Timestamp.fromDate(new Date()),
+                })
+            )
         }
     }, [formData])
 

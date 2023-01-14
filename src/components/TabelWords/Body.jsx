@@ -1,4 +1,5 @@
 import React from 'react'
+import { format } from 'date-fns'
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import Checkbox from '@mui/material/Checkbox'
@@ -30,6 +31,10 @@ const Body = ({
                     const isItemSelected = isSelected(row.id)
                     const labelId = row.id
 
+                    const date = row.dateCreated
+                        ? format(row.dateCreated.toDate(), 'dd-MM-yyyy hh:mm a')
+                        : 'not data'
+
                     return (
                         <TableRow
                             hover
@@ -50,6 +55,7 @@ const Body = ({
                                 />
                             </TableCell>
                             <TableCell
+                                width="30%"
                                 component="th"
                                 id={labelId}
                                 scope="row"
@@ -57,11 +63,14 @@ const Body = ({
                             >
                                 {row.word}
                             </TableCell>
-                            <TableCell align="left">
+                            <TableCell width="30%" align="left">
                                 {row.translation}
                             </TableCell>
-                            <TableCell align="left">
+                            <TableCell width="20%" align="left">
                                 {row.transcription}
+                            </TableCell>
+                            <TableCell width="20%" align="left">
+                                {date}
                             </TableCell>
                         </TableRow>
                     )

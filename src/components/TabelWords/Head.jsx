@@ -14,18 +14,28 @@ const headCells = [
         numeric: false,
         disablePadding: true,
         label: 'Word',
+        with: '30%',
     },
     {
         id: 'translate',
         numeric: false,
         disablePadding: false,
         label: 'Translate',
+        with: '30%',
     },
     {
         id: 'transcription',
         numeric: false,
         disablePadding: false,
         label: 'Transcription',
+        with: '20%'
+    },
+    {
+        id: 'dateCreated',
+        numeric: false,
+        disablePadding: false,
+        label: 'Date created',
+        with: '20%'
     },
 ]
 
@@ -61,6 +71,7 @@ const Head = (props) => {
                 </TableCell>
                 {headCells.map((headCell) => (
                     <TableCell
+                        width={headCell.width}
                         key={headCell.id}
                         align={headCell.numeric ? 'right' : 'left'}
                         padding={headCell.disablePadding ? 'none' : 'normal'}
