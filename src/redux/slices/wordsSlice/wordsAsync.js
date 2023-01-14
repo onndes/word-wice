@@ -13,7 +13,7 @@ export const fetchWords = createAsyncThunk(
     'words/fetchWords',
     async (_, { thunkAPI, getState }) => {
         try {
-            const docRef = doc(db, 'users', getState().user.id)
+            const docRef = doc(db, 'newWords', getState().user.id)
             const docSnap = await getDoc(docRef)
             return docSnap.data().words
         } catch (e) {
@@ -26,7 +26,7 @@ export const addWords = createAsyncThunk(
     'words/addWords',
     async (words, { thunkAPI, getState }) => {
         try {
-            const docRef = doc(db, 'users', getState().user.id)
+            const docRef = doc(db, 'newWords', getState().user.id)
             await updateDoc(docRef, { words: arrayUnion(words) })
             return words
         } catch (e) {
@@ -39,7 +39,7 @@ export const deleteWords = createAsyncThunk(
     'words/deleteWords',
     async (word, { thunkAPI, getState }) => {
         try {
-            const docRef = doc(db, 'users', getState().user.id)
+            const docRef = doc(db, 'newWords', getState().user.id)
             await updateDoc(docRef, {
                 words: arrayRemove(word),
             })

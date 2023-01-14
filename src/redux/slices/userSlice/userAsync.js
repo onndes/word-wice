@@ -1,8 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
-import { doc, updateDoc } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 import { db } from '../../../firebase'
 import { resetStateWords } from '../wordsSlice/wordsSlice'
+
+const newSetDoc = (name, userUid) =>
+    setDoc(doc(db, name, userUid), { capital: true }, { merge: true })
 
 export const getAuthUser = createAsyncThunk(
     'user/getAuthUser',
@@ -12,7 +15,10 @@ export const getAuthUser = createAsyncThunk(
             const provider = new GoogleAuthProvider()
             const { user } = await signInWithPopup(auth, provider)
 
-            await updateDoc(doc(db, 'users', user.uid), {}, { marge: true })
+            await newSetDoc('users', user.uid)
+            await newSetDoc('newWords', user.uid)
+            await newSetDoc('learnedWords', user.uid)
+            await newSetDoc('inProcessWords', user.uid)
 
             return user
         } catch (e) {
