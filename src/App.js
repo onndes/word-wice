@@ -15,14 +15,16 @@ function App() {
 
     const auth = getAuth()
 
-    onAuthStateChanged(auth, (user) => {
-        if (!user) {
-            dispatch(removeUser())
-        } else {
-            dispatch(setUser(user))
-        }
-        setIsAuth(true)
-    })
+    React.useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                dispatch(removeUser())
+            } else {
+                dispatch(setUser(user))
+            }
+            setIsAuth(true)
+        })
+    }, [])
 
     return (
         <ColorModeContext.Provider value={colorMode}>
