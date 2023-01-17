@@ -22,6 +22,7 @@ import {
 } from '../../redux/slices/wordsSlice/wordsAsync'
 import { selectLoading } from '../../redux/slices/wordsSlice/wordsSlice'
 import { collectionNameWords, isLoading, knowWord } from '../../utils/consts'
+import BasicAlerts from '../BasicAlerts'
 
 export default function TableWords() {
     const dispatch = useDispatch()
@@ -43,6 +44,9 @@ export default function TableWords() {
     const [selected, setSelected] = React.useState([])
     const [page, setPage] = React.useState(0)
     const [dense, setDense] = React.useState(false)
+
+    const [checkedAlert, setCheckedAlert] = React.useState(false)
+    const [alertMessage, setAlertMessage] = React.useState(0)
 
     const handleRequestSort = (_, property) => {
         const isAsc = orderBy === property && order === 'asc'
@@ -118,11 +122,16 @@ export default function TableWords() {
     }
 
     const handleSubmitWordsForStudy = () => {
+        let displayAlert = 0
         selected.forEach((el) => {
             if (el.knowledge === knowWord.A0.code) {
                 dispatch(submitWordsForStudy(el))
+                displayAlert++
             }
         })
+        setAlertMessage(displayAlert)
+        setCheckedAlert(true)
+        setTimeout(() => setCheckedAlert(false), 2000)
         setSelected([])
     }
 
@@ -192,6 +201,12 @@ export default function TableWords() {
                     />
                 }
                 label="Dense padding"
+            />
+            <BasicAlerts
+                text={`Added words to study: ${alertMessage}`}
+                checkedAlert={checkedAlert}
+                setCheckedAlert={setCheckedAlert}
+                severity={alertMessage ? 'success' : 'error'}
             />
         </Box>
     )
