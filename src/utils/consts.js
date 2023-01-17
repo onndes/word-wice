@@ -9,6 +9,7 @@ export const isLoading = {
     ADD_WORDS: 'ADD_WORDS',
     FETCH_WORDS: 'FETCH_WORDS',
     DELETE_WORDS: 'DELETE_WORDS',
+    SUBMIT_STUDY: 'SUBMIT_STUDY',
 }
 
 export const formAddWordProps = {
@@ -29,17 +30,17 @@ export const formAddWordProps = {
 export const knowWord = {
     A0: {
         code: 'A0',
-        tittle: 'No know',
+        tittle: 'New',
         color: '#757575',
     },
     A1: {
         code: 'A1',
-        tittle: 'Low',
+        tittle: 'Learning',
         color: '#cddc39',
     },
     A2: {
         code: 'A2',
-        tittle: 'Low+',
+        tittle: 'Low',
         color: '#afb42b',
     },
     B1: {
@@ -53,18 +54,19 @@ export const knowWord = {
         color: '#43a047',
     },
     C1: {
-        code: 'B2',
+        code: 'C1',
         tittle: 'Know',
         color: '#42a5f5',
     },
     C2: {
-        code: 'B2',
-        tittle: 'Know+',
-        color: '#1565c0',
-    },
-    D1: {
-        code: 'D1',
+        code: 'C2',
         tittle: 'Learned',
         color: '#5e35b1',
     },
+}
+
+export const collectionNameWords = {
+    NEW: 'newWords',
+    IN_PROCESS: 'inProcessWords',
+    LEARNED: 'learnedWords',
 }

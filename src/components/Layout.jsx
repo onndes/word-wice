@@ -4,7 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import { styled } from '@mui/material/styles'
 
 import { DRAWER_WIDTH } from '../utils/consts'
-import AppRouter from './AppRouter'
+import AppRouter from '../AppRouter'
 import MyAppBar from './MyAppBar'
 import { MyDrawer, DrawerHeader } from './MyDrawer'
 import { useAuth } from '../hooks/useAuth'

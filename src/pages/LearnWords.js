@@ -1,9 +1,10 @@
 import React from "react"
+import LearnWordsCard from "../components/LearnWordsCard"
 
 const LearnWords = () => {
   return (
     <div>
-      LearnWords
+      <LearnWordsCard/>
     </div>
   )
 };

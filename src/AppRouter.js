@@ -1,9 +1,9 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from './hooks/useAuth'
 
-import { privateRoutes, publicRoutes } from '../routes'
-import { HOME_ROUTE, LOGIN_ROUTE } from '../utils/consts'
+import { privateRoutes, publicRoutes } from './routes'
+import { HOME_ROUTE, LOGIN_ROUTE } from './utils/consts'
 
 const AppRouter = () => {
     const { isAuth } = useAuth()

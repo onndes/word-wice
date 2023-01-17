@@ -18,15 +18,19 @@ import { setRowsPerPage } from '../../redux/slices/settingsAppSlice/settingsAppS
 import {
     deleteWords,
     fetchWords,
+    submitWordsForStudy,
 } from '../../redux/slices/wordsSlice/wordsAsync'
 import { selectLoading } from '../../redux/slices/wordsSlice/wordsSlice'
-import { isLoading } from '../../utils/consts'
+import { collectionNameWords, isLoading, knowWord } from '../../utils/consts'
 
 export default function TableWords() {
     const dispatch = useDispatch()
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
-    const { words } = useSelector(({ words }) => words)
+    const { newWords, inProcessWords, learnedWords } = useSelector(
+        ({ words }) => words
+    )
+    const words = [...newWords, ...inProcessWords, ...learnedWords]
     const isLoadingFetchWords = useSelector(
         selectLoading(isLoading.FETCH_WORDS)
     )
@@ -39,7 +43,6 @@ export default function TableWords() {
     const [selected, setSelected] = React.useState([])
     const [page, setPage] = React.useState(0)
     const [dense, setDense] = React.useState(false)
-    // const [rowsPerPage, setRowsPerPage] = React.useState(5)
 
     const handleRequestSort = (_, property) => {
         const isAsc = orderBy === property && order === 'asc'
@@ -95,7 +98,30 @@ export default function TableWords() {
 
     const handleClickDeleteWords = () => {
         selected.forEach((el) => {
-            dispatch(deleteWords(el))
+            let name = ''
+            if (el.knowledge === knowWord.A0.code) {
+                name = collectionNameWords.NEW
+            } else if (el.knowledge === knowWord.C2.code) {
+                name = collectionNameWords.LEARNED
+            } else {
+                name = collectionNameWords.IN_PROCESS
+            }
+
+            dispatch(
+                deleteWords({
+                    collectionName: name,
+                    word: el,
+                })
+            )
+        })
+        setSelected([])
+    }
+
+    const handleSubmitWordsForStudy = () => {
+        selected.forEach((el) => {
+            if (el.knowledge === knowWord.A0.code) {
+                dispatch(submitWordsForStudy(el))
+            }
         })
         setSelected([])
     }
@@ -118,6 +144,7 @@ export default function TableWords() {
                 <MyToolbar
                     numSelected={selected.length}
                     handleDelete={handleClickDeleteWords}
+                    handleSubmitForStudy={handleSubmitWordsForStudy}
                 />
                 <TableContainer>
                     <Table

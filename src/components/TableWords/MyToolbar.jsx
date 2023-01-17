@@ -7,8 +7,10 @@ import PropTypes from 'prop-types'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import FilterListIcon from '@mui/icons-material/FilterList'
+import AddBoxIcon from '@mui/icons-material/AddBox'
+import { Box } from '@mui/material'
 
-const MyToolbar = ({ numSelected, handleDelete }) => {
+const MyToolbar = ({ numSelected, handleDelete, handleSubmitForStudy }) => {
     return (
         <Toolbar
             sx={{
@@ -39,16 +41,23 @@ const MyToolbar = ({ numSelected, handleDelete }) => {
                     id="tableTitle"
                     component="div"
                 >
-                    Words
+                    Vocabulary
                 </Typography>
             )}
 
             {numSelected > 0 ? (
-                <Tooltip title="Delete">
-                    <IconButton onClick={handleDelete}>
-                        <DeleteIcon />
-                    </IconButton>
-                </Tooltip>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Tooltip title="Add to study">
+                        <IconButton onClick={handleSubmitForStudy}>
+                            <AddBoxIcon />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete">
+                        <IconButton onClick={handleDelete}>
+                            <DeleteIcon />
+                        </IconButton>
+                    </Tooltip>
+                </Box>
             ) : (
                 <Tooltip title="Filter list">
                     <IconButton>

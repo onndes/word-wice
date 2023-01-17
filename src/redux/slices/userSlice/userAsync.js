@@ -5,7 +5,7 @@ import { db } from '../../../firebase'
 import { resetStateWords } from '../wordsSlice/wordsSlice'
 
 const newSetDoc = (name, userUid) =>
-    setDoc(doc(db, name, userUid), { capital: true }, { merge: true })
+    setDoc(doc(db, name, userUid), { nameCollection: name }, { merge: true })
 
 export const getAuthUser = createAsyncThunk(
     'user/getAuthUser',

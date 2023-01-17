@@ -14,7 +14,11 @@ import {
 import { schemaFormAddWord } from '../../utils/schemaFormAddWord'
 import MyInput from './MyInput'
 import MyAlertDialogSlide from '../MyAlertDialogSlide'
-import { formAddWordProps, knowWord } from '../../utils/consts'
+import {
+    collectionNameWords,
+    formAddWordProps,
+    knowWord,
+} from '../../utils/consts'
 
 const AddWord = () => {
     const dispatch = useDispatch()
@@ -45,13 +49,16 @@ const AddWord = () => {
         if (formData) {
             dispatch(
                 addWords({
-                    ...formData,
-                    id: nanoid(),
-                    dateCreated: Timestamp.fromDate(new Date()),
-                    knowledge: knowWord.A0.code,
-                    dateLearned: null,
-                    countRepeat: 0,
-                    imgUrl: null
+                    collectionName: collectionNameWords.NEW,
+                    word: {
+                        ...formData,
+                        id: nanoid(),
+                        dateCreated: Timestamp.fromDate(new Date()),
+                        knowledge: knowWord.A0.code,
+                        dateLearned: null,
+                        countRepeat: 0,
+                        imgUrl: null,
+                    },
                 })
             )
         }
