@@ -1,12 +1,12 @@
-import React from "react"
-import LearnWordsCard from "../components/LearnWordsCard"
+import React from 'react'
+import LearnWordsCard from '../components/LearnWordsCard/LearnWordsCard'
 
 const LearnWords = () => {
-  return (
-    <div>
-      <LearnWordsCard/>
-    </div>
-  )
-};
+    return (
+        <div>
+            <LearnWordsCard />
+        </div>
+    )
+}
 
-export default LearnWords;
+export default LearnWords

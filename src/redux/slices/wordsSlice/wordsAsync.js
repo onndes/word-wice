@@ -50,15 +50,30 @@ export const addWords = createAsyncThunk(
     }
 )
 
-export const deleteWords = createAsyncThunk(
-    'words/deleteWords',
-    async (wordData, { thunkAPI, getState }) => {
+export const submitWordsForLearned = createAsyncThunk(
+    'words/submitWordsForLearned',
+    async (data, { thunkAPI, getState, dispatch }) => {
         try {
-            const docRef = doc(db, wordData.collectionName, getState().user.id)
-            await updateDoc(docRef, {
-                words: arrayRemove(wordData.word),
+            const docRefPrecess = doc(
+                db,
+                collectionNameWords.IN_PROCESS,
+                getState().user.id
+            )
+            const docRefLearned = doc(
+                db,
+                collectionNameWords.LEARNED,
+                getState().user.id
+            )
+            await updateDoc(docRefPrecess, {
+                words: arrayRemove(data.word),
             })
-            return wordData
+            await updateDoc(docRefLearned, {
+                words: arrayUnion({ ...data.word, knowledge: data.knowledge }),
+            })
+            if (data.fetchWords) {
+                dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
+            }
+            return data
         } catch (e) {
             return thunkAPI.rejectWithValue(e)
         }
@@ -79,6 +94,46 @@ export const submitWordsForStudy = createAsyncThunk(
                 })
             )
             return word
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e)
+        }
+    }
+)
+
+export const deleteWords = createAsyncThunk(
+    'words/deleteWords',
+    async (wordData, { thunkAPI, getState }) => {
+        try {
+            const docRef = doc(db, wordData.collectionName, getState().user.id)
+            await updateDoc(docRef, {
+                words: arrayRemove(wordData.word),
+            })
+            return wordData
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e)
+        }
+    }
+)
+
+export const updateRankInProcessWord = createAsyncThunk(
+    'words/updateRankInProcessWord',
+    async (data, { thunkAPI, getState, dispatch }) => {
+        try {
+            const docRef = doc(
+                db,
+                collectionNameWords.IN_PROCESS,
+                getState().user.id
+            )
+            await updateDoc(docRef, {
+                words: arrayRemove(data.word),
+            })
+            await updateDoc(docRef, {
+                words: arrayUnion({ ...data.word, knowledge: data.knowledge }),
+            })
+            if (data.fetchWords) {
+                dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
+            }
+            return data
         } catch (e) {
             return thunkAPI.rejectWithValue(e)
         }

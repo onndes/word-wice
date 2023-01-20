@@ -10,6 +10,8 @@ export const isLoading = {
     FETCH_WORDS: 'FETCH_WORDS',
     DELETE_WORDS: 'DELETE_WORDS',
     SUBMIT_STUDY: 'SUBMIT_STUDY',
+    UPDATE_KNOWLEDGE: 'UPDATE_KNOWLEDGE',
+    SUBMIT_LEARNED: 'SUBMIT_LEARNED',
 }
 
 export const formAddWordProps = {
@@ -36,7 +38,7 @@ export const knowWord = {
     A1: {
         code: 'A1',
         tittle: 'Learning',
-        color: '#cddc39',
+        color: '#37474f',
     },
     A2: {
         code: 'A2',

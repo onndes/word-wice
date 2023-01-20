@@ -9,6 +9,7 @@ import { Box } from '@mui/material'
 import { getComparator, stableSort } from '../../utils/utilsTable'
 import LinearIndeterminate from '../LinearIndeterminate'
 import { knowWord } from '../../utils/consts'
+import WordRank from '../WordRank'
 
 const Body = ({
     order,
@@ -68,19 +69,7 @@ const Body = ({
                                 {row.translation}
                             </TableCell>
                             <TableCell align="left">
-                                <Box
-                                    sx={{
-                                        background:
-                                            knowWord[row.knowledge].color,
-                                        padding: '3px',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        maxWidth: '100px',
-                                        borderRadius: '10px'
-                                    }}
-                                >
-                                    {knowWord[row.knowledge].tittle}
-                                </Box>
+                                <WordRank word={knowWord[row.knowledge]} />
                             </TableCell>
                             <TableCell align="left">
                                 {row.transcription}
