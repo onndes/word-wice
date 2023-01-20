@@ -9,13 +9,12 @@ import {
     HOME_ROUTE,
     LEARN_WORDS_ROUTE,
     VOCABULARY_ROUTE,
-} from '../utils/consts'
+} from '../../utils/consts'
 
 const DrawerMenu = () => {
     return (
         <List>
             <ListItemDrawer
-            
                 text="Home"
                 icon={() => <HomeIcon />}
                 to={HOME_ROUTE}

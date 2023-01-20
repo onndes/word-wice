@@ -8,9 +8,9 @@ import { styled, useTheme } from '@mui/material/styles'
 
 import ButtonToggleTheme from './ButtonToggleTheme'
 
-import { DRAWER_WIDTH } from '../utils/consts'
+import { DRAWER_WIDTH } from '../../utils/consts'
 import DrawerMenu from './DrawerMenu'
-import { tokens } from '../theme/theme'
+import { tokens } from '../../theme/theme'
 
 export const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
