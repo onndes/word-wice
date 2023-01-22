@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles'
 import { DRAWER_WIDTH } from '../utils/consts'
 import AppRouter from '../AppRouter'
 import MyAppBar from './MyAppBar'
-import { MyDrawer, DrawerHeader } from './MyDrawer'
+import { MyDrawer, DrawerHeader } from './MyDrawer/MyDrawer'
 import { useAuth } from '../hooks/useAuth'
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
