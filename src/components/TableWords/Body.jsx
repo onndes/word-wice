@@ -4,7 +4,6 @@ import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import Checkbox from '@mui/material/Checkbox'
 import TableBody from '@mui/material/TableBody'
-import { Box } from '@mui/material'
 
 import { getComparator, stableSort } from '../../utils/utilsTable'
 import LinearIndeterminate from '../LinearIndeterminate'

@@ -7,7 +7,7 @@ import Switch from '@mui/material/Switch'
 import Table from '@mui/material/Table'
 import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
-import { useMediaQuery, useTheme } from '@mui/material'
+import { useTheme } from '@mui/material'
 
 import Body from './Body'
 import MyToolbar from './MyToolbar'
@@ -25,10 +25,6 @@ import { collectionNameWords, isLoading, knowWord } from '../../utils/consts'
 import BasicAlerts from '../BasicAlerts'
 
 export default function TableWords() {
-    const matches = useMediaQuery('(min-width:600px)')
-    console.log('object')
-    console.log(matches)
-
     const dispatch = useDispatch()
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)

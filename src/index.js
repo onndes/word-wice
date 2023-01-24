@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
-import './firebase';
+import './firebase'
+import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
 import App from './App'
 
@@ -15,3 +16,5 @@ root.render(
         </BrowserRouter>
     </Provider>
 )
+
+serviceWorkerRegistration.register()

@@ -72,7 +72,7 @@ export default function MyAppBar({ handleDrawerOpen, open }) {
                         </IconButton>
                     )}
                     <Typography variant="h4" noWrap component="p">
-                        MyVocabulary
+                        WordWice
                     </Typography>
                 </Box>
                 {isAuth ? (
