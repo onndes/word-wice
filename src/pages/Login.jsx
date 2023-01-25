@@ -1,13 +1,10 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Container, Grid, Button, Box, useTheme } from '@mui/material'
+import { Container, Button, Box } from '@mui/material'
 import { getAuthUser } from '../redux/slices/userSlice/userAsync'
-import { tokens } from '../theme/theme'
 import icon from '../common/images/icon-512x512.png'
 
 export default function Login() {
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
     const dispatch = useDispatch()
     return (
         <Container fixed maxWidth="lg">

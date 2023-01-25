@@ -1,7 +1,7 @@
 import * as React from 'react'
 import CssBaseline from '@mui/material/CssBaseline'
 import { styled } from '@mui/material/styles'
-import { Box, Container } from '@mui/material'
+import { Container } from '@mui/material'
 import AppRouter from '../AppRouter'
 import MyAppBar from './MyAppBar/MyAppBar'
 import { useAuth } from '../hooks/useAuth'

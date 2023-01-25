@@ -20,39 +20,50 @@ import NoWords from './NoWords'
 import TranslationBlock from './TranslationBlock'
 import WordBlock from './WordBlock'
 import { defineNextKnow, shuffleArray } from '../../utils/utils'
+import {
+    setCurrentWordIdx,
+    setMixedWords,
+} from '../../redux/slices/wordsSlice/wordsSlice'
 
 const LearnWordsCard = () => {
     const dispatch = useDispatch()
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
 
-    const { inProcessWords } = useSelector(({ words }) => words)
+    const { inProcessWords, mixedWords, currentWordIdx } = useSelector(
+        ({ words }) => words
+    )
 
-    const [words, setWords] = useState([])
+    const [isMixWords, setIsMixWords] = useState(false)
     const [checkWords, setCheckWords] = useState(false)
-    const [currentWordIdx, setCurrentWordIdx] = useState(0)
     const [visibilityTranslate, setVisibilityTranslate] = useState(false)
 
     useEffect(() => {
-        dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
+        if (!mixedWords.length) {
+            dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
+            setIsMixWords(true)
+        }
     }, [])
 
     useEffect(() => {
-        mixWords()
+        if (currentWordIdx === 0) mixWords()
     }, [inProcessWords])
 
     const mixWords = () => {
         if (inProcessWords.length < 5) setCheckWords(true)
         if (inProcessWords.length > 0)
-            setWords(shuffleArray([...inProcessWords]))
+            dispatch(setMixedWords(shuffleArray([...inProcessWords])))
     }
 
     const nextWord = () => {
-        setCurrentWordIdx((prevState) => {
-            if (words.length - 1 === prevState) return 0
-            return prevState + 1
-        })
+        const isLast = mixedWords.length - 1 === currentWordIdx
+        const idx = isLast ? 0 : currentWordIdx + 1
+        dispatch(setCurrentWordIdx(idx))
         setVisibilityTranslate(false)
+        if (isLast) {
+            dispatch(setMixedWords([]))
+            setVisibilityTranslate(false)
+        }
     }
 
     const showTranslate = () => {
@@ -60,51 +71,33 @@ const LearnWordsCard = () => {
     }
 
     const handleRemembered = () => {
-        const knowledge = defineNextKnow(
-            'next',
-            words[currentWordIdx].knowledge
-        )
-        const data = {
-            knowledge,
-            word: words[currentWordIdx],
-            fetchWords: currentWordIdx === words.length - 1,
-        }
+        const word = mixedWords[currentWordIdx]
+        const isLast = mixedWords.length - 1 === currentWordIdx
+        const knowledge = defineNextKnow('next', word.knowledge)
+        const data = { knowledge, word, isLast }
         if (knowledge !== 'C2') {
             dispatch(updateRankInProcessWord(data))
         } else {
             dispatch(submitWordsForLearned(data))
         }
-        if (currentWordIdx === words.length - 1) {
-            setWords([])
-            setCurrentWordIdx(0)
-            setVisibilityTranslate(false)
-        } else {
-            nextWord()
-        }
+
+        nextWord()
     }
     const handleDonNotKnow = () => {
-        const knowledge = defineNextKnow(
-            'prev',
-            words[currentWordIdx].knowledge
-        )
-        const data = {
-            knowledge,
-            word: words[currentWordIdx],
-            fetchWords: currentWordIdx === words.length - 1,
-        }
-        if (knowledge !== 'A1' && currentWordIdx === words.length - 1) {
-            dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
-        } else {
-            dispatch(updateRankInProcessWord(data))
-        }
-        if (currentWordIdx !== words.length - 1) {
-            nextWord()
-        }
+        const word = mixedWords[currentWordIdx]
+        const isLast = mixedWords.length - 1 === currentWordIdx
+        const knowledge = defineNextKnow('prev', word.knowledge)
+        const data = { knowledge, word, isLast }
+        dispatch(updateRankInProcessWord(data))
+        nextWord()
     }
 
     if (checkWords)
         return (
-            <NoWords setCheckWords={setCheckWords} countWords={words.length} />
+            <NoWords
+                setCheckWords={setCheckWords}
+                countWords={mixedWords.length}
+            />
         )
 
     return (
@@ -123,13 +116,13 @@ const LearnWordsCard = () => {
             >
                 <Box sx={{ padding: '20px' }}>
                     <TranslationBlock
-                        word={words[currentWordIdx]}
-                        isWords={words.length > 0}
+                        word={mixedWords[currentWordIdx]}
+                        isWords={mixedWords.length > 0}
                     />
                     <Divider light />
                     <WordBlock
-                        word={words[currentWordIdx]}
-                        isWords={words.length > 0}
+                        word={mixedWords[currentWordIdx]}
+                        isWords={mixedWords.length > 0}
                         visibility={visibilityTranslate}
                         show={showTranslate}
                     />
@@ -141,7 +134,7 @@ const LearnWordsCard = () => {
                         sx={{ display: 'flex', gap: '20px' }}
                     >
                         <Button
-                            disabled={!words.length}
+                            disabled={!mixedWords.length}
                             variant="contained"
                             color="primary"
                             onClick={handleRemembered}
@@ -154,7 +147,7 @@ const LearnWordsCard = () => {
                             I remembered
                         </Button>
                         <Button
-                            disabled={!words.length}
+                            disabled={!mixedWords.length}
                             variant="contained"
                             color="primary"
                             onClick={handleDonNotKnow}

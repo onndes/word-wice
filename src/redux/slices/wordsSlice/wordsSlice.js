@@ -18,6 +18,8 @@ const status = {
 }
 
 const initialState = {
+    mixedWords: [],
+    currentWordIdx: 0,
     newWords: [],
     inProcessWords: [],
     learnedWords: [],
@@ -33,6 +35,12 @@ const wordsSlice = createSlice({
     initialState,
     reducers: {
         resetStateWords: () => initialState,
+        setMixedWords(state, { payload }) {
+            state.mixedWords = payload
+        },
+        setCurrentWordIdx(state, { payload }) {
+            state.currentWordIdx = payload
+        },
     },
     extraReducers: (builder) => {
         // fetchWords
@@ -115,6 +123,7 @@ export const selectLoading = (loading) => (state) =>
 
 export const statusLoading = (request) => (state) => state.loading[request]
 
-export const { resetStateWords } = wordsSlice.actions
+export const { resetStateWords, setMixedWords, setCurrentWordIdx } =
+    wordsSlice.actions
 
 export default wordsSlice.reducer

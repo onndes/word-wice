@@ -70,7 +70,7 @@ export const submitWordsForLearned = createAsyncThunk(
             await updateDoc(docRefLearned, {
                 words: arrayUnion({ ...data.word, knowledge: data.knowledge }),
             })
-            if (data.fetchWords) {
+            if (data.isLast) {
                 dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
             }
             return data
@@ -130,7 +130,7 @@ export const updateRankInProcessWord = createAsyncThunk(
             await updateDoc(docRef, {
                 words: arrayUnion({ ...data.word, knowledge: data.knowledge }),
             })
-            if (data.fetchWords) {
+            if (data.isLast) {
                 dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
             }
             return data
