@@ -1,62 +1,31 @@
 import * as React from 'react'
-import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
 import { styled } from '@mui/material/styles'
-
-import { DRAWER_WIDTH } from '../utils/consts'
+import { Box, Container } from '@mui/material'
 import AppRouter from '../AppRouter'
-import MyAppBar from './MyAppBar'
-import { MyDrawer, DrawerHeader } from './MyDrawer/MyDrawer'
+import MyAppBar from './MyAppBar/MyAppBar'
 import { useAuth } from '../hooks/useAuth'
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: `-${DRAWER_WIDTH}px`,
-        ...(open && {
-            transition: theme.transitions.create('margin', {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginLeft: 0,
-        }),
-    })
-)
+export const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+}))
 
 export default function Layout() {
-    const [open, setOpen] = React.useState(true)
-    
     const { isAuth } = useAuth()
 
-    const handleDrawerOpen = () => {
-        setOpen(true)
-    }
-
-    const handleDrawerClose = () => {
-        setOpen(false)
-    }
-
     return (
-        <Box sx={{ display: 'flex' }}>
+        <>
             <CssBaseline />
-            <MyAppBar
-                handleDrawerOpen={handleDrawerOpen}
-                open={open && isAuth}
-                user={isAuth}
-            />
-            <MyDrawer
-                handleDrawerClose={handleDrawerClose}
-                open={open && isAuth}
-            />
-            <Main open={open && isAuth}>
-                <DrawerHeader />
+            {isAuth && <MyAppBar />}
+            <DrawerHeader />
+            <Container maxWidth="md" sx={{ mt: 2 }}>
                 <AppRouter />
-            </Main>
-        </Box>
+            </Container>
+        </>
     )
 }

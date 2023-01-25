@@ -1,47 +1,30 @@
 import MuiAppBar from '@mui/material/AppBar'
-import MenuIcon from '@mui/icons-material/Menu'
 import {
     Box,
     Button,
-    IconButton,
+    ListItemButton,
     Toolbar,
     Typography,
     useTheme,
 } from '@mui/material'
 import { useDispatch } from 'react-redux'
-import { styled } from '@mui/material/styles'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
+import { logOutUser } from '../../redux/slices/userSlice/userAsync'
+import { tokens } from '../../theme/theme'
+import DrawerMenu from './Menu'
+import icon from '../../common/images/icon-144x144.png'
+import { VOCABULARY_ROUTE } from '../../utils/consts'
 
-import { DRAWER_WIDTH } from '../utils/consts'
-import { useAuth } from '../hooks/useAuth'
-import { logOutUser } from '../redux/slices/userSlice/userAsync'
-import { tokens } from '../theme/theme'
-
-const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-    transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
-    ...(open && {
-        width: `calc(100% - ${DRAWER_WIDTH}px)`,
-        marginLeft: `${DRAWER_WIDTH}px`,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    }),
-}))
-
-export default function MyAppBar({ handleDrawerOpen, open }) {
+export default function MyAppBar() {
     const dispatch = useDispatch()
     const { isAuth, email } = useAuth()
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
+
     return (
-        <AppBar
+        <MuiAppBar
             position="fixed"
-            open={open}
             variant="persistent"
             sx={{
                 backgroundColor: colors.primary[400],
@@ -60,22 +43,31 @@ export default function MyAppBar({ handleDrawerOpen, open }) {
                         alignItems: 'center',
                     }}
                 >
-                    {isAuth && (
-                        <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            onClick={handleDrawerOpen}
-                            edge="start"
-                            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                    )}
-                    <Typography variant="h4" noWrap component="p">
-                        WordWice
-                    </Typography>
+                    <Link
+                        to={VOCABULARY_ROUTE}
+                        style={{
+                            color: theme.palette.text.primary,
+                            textDecoration: 'none',
+                            '&:active': { textDecoration: 'none' },
+                        }}
+                    >
+                        <ListItemButton disableGutters dense>
+                            <img width="50px" src={icon} alt="" />
+                            <Typography
+                                variant="h3"
+                                noWrap
+                                component="p"
+                                sx={{ letterSpacing: 1 }}
+                            >
+                                WordWice
+                            </Typography>
+                        </ListItemButton>
+                    </Link>
                 </Box>
-                {isAuth ? (
+
+                {isAuth && <DrawerMenu />}
+
+                {isAuth && (
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Typography variant="h6" noWrap component="p" mr={2}>
                             {email}
@@ -93,10 +85,8 @@ export default function MyAppBar({ handleDrawerOpen, open }) {
                             Log out
                         </Button>
                     </Box>
-                ) : (
-                    <Button color="inherit">Login</Button>
                 )}
             </Toolbar>
-        </AppBar>
+        </MuiAppBar>
     )
 }

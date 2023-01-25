@@ -4,7 +4,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4'
 import { Box, IconButton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { ColorModeContext } from '../../theme/theme'
+import { ColorModeContext } from '../theme/theme'
 
 export default function ButtonToggleTheme() {
     const theme = useTheme()
@@ -18,7 +18,7 @@ export default function ButtonToggleTheme() {
                     width: '100%',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    bgcolor: 'background.default',
+                    // bgcolor: 'background.default',
                     color: 'text.primary',
                     borderRadius: 1,
                     p: 3,
