@@ -7,6 +7,7 @@ import GTranslateIcon from '@mui/icons-material/GTranslate'
 import { nanoid } from 'nanoid'
 import { Timestamp } from 'firebase/firestore'
 
+import { Link, redirect } from 'react-router-dom'
 import {
     addWords,
     translateWord,
@@ -18,9 +19,10 @@ import {
     collectionNameWords,
     formAddWordProps,
     knowWord,
+    VOCABULARY_ROUTE,
 } from '../../utils/consts'
 
-const AddWord = () => {
+const AddWord = ({ mobile }) => {
     const dispatch = useDispatch()
     const [formData, setFormData] = useState(null)
 
@@ -41,6 +43,10 @@ const AddWord = () => {
     const { word, translation, transcription } = formAddWordProps
 
     const onSubmit = (data) => {
+        if (mobile) {
+            console.log(1)
+            redirect(VOCABULARY_ROUTE)
+        }
         setFormData(data)
         reset()
     }
@@ -111,18 +117,34 @@ const AddWord = () => {
     return (
         <Box
             component="form"
+            width="100%"
             sx={{
                 '& .MuiTextField-root': {
-                    m: 1,
-                    width: '25ch',
+                    m: mobile ? 0 : 1,
+                    ml: 0,
                 },
                 display: 'flex',
                 alignItems: 'top',
+                flexDirection: mobile ? 'column' : 'row',
             }}
             onSubmit={handleSubmit((data) => onSubmit(data))}
         >
-            <MyInput control={control} label={word.label} name={word.name} />
-            <Box m={2} alignItems="center">
+            <MyInput
+                mobile={mobile}
+                control={control}
+                label={word.label}
+                name={word.name}
+            />
+            <Box
+                sx={{
+                    mr: 2,
+                    mb: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+                alignItems="center"
+            >
                 <IconButton
                     disabled={activeButtonTranslate}
                     aria-label="translate"
@@ -133,29 +155,51 @@ const AddWord = () => {
                 </IconButton>
             </Box>
             <MyInput
+                mobile={mobile}
                 control={control}
                 label={translation.label}
                 name={translation.name}
             />
             <MyInput
+                mobile={mobile}
                 control={control}
                 label={transcription.label}
                 name={transcription.name}
             />
 
-            <Button
-                color="secondary"
-                variant="contained"
-                type="submit"
-                sx={{
-                    height: '50px',
-                    width: '100px',
-                    fontSize: '18px',
-                    mt: '10px',
-                }}
-            >
-                ADD
-            </Button>
+            <Box sx={{ display: 'flex', gap: 3 }}>
+                <Button
+                    color="secondary"
+                    variant="contained"
+                    type="submit"
+                    sx={{
+                        height: '50px',
+                        width: mobile ? '100%' : '140px',
+                        fontSize: '18px',
+                        mt: '10px',
+                    }}
+                >
+                    ADD
+                </Button>
+                {mobile && (
+                    <Button
+                        component={Link}
+                        to={VOCABULARY_ROUTE}
+                        color="secondary"
+                        variant="outlined"
+                        type="submit"
+                        sx={{
+                            height: '50px',
+                            width: mobile ? '100%' : '140px',
+                            fontSize: '18px',
+                            mt: '10px',
+                        }}
+                    >
+                        BACK
+                    </Button>
+                )}
+            </Box>
+
             <MyAlertDialogSlide
                 open={openModalTranslate}
                 setOpen={setOpenModalTranslate}

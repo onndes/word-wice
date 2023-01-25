@@ -34,14 +34,12 @@ const LearnWordsCard = () => {
         ({ words }) => words
     )
 
-    const [isMixWords, setIsMixWords] = useState(false)
     const [checkWords, setCheckWords] = useState(false)
     const [visibilityTranslate, setVisibilityTranslate] = useState(false)
 
     useEffect(() => {
         if (!mixedWords.length) {
             dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
-            setIsMixWords(true)
         }
     }, [])
 
