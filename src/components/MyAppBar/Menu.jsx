@@ -1,35 +1,53 @@
-/* eslint-disable react/no-unstable-nested-components */
 import React from 'react'
-import { List } from '@mui/material'
+import { Link } from 'react-router-dom'
+import { Tab, Tabs } from '@mui/material'
 import MenuBook from '@mui/icons-material/MenuBook'
 import School from '@mui/icons-material/School'
 import MenuIcon from '@mui/icons-material/Menu'
-import ListItemDrawer from './ItemList'
 import {
     LEARN_WORDS_ROUTE,
     MENU_ROUTE,
     VOCABULARY_ROUTE,
 } from '../../utils/consts'
 
+const tabs = [
+    { label: 'Vocabulary', to: VOCABULARY_ROUTE, icon: <MenuBook /> },
+    { label: 'Learn', to: LEARN_WORDS_ROUTE, icon: <School /> },
+    { label: 'Menu', to: MENU_ROUTE, icon: <MenuIcon /> },
+]
+
 const Menu = () => {
+    const [value, setValue] = React.useState(0)
+
+    const handleChange = (_, newValue) => {
+        setValue(newValue)
+    }
     return (
-        <List sx={{ display: 'flex' }}>
-            <ListItemDrawer
-                text="Vocabulary"
-                icon={() => <MenuBook />}
-                to={VOCABULARY_ROUTE}
-            />
-            <ListItemDrawer
-                text="Learn"
-                icon={() => <School />}
-                to={LEARN_WORDS_ROUTE}
-            />
-            <ListItemDrawer
-                text="Menu"
-                icon={() => <MenuIcon />}
-                to={MENU_ROUTE}
-            />
-        </List>
+        <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="tabs"
+            indicatorColor="secondary"
+            textColor="secondary"
+            sx={{
+                '& 	.MuiTabs-root': {},
+                height: '65px',
+            }}
+        >
+            {tabs.map((tab, index) => {
+                return (
+                    <Tab
+                        key={tab.label}
+                        label={tab.label}
+                        icon={tab.icon}
+                        to={tab.to}
+                        component={Link}
+                        iconPosition="start"
+                        value={index}
+                    />
+                )
+            })}
+        </Tabs>
     )
 }
 
