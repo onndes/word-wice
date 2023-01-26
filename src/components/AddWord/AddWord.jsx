@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux'
 import GTranslateIcon from '@mui/icons-material/GTranslate'
 import { nanoid } from 'nanoid'
 import { Timestamp } from 'firebase/firestore'
-
 import { Link, redirect } from 'react-router-dom'
 import {
     addWords,
@@ -44,7 +43,6 @@ const AddWord = ({ mobile }) => {
 
     const onSubmit = (data) => {
         if (mobile) {
-            console.log(1)
             redirect(VOCABULARY_ROUTE)
         }
         setFormData(data)
@@ -53,20 +51,18 @@ const AddWord = ({ mobile }) => {
 
     useEffect(() => {
         if (formData) {
-            dispatch(
-                addWords({
-                    collectionName: collectionNameWords.NEW,
-                    word: {
-                        ...formData,
-                        id: nanoid(),
-                        dateCreated: Timestamp.fromDate(new Date()),
-                        knowledge: knowWord.A0.code,
-                        dateLearned: null,
-                        countRepeat: 0,
-                        imgUrl: null,
-                    },
-                })
-            )
+            const collectionName = collectionNameWords.NEW
+            const word = {
+                ...formData,
+                id: nanoid(),
+                dateCreated: Timestamp.fromDate(new Date()),
+                knowledge: knowWord.A0.code,
+                dateLearned: null,
+                countRepeat: 0,
+                imgUrl: null,
+            }
+
+            dispatch(addWords({ collectionName, word }))
         }
     }, [formData])
 

@@ -1,17 +1,18 @@
-import { Box, Button, useMediaQuery } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useMediaQuery } from '@mui/material'
 import AddWord from '../components/AddWord/AddWord'
 import AddWordMobile from '../components/AddWordMobile/AddWordMobile'
 import TableWords from '../components/TableWords/TableWords'
-
-// eslint-disable-next-line react-hooks/rules-of-hooks
+import usePosition from '../hooks/usePosition'
 
 const Vocabulary = () => {
     const matches = useMediaQuery('(max-width:600px)')
+    const currentPosition = usePosition()
 
     return (
         <>
-            {matches ? <AddWordMobile /> : <AddWord />}
+            {matches && currentPosition < 20 && <AddWordMobile />}
+            {!matches && <AddWord />}
             <TableWords />
         </>
     )

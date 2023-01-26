@@ -61,11 +61,11 @@ const Body = ({
                                 id={labelId}
                                 scope="row"
                                 padding="none"
-                                sx={{ minWidth: '200px' }}
+                                sx={{ minWidth: '180px' }}
                             >
                                 {row.word}
                             </TableCell>
-                            <TableCell sx={{ minWidth: '200px' }} align="left">
+                            <TableCell sx={{ minWidth: '180px' }} align="left">
                                 {row.translation}
                             </TableCell>
                             <TableCell align="left">
@@ -74,7 +74,7 @@ const Body = ({
                             <TableCell align="left">
                                 {row.transcription}
                             </TableCell>
-                            <TableCell sx={{ minWidth: '200px' }} align="left">
+                            <TableCell sx={{ width: '50px' }} align="left">
                                 {date}
                             </TableCell>
                         </TableRow>
