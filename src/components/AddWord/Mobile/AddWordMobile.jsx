@@ -1,8 +1,8 @@
 import React from 'react'
 import { Box, Button, useTheme } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { ADD_WORD_ROUTE } from '../../utils/consts'
-import { tokens } from '../../theme/theme'
+import { ADD_WORD_ROUTE } from '../../../utils/consts'
+import { tokens } from '../../../theme/theme'
 
 const AddWordMobile = () => {
     const theme = useTheme()
@@ -14,7 +14,7 @@ const AddWordMobile = () => {
                 display: 'block',
                 zIndex: 1000,
                 position: 'fixed',
-                bottom: '40px',
+                bottom: '90px',
                 left: '50%',
                 transform: 'translateX(-50%)',
             }}

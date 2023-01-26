@@ -11,32 +11,23 @@ export default function ButtonToggleTheme() {
     const colorMode = React.useContext(ColorModeContext)
 
     return (
-        <Box sx={{ display: 'flex', height: '50px' }}>
-            <Box
-                sx={{
-                    display: 'flex',
-                    width: '100%',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    // bgcolor: 'background.default',
-                    color: 'text.primary',
-                    borderRadius: 1,
-                    p: 3,
-                }}
+        <Box
+            sx={{
+                textTransform: 'uppercase',
+            }}
+        >
+            {theme.palette.mode} mode
+            <IconButton
+                sx={{ ml: 1 }}
+                onClick={colorMode.toggleColorMode}
+                color="secondary"
             >
-                {theme.palette.mode} mode
-                <IconButton
-                    sx={{ ml: 1 }}
-                    onClick={colorMode.toggleColorMode}
-                    color="inherit"
-                >
-                    {theme.palette.mode === 'dark' ? (
-                        <Brightness7Icon />
-                    ) : (
-                        <Brightness4Icon />
-                    )}
-                </IconButton>
-            </Box>
+                {theme.palette.mode === 'dark' ? (
+                    <Brightness7Icon />
+                ) : (
+                    <Brightness4Icon />
+                )}
+            </IconButton>
         </Box>
     )
 }

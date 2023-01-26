@@ -1,7 +1,7 @@
 import React from 'react'
 import { useMediaQuery } from '@mui/material'
 import AddWord from '../components/AddWord/AddWord'
-import AddWordMobile from '../components/AddWordMobile/AddWordMobile'
+import AddWordMobile from '../components/AddWord/Mobile/AddWordMobile'
 import TableWords from '../components/TableWords/TableWords'
 import usePosition from '../hooks/usePosition'
 

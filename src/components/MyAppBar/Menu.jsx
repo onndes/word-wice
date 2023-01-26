@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Tab, Tabs } from '@mui/material'
+import { Tab, Tabs, useMediaQuery } from '@mui/material'
 import MenuBook from '@mui/icons-material/MenuBook'
 import School from '@mui/icons-material/School'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -17,6 +17,7 @@ const tabs = [
 ]
 
 const Menu = () => {
+    const mq = useMediaQuery('(max-width:600px)')
     const [value, setValue] = React.useState(0)
 
     const handleChange = (_, newValue) => {
@@ -29,10 +30,8 @@ const Menu = () => {
             aria-label="tabs"
             indicatorColor="secondary"
             textColor="secondary"
-            sx={{
-                '& 	.MuiTabs-root': {},
-                height: '65px',
-            }}
+            variant="fullWidth"
+            
         >
             {tabs.map((tab, index) => {
                 return (
@@ -42,7 +41,7 @@ const Menu = () => {
                         icon={tab.icon}
                         to={tab.to}
                         component={Link}
-                        iconPosition="start"
+                        iconPosition={mq ? 'top' : 'start'}
                         value={index}
                     />
                 )
