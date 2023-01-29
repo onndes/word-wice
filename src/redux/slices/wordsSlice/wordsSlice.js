@@ -7,7 +7,8 @@ import {
     fetchWords,
     deleteWords,
     submitWordsForStudy,
-    updateRankInProcessWord,
+    updateKnowledgeInProcess,
+    submitWordsForLearned,
 } from './wordsAsync'
 
 const status = {
@@ -26,7 +27,7 @@ const initialState = {
     isLoading: Object.keys(isLoading),
     error: {},
     loading: {
-        updateRankInProcessWord: status.init,
+        updateKnowledgeInProcess: status.init,
     },
 }
 
@@ -41,15 +42,18 @@ const wordsSlice = createSlice({
         setCurrentWordIdx(state, { payload }) {
             state.currentWordIdx = payload
         },
+        setWords(state, { payload }) {
+            state[payload.collectionName] = payload.words
+        },
     },
     extraReducers: (builder) => {
         // fetchWords
         builder.addCase(fetchWords.pending, (state) => {
             state.isLoading = addIsLoading(isLoading.FETCH_WORDS, state)
-            state.loading.updateRankInProcessWord = status.loading
+            state.loading.updateKnowledgeInProcess = status.loading
         })
         builder.addCase(fetchWords.fulfilled, (state, action) => {
-            state.loading.updateRankInProcessWord = status.success
+            state.loading.updateKnowledgeInProcess = status.success
             state.isLoading = removeIsLoading(isLoading.FETCH_WORDS, state)
             const objKeys = Object.keys(action.payload)
             objKeys.forEach((key) => {
@@ -57,7 +61,7 @@ const wordsSlice = createSlice({
             })
         })
         builder.addCase(fetchWords.rejected, (state, action) => {
-            state.loading.updateRankInProcessWord = status.error
+            state.loading.updateKnowledgeInProcess = status.error
             state.isLoading = removeIsLoading(isLoading.FETCH_WORDS, state)
             state.error = action.payload
         })
@@ -104,14 +108,25 @@ const wordsSlice = createSlice({
             state.isLoading = removeIsLoading(isLoading.SUBMIT_STUDY, state)
             state.error = action.payload
         })
-        // updateKnowledgeInProcessWord
-        builder.addCase(updateRankInProcessWord.pending, (state) => {
+        // submitWordsForLearned
+        builder.addCase(submitWordsForLearned.pending, (state) => {
+            state.isLoading = addIsLoading(isLoading.SUBMIT_LEARNED, state)
+        })
+        builder.addCase(submitWordsForLearned.fulfilled, (state) => {
+            state.isLoading = removeIsLoading(isLoading.SUBMIT_LEARNED, state)
+        })
+        builder.addCase(submitWordsForLearned.rejected, (state, action) => {
+            state.isLoading = removeIsLoading(isLoading.SUBMIT_LEARNED, state)
+            state.error = action.payload
+        })
+        // updateKnowledgeInProcess
+        builder.addCase(updateKnowledgeInProcess.pending, (state) => {
             state.isLoading = addIsLoading(isLoading.UPDATE_KNOWLEDGE, state)
         })
-        builder.addCase(updateRankInProcessWord.fulfilled, (state) => {
+        builder.addCase(updateKnowledgeInProcess.fulfilled, (state) => {
             state.isLoading = removeIsLoading(isLoading.UPDATE_KNOWLEDGE, state)
         })
-        builder.addCase(updateRankInProcessWord.rejected, (state, action) => {
+        builder.addCase(updateKnowledgeInProcess.rejected, (state, action) => {
             state.isLoading = removeIsLoading(isLoading.UPDATE_KNOWLEDGE, state)
             state.error = action.payload
         })
@@ -123,7 +138,7 @@ export const selectLoading = (loading) => (state) =>
 
 export const statusLoading = (request) => (state) => state.loading[request]
 
-export const { resetStateWords, setMixedWords, setCurrentWordIdx } =
+export const { resetStateWords, setMixedWords, setCurrentWordIdx, setWords } =
     wordsSlice.actions
 
 export default wordsSlice.reducer

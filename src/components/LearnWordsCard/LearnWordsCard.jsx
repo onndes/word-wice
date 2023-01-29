@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
     fetchWords,
     submitWordsForLearned,
-    updateRankInProcessWord,
+    updateKnowledgeInProcess,
 } from '../../redux/slices/wordsSlice/wordsAsync'
 import { tokens } from '../../theme/theme'
 import { collectionNameWords } from '../../utils/consts'
@@ -74,7 +74,7 @@ const LearnWordsCard = () => {
         const knowledge = defineNextKnow('next', word.knowledge)
         const data = { knowledge, word, isLast }
         if (knowledge !== 'C2') {
-            dispatch(updateRankInProcessWord(data))
+            dispatch(updateKnowledgeInProcess(data))
         } else {
             dispatch(submitWordsForLearned(data))
         }
@@ -86,7 +86,7 @@ const LearnWordsCard = () => {
         const isLast = mixedWords.length - 1 === currentWordIdx
         const knowledge = defineNextKnow('prev', word.knowledge)
         const data = { knowledge, word, isLast }
-        dispatch(updateRankInProcessWord(data))
+        dispatch(updateKnowledgeInProcess(data))
         nextWord()
     }
 

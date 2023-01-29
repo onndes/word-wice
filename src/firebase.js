@@ -1,6 +1,12 @@
+/* eslint-disable no-console */
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+import {
+    enableIndexedDbPersistence,
+    CACHE_SIZE_UNLIMITED,
+    initializeFirestore,
+} from 'firebase/firestore'
+
 import 'firebase/compat/auth'
 import 'firebase/compat/firestore'
 
@@ -17,6 +23,20 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig)
 
 const auth = getAuth(firebaseApp)
-const db = getFirestore(firebaseApp)
 
+const db = initializeFirestore(firebaseApp, {
+    cacheSizeBytes: CACHE_SIZE_UNLIMITED,
+})
+
+enableIndexedDbPersistence(db, { experimentalForceOwningTab: true })
+    .then(() => {
+        console.log('Offline persistence enabled!')
+    })
+    .catch((err) => {
+        if (err.code === 'failed-precondition') {
+            console.log('failed-precondition')
+        } else if (err.code === 'unimplemented') {
+            console.log('unimplemented')
+        }
+    })
 export { auth, db }

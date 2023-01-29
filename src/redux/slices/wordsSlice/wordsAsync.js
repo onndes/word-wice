@@ -3,8 +3,9 @@ import {
     arrayRemove,
     arrayUnion,
     doc,
-    getDoc,
+    onSnapshot,
     updateDoc,
+    query,
 } from 'firebase/firestore'
 import translate from 'translate'
 import { db } from '../../../firebase'
@@ -12,22 +13,30 @@ import { collectionNameWords, knowWord } from '../../../utils/consts'
 
 export const fetchWords = createAsyncThunk(
     'words/fetchWords',
-    async (fetchCollections, { thunkAPI, getState }) => {
+    async (collections, { thunkAPI, getState }) => {
         try {
-            const collectionsWords =
-                fetchCollections || Object.values(collectionNameWords)
-            const docsRef = collectionsWords.map((el) =>
-                doc(db, el, getState().user.id)
-            )
-            const promise = docsRef.map((el) => getDoc(el))
-            const res = await Promise.all(promise)
+            const inquiry = collections || Object.values(collectionNameWords)
             const allWords = {}
-            res.forEach((el) => {
-                allWords[el.data().nameCollection] = el.data().words
-                    ? el.data().words
-                    : []
-            })
+            const qs = inquiry.map((el) =>
+                query(doc(db, el, getState().user.id))
+            )
 
+            const promise = qs.map(async (q) => {
+                return new Promise((resolve) => {
+                    onSnapshot(
+                        q,
+                        { includeMetadataChanges: true },
+                        (snapshot) => {
+                            const data = snapshot.data()
+                            allWords[data.nameCollection] = data.words
+                                ? data.words
+                                : []
+                            resolve()
+                        }
+                    )
+                })
+            })
+            await Promise.all(promise)
             return allWords
         } catch (e) {
             return thunkAPI.rejectWithValue(e)
@@ -40,7 +49,7 @@ export const addWords = createAsyncThunk(
     async (wordData, { thunkAPI, getState }) => {
         try {
             const docRef = doc(db, wordData.collectionName, getState().user.id)
-            await updateDoc(docRef, {
+            updateDoc(docRef, {
                 words: arrayUnion(wordData.word),
             })
             return wordData
@@ -50,30 +59,15 @@ export const addWords = createAsyncThunk(
     }
 )
 
-export const submitWordsForLearned = createAsyncThunk(
-    'words/submitWordsForLearned',
-    async (data, { thunkAPI, getState, dispatch }) => {
+export const deleteWords = createAsyncThunk(
+    'words/deleteWords',
+    async (wordData, { thunkAPI, getState }) => {
         try {
-            const docRefPrecess = doc(
-                db,
-                collectionNameWords.IN_PROCESS,
-                getState().user.id
-            )
-            const docRefLearned = doc(
-                db,
-                collectionNameWords.LEARNED,
-                getState().user.id
-            )
-            await updateDoc(docRefPrecess, {
-                words: arrayRemove(data.word),
+            const docRef = doc(db, wordData.collectionName, getState().user.id)
+            updateDoc(docRef, {
+                words: arrayRemove(wordData.word),
             })
-            await updateDoc(docRefLearned, {
-                words: arrayUnion({ ...data.word, knowledge: data.knowledge }),
-            })
-            if (data.isLast) {
-                dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
-            }
-            return data
+            return wordData
         } catch (e) {
             return thunkAPI.rejectWithValue(e)
         }
@@ -100,36 +94,48 @@ export const submitWordsForStudy = createAsyncThunk(
     }
 )
 
-export const deleteWords = createAsyncThunk(
-    'words/deleteWords',
-    async (wordData, { thunkAPI, getState }) => {
+export const updateKnowledgeInProcess = createAsyncThunk(
+    'words/updateKnowledgeInProcess',
+    async (data, { thunkAPI, dispatch }) => {
         try {
-            const docRef = doc(db, wordData.collectionName, getState().user.id)
-            await updateDoc(docRef, {
-                words: arrayRemove(wordData.word),
-            })
-            return wordData
+            await dispatch(
+                deleteWords({
+                    collectionName: collectionNameWords.IN_PROCESS,
+                    word: data.word,
+                })
+            )
+            await dispatch(
+                addWords({
+                    collectionName: collectionNameWords.IN_PROCESS,
+                    word: { ...data.word, knowledge: data.knowledge },
+                })
+            )
+            if (data.isLast) {
+                dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
+            }
+            return data
         } catch (e) {
             return thunkAPI.rejectWithValue(e)
         }
     }
 )
 
-export const updateRankInProcessWord = createAsyncThunk(
-    'words/updateRankInProcessWord',
-    async (data, { thunkAPI, getState, dispatch }) => {
+export const submitWordsForLearned = createAsyncThunk(
+    'words/submitWordsForLearned',
+    async (data, { thunkAPI, dispatch }) => {
         try {
-            const docRef = doc(
-                db,
-                collectionNameWords.IN_PROCESS,
-                getState().user.id
+            await dispatch(
+                deleteWords({
+                    collectionName: collectionNameWords.IN_PROCESS,
+                    word: data.word,
+                })
             )
-            await updateDoc(docRef, {
-                words: arrayRemove(data.word),
-            })
-            await updateDoc(docRef, {
-                words: arrayUnion({ ...data.word, knowledge: data.knowledge }),
-            })
+            await dispatch(
+                addWords({
+                    collectionName: collectionNameWords.LEARNED,
+                    word: { ...data.word, knowledge: data.knowledge },
+                })
+            )
             if (data.isLast) {
                 dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
             }

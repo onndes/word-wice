@@ -5,10 +5,10 @@
     "dependencies": {
         "@emotion/react": "^11.10.5",
         "@emotion/styled": "^11.10.5",
+        "@firebase/firestore": "^3.8.1",
         "@hookform/resolvers": "^2.9.10",
         "@mui/icons-material": "^5.10.16",
         "@mui/material": "^5.10.16",
-        "@mui/styled-engine-sc": "^5.10.16",
         "@mui/utils": "^5.11.0",
         "@reduxjs/toolkit": "^1.9.1",
         "date-fns": "^2.29.3",

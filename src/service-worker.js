@@ -80,3 +80,34 @@ self.addEventListener('message', (event) => {
 })
 
 // Any other custom service worker logic can go here.
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open('my-cache-name').then((cache) => {
+      return cache.addAll([
+        '/',
+        '/icons',
+        '/static',
+        '/404.html',
+        '/asset-manifest.json',
+        '/favicon.ico',
+        '/index.html',
+        '/manifest.json',
+        '/robots.txt',
+        '/service-worker,js',
+        '/service-worker.js.LICENSE.txt',
+        '/service-worker.js.js.map',
+      ]);
+    })
+  );
+})
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      if (response) {
+        return response;
+      }
+      return fetch(event.request);
+    })
+  );
+})
