@@ -17,7 +17,7 @@ const tabs = [
 ]
 
 const Menu = () => {
-    const mq = useMediaQuery('(max-width:600px)')
+    const mq = useMediaQuery('(max-width:900px)')
     const [value, setValue] = React.useState(0)
 
     const handleChange = (_, newValue) => {
@@ -30,8 +30,7 @@ const Menu = () => {
             aria-label="tabs"
             indicatorColor="secondary"
             textColor="secondary"
-            variant="fullWidth"
-            
+            variant={mq ? 'fullWidth' : 'standard'}
         >
             {tabs.map((tab, index) => {
                 return (

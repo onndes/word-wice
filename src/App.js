@@ -2,7 +2,6 @@ import * as React from 'react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
-import { disableNetwork, enableNetwork } from '@firebase/firestore'
 
 import Layout from './components/Layout'
 import { ColorModeContext, useMode } from './theme/theme'

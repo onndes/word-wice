@@ -9,11 +9,19 @@ const DisplayOnline = ({ isOnline }) => {
                 color: isOnline ? 'lightGreen' : 'red',
                 display: 'flex',
                 alignItems: 'center',
+                textAlign: 'center',
                 gap: 0.5,
             }}
         >
             <CircleIcon fontSize="" />
-            <Typography variant="h6" noWrap component="p" letterSpacing=".2px">
+            <Typography
+                fontSize="13px"
+                noWrap
+                component="p"
+                letterSpacing=".2px"
+                lineHeight={1}
+                pt="1px"
+            >
                 {isOnline ? 'online' : 'offline'}
             </Typography>
         </Box>
