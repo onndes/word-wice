@@ -1,5 +1,6 @@
 import {
     AppBar,
+    Box,
     ListItemButton,
     Toolbar,
     Typography,
@@ -10,10 +11,13 @@ import { Link } from 'react-router-dom'
 import { tokens } from '../../../theme/theme'
 import icon from '../../../common/images/icon-144x144.png'
 import { VOCABULARY_ROUTE } from '../../../utils/consts'
+import DisplayOnline from '../../DisplayOnline'
+import useIsOnline from '../../../hooks/useIsOnline'
 
 export default function MyAppBarMobile() {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
+    const isOnline = useIsOnline()
 
     return (
         <AppBar
@@ -41,14 +45,17 @@ export default function MyAppBarMobile() {
                 >
                     <ListItemButton disableGutters dense>
                         <img width="40px" src={icon} alt="" />
-                        <Typography
-                            variant="h4"
-                            noWrap
-                            component="p"
-                            sx={{ letterSpacing: 1 }}
-                        >
-                            WordWice
-                        </Typography>
+                        <Box>
+                            <Typography
+                                variant="h4"
+                                noWrap
+                                component="p"
+                                sx={{ letterSpacing: 1 }}
+                            >
+                                WordWice
+                            </Typography>
+                            <DisplayOnline isOnline={isOnline}/>
+                        </Box>
                     </ListItemButton>
                 </Link>
             </Toolbar>

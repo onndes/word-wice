@@ -4,6 +4,7 @@ const initialState = {
     tableVocabulary: {
         rowsPerPage: +localStorage.getItem('rowsPerPage') || 5,
     },
+    isOnline: true,
 }
 
 const settingsAppSlice = createSlice({
@@ -14,9 +15,12 @@ const settingsAppSlice = createSlice({
             localStorage.setItem('rowsPerPage', payload)
             state.tableVocabulary.rowsPerPage = payload
         },
+        setIsOnline(state, { payload }) {
+            state.isOnline = payload
+        },
     },
 })
 
-export const { setRowsPerPage } = settingsAppSlice.actions
+export const { setRowsPerPage, setIsOnline } = settingsAppSlice.actions
 
 export default settingsAppSlice.reducer

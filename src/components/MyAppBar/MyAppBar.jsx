@@ -8,16 +8,20 @@ import {
     useTheme,
 } from '@mui/material'
 import { Link } from 'react-router-dom'
+
 import { useAuth } from '../../hooks/useAuth'
 import { tokens } from '../../theme/theme'
 import DrawerMenu from './Menu'
 import icon from '../../common/images/icon-144x144.png'
 import { VOCABULARY_ROUTE } from '../../utils/consts'
 import LogOut from './LogOut'
+import useIsOnline from '../../hooks/useIsOnline'
+import DisplayOnline from '../DisplayOnline'
 
-export default function MyAppBar() {
+const MyAppBar = () => {
     const maxWith = useMediaQuery('(max-width:900px)')
-    const { isAuth,  } = useAuth()
+    const { isAuth } = useAuth()
+    const isOnline = useIsOnline()
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
 
@@ -58,14 +62,17 @@ export default function MyAppBar() {
                         >
                             <ListItemButton disableGutters dense>
                                 <img width="50px" src={icon} alt="" />
-                                <Typography
-                                    variant="h3"
-                                    noWrap
-                                    component="p"
-                                    sx={{ letterSpacing: 1 }}
-                                >
-                                    WordWice
-                                </Typography>
+                                <Box>
+                                    <Typography
+                                        variant="h3"
+                                        noWrap
+                                        component="p"
+                                        sx={{ letterSpacing: 1 }}
+                                    >
+                                        WordWice
+                                    </Typography>
+                                    <DisplayOnline isOnline={isOnline}/>
+                                </Box>
                             </ListItemButton>
                         </Link>
                     </Box>
@@ -77,3 +84,5 @@ export default function MyAppBar() {
         </AppBar>
     )
 }
+
+export default MyAppBar

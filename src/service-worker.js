@@ -1,4 +1,3 @@
-/* eslint-disable prefer-template */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable prefer-regex-literals */
 /// <reference lib="webworker" />
@@ -51,7 +50,7 @@ registerRoute(
         // Return true to signal that we want to use the handler.
         return true
     },
-    createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
+    createHandlerBoundToURL(`${process.env.PUBLIC_URL}/index.html`)
 )
 
 // An example runtime caching route for requests that aren't handled by the
@@ -81,33 +80,33 @@ self.addEventListener('message', (event) => {
 
 // Any other custom service worker logic can go here.
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open('my-cache-name').then((cache) => {
-      return cache.addAll([
-        '/',
-        '/icons',
-        '/static',
-        '/404.html',
-        '/asset-manifest.json',
-        '/favicon.ico',
-        '/index.html',
-        '/manifest.json',
-        '/robots.txt',
-        '/service-worker,js',
-        '/service-worker.js.LICENSE.txt',
-        '/service-worker.js.js.map',
-      ]);
-    })
-  );
+    event.waitUntil(
+        caches.open('my-cache-name').then((cache) => {
+            return cache.addAll([
+                '/',
+                '/icons',
+                '/static',
+                '/404.html',
+                '/asset-manifest.json',
+                '/favicon.ico',
+                '/index.html',
+                '/manifest.json',
+                '/robots.txt',
+                '/service-worker,js',
+                '/service-worker.js.LICENSE.txt',
+                '/service-worker.js.js.map',
+            ])
+        })
+    )
 })
 
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) {
-        return response;
-      }
-      return fetch(event.request);
-    })
-  );
+    event.respondWith(
+        caches.match(event.request).then((response) => {
+            if (response) {
+                return response
+            }
+            return fetch(event.request)
+        })
+    )
 })
