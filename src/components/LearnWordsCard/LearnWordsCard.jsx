@@ -3,7 +3,6 @@ import {
     Box,
     Paper,
     Typography,
-    useTheme,
     Button,
     Divider,
 } from '@mui/material'
@@ -14,7 +13,6 @@ import {
     submitWordsForLearned,
     updateKnowledgeInProcess,
 } from '../../redux/slices/wordsSlice/wordsAsync'
-import { tokens } from '../../theme/theme'
 import { collectionNameWords } from '../../utils/consts'
 import NoWords from './NoWords'
 import TranslationBlock from './TranslationBlock'
@@ -24,11 +22,11 @@ import {
     setCurrentWordIdx,
     setMixedWords,
 } from '../../redux/slices/wordsSlice/wordsSlice'
+import useMyTheme from '../../hooks/useMyTheme'
 
 const LearnWordsCard = () => {
     const dispatch = useDispatch()
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
+    const { colors } = useMyTheme()
 
     const { inProcessWords, mixedWords, currentWordIdx } = useSelector(
         ({ words }) => words

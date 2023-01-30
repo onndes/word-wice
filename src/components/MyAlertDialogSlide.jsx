@@ -6,8 +6,8 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import Slide from '@mui/material/Slide'
-import { Box, useTheme, FormControlLabel, Checkbox } from '@mui/material'
-import { tokens } from '../theme/theme'
+import { Box, FormControlLabel, Checkbox } from '@mui/material'
+import useMyTheme from '../hooks/useMyTheme'
 
 const Transition = React.forwardRef((props, ref) => (
     <Slide direction="up" ref={ref} {...props} />
@@ -20,8 +20,7 @@ export default function MyAlertDialogSlide({
     hideConfirm,
     setHideConfirm,
 }) {
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
+    const { colors } = useMyTheme()
 
     const handleCloseCancellation = () => {
         setOpen(false)

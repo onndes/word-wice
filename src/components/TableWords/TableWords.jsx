@@ -7,12 +7,9 @@ import Switch from '@mui/material/Switch'
 import Table from '@mui/material/Table'
 import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
-import { useTheme } from '@mui/material'
-
 import Body from './Body'
 import MyToolbar from './MyToolbar'
 import Head from './Head'
-import { tokens } from '../../theme/theme'
 // eslint-disable-next-line max-len
 import { setRowsPerPage } from '../../redux/slices/settingsAppSlice/settingsAppSlice'
 import {
@@ -23,11 +20,11 @@ import {
 import { selectLoading } from '../../redux/slices/wordsSlice/wordsSlice'
 import { collectionNameWords, isLoading, knowWord } from '../../utils/consts'
 import BasicAlerts from '../BasicAlerts'
+import useMyTheme from '../../hooks/useMyTheme'
 
 export default function TableWords() {
     const dispatch = useDispatch()
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
+    const { colors } = useMyTheme()
     const { newWords, inProcessWords, learnedWords } = useSelector(
         ({ words }) => words
     )
@@ -43,7 +40,7 @@ export default function TableWords() {
     const [orderBy, setOrderBy] = React.useState('dateCreated')
     const [selected, setSelected] = React.useState([])
     const [page, setPage] = React.useState(0)
-    const [dense, setDense] = React.useState(false)
+    const [dense, setDense] = React.useState(true)
 
     const [checkedAlert, setCheckedAlert] = React.useState(false)
     const [alertMessage, setAlertMessage] = React.useState(0)
@@ -91,7 +88,6 @@ export default function TableWords() {
     }
 
     const handleChangeRowsPerPage = (event) => {
-        // dispatch()
         dispatch(setRowsPerPage(parseInt(event.target.value, 10)))
         setPage(0)
     }

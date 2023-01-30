@@ -4,14 +4,10 @@ import { Tab, Tabs, useMediaQuery } from '@mui/material'
 import MenuBook from '@mui/icons-material/MenuBook'
 import School from '@mui/icons-material/School'
 import MenuIcon from '@mui/icons-material/Menu'
-import {
-    LEARN_WORDS_ROUTE,
-    MENU_ROUTE,
-    VOCABULARY_ROUTE,
-} from '../../utils/consts'
+import { LEARN_WORDS_ROUTE, MENU_ROUTE, WORDS_ROUTE } from '../../utils/consts'
 
 const tabs = [
-    { label: 'Vocabulary', to: VOCABULARY_ROUTE, icon: <MenuBook /> },
+    { label: 'Words', to: WORDS_ROUTE, icon: <MenuBook /> },
     { label: 'Learn', to: LEARN_WORDS_ROUTE, icon: <School /> },
     { label: 'Menu', to: MENU_ROUTE, icon: <MenuIcon /> },
 ]

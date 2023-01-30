@@ -1,16 +1,14 @@
 import {
     AppBar,
     Toolbar,
-    useTheme,
 } from '@mui/material'
 
-import { tokens } from '../../../theme/theme'
 import useIsOnline from '../../../hooks/useIsOnline'
 import LogoBlock from '../LogoBlock'
+import useMyTheme from '../../../hooks/useMyTheme'
 
 export default function MyAppBarMobile() {
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
+  const { colors } = useMyTheme()
     const isOnline = useIsOnline()
 
     return (

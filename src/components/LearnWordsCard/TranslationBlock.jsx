@@ -1,12 +1,12 @@
-import { Box, Typography, useTheme } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React from 'react'
-import { tokens } from '../../theme/theme'
+import useMyTheme from '../../hooks/useMyTheme'
 import { knowWord } from '../../utils/consts'
 import WordRank from '../WordRank'
 
 const TranslationBlock = ({ word, isWords }) => {
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
+    const { colors } = useMyTheme()
+
     return (
         <Box mb={2} ml={1}>
             <Box

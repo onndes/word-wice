@@ -1,12 +1,11 @@
 import React from 'react'
-import { Box, Button, useTheme } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { ADD_WORD_ROUTE } from '../../../utils/consts'
-import { tokens } from '../../../theme/theme'
+import useMyTheme from '../../../hooks/useMyTheme'
 
 const AddWordMobile = () => {
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
+    const { colors } = useMyTheme()
 
     return (
         <Box

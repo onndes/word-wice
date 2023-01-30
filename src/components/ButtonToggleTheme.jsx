@@ -1,7 +1,5 @@
 import React from 'react'
-import Brightness7Icon from '@mui/icons-material/Brightness7'
-import Brightness4Icon from '@mui/icons-material/Brightness4'
-import { Box, IconButton } from '@mui/material'
+import { Box, Switch } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { ColorModeContext } from '../theme/theme'
@@ -11,23 +9,14 @@ export default function ButtonToggleTheme() {
     const colorMode = React.useContext(ColorModeContext)
 
     return (
-        <Box
-            sx={{
-                textTransform: 'uppercase',
-            }}
-        >
-            {theme.palette.mode} mode
-            <IconButton
-                sx={{ ml: 1 }}
-                onClick={colorMode.toggleColorMode}
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+            Dark mode
+            <Switch
                 color="secondary"
-            >
-                {theme.palette.mode === 'dark' ? (
-                    <Brightness7Icon />
-                ) : (
-                    <Brightness4Icon />
-                )}
-            </IconButton>
+                checked={theme.palette.mode === 'dark'}
+                onChange={colorMode.toggleColorMode}
+                inputProps={{ 'aria-label': 'controlled' }}
+            />
         </Box>
     )
 }

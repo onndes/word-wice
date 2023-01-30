@@ -1,12 +1,11 @@
-import { Box, Button, Paper, Typography, useTheme } from '@mui/material'
+import { Box, Button, Paper, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { tokens } from '../../theme/theme'
-import { VOCABULARY_ROUTE } from '../../utils/consts'
+import useMyTheme from '../../hooks/useMyTheme'
+import { WORDS_ROUTE } from '../../utils/consts'
 
 const NoWords = ({ setCheckWords, countWords }) => {
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
+    const { colors } = useMyTheme()
     return (
         <Box sx={{ maxWidth: '400px', margin: '0 auto ' }}>
             <Typography variant="h4" color="" mb={3}>
@@ -40,7 +39,7 @@ const NoWords = ({ setCheckWords, countWords }) => {
                     >
                         <Link
                             style={{ textDecoration: 'none', color: 'black' }}
-                            to={VOCABULARY_ROUTE}
+                            to={WORDS_ROUTE}
                         >
                             Added words
                         </Link>

@@ -1,16 +1,18 @@
-import { AppBar, Toolbar, useMediaQuery, useTheme } from '@mui/material'
-
-import { tokens } from '../../theme/theme'
+import {
+    AppBar,
+    Toolbar,
+    Typography,
+} from '@mui/material'
 import Menu from './Menu'
-import LogOut from './LogOut'
 import useIsOnline from '../../hooks/useIsOnline'
 import LogoBlock from './LogoBlock'
+import { useAuth } from '../../hooks/useAuth'
+import useMyTheme from '../../hooks/useMyTheme'
 
 const MyAppBar = () => {
-    const mq = useMediaQuery('(max-width:900px)')
     const isOnline = useIsOnline()
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
+    const { mq, colors } = useMyTheme()
+    const { email } = useAuth()
 
     return (
         <AppBar
@@ -34,7 +36,11 @@ const MyAppBar = () => {
             >
                 {!mq && <LogoBlock isOnline={isOnline} />}
                 <Menu />
-                {!mq && <LogOut />}
+                {!mq && (
+                    <Typography variant="h6" noWrap component="p" mr={2}>
+                        {email}
+                    </Typography>
+                )}
             </Toolbar>
         </AppBar>
     )

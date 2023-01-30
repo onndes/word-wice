@@ -1,7 +1,7 @@
 export const LOGIN_ROUTE = '/login'
-export const VOCABULARY_ROUTE = '/vocabulary'
+export const WORDS_ROUTE = '/words'
 export const LEARN_WORDS_ROUTE = '/learn-words'
-export const MENU_ROUTE = '/settings'
+export const MENU_ROUTE = '/menu'
 export const ADD_WORD_ROUTE = '/add-word'
 
 export const DRAWER_WIDTH = 240

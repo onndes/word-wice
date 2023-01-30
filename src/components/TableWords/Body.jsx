@@ -74,7 +74,7 @@ const Body = ({
                             <TableCell align="left">
                                 {row.transcription}
                             </TableCell>
-                            <TableCell sx={{ width: '50px' }} align="left">
+                            <TableCell sx={{ width: '50px' }} align="center">
                                 {date}
                             </TableCell>
                         </TableRow>

@@ -1,12 +1,11 @@
 import * as React from 'react'
 import TextField from '@mui/material/TextField'
 import { Controller } from 'react-hook-form'
-import { Box, useTheme } from '@mui/material'
-import { tokens } from '../../theme/theme'
+import { Box,  } from '@mui/material'
+import useMyTheme from '../../hooks/useMyTheme'
 
 export default function MyInput({ label, name, control, mobile }) {
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
+  const { colors } = useMyTheme()
 
     return (
         <Controller

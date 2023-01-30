@@ -18,7 +18,7 @@ import {
     collectionNameWords,
     formAddWordProps,
     knowWord,
-    VOCABULARY_ROUTE,
+    WORDS_ROUTE,
 } from '../../utils/consts'
 
 const AddWord = ({ mobile }) => {
@@ -43,7 +43,7 @@ const AddWord = ({ mobile }) => {
 
     const onSubmit = (data) => {
         if (mobile) {
-            redirect(VOCABULARY_ROUTE)
+            redirect(WORDS_ROUTE)
         }
         setFormData(data)
         reset()
@@ -180,7 +180,7 @@ const AddWord = ({ mobile }) => {
                 {mobile && (
                     <Button
                         component={Link}
-                        to={VOCABULARY_ROUTE}
+                        to={WORDS_ROUTE}
                         color="secondary"
                         variant="outlined"
                         type="submit"

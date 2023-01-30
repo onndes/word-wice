@@ -6,7 +6,7 @@ import TableWords from '../components/TableWords/TableWords'
 import usePosition from '../hooks/usePosition'
 
 const Vocabulary = () => {
-    const matches = useMediaQuery('(max-width:600px)')
+    const matches = useMediaQuery('(max-width:900px)')
     const currentPosition = usePosition()
 
     return (

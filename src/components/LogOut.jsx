@@ -1,26 +1,32 @@
-import { Box, Button, Typography, useTheme } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { useAuth } from '../../hooks/useAuth'
-import { logOutUser } from '../../redux/slices/userSlice/userAsync'
-import { tokens } from '../../theme/theme'
+import { useAuth } from '../hooks/useAuth'
+import useMyTheme from '../hooks/useMyTheme'
+import { logOutUser } from '../redux/slices/userSlice/userAsync'
 
 const LogOut = () => {
     const { email } = useAuth()
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
+    const { colors } = useMyTheme()
     const dispatch = useDispatch()
+
     return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box
+            sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+            }}
+        >
             <Typography variant="h6" noWrap component="p" mr={2}>
                 {email}
             </Typography>
             <Button
                 sx={{
-                    backgroundColor: colors.blueAccent[700],
+                    backgroundColor: colors.redAccent[600],
                     color: colors.grey[100],
                     '&:hover': {
-                        backgroundColor: colors.blueAccent[800],
+                        backgroundColor: colors.redAccent[700],
                     },
                 }}
                 onClick={() => dispatch(logOutUser())}

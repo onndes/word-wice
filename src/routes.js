@@ -8,7 +8,7 @@ import {
     LEARN_WORDS_ROUTE,
     LOGIN_ROUTE,
     MENU_ROUTE,
-    VOCABULARY_ROUTE,
+    WORDS_ROUTE,
 } from './utils/consts'
 
 export const publicRoutes = [
@@ -19,7 +19,7 @@ export const publicRoutes = [
 ]
 export const privateRoutes = [
     {
-        path: VOCABULARY_ROUTE,
+        path: WORDS_ROUTE,
         Component: <Vocabulary />,
     },
     {
