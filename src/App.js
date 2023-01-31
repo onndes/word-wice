@@ -7,13 +7,20 @@ import Layout from './components/Layout'
 import { ColorModeContext, useMode } from './theme/theme'
 import { removeUser, setUser } from './redux/slices/userSlice/userSlice'
 import LoaderPage from './components/LoaderPage/LoaderPage'
+import useIsOnline from './hooks/useIsOnline'
+import { setIsOnline } from './redux/slices/settingsAppSlice/settingsAppSlice'
 
 function App() {
     const [theme, colorMode] = useMode()
     const [isAuth, setIsAuth] = React.useState(false)
+    const isOnline = useIsOnline()
     const dispatch = useDispatch()
 
     const auth = getAuth()
+
+    React.useEffect(() => {
+        dispatch(setIsOnline(isOnline))
+    }, [isOnline])
 
     React.useEffect(() => {
         onAuthStateChanged(auth, (user) => {

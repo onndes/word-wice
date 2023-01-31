@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Box, Button, IconButton } from '@mui/material'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import GTranslateIcon from '@mui/icons-material/GTranslate'
 import { nanoid } from 'nanoid'
 import { Timestamp } from 'firebase/firestore'
@@ -29,7 +29,7 @@ const AddWord = ({ mobile }) => {
         useForm({
             resolver: yupResolver(schemaFormAddWord),
         })
-
+    const isOnline = useSelector(({ settingsApp }) => settingsApp.isOnline)
     const [activeButtonTranslate, setActiveButtonTranslate] =
         React.useState(false)
     const [openModalTranslate, setOpenModalTranslate] = React.useState(false)
@@ -109,7 +109,7 @@ const AddWord = ({ mobile }) => {
             setActiveButtonTranslate(false)
         }
     }, [watchFields])
-
+    
     return (
         <Box
             component="form"
@@ -142,7 +142,7 @@ const AddWord = ({ mobile }) => {
                 alignItems="center"
             >
                 <IconButton
-                    disabled={activeButtonTranslate}
+                    disabled={activeButtonTranslate || !isOnline}
                     aria-label="translate"
                     color="secondary"
                     onClick={handleClickButtonTranslate}

@@ -1,8 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    tableVocabulary: {
+    wordsList: {
         rowsPerPage: +localStorage.getItem('rowsPerPage') || 5,
+        order: 'desc',
+        orderBy: 'dateCreated',
+        selected: [],
+        page: 0,
     },
     isOnline: true,
 }
@@ -13,14 +17,33 @@ const settingsAppSlice = createSlice({
     reducers: {
         setRowsPerPage(state, { payload }) {
             localStorage.setItem('rowsPerPage', payload)
-            state.tableVocabulary.rowsPerPage = payload
+            state.wordsList.rowsPerPage = payload
         },
         setIsOnline(state, { payload }) {
             state.isOnline = payload
         },
+        setOrder(state, { payload }) {
+            state.wordsList.order = payload
+        },
+        setOrderBy(state, { payload }) {
+            state.wordsList.orderBy = payload
+        },
+        setSelected(state, { payload }) {
+            state.wordsList.selected = payload
+        },
+        setPage(state, { payload }) {
+            state.wordsList.page = payload
+        },
     },
 })
 
-export const { setRowsPerPage, setIsOnline } = settingsAppSlice.actions
+export const {
+    setRowsPerPage,
+    setIsOnline,
+    setOrder,
+    setSelected,
+    setOrderBy,
+    setPage,
+} = settingsAppSlice.actions
 
 export default settingsAppSlice.reducer

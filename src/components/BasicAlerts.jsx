@@ -15,9 +15,10 @@ export default function TransitionAlerts({
         <Box
             sx={{
                 maxWidth: '300px',
-                position: 'fixed',
-                bottom: '10px',
+                position: 'absolute',
+                bottom: '100px',
                 right: '10px',
+                zIndex: 3000
             }}
         >
             <Slide

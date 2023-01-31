@@ -1,19 +1,19 @@
-import React from 'react'
-import { useMediaQuery } from '@mui/material'
 import AddWord from '../components/AddWord/AddWord'
 import AddWordMobile from '../components/AddWord/Mobile/AddWordMobile'
 import TableWords from '../components/TableWords/TableWords'
 import usePosition from '../hooks/usePosition'
+import useMyTheme from '../hooks/useMyTheme'
+import CardsWords from '../components/CardsWords/CardsWords'
 
 const Vocabulary = () => {
-    const matches = useMediaQuery('(max-width:900px)')
+    const { mq } = useMyTheme()
     const currentPosition = usePosition()
 
     return (
         <>
-            {matches && currentPosition < 20 && <AddWordMobile />}
-            {!matches && <AddWord />}
-            <TableWords />
+            {mq && currentPosition < 20 && <AddWordMobile />}
+            {!mq && <AddWord />}
+            {mq ? <CardsWords /> : <TableWords />}
         </>
     )
 }

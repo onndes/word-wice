@@ -24,7 +24,7 @@ import useMyTheme from '../../hooks/useMyTheme'
 
 export default function TableWords() {
     const dispatch = useDispatch()
-    const { colors } = useMyTheme()
+    const { colors, mq } = useMyTheme()
     const { newWords, inProcessWords, learnedWords } = useSelector(
         ({ words }) => words
     )
@@ -33,7 +33,7 @@ export default function TableWords() {
         selectLoading(isLoading.FETCH_WORDS)
     )
     const { rowsPerPage } = useSelector(
-        ({ settingsApp }) => settingsApp.tableVocabulary
+        ({ settingsApp }) => settingsApp.wordsList
     )
 
     const [order, setOrder] = React.useState('desc')
@@ -199,12 +199,14 @@ export default function TableWords() {
                 }
                 label="Dense padding"
             />
-            <BasicAlerts
-                text={`Added words to study: ${alertMessage}`}
-                checkedAlert={checkedAlert}
-                setCheckedAlert={setCheckedAlert}
-                severity={alertMessage ? 'success' : 'error'}
-            />
+            {!mq ? (
+                <BasicAlerts
+                    text={`Added words to study: ${alertMessage}`}
+                    checkedAlert={checkedAlert}
+                    setCheckedAlert={setCheckedAlert}
+                    severity={alertMessage ? 'success' : 'error'}
+                />
+            ) : null}
         </Box>
     )
 }
