@@ -6,10 +6,10 @@ const WordBlock = ({ isWords, word, visibility, show }) => {
     return (
         <Box
             mt={2}
-            mb={3}
+            mb={2}
             ml={1}
             sx={{
-                height: '50px',
+                // height: '50px',
             }}
         >
             <Typography mb={1} variant="h6" color={colors.grey[400]}>

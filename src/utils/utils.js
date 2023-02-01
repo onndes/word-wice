@@ -1,11 +1,12 @@
-import { knowWord } from "./consts";
+import { knowWord } from './consts'
 
 export const shuffleArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
+    const newArr = [...array]
+    for (let i = newArr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1))
-        ;[array[i], array[j]] = [array[j], array[i]]
+        ;[newArr[i], newArr[j]] = [newArr[j], newArr[i]]
     }
-    return array
+    return newArr
 }
 
 export const defineNextKnow = (step, currentKey) => {

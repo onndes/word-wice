@@ -98,18 +98,21 @@ export const updateKnowledgeInProcess = createAsyncThunk(
     'words/updateKnowledgeInProcess',
     async (data, { thunkAPI, dispatch }) => {
         try {
-            await dispatch(
-                deleteWords({
-                    collectionName: collectionNameWords.IN_PROCESS,
-                    word: data.word,
-                })
-            )
-            await dispatch(
-                addWords({
-                    collectionName: collectionNameWords.IN_PROCESS,
-                    word: { ...data.word, knowledge: data.knowledge },
-                })
-            )
+            if (data.word.knowledge !== data.knowledge) {
+                await dispatch(
+                    deleteWords({
+                        collectionName: collectionNameWords.IN_PROCESS,
+                        word: data.word,
+                    })
+                )
+                await dispatch(
+                    addWords({
+                        collectionName: collectionNameWords.IN_PROCESS,
+                        word: { ...data.word, knowledge: data.knowledge },
+                    })
+                )
+            }
+
             if (data.isLast) {
                 dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
             }

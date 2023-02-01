@@ -18,6 +18,10 @@ const NoWords = ({ setCheckWords, countWords }) => {
                     background: colors.primary[400],
                     maxWidth: '400px',
                     margin: '0 auto ',
+                    height: '300px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
                 }}
             >
                 <Box sx={{ padding: '20px' }} textAlign="center">
@@ -45,7 +49,7 @@ const NoWords = ({ setCheckWords, countWords }) => {
                         </Link>
                     </Button>
                     <Button
-                        onClick={() => setCheckWords(false)}
+                        onClick={setCheckWords}
                         variant="contained"
                         disabled={countWords === 0}
                         sx={{

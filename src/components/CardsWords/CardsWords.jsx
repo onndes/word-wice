@@ -49,7 +49,7 @@ const CardsWords = () => {
     const isSelected = (wordId) => selected.some((el) => el.id === wordId)
 
     return (
-        <Container maxWidth="sm" disableGutters>
+        <Container maxWidth="sm" disableGutters sx={{ mb: 10 }}>
             {stableSort(words, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
@@ -94,6 +94,7 @@ const CardsWords = () => {
                                 flexDirection="column"
                                 alignItems="end"
                                 gap={0.4}
+                                minWidth="118px"
                             >
                                 <WordRank word={knowWord[row.knowledge]} />
                                 <Typography fontSize="12px" color="lightGrey">

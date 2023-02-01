@@ -1,8 +1,4 @@
-import {
-    AppBar,
-    Toolbar,
-    Typography,
-} from '@mui/material'
+import { AppBar, Toolbar, Typography } from '@mui/material'
 import Menu from './Menu'
 import useIsOnline from '../../hooks/useIsOnline'
 import LogoBlock from './LogoBlock'

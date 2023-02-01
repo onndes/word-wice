@@ -4,9 +4,10 @@ import ButtonToggleTheme from '../components/ButtonToggleTheme'
 import LogOut from '../components/LogOut'
 import { tokens } from '../theme/theme'
 import DisplayWords from '../components/MenuComponents/DisplayWords'
+import useMyTheme from '../hooks/useMyTheme'
 
 const Title = styled(Typography)(({ theme }) => ({
-    ml: theme.spacing(2),
+    marginLeft: theme.spacing(1.5),
     color: 'GrayText',
 }))
 
@@ -14,13 +15,12 @@ const Block = styled(Paper, { shouldForwardProp: () => ({ elevation: 24 }) })(
     ({ theme }) => ({
         padding: theme.spacing(1.5),
         width: '100%',
-        mb: theme.spacing(1.5),
-        mr: theme.spacing(1.5),
         background: tokens(theme.palette.mode).primary[400],
     })
 )
 
 const Menu = () => {
+    const { mq } = useMyTheme()
     return (
         <Container
             disableGutters
@@ -37,10 +37,14 @@ const Menu = () => {
             <Block elevation={1}>
                 <ButtonToggleTheme />
             </Block>
-            <Title variant="h5">Display words</Title>
-            <Block elevation={1}>
-                <DisplayWords />
-            </Block>
+            {mq && (
+                <>
+                    <Title variant="h5">Display words</Title>
+                    <Block elevation={1}>
+                        <DisplayWords />
+                    </Block>
+                </>
+            )}
             <Title variant="h5">Account</Title>
             <Block elevation={1}>
                 <LogOut />

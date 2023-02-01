@@ -15,8 +15,8 @@ export default function TransitionAlerts({
         <Box
             sx={{
                 maxWidth: '300px',
-                position: 'absolute',
-                bottom: '100px',
+                position: 'fixed',
+                bottom: '20px',
                 right: '10px',
                 zIndex: 3000
             }}

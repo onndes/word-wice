@@ -23,6 +23,8 @@ const initialState = {
     currentWordIdx: 0,
     newWords: [],
     inProcessWords: [],
+    isStarted: false,
+    checkWords: false,
     learnedWords: [],
     isLoading: Object.keys(isLoading),
     error: {},
@@ -44,6 +46,15 @@ const wordsSlice = createSlice({
         },
         setWords(state, { payload }) {
             state[payload.collectionName] = payload.words
+        },
+        setCheckWords(state, { payload }) {
+            state.checkWords = payload
+        },
+        setProcessWords(state, { payload }) {
+            state.inProcessWords = payload
+        },
+        setStarted(state, { payload }) {
+            state.isStarted = payload
         },
     },
     extraReducers: (builder) => {
@@ -138,7 +149,14 @@ export const selectLoading = (loading) => (state) =>
 
 export const statusLoading = (request) => (state) => state.loading[request]
 
-export const { resetStateWords, setMixedWords, setCurrentWordIdx, setWords } =
-    wordsSlice.actions
+export const {
+    resetStateWords,
+    setMixedWords,
+    setCurrentWordIdx,
+    setProcessWords,
+    setWords,
+    setCheckWords,
+    setStarted,
+} = wordsSlice.actions
 
 export default wordsSlice.reducer

@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {
-    Box,
-    Paper,
-    Typography,
-    Button,
-    Divider,
-} from '@mui/material'
+import { Box, Paper, Typography, Button, Divider } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -19,20 +13,26 @@ import TranslationBlock from './TranslationBlock'
 import WordBlock from './WordBlock'
 import { defineNextKnow, shuffleArray } from '../../utils/utils'
 import {
+    setCheckWords,
     setCurrentWordIdx,
     setMixedWords,
+    setStarted,
 } from '../../redux/slices/wordsSlice/wordsSlice'
 import useMyTheme from '../../hooks/useMyTheme'
+import Started from './Started'
 
 const LearnWordsCard = () => {
     const dispatch = useDispatch()
     const { colors } = useMyTheme()
 
-    const { inProcessWords, mixedWords, currentWordIdx } = useSelector(
-        ({ words }) => words
-    )
+    const {
+        inProcessWords,
+        mixedWords,
+        currentWordIdx,
+        checkWords,
+        isStarted,
+    } = useSelector(({ words }) => words)
 
-    const [checkWords, setCheckWords] = useState(false)
     const [visibilityTranslate, setVisibilityTranslate] = useState(false)
 
     useEffect(() => {
@@ -40,15 +40,33 @@ const LearnWordsCard = () => {
             dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
         }
     }, [])
+    useEffect(() => {
+        if (!mixedWords.length) {
+            dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
+        }
+    }, [mixedWords])
 
     useEffect(() => {
-        if (currentWordIdx === 0) mixWords()
+        const isMixed =
+            !mixedWords.length || mixedWords.length !== inProcessWords.length
+
+        if (currentWordIdx === 0) {
+            if (isMixed) {
+                mixWords()
+            }
+
+            if (inProcessWords.length < 5) {
+                dispatch(setCheckWords(true))
+            } else {
+                dispatch(setCheckWords(false))
+            }
+        }
     }, [inProcessWords])
 
     const mixWords = () => {
-        if (inProcessWords.length < 5) setCheckWords(true)
-        if (inProcessWords.length > 0)
-            dispatch(setMixedWords(shuffleArray([...inProcessWords])))
+        if (inProcessWords.length > 0) {
+            dispatch(setMixedWords(shuffleArray(inProcessWords)))
+        }
     }
 
     const nextWord = () => {
@@ -58,6 +76,7 @@ const LearnWordsCard = () => {
         setVisibilityTranslate(false)
         if (isLast) {
             dispatch(setMixedWords([]))
+            dispatch(setStarted(false))
             setVisibilityTranslate(false)
         }
     }
@@ -84,14 +103,27 @@ const LearnWordsCard = () => {
         const isLast = mixedWords.length - 1 === currentWordIdx
         const knowledge = defineNextKnow('prev', word.knowledge)
         const data = { knowledge, word, isLast }
+
         dispatch(updateKnowledgeInProcess(data))
         nextWord()
+    }
+
+    if (!isStarted) {
+        return (
+            <Started
+                handle={() => {
+                    dispatch(setStarted(true))
+                }}
+            />
+        )
     }
 
     if (checkWords)
         return (
             <NoWords
-                setCheckWords={setCheckWords}
+                setCheckWords={() => {
+                    dispatch(setCheckWords(false))
+                }}
                 countWords={mixedWords.length}
             />
         )
@@ -108,6 +140,11 @@ const LearnWordsCard = () => {
                     background: colors.primary[400],
                     maxWidth: '400px',
                     margin: '0 auto ',
+                    minHeight: '300px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    flex: "1 1 auto"
                 }}
             >
                 <Box sx={{ padding: '20px' }}>
@@ -140,7 +177,7 @@ const LearnWordsCard = () => {
                                 width: '130px',
                             }}
                         >
-                            I remembered
+                            Remembered
                         </Button>
                         <Button
                             disabled={!mixedWords.length}
@@ -153,7 +190,7 @@ const LearnWordsCard = () => {
                                 width: '130px',
                             }}
                         >
-                            Show more
+                            Don{`'`}t know
                         </Button>
                     </Box>
                 </Box>
