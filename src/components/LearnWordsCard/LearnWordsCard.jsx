@@ -32,6 +32,7 @@ const LearnWordsCard = () => {
         checkWords,
         isStarted,
     } = useSelector(({ words }) => words)
+    const { recommendForLearn } = useSelector(({ settingsApp }) => settingsApp)
 
     const [visibilityTranslate, setVisibilityTranslate] = useState(false)
 
@@ -55,7 +56,7 @@ const LearnWordsCard = () => {
                 mixWords()
             }
 
-            if (inProcessWords.length < 5) {
+            if (inProcessWords.length < recommendForLearn) {
                 dispatch(setCheckWords(true))
             } else {
                 dispatch(setCheckWords(false))
@@ -125,6 +126,7 @@ const LearnWordsCard = () => {
                     dispatch(setCheckWords(false))
                 }}
                 countWords={mixedWords.length}
+                recommendForLearn={recommendForLearn}
             />
         )
 
@@ -144,7 +146,7 @@ const LearnWordsCard = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    flex: "1 1 auto"
+                    flex: '1 1 auto',
                 }}
             >
                 <Box sx={{ padding: '20px' }}>

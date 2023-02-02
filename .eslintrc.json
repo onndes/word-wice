@@ -57,7 +57,8 @@
     "max-len": [
       "warn",
       {
-        "code": 80
+        "code": 80,
+        "ignorePattern": "^import .*"
       }
     ],
     "no-shadow": "off",

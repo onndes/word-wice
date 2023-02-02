@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom'
 import useMyTheme from '../../hooks/useMyTheme'
 import { WORDS_ROUTE } from '../../utils/consts'
 
-const NoWords = ({ setCheckWords, countWords }) => {
+const NoWords = ({ setCheckWords, countWords, recommendForLearn }) => {
     const { colors } = useMyTheme()
+
     return (
         <Box sx={{ maxWidth: '400px', margin: '0 auto ' }}>
             <Typography variant="h4" color="" mb={3}>
@@ -25,9 +26,17 @@ const NoWords = ({ setCheckWords, countWords }) => {
                 }}
             >
                 <Box sx={{ padding: '20px' }} textAlign="center">
-                    <Typography variant="h3" color="" mb={9}>
-                        Not enough words to study, <br /> it takes at least 5
-                    </Typography>
+                    <Box mb={9}>
+                        <Typography variant="h4" color="" mb={1}>
+                            Not enough words to study
+                        </Typography>
+                        <Typography variant="h4" color="" mb={1}>
+                            It takes at least - {recommendForLearn}
+                        </Typography>
+                        <Typography variant="h4" color="">
+                            Now - {countWords}
+                        </Typography>
+                    </Box>
                     <Button
                         variant="contained"
                         sx={{

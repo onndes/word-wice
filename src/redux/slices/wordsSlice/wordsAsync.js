@@ -21,7 +21,7 @@ export const fetchWords = createAsyncThunk(
                 query(doc(db, el, getState().user.id))
             )
 
-            const promise = qs.map(async (q) => {
+            const promises = qs.map(async (q) => {
                 return new Promise((resolve) => {
                     onSnapshot(
                         q,
@@ -36,7 +36,7 @@ export const fetchWords = createAsyncThunk(
                     )
                 })
             })
-            await Promise.all(promise)
+            await Promise.all(promises)
             return allWords
         } catch (e) {
             return thunkAPI.rejectWithValue(e)

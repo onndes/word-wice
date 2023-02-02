@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Typography, Paper, Container, styled } from '@mui/material'
 import ButtonToggleTheme from '../components/ButtonToggleTheme'
 import LogOut from '../components/LogOut'
 import { tokens } from '../theme/theme'
 import DisplayWords from '../components/MenuComponents/DisplayWords'
 import useMyTheme from '../hooks/useMyTheme'
+import RecommendForLearn from '../components/MenuComponents/RecommendForLearn'
+import { fetchUserSettings } from '../redux/slices/settingsAppSlice/settingsAppAsync'
 
 const Title = styled(Typography)(({ theme }) => ({
     marginLeft: theme.spacing(1.5),
@@ -20,7 +23,13 @@ const Block = styled(Paper, { shouldForwardProp: () => ({ elevation: 24 }) })(
 )
 
 const Menu = () => {
+    const dispatch = useDispatch()
     const { mq } = useMyTheme()
+
+    useEffect(() => {
+        dispatch(fetchUserSettings())
+    }, [])
+
     return (
         <Container
             disableGutters
@@ -45,6 +54,10 @@ const Menu = () => {
                     </Block>
                 </>
             )}
+            <Title variant="h5">Learn</Title>
+            <Block elevation={1}>
+                <RecommendForLearn />
+            </Block>
             <Title variant="h5">Account</Title>
             <Block elevation={1}>
                 <LogOut />

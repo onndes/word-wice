@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { setStatus } from '../../../utils/handleStatus'
+import { fetchUserSettings, setRecommendForLearn } from './settingsAppAsync'
 
 const initialState = {
     wordsList: {
@@ -8,11 +10,13 @@ const initialState = {
         selected: [],
         page: 0,
     },
+    recommendForLearn: +localStorage.getItem('recommendForLearn') || 5,
     isOnline: true,
+    status: [],
 }
 
 const settingsAppSlice = createSlice({
-    name: 'settingsAppSlice',
+    name: 'settingsApp',
     initialState,
     reducers: {
         setRowsPerPage(state, { payload }) {
@@ -34,6 +38,33 @@ const settingsAppSlice = createSlice({
         setPage(state, { payload }) {
             state.wordsList.page = payload
         },
+    },
+    extraReducers: (builder) => {
+        // fetchUserSettings
+        builder.addCase(fetchUserSettings.pending, (state, action) => {
+            setStatus(state, action)
+        })
+        builder.addCase(fetchUserSettings.fulfilled, (state, action) => {
+            setStatus(state, action)
+            const s = action.payload.settings
+            state.recommendForLearn = s.recommendForLearn
+            localStorage.setItem('recommendForLearn', s)
+        })
+        builder.addCase(fetchUserSettings.rejected, (state, action) => {
+            setStatus(state, action)
+        })
+
+        // setRecommendForLearn
+        builder.addCase(setRecommendForLearn.pending, (state, action) => {
+            setStatus(state, action)
+        })
+        builder.addCase(setRecommendForLearn.fulfilled, (state, action) => {
+            setStatus(state, action)
+            state.recommendForLearn = action.payload
+        })
+        builder.addCase(setRecommendForLearn.rejected, (state, action) => {
+            setStatus(state, action)
+        })
     },
 })
 
