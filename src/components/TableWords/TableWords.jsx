@@ -11,14 +11,20 @@ import Body from './Body'
 import MyToolbar from './MyToolbar'
 import Head from './Head'
 // eslint-disable-next-line max-len
-import { setRowsPerPage } from '../../redux/slices/settingsAppSlice/settingsAppSlice'
+import {
+    setOrder,
+    setOrderBy,
+    setPage,
+    setRowsPerPage,
+    setSelected,
+} from '../../redux/slices/settingsAppSlice/settingsAppSlice'
 import {
     deleteWords,
     fetchWords,
     submitWordsForStudy,
 } from '../../redux/slices/wordsSlice/wordsAsync'
-import { selectLoading } from '../../redux/slices/wordsSlice/wordsSlice'
-import { collectionNameWords, isLoading, knowWord } from '../../utils/consts'
+import { selectStatus } from '../../redux/slices/wordsSlice/wordsSlice'
+import { collectionNameWords, knowWord } from '../../utils/consts'
 import BasicAlerts from '../BasicAlerts'
 import useMyTheme from '../../hooks/useMyTheme'
 
@@ -28,18 +34,13 @@ export default function TableWords() {
     const { newWords, inProcessWords, learnedWords } = useSelector(
         ({ words }) => words
     )
-    const words = [...newWords, ...inProcessWords, ...learnedWords]
-    const isLoadingFetchWords = useSelector(
-        selectLoading(isLoading.FETCH_WORDS)
-    )
-    const { rowsPerPage } = useSelector(
+    const { rowsPerPage, order, orderBy, selected, page } = useSelector(
         ({ settingsApp }) => settingsApp.wordsList
     )
+    const FetchWords = useSelector(selectStatus('fetchWords'))
 
-    const [order, setOrder] = React.useState('desc')
-    const [orderBy, setOrderBy] = React.useState('dateCreated')
-    const [selected, setSelected] = React.useState([])
-    const [page, setPage] = React.useState(0)
+    const words = [...newWords, ...inProcessWords, ...learnedWords]
+
     const [dense, setDense] = React.useState(true)
 
     const [checkedAlert, setCheckedAlert] = React.useState(false)
@@ -47,16 +48,16 @@ export default function TableWords() {
 
     const handleRequestSort = (_, property) => {
         const isAsc = orderBy === property && order === 'asc'
-        setOrder(isAsc ? 'desc' : 'asc')
-        setOrderBy(property)
+        dispatch(setOrder(isAsc ? 'desc' : 'asc'))
+        dispatch(setOrderBy(property))
     }
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            setSelected(words)
+            dispatch(setSelected(words))
             return
         }
-        setSelected([])
+        dispatch(setSelected([]))
     }
 
     React.useEffect(() => {
@@ -80,16 +81,16 @@ export default function TableWords() {
             )
         }
 
-        setSelected(newSelected)
+        dispatch(setSelected(newSelected))
     }
 
     const handleChangePage = (_, newPage) => {
-        setPage(newPage)
+        dispatch(setPage(newPage))
     }
 
     const handleChangeRowsPerPage = (event) => {
         dispatch(setRowsPerPage(parseInt(event.target.value, 10)))
-        setPage(0)
+        dispatch(setPage(0))
     }
 
     const handleChangeDense = (event) => {
@@ -114,7 +115,7 @@ export default function TableWords() {
                 })
             )
         })
-        setSelected([])
+        dispatch(setSelected([]))
     }
 
     const handleSubmitWordsForStudy = () => {
@@ -128,7 +129,7 @@ export default function TableWords() {
         setAlertMessage(displayAlert)
         setCheckedAlert(true)
         setTimeout(() => setCheckedAlert(false), 2000)
-        setSelected([])
+        dispatch(setSelected([]))
     }
 
     const isSelected = (wordId) => selected.some((el) => el.id === wordId)
@@ -175,7 +176,7 @@ export default function TableWords() {
                             handleClick={handleClick}
                             emptyRows={emptyRows}
                             dense={dense}
-                            isLoading={isLoadingFetchWords}
+                            statusData={FetchWords}
                         />
                     </Table>
                 </TableContainer>

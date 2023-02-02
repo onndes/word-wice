@@ -5,7 +5,7 @@ import usePosition from '../hooks/usePosition'
 import useMyTheme from '../hooks/useMyTheme'
 import CardsWords from '../components/CardsWords/CardsWords'
 
-const Vocabulary = () => {
+const Words = () => {
     const { mq } = useMyTheme()
     const currentPosition = usePosition()
 
@@ -18,4 +18,4 @@ const Vocabulary = () => {
     )
 }
 
-export default Vocabulary
+export default Words

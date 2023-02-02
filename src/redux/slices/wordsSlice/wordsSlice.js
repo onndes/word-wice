@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { setStatus, STATUS } from '../../../utils/handleStatus'
 
-import { isLoading } from '../../../utils/consts'
-import { addIsLoading, removeIsLoading } from '../../../utils/updateLoading'
 import {
     addWords,
     fetchWords,
@@ -11,26 +10,15 @@ import {
     submitWordsForLearned,
 } from './wordsAsync'
 
-const status = {
-    init: 'init',
-    loading: 'loading',
-    error: 'error',
-    success: 'success',
-}
-
 const initialState = {
-    mixedWords: [],
-    currentWordIdx: 0,
     newWords: [],
     inProcessWords: [],
+    learnedWords: [],
+    mixedWords: [],
+    status: [],
+    currentWordIdx: 0,
     isStarted: false,
     checkWords: false,
-    learnedWords: [],
-    isLoading: Object.keys(isLoading),
-    error: {},
-    loading: {
-        updateKnowledgeInProcess: status.init,
-    },
 }
 
 const wordsSlice = createSlice({
@@ -59,95 +47,88 @@ const wordsSlice = createSlice({
     },
     extraReducers: (builder) => {
         // fetchWords
-        builder.addCase(fetchWords.pending, (state) => {
-            state.isLoading = addIsLoading(isLoading.FETCH_WORDS, state)
-            state.loading.updateKnowledgeInProcess = status.loading
+        builder.addCase(fetchWords.pending, (state, action) => {
+            setStatus(state, action)
         })
         builder.addCase(fetchWords.fulfilled, (state, action) => {
-            state.loading.updateKnowledgeInProcess = status.success
-            state.isLoading = removeIsLoading(isLoading.FETCH_WORDS, state)
+            setStatus(state, action)
             const objKeys = Object.keys(action.payload)
             objKeys.forEach((key) => {
                 if (action.payload[key]) state[key] = action.payload[key]
             })
         })
         builder.addCase(fetchWords.rejected, (state, action) => {
-            state.loading.updateKnowledgeInProcess = status.error
-            state.isLoading = removeIsLoading(isLoading.FETCH_WORDS, state)
-            state.error = action.payload
+            setStatus(state, action)
         })
 
         // addWords
-        builder.addCase(addWords.pending, (state) => {
-            state.isLoading = addIsLoading(isLoading.ADD_WORDS, state)
+        builder.addCase(addWords.pending, (state, action) => {
+            setStatus(state, action)
         })
         builder.addCase(addWords.fulfilled, (state, action) => {
-            state.isLoading = removeIsLoading(isLoading.ADD_WORDS, state)
+            setStatus(state, action)
             state[action.payload.collectionName] = [
                 action.payload.word,
                 ...state[action.payload.collectionName],
             ]
         })
         builder.addCase(addWords.rejected, (state, action) => {
-            state.isLoading = removeIsLoading(isLoading.ADD_WORDS, state)
-            state.error = action.payload
+            setStatus(state, action)
         })
 
         // deleteWords
-        builder.addCase(deleteWords.pending, (state) => {
-            state.isLoading = addIsLoading(isLoading.DELETE_WORDS, state)
+        builder.addCase(deleteWords.pending, (state, action) => {
+            setStatus(state, action)
         })
-        builder.addCase(deleteWords.fulfilled, (state, { payload }) => {
-            state.isLoading = removeIsLoading(isLoading.DELETE_WORDS, state)
-            state[payload.collectionName] = state[
-                payload.collectionName
-            ].filter(({ id }) => id !== payload.word.id)
+        builder.addCase(deleteWords.fulfilled, (state, action) => {
+            setStatus(state, action)
+            state[action.payload.collectionName] = state[
+                action.payload.collectionName
+            ].filter(({ id }) => id !== action.payload.word.id)
         })
         builder.addCase(deleteWords.rejected, (state, action) => {
-            state.isLoading = removeIsLoading(isLoading.DELETE_WORDS, state)
-            state.error = action.payload
+            setStatus(state, action)
         })
 
         // submitWordsForStudy
-        builder.addCase(submitWordsForStudy.pending, (state) => {
-            state.isLoading = addIsLoading(isLoading.SUBMIT_STUDY, state)
+        builder.addCase(submitWordsForStudy.pending, (state, action) => {
+            setStatus(state, action)
         })
-        builder.addCase(submitWordsForStudy.fulfilled, (state) => {
-            state.isLoading = removeIsLoading(isLoading.SUBMIT_STUDY, state)
+        builder.addCase(submitWordsForStudy.fulfilled, (state, action) => {
+            setStatus(state, action)
         })
         builder.addCase(submitWordsForStudy.rejected, (state, action) => {
-            state.isLoading = removeIsLoading(isLoading.SUBMIT_STUDY, state)
-            state.error = action.payload
+            setStatus(state, action)
         })
         // submitWordsForLearned
-        builder.addCase(submitWordsForLearned.pending, (state) => {
-            state.isLoading = addIsLoading(isLoading.SUBMIT_LEARNED, state)
+        builder.addCase(submitWordsForLearned.pending, (state, action) => {
+            setStatus(state, action)
         })
-        builder.addCase(submitWordsForLearned.fulfilled, (state) => {
-            state.isLoading = removeIsLoading(isLoading.SUBMIT_LEARNED, state)
+        builder.addCase(submitWordsForLearned.fulfilled, (state, action) => {
+            setStatus(state, action)
         })
         builder.addCase(submitWordsForLearned.rejected, (state, action) => {
-            state.isLoading = removeIsLoading(isLoading.SUBMIT_LEARNED, state)
-            state.error = action.payload
+            setStatus(state, action)
         })
         // updateKnowledgeInProcess
-        builder.addCase(updateKnowledgeInProcess.pending, (state) => {
-            state.isLoading = addIsLoading(isLoading.UPDATE_KNOWLEDGE, state)
+        builder.addCase(updateKnowledgeInProcess.pending, (state, action) => {
+            setStatus(state, action)
         })
-        builder.addCase(updateKnowledgeInProcess.fulfilled, (state) => {
-            state.isLoading = removeIsLoading(isLoading.UPDATE_KNOWLEDGE, state)
+        builder.addCase(updateKnowledgeInProcess.fulfilled, (state, action) => {
+            setStatus(state, action)
         })
         builder.addCase(updateKnowledgeInProcess.rejected, (state, action) => {
-            state.isLoading = removeIsLoading(isLoading.UPDATE_KNOWLEDGE, state)
-            state.error = action.payload
+            setStatus(state, action)
         })
     },
 })
 
-export const selectLoading = (loading) => (state) =>
-    state.words.isLoading.some((l) => l === loading)
-
-export const statusLoading = (request) => (state) => state.loading[request]
+export const selectStatus = (name) => (state) =>
+    state.words.status.find((s) => s.name === name) || {
+        name,
+        status: STATUS.init,
+        error: null,
+    }
 
 export const {
     resetStateWords,

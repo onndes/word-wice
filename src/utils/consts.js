@@ -4,17 +4,6 @@ export const LEARN_WORDS_ROUTE = '/learn-words'
 export const MENU_ROUTE = '/menu'
 export const ADD_WORD_ROUTE = '/add-word'
 
-export const DRAWER_WIDTH = 240
-
-export const isLoading = {
-    ADD_WORDS: 'ADD_WORDS',
-    FETCH_WORDS: 'FETCH_WORDS',
-    DELETE_WORDS: 'DELETE_WORDS',
-    SUBMIT_STUDY: 'SUBMIT_STUDY',
-    UPDATE_KNOWLEDGE: 'UPDATE_KNOWLEDGE',
-    SUBMIT_LEARNED: 'SUBMIT_LEARNED',
-}
-
 export const formAddWordProps = {
     word: {
         label: 'Word',

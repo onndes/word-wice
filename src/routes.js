@@ -2,7 +2,7 @@ import AddWordPage from './pages/AddWordPage'
 import LearnWords from './pages/LearnWords'
 import Login from './pages/Login'
 import Menu from './pages/Menu'
-import Vocabulary from './pages/Vocabulary'
+import Words from './pages/Words'
 import {
     ADD_WORD_ROUTE,
     LEARN_WORDS_ROUTE,
@@ -20,7 +20,7 @@ export const publicRoutes = [
 export const privateRoutes = [
     {
         path: WORDS_ROUTE,
-        Component: <Vocabulary />,
+        Component: <Words />,
     },
     {
         path: LEARN_WORDS_ROUTE,

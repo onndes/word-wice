@@ -32,13 +32,8 @@ const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         // getAuthUser
-        builder.addCase(getAuthUser.pending, (state) => {
-            state.isLoading = true
-            state.displayName = null
-            state.photoURL = null
-            state.email = null
-            state.token = null
-            state.id = null
+        builder.addCase(getAuthUser.pending, () => {
+            return { ...initialState, isLoading: true }
         })
         builder.addCase(getAuthUser.fulfilled, (state, action) => {
             state.isLoading = false

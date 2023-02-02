@@ -9,6 +9,9 @@ import { knowWord } from '../../utils/consts'
 import { fetchWords } from '../../redux/slices/wordsSlice/wordsAsync'
 // eslint-disable-next-line max-len
 import { setSelected } from '../../redux/slices/settingsAppSlice/settingsAppSlice'
+import { selectStatus } from '../../redux/slices/wordsSlice/wordsSlice'
+import { STATUS } from '../../utils/handleStatus'
+import LinearIndeterminate from '../LinearIndeterminate'
 
 const CardsWords = () => {
     const dispatch = useDispatch()
@@ -16,6 +19,7 @@ const CardsWords = () => {
     const { newWords, inProcessWords, learnedWords } = useSelector(
         ({ words }) => words
     )
+    const statusData = useSelector(selectStatus('fetchWords'))
     const words = [...newWords, ...inProcessWords, ...learnedWords]
 
     const { rowsPerPage, order, orderBy, selected, page } = useSelector(
@@ -47,6 +51,26 @@ const CardsWords = () => {
     }
 
     const isSelected = (wordId) => selected.some((el) => el.id === wordId)
+
+    if (statusData.status === STATUS.loading)
+        return (
+            <Container maxWidth="sm" disableGutters sx={{ mb: 10 }}>
+                <LinearIndeterminate />
+            </Container>
+        )
+
+    if (statusData.status === STATUS.success && words.length === 0)
+        return (
+            <Container
+                maxWidth="sm"
+                disableGutters
+                sx={{ mb: 10, display: 'flex', justifyContent: 'center' }}
+            >
+                <Typography variant="h4" color="GrayText">
+                    The list of words is empty
+                </Typography>
+            </Container>
+        )
 
     return (
         <Container maxWidth="sm" disableGutters sx={{ mb: 10 }}>

@@ -9,6 +9,7 @@ import { getComparator, stableSort } from '../../utils/utilsTable'
 import LinearIndeterminate from '../LinearIndeterminate'
 import { knowWord } from '../../utils/consts'
 import WordRank from '../WordRank'
+import { STATUS } from '../../utils/handleStatus'
 
 const Body = ({
     order,
@@ -20,7 +21,7 @@ const Body = ({
     emptyRows,
     dense,
     words,
-    isLoading,
+    statusData,
 }) => {
     return (
         <TableBody>
@@ -80,7 +81,16 @@ const Body = ({
                         </TableRow>
                     )
                 })}
-            {isLoading && !words.length && (
+            {statusData.status === STATUS.success && words.length === 0 && (
+                <TableRow
+                    style={{
+                        height: (dense ? 33 : 53) * emptyRows,
+                    }}
+                >
+                    <TableCell colSpan={6}>The dictionary is empty</TableCell>
+                </TableRow>
+            )}
+            {statusData.status === STATUS.loading && (
                 <TableRow
                     style={{
                         height: (dense ? 33 : 53) * emptyRows,
