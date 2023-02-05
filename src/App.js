@@ -9,7 +9,10 @@ import { ColorModeContext, useMode } from './theme/theme'
 import { removeUser, setUser } from './redux/slices/userSlice/userSlice'
 import LoaderPage from './components/LoaderPage/LoaderPage'
 import useIsOnline from './hooks/useIsOnline'
-import { setIsOnline } from './redux/slices/settingsAppSlice/settingsAppSlice'
+import {
+    setIsOnline,
+    setUserSettings,
+} from './redux/slices/settingsAppSlice/settingsAppSlice'
 import { collectionNameWords } from './utils/consts'
 import { db } from './firebase'
 import { handleStatus, setWords } from './redux/slices/wordsSlice/wordsSlice'
@@ -63,7 +66,8 @@ function App() {
                     qsUsers,
                     { includeMetadataChanges: true },
                     (snapshot) => {
-                        dispatch(setWords(snapshot.data().settings))
+                        console.log(snapshot.data())
+                        dispatch(setUserSettings(snapshot.data().settings))
                         dispatch(
                             handleStatus({
                                 nameCollection: 'userSettings',

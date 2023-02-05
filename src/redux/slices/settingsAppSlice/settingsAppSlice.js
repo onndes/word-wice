@@ -39,9 +39,8 @@ const settingsAppSlice = createSlice({
             state.wordsList.page = payload
         },
         setUserSettings(state, { payload }) {
-            const s = payload.settings
-            state.recommendForLearn = s.recommendForLearn
-            localStorage.setItem('recommendForLearn', s)
+            state.recommendForLearn = payload.recommendForLearn
+            localStorage.setItem('recommendForLearn', payload)
         },
     },
     extraReducers: (builder) => {
