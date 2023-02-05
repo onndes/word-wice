@@ -18,7 +18,13 @@ export const setStatus = (state, action) => {
     switch (reqStatus) {
         case 'pending':
             dataStatus.status = STATUS.loading
-            state.status = [...state.status, dataStatus]
+            if (!state.status.length)
+                state.status = [...state.status, dataStatus]
+            if (state.status.length) {
+                state.status = state.status.map((el) =>
+                    el.name === nameThunk ? dataStatus : el
+                )
+            }
             break
         case 'fulfilled':
             dataStatus.status = STATUS.success

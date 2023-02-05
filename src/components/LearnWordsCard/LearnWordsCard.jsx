@@ -3,11 +3,9 @@ import { Box, Paper, Typography, Button, Divider } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
-    fetchWords,
     submitWordsForLearned,
     updateKnowledgeInProcess,
 } from '../../redux/slices/wordsSlice/wordsAsync'
-import { collectionNameWords } from '../../utils/consts'
 import NoWords from './NoWords'
 import TranslationBlock from './TranslationBlock'
 import WordBlock from './WordBlock'
@@ -35,17 +33,6 @@ const LearnWordsCard = () => {
     const { recommendForLearn } = useSelector(({ settingsApp }) => settingsApp)
 
     const [visibilityTranslate, setVisibilityTranslate] = useState(false)
-
-    useEffect(() => {
-        if (!mixedWords.length) {
-            dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
-        }
-    }, [])
-    useEffect(() => {
-        if (!mixedWords.length) {
-            dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
-        }
-    }, [mixedWords])
 
     useEffect(() => {
         const isMixed =

@@ -2,14 +2,15 @@ import React from 'react'
 import { Paper, Typography, Container, Box } from '@mui/material'
 import { format } from 'date-fns'
 import { useDispatch, useSelector } from 'react-redux'
+
 import { getComparator, stableSort } from '../../utils/utilsTable'
 import useMyTheme from '../../hooks/useMyTheme'
 import WordRank from '../WordRank'
 import { knowWord } from '../../utils/consts'
-import { fetchWords } from '../../redux/slices/wordsSlice/wordsAsync'
-// eslint-disable-next-line max-len
 import { setSelected } from '../../redux/slices/settingsAppSlice/settingsAppSlice'
-import { selectStatus } from '../../redux/slices/wordsSlice/wordsSlice'
+import {
+    selectStatusWords,
+} from '../../redux/slices/wordsSlice/wordsSlice'
 import { STATUS } from '../../utils/handleStatus'
 import LinearIndeterminate from '../LinearIndeterminate'
 
@@ -19,16 +20,15 @@ const CardsWords = () => {
     const { newWords, inProcessWords, learnedWords } = useSelector(
         ({ words }) => words
     )
-    const statusData = useSelector(selectStatus('fetchWords'))
+
+    const statusData = useSelector(
+        selectStatusWords(['newWords', 'inProcessWords', 'learnedWords'])
+    )
     const words = [...newWords, ...inProcessWords, ...learnedWords]
 
     const { rowsPerPage, order, orderBy, selected, page } = useSelector(
         ({ settingsApp }) => settingsApp.wordsList
     )
-
-    React.useEffect(() => {
-        dispatch(fetchWords())
-    }, [])
 
     const handleClick = (event, word) => {
         const selectedIndex = selected.indexOf(word)

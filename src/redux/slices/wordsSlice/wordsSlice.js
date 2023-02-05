@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { setStatus, STATUS } from '../../../utils/handleStatus'
+import { setStatus } from '../../../utils/handleStatus'
+import { selectStatus } from '../../selectors/selectors'
 
 import {
     addWords,
-    fetchWords,
     deleteWords,
     submitWordsForStudy,
     updateKnowledgeInProcess,
@@ -33,7 +33,7 @@ const wordsSlice = createSlice({
             state.currentWordIdx = payload
         },
         setWords(state, { payload }) {
-            state[payload.collectionName] = payload.words
+            state[payload.nameCollection] = payload.words
         },
         setCheckWords(state, { payload }) {
             state.checkWords = payload
@@ -44,23 +44,30 @@ const wordsSlice = createSlice({
         setStarted(state, { payload }) {
             state.isStarted = payload
         },
+        handleStatus(state, { payload }) {
+            const data = {
+                name: payload.nameCollection,
+                status: payload.status,
+                error: payload?.error || null,
+            }
+            const idxStatus = state.status.findIndex(
+                (s) => s.name === payload.nameCollection
+            )
+            if (state.status.length === 0) {
+                state.status = [data]
+            } else if (idxStatus === -1) {
+                state.status = [...state.status, data]
+            } else {
+                state.status = state.status.map((s) => {
+                    if (s.name === payload.nameCollection) {
+                        return data
+                    }
+                    return s
+                })
+            }
+        },
     },
     extraReducers: (builder) => {
-        // fetchWords
-        builder.addCase(fetchWords.pending, (state, action) => {
-            setStatus(state, action)
-        })
-        builder.addCase(fetchWords.fulfilled, (state, action) => {
-            setStatus(state, action)
-            const objKeys = Object.keys(action.payload)
-            objKeys.forEach((key) => {
-                if (action.payload[key]) state[key] = action.payload[key]
-            })
-        })
-        builder.addCase(fetchWords.rejected, (state, action) => {
-            setStatus(state, action)
-        })
-
         // addWords
         builder.addCase(addWords.pending, (state, action) => {
             setStatus(state, action)
@@ -123,12 +130,8 @@ const wordsSlice = createSlice({
     },
 })
 
-export const selectStatus = (name) => (state) =>
-    state.words.status.find((s) => s.name === name) || {
-        name,
-        status: STATUS.init,
-        error: null,
-    }
+export const selectStatusWords = (names) => (state) =>
+    selectStatus(names, state.words)
 
 export const {
     resetStateWords,
@@ -138,6 +141,7 @@ export const {
     setWords,
     setCheckWords,
     setStarted,
+    handleStatus,
 } = wordsSlice.actions
 
 export default wordsSlice.reducer

@@ -10,7 +10,6 @@ import TablePagination from '@mui/material/TablePagination'
 import Body from './Body'
 import MyToolbar from './MyToolbar'
 import Head from './Head'
-// eslint-disable-next-line max-len
 import {
     setOrder,
     setOrderBy,
@@ -20,10 +19,9 @@ import {
 } from '../../redux/slices/settingsAppSlice/settingsAppSlice'
 import {
     deleteWords,
-    fetchWords,
     submitWordsForStudy,
 } from '../../redux/slices/wordsSlice/wordsAsync'
-import { selectStatus } from '../../redux/slices/wordsSlice/wordsSlice'
+import { selectStatusWords } from '../../redux/slices/wordsSlice/wordsSlice'
 import { collectionNameWords, knowWord } from '../../utils/consts'
 import BasicAlerts from '../BasicAlerts'
 import useMyTheme from '../../hooks/useMyTheme'
@@ -37,7 +35,9 @@ export default function TableWords() {
     const { rowsPerPage, order, orderBy, selected, page } = useSelector(
         ({ settingsApp }) => settingsApp.wordsList
     )
-    const FetchWords = useSelector(selectStatus('fetchWords'))
+    const FetchWords = useSelector(
+        selectStatusWords(['newWords', 'inProcessWords', 'learnedWords'])
+    )
 
     const words = [...newWords, ...inProcessWords, ...learnedWords]
 
@@ -59,10 +59,6 @@ export default function TableWords() {
         }
         dispatch(setSelected([]))
     }
-
-    React.useEffect(() => {
-        dispatch(fetchWords())
-    }, [])
 
     const handleClick = (event, word) => {
         const selectedIndex = selected.indexOf(word)

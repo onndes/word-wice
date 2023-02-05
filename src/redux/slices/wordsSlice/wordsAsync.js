@@ -3,46 +3,11 @@ import {
     arrayRemove,
     arrayUnion,
     doc,
-    onSnapshot,
     updateDoc,
-    query,
 } from 'firebase/firestore'
 import translate from 'translate'
 import { db } from '../../../firebase'
 import { collectionNameWords, knowWord } from '../../../utils/consts'
-
-export const fetchWords = createAsyncThunk(
-    'words/fetchWords',
-    async (collections, { thunkAPI, getState }) => {
-        try {
-            const inquiry = collections || Object.values(collectionNameWords)
-            const allWords = {}
-            const qs = inquiry.map((el) =>
-                query(doc(db, el, getState().user.id))
-            )
-
-            const promises = qs.map(async (q) => {
-                return new Promise((resolve) => {
-                    onSnapshot(
-                        q,
-                        { includeMetadataChanges: true },
-                        (snapshot) => {
-                            const data = snapshot.data()
-                            allWords[data.nameCollection] = data.words
-                                ? data.words
-                                : []
-                            resolve()
-                        }
-                    )
-                })
-            })
-            await Promise.all(promises)
-            return allWords
-        } catch (e) {
-            return thunkAPI.rejectWithValue(e)
-        }
-    }
-)
 
 export const addWords = createAsyncThunk(
     'words/addWords',
@@ -112,10 +77,6 @@ export const updateKnowledgeInProcess = createAsyncThunk(
                     })
                 )
             }
-
-            if (data.isLast) {
-                dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
-            }
             return data
         } catch (e) {
             return thunkAPI.rejectWithValue(e)
@@ -140,7 +101,7 @@ export const submitWordsForLearned = createAsyncThunk(
                 })
             )
             if (data.isLast) {
-                dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
+                // dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
             }
             return data
         } catch (e) {

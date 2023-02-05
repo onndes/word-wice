@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { setStatus } from '../../../utils/handleStatus'
-import { fetchUserSettings, setRecommendForLearn } from './settingsAppAsync'
+import { setRecommendForLearn } from './settingsAppAsync'
 
 const initialState = {
     wordsList: {
@@ -38,22 +38,13 @@ const settingsAppSlice = createSlice({
         setPage(state, { payload }) {
             state.wordsList.page = payload
         },
-    },
-    extraReducers: (builder) => {
-        // fetchUserSettings
-        builder.addCase(fetchUserSettings.pending, (state, action) => {
-            setStatus(state, action)
-        })
-        builder.addCase(fetchUserSettings.fulfilled, (state, action) => {
-            setStatus(state, action)
-            const s = action.payload.settings
+        setUserSettings(state, { payload }) {
+            const s = payload.settings
             state.recommendForLearn = s.recommendForLearn
             localStorage.setItem('recommendForLearn', s)
-        })
-        builder.addCase(fetchUserSettings.rejected, (state, action) => {
-            setStatus(state, action)
-        })
-
+        },
+    },
+    extraReducers: (builder) => {
         // setRecommendForLearn
         builder.addCase(setRecommendForLearn.pending, (state, action) => {
             setStatus(state, action)
@@ -75,6 +66,7 @@ export const {
     setSelected,
     setOrderBy,
     setPage,
+    setUserSettings,
 } = settingsAppSlice.actions
 
 export default settingsAppSlice.reducer
