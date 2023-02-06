@@ -1,14 +1,5 @@
 import { knowWord } from './consts'
 
-export const shuffleArray = (array) => {
-    const arr = [...array]
-    for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1))
-        ;[arr[i], arr[j]] = [arr[j], arr[i]]
-    }
-    return arr
-}
-
 export const defineNextKnow = (step, currentKey) => {
     const keys = Object.keys(knowWord)
     const idx = keys.indexOf(currentKey)

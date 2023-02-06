@@ -1,6 +1,33 @@
-import { doc, setDoc} from 'firebase/firestore'
+import { doc, onSnapshot, query, setDoc } from 'firebase/firestore'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { db } from '../../../firebase'
+import { STATUS } from '../../../utils/handleStatus'
+
+export const subAppSettings = (
+    dispatch,
+    uid,
+    handleStatus,
+    setUserSettings
+) => {
+    const qsUsers = query(doc(db, 'users', uid))
+
+    dispatch(
+        handleStatus({
+            nameCollection: 'userSettings',
+            status: STATUS.loading,
+        })
+    )
+
+    return onSnapshot(qsUsers, { includeMetadataChanges: true }, (snapshot) => {
+        dispatch(setUserSettings(snapshot.data().settings))
+        dispatch(
+            handleStatus({
+                nameCollection: 'userSettings',
+                status: STATUS.success,
+            })
+        )
+    })
+}
 
 export const setRecommendForLearn = createAsyncThunk(
     'settingsApp/setRecommendForLearn',

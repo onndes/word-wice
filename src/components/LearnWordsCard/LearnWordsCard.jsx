@@ -9,7 +9,8 @@ import {
 import NoWords from './NoWords'
 import TranslationBlock from './TranslationBlock'
 import WordBlock from './WordBlock'
-import { defineNextKnow, shuffleArray } from '../../utils/utils'
+import { shuffleArray } from '../../utils/shuffleArray'
+import { defineNextKnow } from '../../utils/defineNextKnow'
 import {
     setCheckWords,
     setCurrentWordIdx,
@@ -30,7 +31,9 @@ const LearnWordsCard = () => {
         checkWords,
         isStarted,
     } = useSelector(({ words }) => words)
-    const { recommendForLearn } = useSelector(({ settingsApp }) => settingsApp)
+    const { recommendForLearn } = useSelector(
+        ({ settingsApp }) => settingsApp.user
+    )
 
     const [visibilityTranslate, setVisibilityTranslate] = useState(false)
 

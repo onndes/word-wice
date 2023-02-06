@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { variantDelDup } from '../../../utils/handleDuplicateWords'
 import { setStatus } from '../../../utils/handleStatus'
 import { setRecommendForLearn } from './settingsAppAsync'
 
@@ -10,7 +11,10 @@ const initialState = {
         selected: [],
         page: 0,
     },
-    recommendForLearn: +localStorage.getItem('recommendForLearn') || 5,
+    user: {
+        recommendForLearn: +localStorage.getItem('recommendForLearn') || 5,
+        variantDelDuplicate: variantDelDup.data,
+    },
     isOnline: true,
     status: [],
 }
@@ -39,7 +43,7 @@ const settingsAppSlice = createSlice({
             state.wordsList.page = payload
         },
         setUserSettings(state, { payload }) {
-            state.recommendForLearn = payload.recommendForLearn
+            state.user.recommendForLearn = payload.recommendForLearn
             localStorage.setItem('recommendForLearn', payload)
         },
     },
@@ -50,7 +54,7 @@ const settingsAppSlice = createSlice({
         })
         builder.addCase(setRecommendForLearn.fulfilled, (state, action) => {
             setStatus(state, action)
-            state.recommendForLearn = action.payload
+            state.user.recommendForLearn = action.payload
         })
         builder.addCase(setRecommendForLearn.rejected, (state, action) => {
             setStatus(state, action)

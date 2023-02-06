@@ -7,7 +7,9 @@ import { setRecommendForLearn } from '../../redux/slices/settingsAppSlice/settin
 const RecommendForLearn = () => {
     const dispatch = useDispatch()
     const { colors } = useMyTheme()
-    const { recommendForLearn } = useSelector(({ settingsApp }) => settingsApp)
+    const { recommendForLearn } = useSelector(
+        ({ settingsApp }) => settingsApp.user
+    )
     const handleChange = (event) => {
         dispatch(setRecommendForLearn(event.target.value))
     }

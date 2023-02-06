@@ -3,11 +3,43 @@ import {
     arrayRemove,
     arrayUnion,
     doc,
+    onSnapshot,
+    query,
+    Timestamp,
     updateDoc,
 } from 'firebase/firestore'
 import translate from 'translate'
 import { db } from '../../../firebase'
 import { collectionNameWords, knowWord } from '../../../utils/consts'
+import { STATUS } from '../../../utils/handleStatus'
+
+export const subWords = (dispatch, uid, handleStatus, setWords) => {
+    const inquiry = Object.values(collectionNameWords)
+    const qsWords = inquiry.map((el) => query(doc(db, el, uid)))
+    const unSubs = []
+
+    qsWords.forEach((q, idx) => {
+        dispatch(
+            handleStatus({
+                nameCollection: inquiry[idx],
+                status: STATUS.loading,
+            })
+        )
+        unSubs.push(
+            onSnapshot(q, { includeMetadataChanges: true }, (snapshot) => {
+                const data = snapshot.data()
+                dispatch(setWords(data))
+                dispatch(
+                    handleStatus({
+                        nameCollection: inquiry[idx],
+                        status: STATUS.success,
+                    })
+                )
+            })
+        )
+    })
+    return unSubs
+}
 
 export const addWords = createAsyncThunk(
     'words/addWords',
@@ -49,7 +81,11 @@ export const submitWordsForStudy = createAsyncThunk(
             await dispatch(
                 addWords({
                     collectionName: collectionNameWords.IN_PROCESS,
-                    word: { ...word, knowledge: knowWord.A1.code },
+                    word: {
+                        ...word,
+                        knowledge: knowWord.A1.code,
+                        dateChange: Timestamp.fromDate(new Date()),
+                    },
                 })
             )
             return word
@@ -73,7 +109,11 @@ export const updateKnowledgeInProcess = createAsyncThunk(
                 await dispatch(
                     addWords({
                         collectionName: collectionNameWords.IN_PROCESS,
-                        word: { ...data.word, knowledge: data.knowledge },
+                        word: {
+                            ...data.word,
+                            knowledge: data.knowledge,
+                            dateChange: Timestamp.fromDate(new Date()),
+                        },
                     })
                 )
             }

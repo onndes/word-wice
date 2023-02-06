@@ -56,6 +56,7 @@ const AddWord = ({ mobile }) => {
                 ...formData,
                 id: nanoid(),
                 dateCreated: Timestamp.fromDate(new Date()),
+                dateChange: Timestamp.fromDate(new Date()),
                 knowledge: knowWord.A0.code,
                 dateLearned: null,
                 countRepeat: 0,
@@ -109,7 +110,7 @@ const AddWord = ({ mobile }) => {
             setActiveButtonTranslate(false)
         }
     }, [watchFields])
-    
+
     return (
         <Box
             component="form"
@@ -137,7 +138,7 @@ const AddWord = ({ mobile }) => {
                     mb: 2,
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    justifyContent: 'space-between',
                 }}
                 alignItems="center"
             >

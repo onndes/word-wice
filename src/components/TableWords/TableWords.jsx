@@ -21,7 +21,10 @@ import {
     deleteWords,
     submitWordsForStudy,
 } from '../../redux/slices/wordsSlice/wordsAsync'
-import { selectStatusWords } from '../../redux/slices/wordsSlice/wordsSlice'
+import {
+    selectAllWords,
+    selectStatusWords,
+} from '../../redux/slices/wordsSlice/wordsSlice'
 import { collectionNameWords, knowWord } from '../../utils/consts'
 import BasicAlerts from '../BasicAlerts'
 import useMyTheme from '../../hooks/useMyTheme'
@@ -29,17 +32,14 @@ import useMyTheme from '../../hooks/useMyTheme'
 export default function TableWords() {
     const dispatch = useDispatch()
     const { colors, mq } = useMyTheme()
-    const { newWords, inProcessWords, learnedWords } = useSelector(
-        ({ words }) => words
-    )
+    const words = useSelector(selectAllWords())
+
     const { rowsPerPage, order, orderBy, selected, page } = useSelector(
         ({ settingsApp }) => settingsApp.wordsList
     )
     const FetchWords = useSelector(
         selectStatusWords(['newWords', 'inProcessWords', 'learnedWords'])
     )
-
-    const words = [...newWords, ...inProcessWords, ...learnedWords]
 
     const [dense, setDense] = React.useState(true)
 
@@ -60,7 +60,7 @@ export default function TableWords() {
         dispatch(setSelected([]))
     }
 
-    const handleClick = (event, word) => {
+    const handleClick = (_, word) => {
         const selectedIndex = selected.indexOf(word)
         let newSelected = []
 

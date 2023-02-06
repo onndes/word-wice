@@ -130,9 +130,6 @@ const wordsSlice = createSlice({
     },
 })
 
-export const selectStatusWords = (names) => (state) =>
-    selectStatus(names, state.words)
-
 export const {
     resetStateWords,
     setMixedWords,
@@ -145,3 +142,14 @@ export const {
 } = wordsSlice.actions
 
 export default wordsSlice.reducer
+
+export const selectStatusWords = (names) => (state) =>
+    selectStatus(names, state.words)
+
+export const selectAllWords = () => (state) => {
+    return [
+        ...state.words.newWords,
+        ...state.words.inProcessWords,
+        ...state.words.learnedWords,
+    ]
+}
