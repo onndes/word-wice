@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { Tab, Tabs, useMediaQuery } from '@mui/material'
 import MenuBook from '@mui/icons-material/MenuBook'
 import School from '@mui/icons-material/School'
@@ -14,15 +14,16 @@ const tabs = [
 
 const Menu = () => {
     const mq = useMediaQuery('(max-width:900px)')
+    const location = useLocation()
     const [value, setValue] = React.useState(0)
 
-    const handleChange = (_, newValue) => {
-        setValue(newValue)
-    }
+    useEffect(() => {
+        setValue(tabs.findIndex((tab) => tab.to === location.pathname))
+    }, [location])
+
     return (
         <Tabs
             value={value}
-            onChange={handleChange}
             aria-label="tabs"
             indicatorColor="secondary"
             textColor="secondary"

@@ -28,59 +28,69 @@ const Body = ({
             {/* if you don't need to support IE11, 
             you can replace the `stableSort` call with:
             rows.sort(getComparator(order, orderBy)).slice() */}
-            {stableSort(words, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                    const isItemSelected = isSelected(row.id)
-                    const labelId = row.id
+            {statusData.status === STATUS.success &&
+                stableSort(words, getComparator(order, orderBy))
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                        const isItemSelected = isSelected(row.id)
+                        const labelId = row.id
 
-                    const date = row.dateCreated
-                        ? format(row.dateCreated.toDate(), 'dd-MM-yyyy hh:mm a')
-                        : 'not data'
+                        const date = row.dateCreated
+                            ? format(
+                                  row.dateCreated.toDate(),
+                                  'dd-MM-yyyy hh:mm a'
+                              )
+                            : 'not data'
 
-                    return (
-                        <TableRow
-                            hover
-                            onClick={(event) => handleClick(event, row)}
-                            role="checkbox"
-                            aria-checked={isItemSelected}
-                            tabIndex={-1}
-                            key={row.id}
-                            selected={isItemSelected}
-                        >
-                            <TableCell padding="checkbox">
-                                <Checkbox
-                                    color="secondary"
-                                    checked={isItemSelected}
-                                    inputProps={{
-                                        'aria-labelledby': labelId,
-                                    }}
-                                />
-                            </TableCell>
-                            <TableCell
-                                component="th"
-                                id={labelId}
-                                scope="row"
-                                padding="none"
-                                sx={{ minWidth: '180px' }}
+                        return (
+                            <TableRow
+                                hover
+                                onClick={(event) => handleClick(event, row)}
+                                role="checkbox"
+                                aria-checked={isItemSelected}
+                                tabIndex={-1}
+                                key={row.id}
+                                selected={isItemSelected}
                             >
-                                {row.word}
-                            </TableCell>
-                            <TableCell sx={{ minWidth: '180px' }} align="left">
-                                {row.translation}
-                            </TableCell>
-                            <TableCell align="left">
-                                <WordRank word={knowWord[row.knowledge]} />
-                            </TableCell>
-                            <TableCell align="left">
-                                {row.transcription}
-                            </TableCell>
-                            <TableCell sx={{ width: '50px' }} align="center">
-                                {date}
-                            </TableCell>
-                        </TableRow>
-                    )
-                })}
+                                <TableCell padding="checkbox">
+                                    <Checkbox
+                                        color="secondary"
+                                        checked={isItemSelected}
+                                        inputProps={{
+                                            'aria-labelledby': labelId,
+                                        }}
+                                    />
+                                </TableCell>
+                                <TableCell
+                                    component="th"
+                                    id={labelId}
+                                    scope="row"
+                                    padding="none"
+                                    sx={{ minWidth: '180px' }}
+                                >
+                                    {row.word}
+                                </TableCell>
+                                <TableCell
+                                    sx={{ minWidth: '180px' }}
+                                    align="left"
+                                >
+                                    {row.translation}
+                                </TableCell>
+                                <TableCell align="left">
+                                    <WordRank word={knowWord[row.knowledge]} />
+                                </TableCell>
+                                <TableCell align="left">
+                                    {row.transcription}
+                                </TableCell>
+                                <TableCell
+                                    sx={{ width: '50px' }}
+                                    align="center"
+                                >
+                                    {date}
+                                </TableCell>
+                            </TableRow>
+                        )
+                    })}
             {statusData.status === STATUS.success && words.length === 0 && (
                 <TableRow
                     style={{
