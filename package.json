@@ -5,7 +5,6 @@
     "dependencies": {
         "@emotion/react": "^11.10.5",
         "@emotion/styled": "^11.10.5",
-        "@firebase/firestore": "^3.8.1",
         "@hookform/resolvers": "^2.9.10",
         "@mui/icons-material": "^5.10.16",
         "@mui/material": "^5.10.16",

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Box from '@mui/material/Box'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -21,10 +21,7 @@ import {
     deleteWords,
     submitWordsForStudy,
 } from '../../redux/slices/wordsSlice/wordsAsync'
-import {
-    selectAllWords,
-    selectStatusWords,
-} from '../../redux/slices/wordsSlice/wordsSlice'
+import { selectStatusWords } from '../../redux/slices/wordsSlice/wordsSlice'
 import { collectionNameWords, knowWord } from '../../utils/consts'
 import BasicAlerts from '../BasicAlerts'
 import useMyTheme from '../../hooks/useMyTheme'
@@ -32,8 +29,14 @@ import useMyTheme from '../../hooks/useMyTheme'
 export default function TableWords() {
     const dispatch = useDispatch()
     const { colors, mq } = useMyTheme()
-    const words = useSelector(selectAllWords())
+    const { newWords, inProcessWords, learnedWords } = useSelector(
+        ({ words }) => words
+    )
 
+    const words = [...newWords, ...inProcessWords, ...learnedWords]
+
+
+    // console.log(words)
     const { rowsPerPage, order, orderBy, selected, page } = useSelector(
         ({ settingsApp }) => settingsApp.wordsList
     )
@@ -94,23 +97,30 @@ export default function TableWords() {
     }
 
     const handleClickDeleteWords = () => {
+        const delWords = {
+            [collectionNameWords.NEW]: [],
+            [collectionNameWords.LEARNED]: [],
+            [collectionNameWords.IN_PROCESS]: [],
+        }
         selected.forEach((el) => {
-            let name = ''
             if (el.knowledge === knowWord.A0.code) {
-                name = collectionNameWords.NEW
+                delWords[collectionNameWords.NEW].push(el)
             } else if (el.knowledge === knowWord.C2.code) {
-                name = collectionNameWords.LEARNED
+                delWords[collectionNameWords.LEARNED].push(el)
             } else {
-                name = collectionNameWords.IN_PROCESS
+                delWords[collectionNameWords.IN_PROCESS].push(el)
             }
-
-            dispatch(
-                deleteWords({
-                    collectionName: name,
-                    word: el,
-                })
-            )
         })
+        Object.keys(delWords).forEach((collection) => {
+            if (delWords[collection].length)
+                dispatch(
+                    deleteWords({
+                        collectionName: collection,
+                        words: delWords[collection],
+                    })
+                )
+        })
+
         dispatch(setSelected([]))
     }
 

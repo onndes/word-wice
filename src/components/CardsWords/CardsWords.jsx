@@ -8,14 +8,20 @@ import useMyTheme from '../../hooks/useMyTheme'
 import WordRank from '../WordRank'
 import { knowWord } from '../../utils/consts'
 import { setSelected } from '../../redux/slices/settingsAppSlice/settingsAppSlice'
-import { selectAllWords, selectStatusWords } from '../../redux/slices/wordsSlice/wordsSlice'
+import {
+    selectAllWords,
+    selectStatusWords,
+} from '../../redux/slices/wordsSlice/wordsSlice'
 import { STATUS } from '../../utils/handleStatus'
 import LinearIndeterminate from '../LinearIndeterminate'
 
 const CardsWords = () => {
     const dispatch = useDispatch()
     const { colors } = useMyTheme()
-    const words = useSelector(selectAllWords())
+    const { newWords, inProcessWords, learnedWords } = useSelector(
+        ({ words }) => words
+    )
+    const words = [...newWords, ...inProcessWords, ...learnedWords]
 
     const statusData = useSelector(
         selectStatusWords(['newWords', 'inProcessWords', 'learnedWords'])

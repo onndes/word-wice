@@ -29,7 +29,7 @@ const ToolbarWordsCards = () => {
             dispatch(
                 deleteWords({
                     collectionName: name,
-                    word: el,
+                    words: [el],
                 })
             )
         })

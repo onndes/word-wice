@@ -11,6 +11,8 @@ import {
 import translate from 'translate'
 import { db } from '../../../firebase'
 import { collectionNameWords, knowWord } from '../../../utils/consts'
+import { handleDelWords } from '../../../utils/handleDelWords'
+import { handleDuplicateWords } from '../../../utils/handleDuplicateWords'
 import { STATUS } from '../../../utils/handleStatus'
 
 export const subWords = (dispatch, uid, handleStatus, setWords) => {
@@ -28,7 +30,24 @@ export const subWords = (dispatch, uid, handleStatus, setWords) => {
         unSubs.push(
             onSnapshot(q, { includeMetadataChanges: true }, (snapshot) => {
                 const data = snapshot.data()
-                dispatch(setWords(data))
+
+                const { uniq, duplicate } = handleDuplicateWords(data.words)
+
+                if (duplicate.length) {
+                    const { keys, words: wordsDel } = handleDelWords(duplicate)
+
+                    keys.forEach((collection) => {
+                        if (wordsDel[collection].length)
+                            dispatch(
+                                deleteWords({
+                                    collectionName: collection,
+                                    words: wordsDel[collection],
+                                })
+                            )
+                    })
+                }
+
+                dispatch(setWords({ ...data, words: uniq }))
                 dispatch(
                     handleStatus({
                         nameCollection: inquiry[idx],
@@ -61,8 +80,9 @@ export const deleteWords = createAsyncThunk(
     async (wordData, { thunkAPI, getState }) => {
         try {
             const docRef = doc(db, wordData.collectionName, getState().user.id)
+
             updateDoc(docRef, {
-                words: arrayRemove(wordData.word),
+                words: arrayRemove(...wordData.words),
             })
             return wordData
         } catch (e) {
@@ -76,8 +96,12 @@ export const submitWordsForStudy = createAsyncThunk(
     async (word, { thunkAPI, dispatch }) => {
         try {
             await dispatch(
-                deleteWords({ collectionName: collectionNameWords.NEW, word })
+                deleteWords({
+                    collectionName: collectionNameWords.NEW,
+                    words: [word],
+                })
             )
+
             await dispatch(
                 addWords({
                     collectionName: collectionNameWords.IN_PROCESS,
@@ -103,7 +127,7 @@ export const updateKnowledgeInProcess = createAsyncThunk(
                 await dispatch(
                     deleteWords({
                         collectionName: collectionNameWords.IN_PROCESS,
-                        word: data.word,
+                        words: [data.word],
                     })
                 )
                 await dispatch(
@@ -131,7 +155,7 @@ export const submitWordsForLearned = createAsyncThunk(
             await dispatch(
                 deleteWords({
                     collectionName: collectionNameWords.IN_PROCESS,
-                    word: data.word,
+                    words: [data.word],
                 })
             )
             await dispatch(

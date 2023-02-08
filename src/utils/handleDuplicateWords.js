@@ -7,20 +7,18 @@ export const variantDelDup = {
 export const handleDuplicateWords = (words, variant = variantDelDup.data) => {
     if (!words.length) return { uniq: [], duplicate: [] }
 
-    const removedWords = []
-    const latestObjects = words.reduce((acc, cur) => {
-        if (acc[cur.id]) {
-            const checkData = acc[cur.id].dateChange > cur.dateChange
+    const duplicate = []
+    const latestObjects = new Map()
+    // eslint-disable-next-line no-restricted-syntax
+    for (const cur of words) {
+        if (latestObjects.has(cur.id)) {
+            const acc = latestObjects.get(cur.id)
+            const checkData = acc.dateChange >= cur.dateChange
             const checkKH =
-                acc[cur.id].knowledge < cur.knowledge
-                    ? acc[cur.id].knowledge
-                    : cur.knowledge
+                acc.knowledge <= cur.knowledge ? acc.knowledge : cur.knowledge
             const checkKL =
-                acc[cur.id].knowledge < cur.knowledge
-                    ? cur.knowledge
-                    : acc[cur.id].knowledge
+                acc.knowledge <= cur.knowledge ? cur.knowledge : acc.knowledge
 
-            if (acc[cur.id].dateChange > cur.dateChange) return acc
             const check =
                 // eslint-disable-next-line no-nested-ternary
                 variantDelDup.data === variant
@@ -28,13 +26,11 @@ export const handleDuplicateWords = (words, variant = variantDelDup.data) => {
                     : variantDelDup.knowledgeHigher === variant
                     ? checkKH
                     : checkKL
-            const deleteWord = check ? cur : acc[cur.id]
-            removedWords.push(deleteWord)
-
-            return { ...acc, [cur.id]: cur }
+            const deleteWord = check ? cur : acc
+            duplicate.push(deleteWord)
         }
-        return { ...acc, [cur.id]: cur }
-    }, {})
+        latestObjects.set(cur.id, cur)
+    }
 
-    return { uniq: Object.values(latestObjects), duplicate: removedWords }
+    return { uniq: Array.from(latestObjects.values()), duplicate }
 }

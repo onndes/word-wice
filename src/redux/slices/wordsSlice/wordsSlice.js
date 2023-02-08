@@ -74,10 +74,6 @@ const wordsSlice = createSlice({
         })
         builder.addCase(addWords.fulfilled, (state, action) => {
             setStatus(state, action)
-            state[action.payload.collectionName] = [
-                action.payload.word,
-                ...state[action.payload.collectionName],
-            ]
         })
         builder.addCase(addWords.rejected, (state, action) => {
             setStatus(state, action)
@@ -89,9 +85,12 @@ const wordsSlice = createSlice({
         })
         builder.addCase(deleteWords.fulfilled, (state, action) => {
             setStatus(state, action)
-            state[action.payload.collectionName] = state[
-                action.payload.collectionName
-            ].filter(({ id }) => id !== action.payload.word.id)
+            // const { collectionName, words } = action.payload
+            // const filteredWords = state[collectionName].filter(({ id }) => {
+            //     return words.find((word) => word.id === id)
+            // })
+            // console.log('s', filteredWords, state[collectionName])
+            // state[collectionName] = filteredWords
         })
         builder.addCase(deleteWords.rejected, (state, action) => {
             setStatus(state, action)
