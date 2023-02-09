@@ -18,7 +18,8 @@ const Menu = () => {
     const [value, setValue] = React.useState(0)
 
     useEffect(() => {
-        setValue(tabs.findIndex((tab) => tab.to === location.pathname))
+        const idx = tabs.findIndex((tab) => tab.to === location.pathname)
+        setValue(idx === -1 ? 0 : idx)
     }, [location])
 
     return (

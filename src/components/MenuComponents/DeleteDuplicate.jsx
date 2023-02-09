@@ -4,22 +4,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import useMyTheme from '../../hooks/useMyTheme'
 import { setSettings } from '../../redux/slices/settingsAppSlice/settingsAppAsync'
 
-const RecommendForLearn = () => {
+const DeleteDuplicate = () => {
     const dispatch = useDispatch()
     const { colors } = useMyTheme()
-    const { recommendForLearn } = useSelector(
+    const { variantDelDuplicate } = useSelector(
         ({ settingsApp }) => settingsApp.user
     )
     const handleChange = (event) => {
         dispatch(
             setSettings({
-                name: 'recommendForLearn',
+                name: 'variantDelDuplicate',
                 value: event.target.value,
             })
         )
     }
-
-    const numbers = Array.from({ length: 46 }, (_, i) => i + 5)
 
     return (
         <Box
@@ -38,14 +36,14 @@ const RecommendForLearn = () => {
                     alignItems: 'center',
                 }}
             >
-                <Box>Sorting</Box>
+                <Box>Save word: </Box>
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth size="small" variant="standard">
                         <Select
                             color="secondary"
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={recommendForLearn}
+                            value={variantDelDuplicate}
                             onChange={handleChange}
                             sx={{
                                 '& .Mui-focused.MuiSelectLabel-root': {
@@ -59,13 +57,15 @@ const RecommendForLearn = () => {
                                     },
                             }}
                         >
-                            {numbers.map((el) => {
-                                return (
-                                    <MenuItem key={el} value={el}>
-                                        {el}
-                                    </MenuItem>
-                                )
-                            })}
+                            <MenuItem value="lastUpdateWords">
+                                Last changes
+                            </MenuItem>
+                            <MenuItem value="higherKnowledge">
+                                Higher knowledge
+                            </MenuItem>
+                            <MenuItem value="lowerKnowledge">
+                                Lower knowledge
+                            </MenuItem>
                         </Select>
                     </FormControl>
                 </Box>
@@ -74,4 +74,4 @@ const RecommendForLearn = () => {
     )
 }
 
-export default RecommendForLearn
+export default DeleteDuplicate

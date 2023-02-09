@@ -15,7 +15,13 @@ import { handleDelWords } from '../../../utils/handleDelWords'
 import { handleDuplicateWords } from '../../../utils/handleDuplicateWords'
 import { STATUS } from '../../../utils/handleStatus'
 
-export const subWords = (dispatch, uid, handleStatus, setWords) => {
+export const subWords = (
+    dispatch,
+    uid,
+    handleStatus,
+    setWords,
+    variantDelDuplicate
+) => {
     const inquiry = Object.values(collectionNameWords)
     const qsWords = inquiry.map((el) => query(doc(db, el, uid)))
     const unSubs = []
@@ -31,7 +37,10 @@ export const subWords = (dispatch, uid, handleStatus, setWords) => {
             onSnapshot(q, { includeMetadataChanges: true }, (snapshot) => {
                 const data = snapshot.data()
 
-                const { uniq, duplicate } = handleDuplicateWords(data.words)
+                const { uniq, duplicate } = handleDuplicateWords(
+                    data.words || [],
+                    variantDelDuplicate
+                )
 
                 if (duplicate.length) {
                     const { keys, words: wordsDel } = handleDelWords(duplicate)
@@ -45,15 +54,15 @@ export const subWords = (dispatch, uid, handleStatus, setWords) => {
                                 })
                             )
                     })
+                } else {
+                    dispatch(setWords({ ...data, words: uniq }))
+                    dispatch(
+                        handleStatus({
+                            nameCollection: inquiry[idx],
+                            status: STATUS.success,
+                        })
+                    )
                 }
-
-                dispatch(setWords({ ...data, words: uniq }))
-                dispatch(
-                    handleStatus({
-                        nameCollection: inquiry[idx],
-                        status: STATUS.success,
-                    })
-                )
             })
         )
     })

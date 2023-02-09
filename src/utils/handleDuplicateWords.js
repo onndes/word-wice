@@ -26,6 +26,7 @@ export const handleDuplicateWords = (words, variant = variantDelDup.data) => {
                     : variantDelDup.knowledgeHigher === variant
                     ? checkKH
                     : checkKL
+
             const deleteWord = check ? cur : acc
             duplicate.push(deleteWord)
         }

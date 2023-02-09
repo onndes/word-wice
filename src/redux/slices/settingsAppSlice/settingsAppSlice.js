@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { variantDelDup } from '../../../utils/handleDuplicateWords'
 import { setStatus } from '../../../utils/handleStatus'
-import { setRecommendForLearn } from './settingsAppAsync'
+import { setSettings } from './settingsAppAsync'
 
 const initialState = {
     wordsList: {
@@ -23,6 +23,9 @@ const settingsAppSlice = createSlice({
     name: 'settingsApp',
     initialState,
     reducers: {
+        removeUserSA() {
+            return { ...initialState }
+        },
         setRowsPerPage(state, { payload }) {
             localStorage.setItem('rowsPerPage', payload)
             state.wordsList.rowsPerPage = payload
@@ -43,26 +46,33 @@ const settingsAppSlice = createSlice({
             state.wordsList.page = payload
         },
         setUserSettings(state, { payload }) {
-            state.user.recommendForLearn = payload.recommendForLearn
-            localStorage.setItem('recommendForLearn', payload)
+            if (payload) {
+                const keys = Object.keys(payload)
+                keys.forEach((key) => {
+                    state.user[key] = payload?.[key] || state.user[key]
+                })
+
+                localStorage.setItem('recommendForLearn', payload)
+            }
         },
     },
     extraReducers: (builder) => {
-        // setRecommendForLearn
-        builder.addCase(setRecommendForLearn.pending, (state, action) => {
+        // setSettings
+        builder.addCase(setSettings.pending, (state, action) => {
             setStatus(state, action)
         })
-        builder.addCase(setRecommendForLearn.fulfilled, (state, action) => {
+        builder.addCase(setSettings.fulfilled, (state, action) => {
             setStatus(state, action)
-            state.user.recommendForLearn = action.payload
+            // state.user[action.payload.name] = action.payload.value
         })
-        builder.addCase(setRecommendForLearn.rejected, (state, action) => {
+        builder.addCase(setSettings.rejected, (state, action) => {
             setStatus(state, action)
         })
     },
 })
 
 export const {
+    removeUserSA,
     setRowsPerPage,
     setIsOnline,
     setOrder,

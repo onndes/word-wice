@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Container, Button, Box } from '@mui/material'
 import { getAuthUser } from '../redux/slices/userSlice/userAsync'
-import icon from '../common/images/icon-512x512.png'
+import icon from '../common/images/icon-256x256.png'
 
 export default function Login() {
     const dispatch = useDispatch()
@@ -16,18 +16,18 @@ export default function Login() {
                     alignItems: 'center',
                 }}
             >
-                <img width="250px" src={icon} alt="" />
+                <img width="250px" height="250px" src={icon} alt="" />
                 <Button
                     variant="contained"
                     color="inherit"
                     sx={{
-                        backgroundColor: "#FAF3EB",
-                        color: "#D43619",
+                        backgroundColor: '#FAF3EB',
+                        color: '#D43619',
                         fontSize: '20px',
                         '&:hover': {
-                            backgroundColor: "#ede0d0",
+                            backgroundColor: '#ede0d0',
                         },
-                        borderRadius: '30px'
+                        borderRadius: '30px',
                     }}
                     onClick={() => dispatch(getAuthUser())}
                 >

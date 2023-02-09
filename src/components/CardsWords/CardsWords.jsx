@@ -8,10 +8,7 @@ import useMyTheme from '../../hooks/useMyTheme'
 import WordRank from '../WordRank'
 import { knowWord } from '../../utils/consts'
 import { setSelected } from '../../redux/slices/settingsAppSlice/settingsAppSlice'
-import {
-    selectAllWords,
-    selectStatusWords,
-} from '../../redux/slices/wordsSlice/wordsSlice'
+import { selectStatusWords } from '../../redux/slices/wordsSlice/wordsSlice'
 import { STATUS } from '../../utils/handleStatus'
 import LinearIndeterminate from '../LinearIndeterminate'
 

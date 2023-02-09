@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Layout from './components/Layout'
 import { ColorModeContext, useMode } from './theme/theme'
@@ -9,24 +9,26 @@ import { removeUser, setUser } from './redux/slices/userSlice/userSlice'
 import LoaderPage from './components/LoaderPage/LoaderPage'
 import useIsOnline from './hooks/useIsOnline'
 import {
+    removeUserSA,
     setIsOnline,
     setUserSettings,
 } from './redux/slices/settingsAppSlice/settingsAppSlice'
 import { handleStatus, setWords } from './redux/slices/wordsSlice/wordsSlice'
-import { deleteWords, subWords } from './redux/slices/wordsSlice/wordsAsync'
+import { subWords } from './redux/slices/wordsSlice/wordsAsync'
 import { subAppSettings } from './redux/slices/settingsAppSlice/settingsAppAsync'
 
 const unSubs = []
 
 function App() {
     const [theme, colorMode] = useMode()
-
+    const { variantDelDuplicate } = useSelector(
+        ({ settingsApp }) => settingsApp.user
+    )
     const [isAuth, setIsAuth] = React.useState(false)
     const isOnline = useIsOnline()
     const dispatch = useDispatch()
 
     const auth = getAuth()
- 
 
     React.useEffect(() => {
         dispatch(setIsOnline(isOnline))
@@ -36,6 +38,7 @@ function App() {
         onAuthStateChanged(auth, (user) => {
             if (!user) {
                 dispatch(removeUser())
+                dispatch(removeUserSA())
                 if (unSubs) {
                     unSubs.forEach((unSub) => unSub())
                 }
@@ -52,7 +55,7 @@ function App() {
                     id,
                     handleStatus,
                     setWords,
-                    deleteWords
+                    variantDelDuplicate
                 ).forEach((unSub) => unSubs.push(unSub))
             }
             setIsAuth(true)

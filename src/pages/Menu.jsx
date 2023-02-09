@@ -6,6 +6,7 @@ import { tokens } from '../theme/theme'
 import DisplayWords from '../components/MenuComponents/DisplayWords'
 import useMyTheme from '../hooks/useMyTheme'
 import RecommendForLearn from '../components/MenuComponents/RecommendForLearn'
+import DeleteDuplicate from '../components/MenuComponents/DeleteDuplicate'
 
 const Title = styled(Typography)(({ theme }) => ({
     marginLeft: theme.spacing(1.5),
@@ -50,6 +51,10 @@ const Menu = () => {
             <Title variant="h5">Learn</Title>
             <Block elevation={1}>
                 <RecommendForLearn />
+            </Block>
+            <Title variant="h5">Synchronization</Title>
+            <Block elevation={1}>
+                <DeleteDuplicate />
             </Block>
             <Title variant="h5">Account</Title>
             <Block elevation={1}>

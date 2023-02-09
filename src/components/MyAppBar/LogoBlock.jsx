@@ -8,7 +8,7 @@ import {
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { WORDS_ROUTE } from '../../utils/consts'
-import icon from '../../common/images/icon-144x144.png'
+import icon from '../../common/images/icon-72x72.png'
 import DisplayOnline from '../DisplayOnline'
 
 const LogoBlock = ({ isOnline }) => {
