@@ -19,6 +19,7 @@ import {
 } from '../../redux/slices/wordsSlice/wordsSlice'
 import useMyTheme from '../../hooks/useMyTheme'
 import Started from './Started'
+import { checkTimeStop } from '../../utils/checkTimeStop'
 
 const LearnWordsCard = () => {
     const dispatch = useDispatch()
@@ -56,7 +57,8 @@ const LearnWordsCard = () => {
 
     const mixWords = () => {
         if (inProcessWords.length > 0) {
-            dispatch(setMixedWords(shuffleArray(inProcessWords)))
+            const mixWords = shuffleArray(inProcessWords)
+            dispatch(setMixedWords(checkTimeStop(mixWords)))
         }
     }
 

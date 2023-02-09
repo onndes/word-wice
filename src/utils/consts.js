@@ -44,16 +44,19 @@ export const knowWord = {
         code: 'B2',
         tittle: 'Height',
         color: '#43a047',
+        timeStop: 2,
     },
     C1: {
         code: 'C1',
         tittle: 'Know',
         color: '#42a5f5',
+        timeStop: 24,
     },
     C2: {
         code: 'C2',
         tittle: 'Learned',
         color: '#5e35b1',
+        timeStop: 24,
     },
 }
 
