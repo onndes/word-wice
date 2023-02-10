@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Box from '@mui/material/Box'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -25,6 +25,7 @@ import { selectStatusWords } from '../../redux/slices/wordsSlice/wordsSlice'
 import { collectionNameWords, knowWord } from '../../utils/consts'
 import BasicAlerts from '../BasicAlerts'
 import useMyTheme from '../../hooks/useMyTheme'
+import ConfirmDialog from '../ConfirmDialog'
 
 export default function TableWords() {
     const dispatch = useDispatch()
@@ -33,8 +34,11 @@ export default function TableWords() {
         ({ words }) => words
     )
 
-    const words = [...newWords, ...inProcessWords, ...learnedWords]
+    const [openConfirmDelete, setOpenConfirmDelete] = useState(false)
+    const [openConfirmWordsForStudy, setOpenConfirmWordsForStudy] =
+        useState(false)
 
+    const words = [...newWords, ...inProcessWords, ...learnedWords]
 
     // console.log(words)
     const { rowsPerPage, order, orderBy, selected, page } = useSelector(
@@ -83,6 +87,8 @@ export default function TableWords() {
         dispatch(setSelected(newSelected))
     }
 
+    const handleClearSelected = () => dispatch(setSelected([]))
+
     const handleChangePage = (_, newPage) => {
         dispatch(setPage(newPage))
     }
@@ -121,7 +127,7 @@ export default function TableWords() {
                 )
         })
 
-        dispatch(setSelected([]))
+        handleClearSelected()
     }
 
     const handleSubmitWordsForStudy = () => {
@@ -135,7 +141,7 @@ export default function TableWords() {
         setAlertMessage(displayAlert)
         setCheckedAlert(true)
         setTimeout(() => setCheckedAlert(false), 2000)
-        dispatch(setSelected([]))
+        handleClearSelected()
     }
 
     const isSelected = (wordId) => selected.some((el) => el.id === wordId)
@@ -143,6 +149,12 @@ export default function TableWords() {
     // Avoid a layout jump when reaching the last page with empty words.
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - words.length) : 0
+
+    const messageConfirmForStudy = `Are you certain that you wish to add these 
+        ${selected.filter((el) => el.knowledge === knowWord.A0.code).length}
+        word(s) to your study list?`
+    const messageConfirmDelete = `Are you certain that you wish to 
+        remove these ${selected.length} word(s) from your dictionary?`
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -156,8 +168,10 @@ export default function TableWords() {
             >
                 <MyToolbar
                     numSelected={selected.length}
-                    handleDelete={handleClickDeleteWords}
-                    handleSubmitForStudy={handleSubmitWordsForStudy}
+                    handleDelete={() => setOpenConfirmDelete(true)}
+                    handleSubmitForStudy={() =>
+                        setOpenConfirmWordsForStudy(true)
+                    }
                 />
                 <TableContainer>
                     <Table
@@ -214,6 +228,22 @@ export default function TableWords() {
                     severity={alertMessage ? 'success' : 'error'}
                 />
             ) : null}
+            <ConfirmDialog
+                title="Confirm"
+                text={messageConfirmDelete}
+                open={openConfirmDelete}
+                setOpen={setOpenConfirmDelete}
+                onConfirm={handleClickDeleteWords}
+                onRefute={handleClearSelected}
+            />
+            <ConfirmDialog
+                title="Confirm"
+                text={messageConfirmForStudy}
+                open={openConfirmWordsForStudy}
+                setOpen={setOpenConfirmWordsForStudy}
+                onConfirm={handleSubmitWordsForStudy}
+                onRefute={handleClearSelected}
+            />
         </Box>
     )
 }

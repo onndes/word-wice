@@ -11,6 +11,7 @@ import FilterListIcon from '@mui/icons-material/FilterList'
 import { Box } from '@mui/material'
 
 const MyToolbar = ({ numSelected, handleDelete, handleSubmitForStudy }) => {
+  
     return (
         <Toolbar
             sx={{
