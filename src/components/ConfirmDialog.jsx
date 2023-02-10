@@ -41,7 +41,6 @@ export default function ConfirmDialog({
                 PaperProps={{}}
                 sx={{
                     '& 	.MuiDialog-paper': {
-                        // minWidth: '250px',
                         background: colors.primary[400],
                     },
                 }}

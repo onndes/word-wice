@@ -49,7 +49,7 @@ const settingsAppSlice = createSlice({
             if (payload) {
                 const keys = Object.keys(payload)
                 keys.forEach((key) => {
-                    state.user[key] = payload?.[key] || state.user[key]
+                    state.user[key] = payload[key]
                 })
 
                 localStorage.setItem('recommendForLearn', payload)
