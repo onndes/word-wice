@@ -23,6 +23,7 @@ const MyAppBar = () => {
             }}
         >
             <Toolbar
+                disableGutters={mq}
                 sx={{
                     display: 'flex',
                     justifyContent: 'space-between',

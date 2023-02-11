@@ -9,9 +9,6 @@ const NoWords = ({ setCheckWords, countWords, recommendForLearn }) => {
 
     return (
         <Box sx={{ maxWidth: '400px', margin: '0 auto ' }}>
-            <Typography variant="h4" color="" mb={3}>
-                Learn new words
-            </Typography>
             <Paper
                 sx={{
                     width: '100%',

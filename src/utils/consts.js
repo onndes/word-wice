@@ -3,6 +3,7 @@ export const WORDS_ROUTE = '/words'
 export const LEARN_WORDS_ROUTE = '/learn-words'
 export const MENU_ROUTE = '/menu'
 export const ADD_WORD_ROUTE = '/add-word'
+export const PROFILE_ROUTE = '/profile'
 
 export const formAddWordProps = {
     word: {

@@ -7,11 +7,9 @@ import PropTypes from 'prop-types'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddBoxIcon from '@mui/icons-material/AddBox'
-import FilterListIcon from '@mui/icons-material/FilterList'
 import { Box } from '@mui/material'
 
 const MyToolbar = ({ numSelected, handleDelete, handleSubmitForStudy }) => {
-  
     return (
         <Toolbar
             sx={{
@@ -59,13 +57,7 @@ const MyToolbar = ({ numSelected, handleDelete, handleSubmitForStudy }) => {
                         </IconButton>
                     </Tooltip>
                 </Box>
-            ) : (
-                <Tooltip title="Filter list">
-                    <IconButton>
-                        <FilterListIcon />
-                    </IconButton>
-                </Tooltip>
-            )}
+            ) : null}
         </Toolbar>
     )
 }

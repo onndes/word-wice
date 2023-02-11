@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Paper, Typography, Button, Divider } from '@mui/material'
+import { Box, Paper, Button, Divider } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -124,9 +124,6 @@ const LearnWordsCard = () => {
 
     return (
         <Box sx={{ maxWidth: '400px', margin: '0 auto ' }}>
-            <Typography variant="h4" color="" mb={3}>
-                Learn new words
-            </Typography>
             <Paper
                 sx={{
                     width: '100%',

@@ -2,12 +2,14 @@ import AddWordPage from './pages/AddWordPage'
 import LearnWords from './pages/LearnWords'
 import Login from './pages/Login'
 import Menu from './pages/Menu'
+import Profile from './pages/Profile'
 import Words from './pages/Words'
 import {
     ADD_WORD_ROUTE,
     LEARN_WORDS_ROUTE,
     LOGIN_ROUTE,
     MENU_ROUTE,
+    PROFILE_ROUTE,
     WORDS_ROUTE,
 } from './utils/consts'
 
@@ -30,9 +32,12 @@ export const privateRoutes = [
         path: MENU_ROUTE,
         Component: <Menu />,
     },
-
     {
         path: ADD_WORD_ROUTE,
         Component: <AddWordPage />,
+    },
+    {
+        path: PROFILE_ROUTE,
+        Component: <Profile />,
     },
 ]
