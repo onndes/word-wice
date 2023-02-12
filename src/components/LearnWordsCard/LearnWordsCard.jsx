@@ -15,6 +15,7 @@ import {
     setCheckWords,
     setCurrentWordIdx,
     setMixedWords,
+    setReadyForStudyCount,
     setStarted,
 } from '../../redux/slices/wordsSlice/wordsSlice'
 import useMyTheme from '../../hooks/useMyTheme'
@@ -58,7 +59,9 @@ const LearnWordsCard = () => {
     const mixWords = () => {
         if (inProcessWords.length > 0) {
             const mixWords = shuffleArray(inProcessWords)
-            dispatch(setMixedWords(checkTimeStop(mixWords)))
+            const readyForStudy = checkTimeStop(mixWords)
+            dispatch(setReadyForStudyCount(readyForStudy.length))
+            dispatch(setMixedWords(readyForStudy))
         }
     }
 

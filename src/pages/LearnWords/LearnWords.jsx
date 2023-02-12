@@ -1,9 +1,23 @@
-import React from 'react'
-import { Button, Container } from '@mui/material'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Button, Container, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { LEARN_NEW_ROUTE, LEARN_REPEAT_ROUTE } from '../../utils/consts'
+import {
+    setReadyForStudyCount,
+} from '../../redux/slices/wordsSlice/wordsSlice'
+import { checkTimeStop } from '../../utils/checkTimeStop'
 
 const LearnWords = () => {
+    const dispatch = useDispatch()
+    const { readyForStudyCount, inProcessWords } = useSelector(
+        ({ words }) => words
+    )
+
+    useEffect(() => {
+        const readyForStudy = checkTimeStop(inProcessWords)
+        dispatch(setReadyForStudyCount(readyForStudy.length))
+    }, [inProcessWords])
     return (
         <Container maxWidth="xs">
             <Button
@@ -25,7 +39,12 @@ const LearnWords = () => {
                 color="primary"
                 size="large"
             >
-                Learn new words
+                <Typography variant="p" color="initial" display="block">
+                    Learn new words
+                </Typography>
+                <Typography variant="p" color="initial">
+                    {readyForStudyCount} word(s) for study is ready
+                </Typography>
             </Button>
             <Button
                 sx={(theme) => ({

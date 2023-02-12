@@ -17,6 +17,7 @@ const initialState = {
     mixedWords: [],
     status: [],
     currentWordIdx: 0,
+    readyForStudyCount: 0,
     isStarted: false,
     checkWords: false,
 }
@@ -65,6 +66,9 @@ const wordsSlice = createSlice({
                     return s
                 })
             }
+        },
+        setReadyForStudyCount(state, { payload }) {
+            state.readyForStudyCount = payload
         },
     },
     extraReducers: (builder) => {
@@ -138,6 +142,7 @@ export const {
     setCheckWords,
     setStarted,
     handleStatus,
+    setReadyForStudyCount,
 } = wordsSlice.actions
 
 export default wordsSlice.reducer
