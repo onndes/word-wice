@@ -25,8 +25,14 @@ const Started = ({ handle }) => {
                         variant="contained"
                         color="success"
                         display="flex"
+                        size="large"
+                        sx={{
+                            fontWeight: 600,
+                            letterSpacing: 1,
+                            color: 'white',
+                        }}
                     >
-                        Learn new words!
+                        Start!
                     </Button>
                 </Box>
             </Paper>

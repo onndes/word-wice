@@ -59,6 +59,40 @@ export const tokens = (mode) => ({
                   800: '#2a2d64',
                   900: '#151632',
               },
+
+              greenSecondAccent: {
+                  100: '#def0e4',
+                  200: '#bde1c9',
+                  300: '#9cd3ae',
+                  400: '#7bc493',
+                  500: '#5ab578',
+                  600: '#489160',
+                  700: '#366d48',
+                  800: '#244830',
+                  900: '#122418',
+              },
+              purpleAccent: {
+                  100: '#ebdef3',
+                  200: '#d6bde7',
+                  300: '#c29dda',
+                  400: '#ad7cce',
+                  500: '#995bc2',
+                  600: '#7a499b',
+                  700: '#5c3774',
+                  800: '#3d244e',
+                  900: '#1f1227',
+              },
+              purpleTAccent: {
+                  100: '#fefefecf',
+                  200: '#fdfcfe9e',
+                  300: '#faf9fc6e',
+                  400: '#f3eff73d',
+                  500: '#7d54a60d',
+                  600: '#0c080f3d',
+                  700: '#0503066e',
+                  800: '#0201039e',
+                  900: '#010101cf',
+              },
           }
         : {
               grey: {
@@ -116,6 +150,28 @@ export const tokens = (mode) => ({
                   800: '#c3c6fd',
                   900: '#e1e2fe',
               },
+              greenSecondAccent: {
+                  900: '#122418',
+                  800: '#244830',
+                  700: '#366d48',
+                  600: '#489160',
+                  500: '#5ab578',
+                  400: '#7bc493',
+                  300: '#9cd3ae',
+                  200: '#bde1c9',
+                  100: '#def0e4',
+              },
+              purpleAccent: {
+                  900: '#1f1227',
+                  800: '#3d244e',
+                  700: '#5c3774',
+                  600: '#7a499b',
+                  500: '#995bc2',
+                  400: '#ad7cce',
+                  300: '#c29dda',
+                  200: '#d6bde7',
+                  100: '#ebdef3',
+              },
           }),
 })
 
@@ -140,6 +196,14 @@ export const themeSettings = (mode) => {
                       background: {
                           default: colors.primary[500],
                       },
+                      button: {
+                          default: colors.greenSecondAccent[500],
+                          hover: colors.greenSecondAccent[600],
+                      },
+                      purple: {
+                          default: colors.purpleAccent[600],
+                          hover: colors.purpleAccent[700],
+                      },
                   }
                 : {
                       primary: {
@@ -156,6 +220,14 @@ export const themeSettings = (mode) => {
                       background: {
                           default: '#fcfcfc',
                       },
+                      button: {
+                          default: colors.greenSecondAccent[500],
+                          hover: colors.greenSecondAccent[600],
+                      },
+                      purple: {
+                          default: colors.purpleAccent[600],
+                          hover: colors.purpleAccent[700],
+                      },
                   }),
         },
         components: {
@@ -163,9 +235,7 @@ export const themeSettings = (mode) => {
                 styleOverrides: {
                     root: {
                         background:
-                            mode === 'dark'
-                                ? colors.primary[500]
-                                : 'white',
+                            mode === 'dark' ? colors.primary[500] : 'white',
                     },
                 },
             },

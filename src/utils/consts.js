@@ -1,9 +1,11 @@
 export const LOGIN_ROUTE = '/login'
 export const WORDS_ROUTE = '/words'
-export const LEARN_WORDS_ROUTE = '/learn-words'
+export const LEARN_WORDS_ROUTE = '/learn'
 export const MENU_ROUTE = '/menu'
 export const ADD_WORD_ROUTE = '/add-word'
 export const PROFILE_ROUTE = '/profile'
+export const LEARN_NEW_ROUTE = '/learn/new'
+export const LEARN_REPEAT_ROUTE = '/learn/repeat'
 
 export const formAddWordProps = {
     word: {
