@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import React from 'react'
 
-const WordRank = ({ word }) => {
+const WordRank = ({ word, countRepeat = 0 }) => {
     return (
         <Box
             sx={{
@@ -16,7 +16,7 @@ const WordRank = ({ word }) => {
                 borderRadius: '10px',
             }}
         >
-            {word.tittle}
+            {word.tittle} {countRepeat ? `(${countRepeat})` : null}
         </Box>
     )
 }

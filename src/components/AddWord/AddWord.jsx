@@ -16,7 +16,7 @@ import MyInput from './MyInput'
 import MyAlertDialogSlide from '../MyAlertDialogSlide'
 import {
     collectionNameWords,
-    formAddWordProps,
+    fieldsData,
     knowWord,
     WORDS_ROUTE,
 } from '../../utils/consts'
@@ -39,7 +39,7 @@ const AddWord = ({ mobile }) => {
 
     const watchFields = watch(['word', 'translation'])
 
-    const { word, translation, transcription } = formAddWordProps
+    const { word, translation, transcription } = fieldsData
 
     const onSubmit = (data) => {
         if (mobile) {

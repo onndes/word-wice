@@ -77,7 +77,10 @@ const Body = ({
                                     {row.translation}
                                 </TableCell>
                                 <TableCell align="left">
-                                    <WordRank word={knowWord[row.knowledge]} />
+                                    <WordRank
+                                        word={knowWord[row.knowledge]}
+                                        countRepeat={row.countRepeat}
+                                    />
                                 </TableCell>
                                 <TableCell align="left">
                                     {row.transcription}

@@ -7,7 +7,7 @@ export const PROFILE_ROUTE = '/profile'
 export const LEARN_NEW_ROUTE = '/learn/new'
 export const LEARN_REPEAT_ROUTE = '/learn/repeat'
 
-export const formAddWordProps = {
+export const fieldsData = {
     word: {
         label: 'Word',
         name: 'word',

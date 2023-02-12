@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { fieldsData } from '../../../utils/consts'
 import { variantDelDup } from '../../../utils/handleDuplicateWords'
 import { setStatus } from '../../../utils/handleStatus'
 import { setSettings } from './settingsAppAsync'
@@ -14,6 +15,7 @@ const initialState = {
     user: {
         recommendForLearn: +localStorage.getItem('recommendForLearn') || 5,
         variantDelDuplicate: variantDelDup.data,
+        show: fieldsData.translation.name
     },
     isOnline: true,
     status: [],

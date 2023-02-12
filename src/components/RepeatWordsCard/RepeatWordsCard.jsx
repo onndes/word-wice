@@ -7,8 +7,8 @@ import {
     updateCountRepeat,
 } from '../../redux/slices/wordsSlice/wordsAsync'
 import NoWords from './NoWords'
-import TranslationBlock from './TranslationBlock'
-import WordBlock from './WordBlock'
+import VisibleWordBlock from './VisibleWordBlock'
+import HiddenWordBlock from './HiddenWordBlock'
 import { defineNextKnow } from '../../utils/defineNextKnow'
 import {
     setCurrentWordIdx,
@@ -18,6 +18,7 @@ import {
 import useMyTheme from '../../hooks/useMyTheme'
 import { checkTimeStop } from '../../utils/checkTimeStop'
 import Started from './Started'
+import { fieldsData } from '../../utils/consts'
 
 const RepeatWordsCard = () => {
     const dispatch = useDispatch()
@@ -102,16 +103,20 @@ const RepeatWordsCard = () => {
                 }}
             >
                 <Box sx={{ padding: '20px' }}>
-                    <TranslationBlock
+                    <VisibleWordBlock
                         word={repeatWords[currentWordIdx]}
                         isWords={repeatWords.length > 0}
+                        title={fieldsData.translation.label}
+                        show={fieldsData.translation.name}
                     />
                     <Divider light />
-                    <WordBlock
+                    <HiddenWordBlock
                         word={repeatWords[currentWordIdx]}
                         isWords={repeatWords.length > 0}
                         visibility={visibilityTranslate}
-                        show={showTranslate}
+                        onVisible={showTranslate}
+                        title={fieldsData.word.name}
+                        show={fieldsData.word.name}
                     />
                     <Divider light />
                     <Box

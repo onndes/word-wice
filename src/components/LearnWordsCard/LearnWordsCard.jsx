@@ -9,8 +9,8 @@ import {
     updateKnowledgeInProcess,
 } from '../../redux/slices/wordsSlice/wordsAsync'
 import NoWords from './NoWords'
-import TranslationBlock from './TranslationBlock'
-import WordBlock from './WordBlock'
+import VisibleWordBlock from './VisibleWordBlock'
+import HiddenWordBlock from './HiddenWordBlock'
 import { shuffleArray } from '../../utils/shuffleArray'
 import { defineNextKnow } from '../../utils/defineNextKnow'
 import {
@@ -22,7 +22,7 @@ import {
 import useMyTheme from '../../hooks/useMyTheme'
 import Started from './Started'
 import { checkTimeStop } from '../../utils/checkTimeStop'
-import { knowWord } from '../../utils/consts'
+import { fieldsData, knowWord } from '../../utils/consts'
 
 const LearnWordsCard = ({ method }) => {
     const dispatch = useDispatch()
@@ -33,7 +33,7 @@ const LearnWordsCard = ({ method }) => {
         ({ words }) => words[method]
     )
 
-    const { recommendForLearn } = useSelector(
+    const { recommendForLearn, show } = useSelector(
         ({ settingsApp }) => settingsApp.user
     )
 
@@ -133,6 +133,16 @@ const LearnWordsCard = ({ method }) => {
             />
         )
 
+    const titleHidden =
+        show === fieldsData.word.name
+            ? fieldsData.translation.label
+            : fieldsData.word.label
+
+    const showHidden =
+        show === fieldsData.word.name
+            ? fieldsData.translation.name
+            : fieldsData.word.name
+
     return (
         <Box sx={{ maxWidth: '400px', margin: '0 auto ' }}>
             <Paper
@@ -150,16 +160,20 @@ const LearnWordsCard = ({ method }) => {
                 }}
             >
                 <Box sx={{ padding: '20px' }}>
-                    <TranslationBlock
+                    <VisibleWordBlock
                         word={mixed[currentWordIdx]}
                         isWords={mixed.length > 0}
+                        title={fieldsData[show].label}
+                        show={show}
                     />
                     <Divider light />
-                    <WordBlock
+                    <HiddenWordBlock
                         word={mixed[currentWordIdx]}
                         isWords={mixed.length > 0}
                         visibility={visibilityTranslate}
-                        show={showTranslate}
+                        onVisible={showTranslate}
+                        title={titleHidden}
+                        show={showHidden}
                     />
                     <Divider light />
                     <Box

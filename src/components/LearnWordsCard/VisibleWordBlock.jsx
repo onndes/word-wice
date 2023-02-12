@@ -4,7 +4,7 @@ import useMyTheme from '../../hooks/useMyTheme'
 import { knowWord } from '../../utils/consts'
 import WordRank from '../WordRank'
 
-const TranslationBlock = ({ word, isWords }) => {
+const VisibleWordBlock = ({ word, isWords, title, show }) => {
     const { colors } = useMyTheme()
 
     return (
@@ -18,15 +18,20 @@ const TranslationBlock = ({ word, isWords }) => {
                 }}
             >
                 <Typography mb={1} variant="h6" color={colors.grey[400]}>
-                    Translation:
+                    {title}
                 </Typography>
-                {isWords && <WordRank word={knowWord[word.knowledge]} />}
+                {isWords && (
+                    <WordRank
+                        word={knowWord[word.knowledge]}
+                        countRepeat={word.countRepeat}
+                    />
+                )}
             </Box>
             <Typography ml={1} variant="h3" color="initial">
-                {isWords ? word.translation : 'Loading...'}
+                {isWords ? word[show] : 'Loading...'}
             </Typography>
         </Box>
     )
 }
 
-export default TranslationBlock
+export default VisibleWordBlock

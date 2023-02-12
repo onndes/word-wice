@@ -118,7 +118,10 @@ const CardsWords = () => {
                                 gap={0.4}
                                 minWidth="118px"
                             >
-                                <WordRank word={knowWord[row.knowledge]} />
+                                <WordRank
+                                    word={knowWord[row.knowledge]}
+                                    countRepeat={row.countRepeat}
+                                />
                                 <Typography fontSize="12px" color="lightGrey">
                                     {date}
                                 </Typography>
