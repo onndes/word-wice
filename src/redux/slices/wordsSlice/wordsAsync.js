@@ -170,12 +170,69 @@ export const submitWordsForLearned = createAsyncThunk(
             await dispatch(
                 addWords({
                     collectionName: collectionNameWords.LEARNED,
-                    word: { ...data.word, knowledge: data.knowledge },
+                    word: {
+                        ...data.word,
+                        knowledge: data.knowledge,
+                        dateChange: Timestamp.fromDate(new Date()),
+                    },
                 })
             )
-            if (data.isLast) {
-                // dispatch(fetchWords([collectionNameWords.IN_PROCESS]))
-            }
+            return data
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e)
+        }
+    }
+)
+
+export const updateCountRepeat = createAsyncThunk(
+    'words/updateCountRepeat',
+    async (data, { thunkAPI, dispatch }) => {
+        try {
+            await dispatch(
+                deleteWords({
+                    collectionName: collectionNameWords.LEARNED,
+                    words: [data.word],
+                })
+            )
+            await dispatch(
+                addWords({
+                    collectionName: collectionNameWords.LEARNED,
+                    word: {
+                        ...data.word,
+                        countRepeat: data.countRepeat,
+                        dateChange: Timestamp.fromDate(new Date()),
+                    },
+                })
+            )
+
+            return data
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e)
+        }
+    }
+)
+export const learnedWordDropToInProgress = createAsyncThunk(
+    'words/learnedWordDropToInProgress',
+    async (data, { thunkAPI, dispatch }) => {
+        try {
+            await dispatch(
+                deleteWords({
+                    collectionName: collectionNameWords.LEARNED,
+                    words: [data.word],
+                })
+            )
+            await dispatch(
+                addWords({
+                    collectionName: collectionNameWords.IN_PROCESS,
+                    word: {
+                        ...data.word,
+                        countRepeat: data.countRepeat,
+                        knowledge: data.knowledge,
+                        dateChange: Timestamp.fromDate(new Date()),
+                    },
+                })
+            )
+
             return data
         } catch (e) {
             return thunkAPI.rejectWithValue(e)

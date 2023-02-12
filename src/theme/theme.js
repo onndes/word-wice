@@ -82,7 +82,7 @@ export const tokens = (mode) => ({
                   800: '#3d244e',
                   900: '#1f1227',
               },
-              purpleTAccent: {
+              black: {
                   100: '#fefefecf',
                   200: '#fdfcfe9e',
                   300: '#faf9fc6e',

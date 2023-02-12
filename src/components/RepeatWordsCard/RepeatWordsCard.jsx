@@ -4,73 +4,52 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import {
     learnedWordDropToInProgress,
-    submitWordsForLearned,
     updateCountRepeat,
-    updateKnowledgeInProcess,
 } from '../../redux/slices/wordsSlice/wordsAsync'
 import NoWords from './NoWords'
 import TranslationBlock from './TranslationBlock'
 import WordBlock from './WordBlock'
-import { shuffleArray } from '../../utils/shuffleArray'
 import { defineNextKnow } from '../../utils/defineNextKnow'
 import {
-    setCheckWords,
     setCurrentWordIdx,
-    setMixedWords,
+    setRepeatWord,
     setStarted,
 } from '../../redux/slices/wordsSlice/wordsSlice'
 import useMyTheme from '../../hooks/useMyTheme'
-import Started from './Started'
 import { checkTimeStop } from '../../utils/checkTimeStop'
-import { knowWord } from '../../utils/consts'
+import Started from './Started'
 
-const LearnWordsCard = ({ method }) => {
+const RepeatWordsCard = () => {
     const dispatch = useDispatch()
     const { colors } = useMyTheme()
 
-    const inProcessWords = useSelector(({ words }) => words.inProcessWords)
-    const { mixed, currentWordIdx, checkWords, isStarted } = useSelector(
-        ({ words }) => words[method]
+    const learnedWords = useSelector(({ words }) => words.learnedWords)
+    const { repeatWords, isStarted, currentWordIdx } = useSelector(
+        ({ words }) => words.learned
     )
-
-    const { recommendForLearn } = useSelector(
-        ({ settingsApp }) => settingsApp.user
-    )
-
     const [visibilityTranslate, setVisibilityTranslate] = useState(false)
 
-    useEffect(() => {
-        const isMixed = !mixed.length || mixed.length !== inProcessWords.length
-
-        if (currentWordIdx === 0) {
-            if (isMixed) {
-                mixWords()
-            }
-
-            if (inProcessWords.length < recommendForLearn) {
-                dispatch(setCheckWords(true))
-            } else {
-                dispatch(setCheckWords(false))
-            }
-        }
-    }, [inProcessWords])
-
-    const mixWords = () => {
-        if (inProcessWords.length > 0) {
-            const mixWords = shuffleArray(inProcessWords)
-            const readyForStudy = checkTimeStop(mixWords)
-            dispatch(setMixedWords(readyForStudy))
-        }
+    const setWord = () => {
+        if (!learnedWords.length) return
+        const words = checkTimeStop(learnedWords)
+        dispatch(setRepeatWord(words))
     }
 
+    useEffect(() => {
+        const isMixed = !repeatWords.length && !isStarted
+        if (currentWordIdx === 0 && isMixed) {
+            setWord()
+        }
+    }, [learnedWords])
+
     const nextWord = () => {
-        const isLast = mixed.length - 1 === currentWordIdx
+        const isLast = repeatWords.length - 1 === currentWordIdx
         const idx = isLast ? 0 : currentWordIdx + 1
-        dispatch(setCurrentWordIdx({ data: idx, method: 'inProcess' }))
+        dispatch(setCurrentWordIdx({ data: idx, method: 'learned' }))
         setVisibilityTranslate(false)
         if (isLast) {
-            dispatch(setMixedWords([]))
-            dispatch(setStarted({ data: false, method: 'inProcess' }))
+            dispatch(setRepeatWord([]))
+            dispatch(setStarted({ data: false, method: 'learned' }))
         }
     }
 
@@ -79,59 +58,32 @@ const LearnWordsCard = ({ method }) => {
     }
 
     const handleRemembered = () => {
-        const word = mixed[currentWordIdx]
-        const isLast = mixed.length - 1 === currentWordIdx
-        const knowledge = defineNextKnow('next', word.knowledge)
-        const data = { knowledge, word, isLast }
-
-        if (word.knowledge === knowWord.C2.code) {
-            const countRepeat = word.countRepeat + 1
-            dispatch(updateCountRepeat({ word, countRepeat }))
-        } else if (knowledge !== 'C2') {
-            dispatch(updateKnowledgeInProcess(data))
-        } else {
-            dispatch(submitWordsForLearned(data))
-        }
-
+        const word = repeatWords[currentWordIdx]
+        const countRepeat = repeatWords[currentWordIdx].countRepeat + 1
+        dispatch(updateCountRepeat({ word, countRepeat }))
         nextWord()
     }
 
     const handleDonNotKnow = () => {
-        const word = mixed[currentWordIdx]
-        const isLast = mixed.length - 1 === currentWordIdx
-        const knowledge = defineNextKnow('prev', word.knowledge)
+        const word = repeatWords[currentWordIdx]
+        const knowledge = defineNextKnow('prev', repeatWords.knowledge)
         const countRepeat = 0
-        const data = { knowledge, word, isLast, countRepeat }
-
-        if (word.knowledge === knowWord.C2.code) {
-            dispatch(learnedWordDropToInProgress(data))
-        } else {
-            dispatch(updateKnowledgeInProcess(data))
-        }
-
+        const data = { knowledge, word, countRepeat }
+        dispatch(learnedWordDropToInProgress(data))
         nextWord()
     }
 
-    if (!isStarted) {
+    if (!isStarted && repeatWords.length) {
         return (
             <Started
                 handle={() => {
-                    dispatch(setStarted({ data: true, method: 'inProcess' }))
+                    dispatch(setStarted({ data: true, method: 'learned' }))
                 }}
             />
         )
     }
 
-    if (checkWords)
-        return (
-            <NoWords
-                setCheckWords={() => {
-                    dispatch(setCheckWords(false))
-                }}
-                countWords={mixed.length}
-                recommendForLearn={recommendForLearn}
-            />
-        )
+    if (!repeatWords.length) return <NoWords />
 
     return (
         <Box sx={{ maxWidth: '400px', margin: '0 auto ' }}>
@@ -151,13 +103,13 @@ const LearnWordsCard = ({ method }) => {
             >
                 <Box sx={{ padding: '20px' }}>
                     <TranslationBlock
-                        word={mixed[currentWordIdx]}
-                        isWords={mixed.length > 0}
+                        word={repeatWords[currentWordIdx]}
+                        isWords={repeatWords.length > 0}
                     />
                     <Divider light />
                     <WordBlock
-                        word={mixed[currentWordIdx]}
-                        isWords={mixed.length > 0}
+                        word={repeatWords[currentWordIdx]}
+                        isWords={repeatWords.length > 0}
                         visibility={visibilityTranslate}
                         show={showTranslate}
                     />
@@ -169,7 +121,7 @@ const LearnWordsCard = ({ method }) => {
                         sx={{ display: 'flex', gap: '20px' }}
                     >
                         <Button
-                            disabled={!mixed.length}
+                            disabled={!repeatWords}
                             variant="contained"
                             color="primary"
                             onClick={handleRemembered}
@@ -182,7 +134,7 @@ const LearnWordsCard = ({ method }) => {
                             Remembered
                         </Button>
                         <Button
-                            disabled={!mixed.length}
+                            disabled={!repeatWords}
                             variant="contained"
                             color="primary"
                             onClick={handleDonNotKnow}
@@ -201,4 +153,4 @@ const LearnWordsCard = ({ method }) => {
     )
 }
 
-export default LearnWordsCard
+export default RepeatWordsCard

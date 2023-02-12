@@ -1,6 +1,9 @@
 import { knowWord } from './consts'
 
 export const defineNextKnow = (step, currentKey) => {
+    if (currentKey === knowWord.C2.code) {
+        return step === 'next' ? knowWord.C2.code : knowWord.B2.code
+    }
     const keys = Object.keys(knowWord)
     const idx = keys.indexOf(currentKey)
     if (currentKey === keys[1] && step === 'prev') return currentKey

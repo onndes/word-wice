@@ -14,12 +14,23 @@ const initialState = {
     newWords: [],
     inProcessWords: [],
     learnedWords: [],
-    mixedWords: [],
+    inProcess: {
+        mixed: [],
+        currentWordIdx: 0,
+        readyWordCount: 0,
+        isStarted: false,
+        checkWords: false,
+    },
+    learned: {
+        mixed: [],
+        repeatWords: [],
+        currentWordIdx: 0,
+        readyWordCount: 0,
+        isStarted: false,
+        checkWords: false,
+    },
+
     status: [],
-    currentWordIdx: 0,
-    readyForStudyCount: 0,
-    isStarted: false,
-    checkWords: false,
 }
 
 const wordsSlice = createSlice({
@@ -28,22 +39,26 @@ const wordsSlice = createSlice({
     reducers: {
         resetStateWords: () => initialState,
         setMixedWords(state, { payload }) {
-            state.mixedWords = payload
+            state.inProcess.mixed = payload
         },
         setCurrentWordIdx(state, { payload }) {
-            state.currentWordIdx = payload
+            state[payload.method].currentWordIdx = payload.data
         },
         setWords(state, { payload }) {
             state[payload.nameCollection] = payload.words
         },
         setCheckWords(state, { payload }) {
-            state.checkWords = payload
+            state.inProcess.checkWords = payload
         },
-        setProcessWords(state, { payload }) {
-            state.inProcessWords = payload
-        },
+
         setStarted(state, { payload }) {
-            state.isStarted = payload
+            state[payload.method].isStarted = payload.data
+        },
+        setReadyForStudyAndRepeat(state, { payload }) {
+            state[payload.method].readyWordCount = payload.count
+        },
+        setRepeatWord(state, { payload }) {
+            state.learned.repeatWords = payload
         },
         handleStatus(state, { payload }) {
             const data = {
@@ -67,9 +82,6 @@ const wordsSlice = createSlice({
                 })
             }
         },
-        setReadyForStudyCount(state, { payload }) {
-            state.readyForStudyCount = payload
-        },
     },
     extraReducers: (builder) => {
         // addWords
@@ -89,12 +101,6 @@ const wordsSlice = createSlice({
         })
         builder.addCase(deleteWords.fulfilled, (state, action) => {
             setStatus(state, action)
-            // const { collectionName, words } = action.payload
-            // const filteredWords = state[collectionName].filter(({ id }) => {
-            //     return words.find((word) => word.id === id)
-            // })
-            // console.log('s', filteredWords, state[collectionName])
-            // state[collectionName] = filteredWords
         })
         builder.addCase(deleteWords.rejected, (state, action) => {
             setStatus(state, action)
@@ -137,23 +143,15 @@ export const {
     resetStateWords,
     setMixedWords,
     setCurrentWordIdx,
-    setProcessWords,
     setWords,
     setCheckWords,
     setStarted,
     handleStatus,
-    setReadyForStudyCount,
+    setReadyForStudyAndRepeat,
+    setRepeatWord,
 } = wordsSlice.actions
 
 export default wordsSlice.reducer
 
 export const selectStatusWords = (names) => (state) =>
     selectStatus(names, state.words)
-
-export const selectAllWords = () => (state) => {
-    return [
-        ...state.words.newWords,
-        ...state.words.inProcessWords,
-        ...state.words.learnedWords,
-    ]
-}

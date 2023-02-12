@@ -7,6 +7,22 @@ export const checkTimeStop = (words) => {
         const nowDate = Date.now()
         const durationHours = differenceInHours(nowDate, dateChange)
 
+        if (word.knowledge === knowWord.C2.code) {
+            if (word.countRepeat <= 5) {
+                return durationHours > knowWord[word.knowledge].timeStop * 3
+            }
+            if (word.countRepeat > 5 && word.countRepeat <= 10) {
+                return durationHours > knowWord[word.knowledge].timeStop * 14
+            }
+            if (word.countRepeat > 10 && word.countRepeat <= 15) {
+                return durationHours > knowWord[word.knowledge].timeStop * 30
+            }
+            if (word.countRepeat > 15 && word.countRepeat <= 20) {
+                return durationHours > knowWord[word.knowledge].timeStop * 183
+            }
+            return durationHours > knowWord[word.knowledge].timeStop * 365
+        }
+
         if (knowWord[word.knowledge].timeStop) {
             return durationHours > knowWord[word.knowledge].timeStop
         }

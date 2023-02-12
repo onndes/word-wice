@@ -1,7 +1,8 @@
 import React from 'react'
+import RepeatWordsCard from '../../components/RepeatWordsCard/RepeatWordsCard'
 
 const LearnRepeat = () => {
-    return <div>LearnNew</div>
+    return <RepeatWordsCard method="learned" />
 }
 
 export default LearnRepeat

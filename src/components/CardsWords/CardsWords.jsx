@@ -86,17 +86,17 @@ const CardsWords = () => {
                             onClick={(event) => handleClick(event, row)}
                             key={row.id}
                             elevation={1}
-                            sx={{
+                            sx={() => ({
                                 padding: 1,
                                 width: '100%',
                                 mb: 0.3,
                                 background: isItemSelected
-                                    ? colors.primary[600]
+                                    ? colors.primary[500]
                                     : colors.primary[400],
                                 display: 'flex',
                                 gap: 3,
                                 justifyContent: 'space-between',
-                            }}
+                            })}
                         >
                             <Box display="flex" flexDirection="column">
                                 <Typography variant="p" fontSize="16px">
