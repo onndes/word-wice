@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { styled, Tab, Tabs } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 import MenuBook from '@mui/icons-material/MenuBook'
 import School from '@mui/icons-material/School'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -13,7 +14,8 @@ import {
 } from '../../utils/consts'
 import useMyTheme from '../../hooks/useMyTheme'
 
-const TabsCustom = styled(Tabs)(({ theme, mq }) => {
+const TabsCustom = styled(Tabs)(({ theme }) => {
+    const { mq } = useMyTheme()
     return {
         letterSpacing: '.4px',
         '.MuiTab-root': mq
@@ -38,6 +40,7 @@ const tabs = [
 
 const Menu = () => {
     const { mq } = useMyTheme()
+    const { t } = useTranslation()
     const location = useLocation()
     const [value, setValue] = React.useState(0)
 
@@ -52,13 +55,12 @@ const Menu = () => {
             value={value}
             aria-label="tabs"
             variant={mq ? 'fullWidth' : 'standard'}
-            mq={mq}
         >
             {tabs.map((tab, index) => {
                 return (
                     <Tab
                         key={tab.label}
-                        label={tab.label}
+                        label={t(tab.label)}
                         icon={tab.icon}
                         to={tab.to}
                         component={Link}

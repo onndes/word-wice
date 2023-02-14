@@ -1,11 +1,12 @@
 import React from 'react'
 import { Typography, Paper, Container, styled } from '@mui/material'
-import ButtonToggleTheme from '../components/ButtonToggleTheme'
+import ButtonToggleTheme from '../components/MenuComponents/ButtonToggleTheme'
 import LogOut from '../components/LogOut'
 import DisplayWords from '../components/MenuComponents/DisplayWords'
 import useMyTheme from '../hooks/useMyTheme'
 import RecommendForLearn from '../components/MenuComponents/RecommendForLearn'
 import DeleteDuplicate from '../components/MenuComponents/DeleteDuplicate'
+import LanguageSwitcher from '../components/MenuComponents/LanguageSwitcher'
 
 const Title = styled(Typography)(({ theme }) => ({
     marginLeft: theme.spacing(1.5),
@@ -22,7 +23,7 @@ const Block = styled(Paper, { shouldForwardProp: () => ({ elevation: 24 }) })(
 )
 
 const Menu = () => {
-    const { mq } = useMyTheme()
+    const { mq, t } = useMyTheme()
 
     return (
         <Container
@@ -36,27 +37,29 @@ const Menu = () => {
                 gap: 1,
             }}
         >
-            <Title variant="h5">Theme</Title>
+            <Title variant="h5">{t('Application')}</Title>
             <Block elevation={1}>
                 <ButtonToggleTheme />
+                <LanguageSwitcher />
             </Block>
+
             {mq && (
                 <>
-                    <Title variant="h5">Display words</Title>
+                    <Title variant="h5">{t('Display words')}</Title>
                     <Block elevation={1}>
                         <DisplayWords />
                     </Block>
                 </>
             )}
-            <Title variant="h5">Learn</Title>
+            <Title variant="h5">{t('Learn')}</Title>
             <Block elevation={1}>
                 <RecommendForLearn />
             </Block>
-            <Title variant="h5">Synchronization</Title>
+            <Title variant="h5">{t('Synchronization')}</Title>
             <Block elevation={1}>
                 <DeleteDuplicate />
             </Block>
-            <Title variant="h5">Account</Title>
+            <Title variant="h5">{t('Account')}</Title>
             <Block elevation={1}>
                 <LogOut />
             </Block>

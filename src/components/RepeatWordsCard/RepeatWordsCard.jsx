@@ -19,9 +19,11 @@ import { checkTimeStop } from '../../utils/checkTimeStop'
 import Started from '../Started'
 import { fieldsData } from '../../utils/consts'
 import { PaperLearn } from '../PaperLearn'
+import useMyTheme from '../../hooks/useMyTheme'
 
 const RepeatWordsCard = () => {
     const dispatch = useDispatch()
+    const { t } = useMyTheme()
 
     const learnedWords = useSelector(({ words }) => words.learnedWords)
     const { repeatWords, isStarted, currentWordIdx } = useSelector(
@@ -91,7 +93,7 @@ const RepeatWordsCard = () => {
                 <VisibleWordBlock
                     word={repeatWords[currentWordIdx]}
                     isWords={repeatWords.length > 0}
-                    title={fieldsData.translation.label}
+                    title={t(fieldsData.translation.label)}
                     show={fieldsData.translation.name}
                 />
                 <Divider light />
@@ -100,7 +102,7 @@ const RepeatWordsCard = () => {
                     isWords={repeatWords.length > 0}
                     visibility={visibilityTranslate}
                     onVisible={showTranslate}
-                    title={fieldsData.word.name}
+                    title={t(fieldsData.word.label)}
                     show={fieldsData.word.name}
                 />
                 <Divider light />
@@ -126,7 +128,7 @@ const RepeatWordsCard = () => {
                         width: '130px',
                     }}
                 >
-                    Remembered
+                    {t('Remembered')}
                 </Button>
                 <Button
                     disabled={!repeatWords}
@@ -139,7 +141,7 @@ const RepeatWordsCard = () => {
                         width: '130px',
                     }}
                 >
-                    Don{`'`}t know
+                    {t(`Don't know`)}
                 </Button>
             </Box>
         </PaperLearn>

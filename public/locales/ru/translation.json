@@ -1,0 +1,63 @@
+{
+    "Profile": "Профиль",
+    "Words": "Слова",
+    "Learn": "Учить",
+    "Menu": "Меню",
+
+    "sync on": "синхр. вкл",
+    "sync off": "синхр. выкл",
+
+    "Words in the dictionary": "Слов в словаре",
+    "New words": "Новых слова",
+    "In the study": "В процессе изучения",
+
+    "New": "Новое",
+    "Learning": "Начатое",
+    "Low": "Низкий",
+    "Medium": "Средний",
+    "Height": "Высокий",
+    "Know": "Знаю",
+    "Learned": "Выучено",
+
+    "Add Word": "Новое слово",
+    "Add": "Добавить",
+    "Back": "Назад",
+    "Start": "Начать",
+
+    "Word": "Слово",
+    "Translation": "Перевод",
+    "Transcription": "Транскрипция",
+
+    "Application": "Приложение",
+    "Display words": "Отображать слова",
+    "Synchronization": "Синхронизация",
+    "Account": "Учетная запись",
+    "Dark mode": "Темный режим",
+    "Language": "Язык",
+    "Sorting": "Сортировка",
+    "Order": "По",
+    "asc": "По возрастанию",
+    "desk": "По Убыванию",
+    "Recommended for study": "Рекомендовано к изучению",
+    "Show": "Показать",
+    "Save word": "Сохранить слово",
+    "Last changes": "Последние изменения",
+    "Higher knowledge": "Высшее знание",
+    "Lower knowledge": "Низшие знания",
+
+    "Translate": "Перевести",
+    "Knowledge": "Знание",
+    "Date created": "Дата создания",
+
+    "Not enough words to study": "Недостаточно слов для изучения",
+    "It takes at least": "Нужно как минимум",
+    "Now": "Сейчас",
+    "Added words": "Добавить слова",
+    "Still continue": "Продолжить учить",
+    "Remembered": "Помню",
+    "Don't know": "Не помню",
+    "Learn new words": "Учить новые слова",
+    "word(s) for study is ready": "слов готово для изучения",
+    "Repeat learned words": "Повторить выученные слова",
+    "word(s) for repeat is ready": "слов готово для повторения"
+}

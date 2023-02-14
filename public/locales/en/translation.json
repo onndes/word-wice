@@ -1,0 +1,63 @@
+{
+    "Profile": "Profile",
+    "Words": "Words",
+    "Learn": "Learn",
+    "Menu": "Menu",
+
+    "sync on": "sync on",
+    "sync off": "sync off",
+
+    "Words in the dictionary": "Words in the dictionary",
+    "New words": "New words",
+    "In the study": "In the study",
+    "Learned": "Learned",
+
+    "New": "New",
+    "Learning": "Learning",
+    "Low": "Low",
+    "Medium": "Medium",
+    "Height": "Height",
+    "Know": "Know",
+
+    "Add Word": "Add Word",
+    "Add": "Добавить",
+    "Back": "Назад",
+    "Start": "Start",
+
+    "Word": "Word",
+    "Translation": "Translation",
+    "Transcription": "Transcription",
+
+    "Application": "Application",
+    "Display words": "Display words",
+    "Synchronization": "Synchronization",
+    "Account": "Account",
+    "Dark mode": "Dark mode",
+    "Language": "Language",
+    "Sorting": "Sorting",
+    "Order": "Order",
+    "asc": "asc",
+    "desk": "desc",
+    "Recommended for study": "Recommended for study",
+    "Show": "Show",
+    "Save word": "Save word",
+    "Last changes": "Last changes",
+    "Higher knowledge": "Higher knowledge",
+    "Lower knowledge": "Lower knowledge",
+
+    "Translate": "Translate",
+    "Knowledge": "Knowledge",
+    "Date created": "Date created",
+
+    "Not enough words to study": "Not enough words to study",
+    "It takes at least": "It takes at least",
+    "Now": "Now",
+    "Added words": "Added words",
+    "Still continue": "Still continue",
+    "Remembered": "Remembered",
+    "Don't know": "Don't know",
+    "Learn new words": "Learn new words",
+    "word(s) for study is ready": "word(s) for study is ready",
+    "Repeat learned words": "Repeat learned words",
+    "word(s) for repeat is ready": "word(s) for repeat is ready"
+}

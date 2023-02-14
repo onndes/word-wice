@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import Typography from '@mui/material/Typography'
 import { Avatar, Paper, styled } from '@mui/material'
@@ -20,6 +21,7 @@ const Item = styled(Paper)(({ theme, bg }) => ({
 }))
 
 const Profile = () => {
+    const { t } = useTranslation()
     const { colors } = useMyTheme()
     const user = useSelector(({ user }) => user)
     const { newWords, inProcessWords, learnedWords } = useSelector(
@@ -58,7 +60,7 @@ const Profile = () => {
             <Grid xs={12} direction="column" justifyContent="flex-start">
                 <Item>
                     <Typography variant="h6" mb={1}>
-                        Words in the dictionary
+                        {t('Words in the dictionary')}
                     </Typography>
                     <Typography variant="h3">{allWords}</Typography>
                 </Item>
@@ -66,7 +68,7 @@ const Profile = () => {
             <Grid xs={4} direction="column" justifyContent="flex-start">
                 <Item bg={colors.mocha[500]}>
                     <Typography variant="h6" mb={1} color="white">
-                        New words
+                        {t('New words')}
                     </Typography>
                     <Typography variant="h3" color="white">
                         {newWordsCount}
@@ -76,7 +78,7 @@ const Profile = () => {
             <Grid xs={4} direction="column" justifyContent="flex-start">
                 <Item bg={colors.emerald[500]}>
                     <Typography variant="h6" mb={1} color="white">
-                        In the study
+                        {t('In the study')}
                     </Typography>
                     <Typography variant="h3" color="white">
                         {inProcessWordsCount}
@@ -86,7 +88,7 @@ const Profile = () => {
             <Grid xs={4} direction="column" justifyContent="flex-start">
                 <Item bg={colors.indigo[500]}>
                     <Typography variant="h6" mb={1} color="white">
-                        Learned
+                        {t('Learned')}
                     </Typography>
                     <Typography variant="h3" color="white">
                         {learnedWordsCount}

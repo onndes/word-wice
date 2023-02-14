@@ -17,6 +17,7 @@ import { handleStatus, setWords } from './redux/slices/wordsSlice/wordsSlice'
 import { subWords } from './redux/slices/wordsSlice/wordsAsync'
 import { subAppSettings } from './redux/slices/settingsAppSlice/settingsAppAsync'
 import './index.css'
+import './i18n'
 
 const unSubs = []
 

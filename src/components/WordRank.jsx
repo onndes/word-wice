@@ -1,5 +1,6 @@
 import { Box, styled } from '@mui/material'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { knowWord } from '../utils/consts'
 
 const BoxCustom = styled(Box)(({ word, bg }) => ({
@@ -17,6 +18,8 @@ const BoxCustom = styled(Box)(({ word, bg }) => ({
 }))
 
 const WordRank = ({ word }) => {
+    const { t } = useTranslation()
+
     const bg =
         // eslint-disable-next-line no-nested-ternary
         word.countRepeat > 5
@@ -26,7 +29,7 @@ const WordRank = ({ word }) => {
             : knowWord[word.knowledge].color
     return (
         <BoxCustom bg={bg} word={word}>
-            {knowWord[word.knowledge].tittle}{' '}
+            {t(knowWord[word.knowledge].tittle)}{' '}
             {word.countRepeat ? `(${word.countRepeat})` : null}
         </BoxCustom>
     )

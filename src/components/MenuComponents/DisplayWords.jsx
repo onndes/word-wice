@@ -1,6 +1,7 @@
 import { Box, FormControl, MenuItem, Select } from '@mui/material'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import useMyTheme from '../../hooks/useMyTheme'
 import {
     setOrder,
     setOrderBy,
@@ -8,6 +9,7 @@ import {
 import { headCells } from '../TableWords/Head'
 
 const DisplayWords = () => {
+    const { t } = useMyTheme()
     const dispatch = useDispatch()
     const { orderBy, order } = useSelector(
         ({ settingsApp }) => settingsApp.wordsList
@@ -37,7 +39,7 @@ const DisplayWords = () => {
                     alignItems: 'center',
                 }}
             >
-                <Box>Sorting</Box>
+                <Box>{t('Sorting')}</Box>
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth size="small" variant="standard">
                         <Select
@@ -50,7 +52,7 @@ const DisplayWords = () => {
                             {headCells.map((el) => {
                                 return (
                                     <MenuItem key={el.id} value={el.id}>
-                                        {el.label}
+                                        {t(el.label)}
                                     </MenuItem>
                                 )
                             })}
@@ -66,7 +68,7 @@ const DisplayWords = () => {
                     alignItems: 'center',
                 }}
             >
-                <Box>Order</Box>
+                <Box>{t('Order')}</Box>
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth size="small" variant="standard">
                         <Select
@@ -76,8 +78,8 @@ const DisplayWords = () => {
                             value={order}
                             onChange={handleChangeOrder}
                         >
-                            <MenuItem value="asc">asc</MenuItem>
-                            <MenuItem value="desc">desk</MenuItem>
+                            <MenuItem value="asc">{t('asc')}</MenuItem>
+                            <MenuItem value="desc">{t('desk')}</MenuItem>
                         </Select>
                     </FormControl>
                 </Box>

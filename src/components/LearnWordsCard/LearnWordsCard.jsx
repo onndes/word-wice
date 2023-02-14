@@ -27,7 +27,7 @@ import useMyTheme from '../../hooks/useMyTheme'
 
 const LearnWordsCard = ({ method }) => {
     const dispatch = useDispatch()
-    const { mq } = useMyTheme()
+    const { t } = useMyTheme()
 
     const inProcessWords = useSelector(({ words }) => words.inProcessWords)
     const { mixed, currentWordIdx, checkWords, isStarted } = useSelector(
@@ -150,7 +150,7 @@ const LearnWordsCard = ({ method }) => {
                 <VisibleWordBlock
                     word={mixed[currentWordIdx]}
                     isWords={mixed.length > 0}
-                    title={fieldsData[show].label}
+                    title={t(fieldsData[show].label)}
                     show={show}
                 />
                 <Divider light />
@@ -159,7 +159,7 @@ const LearnWordsCard = ({ method }) => {
                     isWords={mixed.length > 0}
                     visibility={visibilityTranslate}
                     onVisible={showTranslate}
-                    title={titleHidden}
+                    title={t(titleHidden)}
                     show={showHidden}
                 />
                 <Divider light />
@@ -185,7 +185,7 @@ const LearnWordsCard = ({ method }) => {
                         width: '130px',
                     }}
                 >
-                    Remembered
+                    {t('Remembered')}
                 </Button>
                 <Button
                     disabled={!mixed.length}
@@ -198,7 +198,7 @@ const LearnWordsCard = ({ method }) => {
                         width: '130px',
                     }}
                 >
-                    Don{`'`}t know
+                    {t(`Don't know`)}
                 </Button>
             </Box>
         </PaperLearn>

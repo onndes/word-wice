@@ -1,8 +1,11 @@
 import { Box, Button } from '@mui/material'
 import React from 'react'
+import useMyTheme from '../hooks/useMyTheme'
 import { PaperLearn } from './PaperLearn'
 
 const Started = ({ handle }) => {
+    const { t } = useMyTheme()
+
     return (
         <PaperLearn>
             <Box
@@ -26,7 +29,7 @@ const Started = ({ handle }) => {
                         color: 'white',
                     }}
                 >
-                    Start!
+                    {t('Start')}
                 </Button>
             </Box>
         </PaperLearn>

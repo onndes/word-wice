@@ -4,8 +4,8 @@ import { Controller } from 'react-hook-form'
 import { Box } from '@mui/material'
 import useMyTheme from '../../hooks/useMyTheme'
 
-export default function MyInput({ label, name, control, mobile }) {
-    const { colors } = useMyTheme()
+export default function MyInput({ label, name, control }) {
+    const { colors, mq, t } = useMyTheme()
 
     return (
         <Controller
@@ -13,10 +13,10 @@ export default function MyInput({ label, name, control, mobile }) {
             defaultValue=""
             name={name}
             render={({ field, fieldState: { error } }) => (
-                <Box sx={{ mr: mobile ? 0 : 2, mb: 2 }}>
+                <Box sx={{ mr: mq ? 0 : 2, mb: 2 }}>
                     <TextField
                         variant="filled"
-                        label={label}
+                        label={t(label)}
                         error={!!error}
                         helperText={error ? error.message : null}
                         autoComplete="off"

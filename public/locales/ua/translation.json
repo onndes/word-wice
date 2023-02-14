@@ -1,0 +1,63 @@
+{
+    "Profile": "Профіль",
+    "Words": "Слова",
+    "Learn": "Вчити",
+    "Menu": "Меню",
+
+    "sync on": "синхр. вкл",
+    "sync off": "синхр. вимк",
+
+    "Words in the dictionary": "Слів у словнику",
+    "New words": "Нові слова",
+    "In the study": "У процесі вивчення",
+
+    "New": "Нове",
+    "Learning": "Почате",
+    "Low": "Низький",
+    "Medium": "Середній",
+    "Height": "Високий",
+    "Know": "Знаю",
+    "Learned": "Вивчено",
+
+    "Add Word": "Нове слово",
+    "Add": "Додати",
+    "Back": "Назад",
+    "Start": "Почати",
+
+    "Word": "Слово",
+    "Translation": "Переклад",
+    "Transcription": "Транскрипція",
+
+    "Application": "Додаток",
+    "Display words": "Відображати слова",
+    "Synchronization": "Синхронізація",
+    "Account": "Обліковий запис",
+    "Dark mode": "Темный режим",
+    "Language": "Мова",
+    "Sorting": "Сортування",
+    "Order": "По",
+    "asc": "За зростанням",
+    "desk": "За зменшенням",
+    "Recommended for study": "Рекомендовано до вивчення",
+    "Show": "Показати",
+    "Save word": "Зберегти слово",
+    "Last changes": "Останні зміни",
+    "Higher knowledge": "Вищі знання",
+    "Lower knowledge": "Нижчі знання",
+
+    "Translate": "Перекласти",
+    "Knowledge": "Знання",
+    "Date created": "Дата створення",
+
+    "Not enough words to study": "Not enough words to study",
+    "It takes at least": "It takes at least",
+    "Now": "Now",
+    "Added words": "Added words",
+    "Still continue": "Still continue",
+    "Remembered": "Пам'ятаю",
+    "Don't know": "Не пам'ятаю",
+    "Learn new words": "Вчити нові слова",
+    "word(s) for study is ready": "слов готовий для вивчення",
+    "Repeat learned words": "Повторити вивчені слова",
+    "word(s) for repeat is ready": "слов готові для повторення"
+}

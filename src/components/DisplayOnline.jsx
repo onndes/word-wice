@@ -2,8 +2,10 @@ import { Box, Typography } from '@mui/material'
 import React from 'react'
 import SyncIcon from '@mui/icons-material/Sync'
 import SyncDisabledIcon from '@mui/icons-material/SyncDisabled'
+import { useTranslation } from 'react-i18next'
 
 const DisplayOnline = ({ isOnline }) => {
+    const { t } = useTranslation()
     return (
         <Box
             sx={() => ({
@@ -23,7 +25,7 @@ const DisplayOnline = ({ isOnline }) => {
                 lineHeight={1}
                 pt="1px"
             >
-                {isOnline ? 'sync on' : 'sync off'}
+                {isOnline ? t('sync on') : t('sync off')}
             </Typography>
         </Box>
     )

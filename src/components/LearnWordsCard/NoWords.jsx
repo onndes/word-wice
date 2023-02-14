@@ -3,11 +3,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { WORDS_ROUTE } from '../../utils/consts'
 import { PaperLearn } from '../PaperLearn'
-import { tokens } from '../../theme/theme'
+import useMyTheme from '../../hooks/useMyTheme'
 
 const CustomButton = styled(Button)(({ theme, mbg }) => {
-    const colors = tokens(theme.palette.mode)
-
+    const { colors } = useMyTheme()
     const bgRed = mbg === 'red' && colors.redAccent[500]
     const bgRedHover = mbg === 'red' && colors.redAccent[600]
     const bgGreen = mbg === 'green' && colors.greenAccent[600]
@@ -30,20 +29,23 @@ const CustomButton = styled(Button)(({ theme, mbg }) => {
 })
 
 const NoWords = ({ setCheckWords, countWords, recommendForLearn }) => {
+    const { t } = useMyTheme()
     return (
         <PaperLearn>
             <Box mb={9} textAlign="center">
                 <Typography variant="h4" mb={1}>
-                    Not enough words to study
+                    {t('Not enough words to study')}
                 </Typography>
                 <Typography variant="h4" mb={1}>
-                    It takes at least - {recommendForLearn}
+                    {t('It takes at least')} - {recommendForLearn}
                 </Typography>
-                <Typography variant="h4">Now - {countWords}</Typography>
+                <Typography variant="h4">
+                    {t('Now')} - {countWords}
+                </Typography>
             </Box>
             <Box display="flex" justifyContent="space-between">
                 <CustomButton mbg="green" variant="contained">
-                    <Link to={WORDS_ROUTE}>Added words</Link>
+                    <Link to={WORDS_ROUTE}>{t('Added words')}</Link>
                 </CustomButton>
                 <CustomButton
                     mbg="red"
@@ -51,7 +53,7 @@ const NoWords = ({ setCheckWords, countWords, recommendForLearn }) => {
                     variant="contained"
                     disabled={countWords === 0}
                 >
-                    Still continue
+                    {t('Still continue')}
                 </CustomButton>
             </Box>
         </PaperLearn>

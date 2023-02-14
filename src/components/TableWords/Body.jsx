@@ -13,8 +13,6 @@ import { STATUS } from '../../utils/handleStatus'
 const Body = ({
     order,
     orderBy,
-    page,
-    rowsPerPage,
     isSelected,
     handleClick,
     emptyRows,

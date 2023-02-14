@@ -9,7 +9,7 @@ import useMyTheme from '../../hooks/useMyTheme'
 
 const LearnWords = () => {
     const dispatch = useDispatch()
-    const { colors } = useMyTheme()
+    const { colors, t } = useMyTheme()
     const { inProcess, learned, inProcessWords, learnedWords } = useSelector(
         ({ words }) => words
     )
@@ -57,10 +57,10 @@ const LearnWords = () => {
                 size="large"
             >
                 <Typography variant="p" display="block">
-                    Learn new words
+                    {t('Learn new words')}
                 </Typography>
                 <Typography variant="p">
-                    {inProcess.readyWordCount} word(s) for study is ready
+                    {inProcess.readyWordCount} {t('word(s) for study is ready')}
                 </Typography>
             </Button>
             <Button
@@ -83,10 +83,10 @@ const LearnWords = () => {
                 size="large"
             >
                 <Typography variant="p" display="block">
-                    Repeat learned words
+                    {t('Repeat learned words')}
                 </Typography>
                 <Typography variant="p">
-                    {learned.readyWordCount} word(s) for study is ready
+                    {learned.readyWordCount} {t('word(s) for repeat is ready')}
                 </Typography>
             </Button>
         </Container>

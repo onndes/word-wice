@@ -20,8 +20,10 @@ import {
     knowWord,
     WORDS_ROUTE,
 } from '../../utils/consts'
+import useMyTheme from '../../hooks/useMyTheme'
 
-const AddWord = ({ mobile }) => {
+const AddWord = () => {
+    const { mq, t } = useMyTheme()
     const dispatch = useDispatch()
     const [formData, setFormData] = useState(null)
 
@@ -42,7 +44,7 @@ const AddWord = ({ mobile }) => {
     const { word, translation, transcription } = fieldsData
 
     const onSubmit = (data) => {
-        if (mobile) {
+        if (mq) {
             redirect(WORDS_ROUTE)
         }
         setFormData(data)
@@ -117,17 +119,17 @@ const AddWord = ({ mobile }) => {
             width="100%"
             sx={{
                 '& .MuiTextField-root': {
-                    m: mobile ? 0 : 1,
+                    m: mq ? 0 : 1,
                     ml: 0,
                 },
                 display: 'flex',
                 alignItems: 'top',
-                flexDirection: mobile ? 'column' : 'row',
+                flexDirection: mq ? 'column' : 'row',
             }}
             onSubmit={handleSubmit((data) => onSubmit(data))}
         >
             <MyInput
-                mobile={mobile}
+                mq={mq}
                 control={control}
                 label={word.label}
                 name={word.name}
@@ -138,9 +140,10 @@ const AddWord = ({ mobile }) => {
                     mb: 2,
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'space-between',
+                    justifyContent: mq ? 'center' : 'space-between',
                 }}
                 alignItems="center"
+                justifyContent="center"
             >
                 <IconButton
                     disabled={activeButtonTranslate || !isOnline}
@@ -152,49 +155,47 @@ const AddWord = ({ mobile }) => {
                 </IconButton>
             </Box>
             <MyInput
-                mobile={mobile}
                 control={control}
                 label={translation.label}
                 name={translation.name}
             />
             <MyInput
-                mobile={mobile}
                 control={control}
                 label={transcription.label}
                 name={transcription.name}
             />
 
             <Box sx={{ display: 'flex', gap: 3 }}>
+                {mq && (
+                    <Button
+                        component={Link}
+                        to={WORDS_ROUTE}
+                        color="secondary"
+                        variant="contained"
+                        type="submit"
+                        sx={{
+                            height: '50px',
+                            width: mq ? '100%' : '140px',
+                            fontSize: '18px',
+                            mt: '10px',
+                        }}
+                    >
+                        {t('Back')}
+                    </Button>
+                )}
                 <Button
                     color="secondary"
                     variant="contained"
                     type="submit"
                     sx={() => ({
                         height: '50px',
-                        width: mobile ? '100%' : '140px',
+                        width: mq ? '100%' : '140px',
                         fontSize: '18px',
                         mt: '10px',
                     })}
                 >
-                    ADD
+                    {t('Add')}
                 </Button>
-                {mobile && (
-                    <Button
-                        component={Link}
-                        to={WORDS_ROUTE}
-                        color="secondary"
-                        variant="outlined"
-                        type="submit"
-                        sx={{
-                            height: '50px',
-                            width: mobile ? '100%' : '140px',
-                            fontSize: '18px',
-                            mt: '10px',
-                        }}
-                    >
-                        BACK
-                    </Button>
-                )}
             </Box>
 
             <MyAlertDialogSlide

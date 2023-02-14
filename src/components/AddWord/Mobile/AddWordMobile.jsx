@@ -5,7 +5,7 @@ import { ADD_WORD_ROUTE } from '../../../utils/consts'
 import useMyTheme from '../../../hooks/useMyTheme'
 
 const AddWordMobile = () => {
-    const { theme } = useMyTheme()
+    const { theme, t } = useMyTheme()
 
     return (
         <Box
@@ -32,7 +32,7 @@ const AddWordMobile = () => {
                     backdropFilter: 'blur(4px)',
                 }}
             >
-                Add Word
+                {t('Add Word')}
             </Button>
         </Box>
     )

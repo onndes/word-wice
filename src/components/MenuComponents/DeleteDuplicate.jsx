@@ -1,10 +1,12 @@
 import { Box, FormControl, MenuItem, Select } from '@mui/material'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import useMyTheme from '../../hooks/useMyTheme'
 import { setSettings } from '../../redux/slices/settingsAppSlice/settingsAppAsync'
 
 const DeleteDuplicate = () => {
     const dispatch = useDispatch()
+    const { t } = useMyTheme()
     const { variantDelDuplicate } = useSelector(
         ({ settingsApp }) => settingsApp.user
     )
@@ -34,7 +36,7 @@ const DeleteDuplicate = () => {
                     alignItems: 'center',
                 }}
             >
-                <Box>Save word: </Box>
+                <Box>{t('Save word')}</Box>
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth size="small" variant="standard">
                         <Select
@@ -48,13 +50,13 @@ const DeleteDuplicate = () => {
                             }}
                         >
                             <MenuItem value="lastUpdateWords">
-                                Last changes
+                                {t('Last changes')}
                             </MenuItem>
                             <MenuItem value="higherKnowledge">
-                                Higher knowledge
+                                {t('Higher knowledge')}
                             </MenuItem>
                             <MenuItem value="lowerKnowledge">
-                                Lower knowledge
+                                {t('Lower knowledge')}
                             </MenuItem>
                         </Select>
                     </FormControl>

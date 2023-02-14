@@ -6,15 +6,12 @@ import Paper from '@mui/material/Paper'
 import Switch from '@mui/material/Switch'
 import Table from '@mui/material/Table'
 import TableContainer from '@mui/material/TableContainer'
-import TablePagination from '@mui/material/TablePagination'
 import Body from './Body'
 import MyToolbar from './MyToolbar'
 import Head from './Head'
 import {
     setOrder,
     setOrderBy,
-    setPage,
-    setRowsPerPage,
     setSelected,
 } from '../../redux/slices/settingsAppSlice/settingsAppSlice'
 import {
@@ -87,15 +84,6 @@ export default function TableWords() {
     }
 
     const handleClearSelected = () => dispatch(setSelected([]))
-
-    const handleChangePage = (_, newPage) => {
-        dispatch(setPage(newPage))
-    }
-
-    const handleChangeRowsPerPage = (event) => {
-        dispatch(setRowsPerPage(parseInt(event.target.value, 10)))
-        dispatch(setPage(0))
-    }
 
     const handleChangeDense = (event) => {
         setDense(event.target.checked)

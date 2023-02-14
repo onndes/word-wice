@@ -1,11 +1,13 @@
 import { Box, FormControl, MenuItem, Select } from '@mui/material'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import useMyTheme from '../../hooks/useMyTheme'
 import { setSettings } from '../../redux/slices/settingsAppSlice/settingsAppAsync'
 import { fieldsData } from '../../utils/consts'
 
 const RecommendForLearn = () => {
     const dispatch = useDispatch()
+    const { t } = useMyTheme()
     const { recommendForLearn, show } = useSelector(
         ({ settingsApp }) => settingsApp.user
     )
@@ -45,7 +47,7 @@ const RecommendForLearn = () => {
                     alignItems: 'center',
                 }}
             >
-                <Box>Recommended for study</Box>
+                <Box>{t('Recommended for study')}</Box>
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth size="small" variant="standard">
                         <Select
@@ -74,7 +76,7 @@ const RecommendForLearn = () => {
                     alignItems: 'center',
                 }}
             >
-                <Box>Show</Box>
+                <Box>{t("Show")}</Box>
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth size="small" variant="standard">
                         <Select
@@ -85,10 +87,10 @@ const RecommendForLearn = () => {
                             onChange={handleChangeShow}
                         >
                             <MenuItem value={fieldsData.translation.name}>
-                                {fieldsData.translation.label}
+                                {t(fieldsData.translation.label)}
                             </MenuItem>
                             <MenuItem value={fieldsData.word.name}>
-                                {fieldsData.word.label}
+                                {t(fieldsData.word.label)}
                             </MenuItem>
                         </Select>
                     </FormControl>
