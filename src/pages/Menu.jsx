@@ -2,7 +2,6 @@ import React from 'react'
 import { Typography, Paper, Container, styled } from '@mui/material'
 import ButtonToggleTheme from '../components/ButtonToggleTheme'
 import LogOut from '../components/LogOut'
-import { tokens } from '../theme/theme'
 import DisplayWords from '../components/MenuComponents/DisplayWords'
 import useMyTheme from '../hooks/useMyTheme'
 import RecommendForLearn from '../components/MenuComponents/RecommendForLearn'
@@ -10,14 +9,15 @@ import DeleteDuplicate from '../components/MenuComponents/DeleteDuplicate'
 
 const Title = styled(Typography)(({ theme }) => ({
     marginLeft: theme.spacing(1.5),
-    color: 'GrayText',
+    color: theme.palette.text.secondary,
 }))
 
 const Block = styled(Paper, { shouldForwardProp: () => ({ elevation: 24 }) })(
     ({ theme }) => ({
         padding: theme.spacing(1.5),
         width: '100%',
-        background: tokens(theme.palette.mode).primary[400],
+        backgroundColor: theme.palette.background.main,
+        color: theme.palette.text.primary,
     })
 )
 

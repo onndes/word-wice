@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, colors, IconButton, Tooltip, Typography } from '@mui/material'
+import { Box, IconButton, Tooltip, Typography } from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 
 const HiddenWordBlock = ({
@@ -12,11 +12,11 @@ const HiddenWordBlock = ({
 }) => {
     return (
         <Box mt={2} mb={2} ml={1}>
-            <Typography mb={1} variant="h6" color={colors.grey[400]}>
+            <Typography mb={1} variant="h6" color="text.secondary">
                 {title}
             </Typography>
             {visibility ? (
-                <Typography ml={1} variant="h3" color="initial">
+                <Typography ml={1} variant="h3" color="text.primary">
                     {isWords ? word[show] : 'Loading...'}
                 </Typography>
             ) : (

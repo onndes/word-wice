@@ -56,7 +56,11 @@ const Head = (props) => {
     }
 
     return (
-        <TableHead>
+        <TableHead
+            sx={(theme) => ({
+                backgroundColor: theme.palette.background.secondary,
+            })}
+        >
             <TableRow>
                 <TableCell padding="checkbox">
                     <Checkbox

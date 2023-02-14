@@ -145,7 +145,7 @@ const AddWord = ({ mobile }) => {
                 <IconButton
                     disabled={activeButtonTranslate || !isOnline}
                     aria-label="translate"
-                    color="secondary"
+                    color="primary"
                     onClick={handleClickButtonTranslate}
                 >
                     <GTranslateIcon />
@@ -169,12 +169,12 @@ const AddWord = ({ mobile }) => {
                     color="secondary"
                     variant="contained"
                     type="submit"
-                    sx={{
+                    sx={() => ({
                         height: '50px',
                         width: mobile ? '100%' : '140px',
                         fontSize: '18px',
                         mt: '10px',
-                    }}
+                    })}
                 >
                     ADD
                 </Button>

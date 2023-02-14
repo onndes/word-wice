@@ -1,12 +1,8 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
-import useMyTheme from '../../hooks/useMyTheme'
-import { knowWord } from '../../utils/consts'
-import WordRank from '../WordRank'
+import WordRank from './WordRank'
 
 const VisibleWordBlock = ({ word, isWords, title, show }) => {
-    const { colors } = useMyTheme()
-
     return (
         <Box mb={2} ml={1}>
             <Box
@@ -17,17 +13,12 @@ const VisibleWordBlock = ({ word, isWords, title, show }) => {
                     justifyContent: 'space-between',
                 }}
             >
-                <Typography mb={1} variant="h6" color={colors.grey[400]}>
+                <Typography mb={1} variant="h6" color="text.secondary">
                     {title}
                 </Typography>
-                {isWords && (
-                    <WordRank
-                        word={knowWord[word.knowledge]}
-                        countRepeat={word.countRepeat}
-                    />
-                )}
+                {isWords && <WordRank word={word} />}
             </Box>
-            <Typography ml={1} variant="h3" color="initial">
+            <Typography ml={1} variant="h3" color="text.primary">
                 {isWords ? word[show] : 'Loading...'}
             </Typography>
         </Box>

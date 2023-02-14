@@ -5,7 +5,7 @@ import { ADD_WORD_ROUTE } from '../../../utils/consts'
 import useMyTheme from '../../../hooks/useMyTheme'
 
 const AddWordMobile = () => {
-    const { colors } = useMyTheme()
+    const { theme } = useMyTheme()
 
     return (
         <Box
@@ -25,10 +25,11 @@ const AddWordMobile = () => {
                 color="secondary"
                 size="large"
                 sx={{
-                    color: colors.grey[800],
                     fontWeight: 600,
-                    borderRadius: '25px',
-                    boxShadow: `0px 0px 20px 5px ${colors.greenAccent[800]}`,
+                    borderRadius: '5px',
+                    boxShadow: 
+                      `0px 0px 10px 2px ${theme.palette.secondary.main}`,
+                    backdropFilter: 'blur(4px)',
                 }}
             >
                 Add Word

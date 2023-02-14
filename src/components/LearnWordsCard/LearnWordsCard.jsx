@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Paper, Button, Divider } from '@mui/material'
+import { Box, Button, Divider } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -9,8 +9,8 @@ import {
     updateKnowledgeInProcess,
 } from '../../redux/slices/wordsSlice/wordsAsync'
 import NoWords from './NoWords'
-import VisibleWordBlock from './VisibleWordBlock'
-import HiddenWordBlock from './HiddenWordBlock'
+import VisibleWordBlock from '../VisibleWordBlock'
+import HiddenWordBlock from '../HiddenWordBlock'
 import { shuffleArray } from '../../utils/shuffleArray'
 import { defineNextKnow } from '../../utils/defineNextKnow'
 import {
@@ -19,14 +19,13 @@ import {
     setMixedWords,
     setStarted,
 } from '../../redux/slices/wordsSlice/wordsSlice'
-import useMyTheme from '../../hooks/useMyTheme'
-import Started from './Started'
+import Started from '../Started'
 import { checkTimeStop } from '../../utils/checkTimeStop'
 import { fieldsData, knowWord } from '../../utils/consts'
+import { PaperLearn } from '../PaperLearn'
 
 const LearnWordsCard = ({ method }) => {
     const dispatch = useDispatch()
-    const { colors } = useMyTheme()
 
     const inProcessWords = useSelector(({ words }) => words.inProcessWords)
     const { mixed, currentWordIdx, checkWords, isStarted } = useSelector(
@@ -145,20 +144,7 @@ const LearnWordsCard = ({ method }) => {
 
     return (
         <Box sx={{ maxWidth: '400px', margin: '0 auto ' }}>
-            <Paper
-                sx={{
-                    width: '100%',
-                    mb: 2,
-                    background: colors.primary[400],
-                    maxWidth: '400px',
-                    margin: '0 auto ',
-                    minHeight: '300px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    flex: '1 1 auto',
-                }}
-            >
+            <PaperLearn>
                 <Box sx={{ padding: '20px' }}>
                     <VisibleWordBlock
                         word={mixed[currentWordIdx]}
@@ -177,15 +163,18 @@ const LearnWordsCard = ({ method }) => {
                     />
                     <Divider light />
                     <Box
-                        color="primary"
                         aria-label=""
                         mt={2}
-                        sx={{ display: 'flex', gap: '20px' }}
+                        sx={{
+                            display: 'flex',
+                            gap: '20px',
+                            justifyContent: 'space-between',
+                        }}
                     >
                         <Button
                             disabled={!mixed.length}
                             variant="contained"
-                            color="primary"
+                            color="secondary"
                             onClick={handleRemembered}
                             sx={{
                                 fontSize: '12px',
@@ -198,7 +187,7 @@ const LearnWordsCard = ({ method }) => {
                         <Button
                             disabled={!mixed.length}
                             variant="contained"
-                            color="primary"
+                            color="secondary"
                             onClick={handleDonNotKnow}
                             sx={{
                                 fontSize: '12px',
@@ -210,7 +199,7 @@ const LearnWordsCard = ({ method }) => {
                         </Button>
                     </Box>
                 </Box>
-            </Paper>
+            </PaperLearn>
         </Box>
     )
 }

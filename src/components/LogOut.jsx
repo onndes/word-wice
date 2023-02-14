@@ -24,7 +24,7 @@ const LogOut = () => {
             <Button
                 sx={{
                     backgroundColor: colors.redAccent[600],
-                    color: colors.grey[100],
+                    color: 'white',
                     '&:hover': {
                         backgroundColor: colors.redAccent[700],
                     },

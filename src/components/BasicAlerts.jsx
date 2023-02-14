@@ -18,7 +18,7 @@ export default function TransitionAlerts({
                 position: 'fixed',
                 bottom: '20px',
                 right: '10px',
-                zIndex: 3000
+                zIndex: 3000,
             }}
         >
             <Slide

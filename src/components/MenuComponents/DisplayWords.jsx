@@ -1,7 +1,6 @@
 import { Box, FormControl, MenuItem, Select } from '@mui/material'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import useMyTheme from '../../hooks/useMyTheme'
 import {
     setOrder,
     setOrderBy,
@@ -10,7 +9,6 @@ import { headCells } from '../TableWords/Head'
 
 const DisplayWords = () => {
     const dispatch = useDispatch()
-    const { colors } = useMyTheme()
     const { orderBy, order } = useSelector(
         ({ settingsApp }) => settingsApp.wordsList
     )
@@ -48,17 +46,6 @@ const DisplayWords = () => {
                             id="demo-simple-select"
                             value={orderBy}
                             onChange={handleChange}
-                            sx={{
-                                '& .Mui-focused.MuiSelectLabel-root': {
-                                    color: colors.grey[400],
-                                    fontSize: 14,
-                                },
-                                '& .Mui-focused.MuiSelectLabel-root.Mui-error':
-                                    {
-                                        color: 'red',
-                                        fontSize: 14,
-                                    },
-                            }}
                         >
                             {headCells.map((el) => {
                                 return (
@@ -88,17 +75,6 @@ const DisplayWords = () => {
                             id="demo-simple-select"
                             value={order}
                             onChange={handleChangeOrder}
-                            sx={{
-                                '& .Mui-focused.MuiSelectLabel-root': {
-                                    color: colors.grey[400],
-                                    fontSize: 14,
-                                },
-                                '& .Mui-focused.MuiSelectLabel-root.Mui-error':
-                                    {
-                                        color: 'red',
-                                        fontSize: 14,
-                                    },
-                            }}
                         >
                             <MenuItem value="asc">asc</MenuItem>
                             <MenuItem value="desc">desk</MenuItem>

@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography } from '@mui/material'
+import { alpha, AppBar, Toolbar, Typography } from '@mui/material'
 import Menu from './Menu'
 import useIsOnline from '../../hooks/useIsOnline'
 import LogoBlock from './LogoBlock'
@@ -7,7 +7,7 @@ import useMyTheme from '../../hooks/useMyTheme'
 
 const MyAppBar = () => {
     const isOnline = useIsOnline()
-    const { mq, colors } = useMyTheme()
+    const { mq, theme } = useMyTheme()
     const { email } = useAuth()
 
     return (
@@ -15,16 +15,18 @@ const MyAppBar = () => {
             position="fixed"
             variant="persistent"
             color="primary"
-            sx={{
-                backgroundColor: colors.primary[400],
-                color: colors.primary[100],
+            sx={(theme) => ({
+                backgroundColor: alpha(theme.palette.background.main, 0.85),
+                backdropFilter: 'blur(3px)',
                 top: mq && 'auto',
                 bottom: mq && 0,
-            }}
+            })}
         >
             <Toolbar
                 disableGutters={mq}
                 sx={{
+                    [`border${mq ? 'Top' : 'Bottom'}`]:
+                        theme.palette.mode === 'light' && '1px solid lightGrey',
                     display: 'flex',
                     justifyContent: 'space-between',
                     flexDirection: mq && 'column',
@@ -34,7 +36,13 @@ const MyAppBar = () => {
                 {!mq && <LogoBlock isOnline={isOnline} />}
                 <Menu />
                 {!mq && (
-                    <Typography variant="h6" noWrap component="p" mr={2}>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="p"
+                        mr={2}
+                        color="text.primary"
+                    >
                         {email}
                     </Typography>
                 )}

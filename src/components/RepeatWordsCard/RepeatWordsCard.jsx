@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Paper, Button, Divider } from '@mui/material'
+import { Box, Button, Divider } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -7,22 +7,21 @@ import {
     updateCountRepeat,
 } from '../../redux/slices/wordsSlice/wordsAsync'
 import NoWords from './NoWords'
-import VisibleWordBlock from './VisibleWordBlock'
-import HiddenWordBlock from './HiddenWordBlock'
+import VisibleWordBlock from '../VisibleWordBlock'
+import HiddenWordBlock from '../HiddenWordBlock'
 import { defineNextKnow } from '../../utils/defineNextKnow'
 import {
     setCurrentWordIdx,
     setRepeatWord,
     setStarted,
 } from '../../redux/slices/wordsSlice/wordsSlice'
-import useMyTheme from '../../hooks/useMyTheme'
 import { checkTimeStop } from '../../utils/checkTimeStop'
-import Started from './Started'
+import Started from '../Started'
 import { fieldsData } from '../../utils/consts'
+import { PaperLearn } from '../PaperLearn'
 
 const RepeatWordsCard = () => {
     const dispatch = useDispatch()
-    const { colors } = useMyTheme()
 
     const learnedWords = useSelector(({ words }) => words.learnedWords)
     const { repeatWords, isStarted, currentWordIdx } = useSelector(
@@ -88,20 +87,7 @@ const RepeatWordsCard = () => {
 
     return (
         <Box sx={{ maxWidth: '400px', margin: '0 auto ' }}>
-            <Paper
-                sx={{
-                    width: '100%',
-                    mb: 2,
-                    background: colors.primary[400],
-                    maxWidth: '400px',
-                    margin: '0 auto ',
-                    minHeight: '300px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    flex: '1 1 auto',
-                }}
-            >
+            <PaperLearn>
                 <Box sx={{ padding: '20px' }}>
                     <VisibleWordBlock
                         word={repeatWords[currentWordIdx]}
@@ -153,7 +139,7 @@ const RepeatWordsCard = () => {
                         </Button>
                     </Box>
                 </Box>
-            </Paper>
+            </PaperLearn>
         </Box>
     )
 }

@@ -7,7 +7,6 @@ import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import Slide from '@mui/material/Slide'
 import { Paper } from '@mui/material'
-import useMyTheme from '../hooks/useMyTheme'
 
 const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />
@@ -21,7 +20,6 @@ export default function ConfirmDialog({
     onRefute,
     text = '',
 }) {
-    const { colors } = useMyTheme()
     const handleOnConfirm = () => {
         setOpen(false)
         onConfirm()
@@ -38,16 +36,20 @@ export default function ConfirmDialog({
                 keepMounted
                 onClose={() => setOpen(false)}
                 aria-describedby="alert-dialog-slide-description"
-                PaperProps={{}}
-                sx={{
+                sx={(theme) => ({
                     '& 	.MuiDialog-paper': {
-                        background: colors.primary[400],
+                        background: theme.palette.background.main,
                     },
-                }}
+                })}
             >
-                <DialogTitle>{title}</DialogTitle>
+                <DialogTitle color="text.primary" sx={{ fontSize: '20px' }}>
+                    {title}
+                </DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-slide-description">
+                    <DialogContentText
+                        color="text.primary"
+                        id="alert-dialog-slide-description"
+                    >
                         {text}
                     </DialogContentText>
                 </DialogContent>

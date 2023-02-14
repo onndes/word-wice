@@ -5,9 +5,11 @@ import { Link } from 'react-router-dom'
 import { LEARN_NEW_ROUTE, LEARN_REPEAT_ROUTE } from '../../utils/consts'
 import { setReadyForStudyAndRepeat } from '../../redux/slices/wordsSlice/wordsSlice'
 import { checkTimeStop } from '../../utils/checkTimeStop'
+import useMyTheme from '../../hooks/useMyTheme'
 
 const LearnWords = () => {
     const dispatch = useDispatch()
+    const { colors } = useMyTheme()
     const { inProcess, learned, inProcessWords, learnedWords } = useSelector(
         ({ words }) => words
     )
@@ -35,13 +37,14 @@ const LearnWords = () => {
     return (
         <Container maxWidth="xs">
             <Button
-                sx={(theme) => ({
+                sx={() => ({
                     display: 'block',
                     textAlign: 'center',
                     fontWeight: 600,
-                    backgroundColor: theme.palette.button.default,
+                    color: 'white',
+                    backgroundColor: colors.emerald[500],
                     '&:hover': {
-                        backgroundColor: theme.palette.button.hover,
+                        backgroundColor: colors.emerald[600],
                     },
                     mb: 2,
                     pt: 3,
@@ -53,21 +56,21 @@ const LearnWords = () => {
                 color="primary"
                 size="large"
             >
-                <Typography variant="p" color="initial" display="block">
+                <Typography variant="p" display="block">
                     Learn new words
                 </Typography>
-                <Typography variant="p" color="initial">
+                <Typography variant="p">
                     {inProcess.readyWordCount} word(s) for study is ready
                 </Typography>
             </Button>
             <Button
-                sx={(theme) => ({
+                sx={() => ({
                     display: 'block',
-                    backgroundColor: theme.palette.purple.default,
+                    backgroundColor: colors.indigo[500],
                     textAlign: 'center',
                     fontWeight: 600,
                     '&:hover': {
-                        backgroundColor: theme.palette.purple.hover,
+                        backgroundColor: colors.indigo[600],
                     },
                     mb: 2,
                     pt: 3,
@@ -79,10 +82,10 @@ const LearnWords = () => {
                 color="primary"
                 size="large"
             >
-                <Typography variant="p" color="initial" display="block">
+                <Typography variant="p" display="block">
                     Repeat learned words
                 </Typography>
-                <Typography variant="p" color="initial">
+                <Typography variant="p">
                     {learned.readyWordCount} word(s) for study is ready
                 </Typography>
             </Button>

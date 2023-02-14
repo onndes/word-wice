@@ -1,19 +1,20 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
-import CircleIcon from '@mui/icons-material/Circle'
+import SyncIcon from '@mui/icons-material/Sync'
+import SyncDisabledIcon from '@mui/icons-material/SyncDisabled'
 
 const DisplayOnline = ({ isOnline }) => {
     return (
         <Box
-            sx={{
-                color: isOnline ? 'lightGreen' : 'red',
+            sx={() => ({
+                color: isOnline ? 'green' : 'red',
                 display: 'flex',
                 alignItems: 'center',
                 textAlign: 'center',
                 gap: 0.5,
-            }}
+            })}
         >
-            <CircleIcon fontSize="" />
+            {isOnline ? <SyncIcon /> : <SyncDisabledIcon />}
             <Typography
                 fontSize="13px"
                 noWrap
@@ -22,7 +23,7 @@ const DisplayOnline = ({ isOnline }) => {
                 lineHeight={1}
                 pt="1px"
             >
-                {isOnline ? 'online' : 'offline'}
+                {isOnline ? 'sync on' : 'sync off'}
             </Typography>
         </Box>
     )

@@ -29,7 +29,7 @@ import ConfirmDialog from '../ConfirmDialog'
 
 export default function TableWords() {
     const dispatch = useDispatch()
-    const { colors, mq } = useMyTheme()
+    const { mq } = useMyTheme()
     const { newWords, inProcessWords, learnedWords } = useSelector(
         ({ words }) => words
     )
@@ -163,7 +163,6 @@ export default function TableWords() {
                     width: '100%',
                     mb: 2,
                     mr: 2,
-                    background: colors.primary[400],
                 }}
             >
                 <MyToolbar

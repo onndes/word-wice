@@ -1,15 +1,10 @@
 import { useSelector } from 'react-redux'
-import {
-    AppBar,
-    Toolbar,
-} from '@mui/material'
+import { alpha, AppBar, Toolbar } from '@mui/material'
 import useIsOnline from '../../../hooks/useIsOnline'
 import LogoBlock from '../LogoBlock'
-import useMyTheme from '../../../hooks/useMyTheme'
 import ToolbarWordsCards from './ToolbarWordsCards'
 
 export default function MyAppBarMobile() {
-    const { colors } = useMyTheme()
     const isOnline = useIsOnline()
     const { selected } = useSelector(({ settingsApp }) => settingsApp.wordsList)
 
@@ -18,12 +13,17 @@ export default function MyAppBarMobile() {
             position="fixed"
             variant="persistent"
             color="primary"
-            sx={{
-                backgroundColor: colors.primary[400],
-                color: colors.primary[100],
+            sx={(theme) => ({
+                backgroundColor: alpha(theme.palette.background.main, 0.85),
+                backdropFilter: 'blur(3px)',
+                color: theme.palette.text.primary,
                 height: '60px',
-                zIndex: 1000
-            }}
+                zIndex: 1000,
+                borderBottom:
+                    theme.palette.mode === 'light'
+                        ? '1px solid lightGrey'
+                        : null,
+            })}
         >
             <Toolbar
                 sx={{

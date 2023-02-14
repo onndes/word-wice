@@ -1,12 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Paper, Typography, Container, Box } from '@mui/material'
 import { format } from 'date-fns'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { getComparator, stableSort } from '../../utils/utilsTable'
-import useMyTheme from '../../hooks/useMyTheme'
 import WordRank from '../WordRank'
-import { knowWord } from '../../utils/consts'
 import { setSelected } from '../../redux/slices/settingsAppSlice/settingsAppSlice'
 import { selectStatusWords } from '../../redux/slices/wordsSlice/wordsSlice'
 import { STATUS } from '../../utils/handleStatus'
@@ -14,7 +12,6 @@ import LinearIndeterminate from '../LinearIndeterminate'
 
 const CardsWords = () => {
     const dispatch = useDispatch()
-    const { colors } = useMyTheme()
     const { newWords, inProcessWords, learnedWords } = useSelector(
         ({ words }) => words
     )
@@ -24,9 +21,13 @@ const CardsWords = () => {
         selectStatusWords(['newWords', 'inProcessWords', 'learnedWords'])
     )
 
-    const { rowsPerPage, order, orderBy, selected, page } = useSelector(
+    const { order, orderBy, selected } = useSelector(
         ({ settingsApp }) => settingsApp.wordsList
     )
+
+    useEffect(() => {
+        return () => dispatch(setSelected([]))
+    }, [])
 
     const handleClick = (_, word) => {
         const selectedIndex = selected.indexOf(word)
@@ -72,63 +73,65 @@ const CardsWords = () => {
 
     return (
         <Container maxWidth="sm" disableGutters sx={{ mb: 10 }}>
-            {stableSort(words, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                    const isItemSelected = isSelected(row.id)
+            {stableSort(
+                [...newWords, ...inProcessWords, ...learnedWords],
+                getComparator(order, orderBy)
+            ).map((row) => {
+                const isItemSelected = isSelected(row.id)
 
-                    const date = row.dateCreated
-                        ? format(row.dateCreated.toDate(), 'dd-MM-yyyy hh:mm a')
-                        : 'not data'
+                const date = row.dateCreated
+                    ? format(row.dateCreated.toDate(), 'dd-MM-yyyy hh:mm a')
+                    : 'not data'
 
-                    return (
-                        <Paper
-                            onClick={(event) => handleClick(event, row)}
-                            key={row.id}
-                            elevation={1}
-                            sx={() => ({
-                                padding: 1,
-                                width: '100%',
-                                mb: 0.3,
-                                background: isItemSelected
-                                    ? colors.primary[500]
-                                    : colors.primary[400],
-                                display: 'flex',
-                                gap: 3,
-                                justifyContent: 'space-between',
-                            })}
-                        >
-                            <Box display="flex" flexDirection="column">
-                                <Typography variant="p" fontSize="16px">
-                                    {row.word}
-                                </Typography>
-                                <Typography
-                                    variant="p"
-                                    fontSize="13px"
-                                    color="Highlight"
-                                >
-                                    {row.translation}
-                                </Typography>
-                                <Typography>{row.transcription}</Typography>
-                            </Box>
-                            <Box
-                                display="flex"
-                                flexDirection="column"
-                                alignItems="end"
-                                gap={0.4}
-                                minWidth="118px"
+                return (
+                    <Paper
+                        onClick={(event) => handleClick(event, row)}
+                        key={row.id}
+                        elevation={1}
+                        sx={(theme) => ({
+                            padding: 1,
+                            width: '100%',
+                            mb: 0.5,
+                            backgroundColor: isItemSelected
+                                ? theme.palette.background.default
+                                : theme.palette.background.main,
+                            display: 'flex',
+                            gap: 3,
+                            justifyContent: 'space-between',
+                        })}
+                    >
+                        <Box display="flex" flexDirection="column">
+                            <Typography
+                                variant="p"
+                                fontSize="16px"
+                                color="text.primary"
                             >
-                                <WordRank
-                                    word={knowWord[row.knowledge]}
-                                    countRepeat={row.countRepeat}
-                                />
-                                <Typography fontSize="12px" color="lightGrey">
-                                    {date}
-                                </Typography>
-                            </Box>
-                        </Paper>
-                    )
-                })}
+                                {row.word}
+                            </Typography>
+                            <Typography
+                                variant="p"
+                                fontSize="13px"
+                                color="text.secondary"
+                            >
+                                {row.translation}
+                            </Typography>
+                            <Typography>{row.transcription}</Typography>
+                        </Box>
+                        <Box
+                            display="flex"
+                            flexDirection="column"
+                            alignItems="end"
+                            gap={0.4}
+                            minWidth="118px"
+                        >
+                            <WordRank word={row} />
+                            <Typography fontSize="12px" color="text.secondary">
+                                {date}
+                            </Typography>
+                        </Box>
+                    </Paper>
+                )
+            })}
         </Container>
     )
 }

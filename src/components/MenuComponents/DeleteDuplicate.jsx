@@ -1,12 +1,10 @@
 import { Box, FormControl, MenuItem, Select } from '@mui/material'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import useMyTheme from '../../hooks/useMyTheme'
 import { setSettings } from '../../redux/slices/settingsAppSlice/settingsAppAsync'
 
 const DeleteDuplicate = () => {
     const dispatch = useDispatch()
-    const { colors } = useMyTheme()
     const { variantDelDuplicate } = useSelector(
         ({ settingsApp }) => settingsApp.user
     )
@@ -46,15 +44,7 @@ const DeleteDuplicate = () => {
                             value={variantDelDuplicate}
                             onChange={handleChange}
                             sx={{
-                                '& .Mui-focused.MuiSelectLabel-root': {
-                                    color: colors.grey[400],
-                                    fontSize: 14,
-                                },
-                                '& .Mui-focused.MuiSelectLabel-root.Mui-error':
-                                    {
-                                        color: 'red',
-                                        fontSize: 14,
-                                    },
+                                minWidth: '134px',
                             }}
                         >
                             <MenuItem value="lastUpdateWords">

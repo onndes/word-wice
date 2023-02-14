@@ -61,7 +61,7 @@ function App() {
             setIsAuth(true)
         })
     }, [])
-
+    console.log(theme)
     return (
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>

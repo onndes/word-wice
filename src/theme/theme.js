@@ -16,15 +16,15 @@ export const tokens = (mode) => ({
                   900: '#141414',
               },
               primary: {
-                  100: '#d0d1d5',
-                  200: '#a1a4ab',
-                  300: '#727681',
-                  400: '#1F2A40',
-                  500: '#141b2d',
-                  600: '#101624',
-                  700: '#0c101b',
-                  800: '#080b12',
-                  900: '#040509',
+                  100: '#d6e3f8',
+                  200: '#adc7f1',
+                  300: '#83aceb',
+                  400: '#5a90e4',
+                  500: '#3174dd',
+                  600: '#275db1',
+                  700: '#1d4685',
+                  800: '#142e58',
+                  900: '#0a172c',
               },
               greenAccent: {
                   100: '#dbf5ee',
@@ -59,63 +59,62 @@ export const tokens = (mode) => ({
                   800: '#2a2d64',
                   900: '#151632',
               },
-
-              greenSecondAccent: {
-                  100: '#def0e4',
-                  200: '#bde1c9',
-                  300: '#9cd3ae',
-                  400: '#7bc493',
-                  500: '#5ab578',
-                  600: '#489160',
-                  700: '#366d48',
-                  800: '#244830',
-                  900: '#122418',
+              mocha: {
+                  100: '#eae4e2',
+                  200: '#d4c9c5',
+                  300: '#bfada7',
+                  400: '#a9928a',
+                  500: '#94776d',
+                  600: '#765f57',
+                  700: '#594741',
+                  800: '#3b302c',
+                  900: '#1e1816',
               },
-              purpleAccent: {
-                  100: '#ebdef3',
-                  200: '#d6bde7',
-                  300: '#c29dda',
-                  400: '#ad7cce',
-                  500: '#995bc2',
-                  600: '#7a499b',
-                  700: '#5c3774',
-                  800: '#3d244e',
-                  900: '#1f1227',
+              emerald: {
+                  100: '#ddeae1',
+                  200: '#bcd5c4',
+                  300: '#9abfa6',
+                  400: '#79aa89',
+                  500: '#57956b',
+                  600: '#467756',
+                  700: '#345940',
+                  800: '#233c2b',
+                  900: '#111e15',
               },
-              black: {
-                  100: '#fefefecf',
-                  200: '#fdfcfe9e',
-                  300: '#faf9fc6e',
-                  400: '#f3eff73d',
-                  500: '#7d54a60d',
-                  600: '#0c080f3d',
-                  700: '#0503066e',
-                  800: '#0201039e',
-                  900: '#010101cf',
+              indigo: {
+                  100: '#e3dbe8',
+                  200: '#c7b7d2',
+                  300: '#ac94bb',
+                  400: '#9070a5',
+                  500: '#744c8e',
+                  600: '#5d3d72',
+                  700: '#462e55',
+                  800: '#2e1e39',
+                  900: '#170f1c',
               },
           }
         : {
               grey: {
-                  100: '#141414',
-                  200: '#292929',
-                  300: '#3d3d3d',
-                  400: '#525252',
+                  900: '#141414',
+                  800: '#292929',
+                  700: '#3d3d3d',
+                  600: '#525252',
                   500: '#666666',
-                  600: '#858585',
-                  700: '#a3a3a3',
-                  800: '#c2c2c2',
-                  900: '#e0e0e0',
+                  400: '#858585',
+                  300: '#a3a3a3',
+                  200: '#c2c2c2',
+                  100: '#e0e0e0',
               },
               primary: {
-                  100: '#040509',
-                  200: '#080b12',
-                  300: '#0c101b',
-                  400: '#f2f0f0',
-                  500: '#141b2d',
-                  600: '#1F2A40',
-                  700: '#727681',
-                  800: '#a1a4ab',
-                  900: '#d0d1d5',
+                  100: '#d6e3f8',
+                  200: '#adc7f1',
+                  300: '#83aceb',
+                  400: '#5a90e4',
+                  500: '#3174dd',
+                  600: '#275db1',
+                  700: '#1d4685',
+                  800: '#142e58',
+                  900: '#0a172c',
               },
               greenAccent: {
                   100: '#0f2922',
@@ -150,102 +149,95 @@ export const tokens = (mode) => ({
                   800: '#c3c6fd',
                   900: '#e1e2fe',
               },
-              greenSecondAccent: {
-                  900: '#122418',
-                  800: '#244830',
-                  700: '#366d48',
-                  600: '#489160',
-                  500: '#5ab578',
-                  400: '#7bc493',
-                  300: '#9cd3ae',
-                  200: '#bde1c9',
-                  100: '#def0e4',
+              mocha: {
+                  100: '#eae4e2',
+                  200: '#d4c9c5',
+                  300: '#bfada7',
+                  400: '#a9928a',
+                  500: '#94776d',
+                  600: '#765f57',
+                  700: '#594741',
+                  800: '#3b302c',
+                  900: '#1e1816',
               },
-              purpleAccent: {
-                  900: '#1f1227',
-                  800: '#3d244e',
-                  700: '#5c3774',
-                  600: '#7a499b',
-                  500: '#995bc2',
-                  400: '#ad7cce',
-                  300: '#c29dda',
-                  200: '#d6bde7',
-                  100: '#ebdef3',
+              emerald: {
+                  100: '#ddeae1',
+                  200: '#bcd5c4',
+                  300: '#9abfa6',
+                  400: '#79aa89',
+                  500: '#57956b',
+                  600: '#467756',
+                  700: '#345940',
+                  800: '#233c2b',
+                  900: '#111e15',
+              },
+              indigo: {
+                  100: '#e3dbe8',
+                  200: '#c7b7d2',
+                  300: '#ac94bb',
+                  400: '#9070a5',
+                  500: '#744c8e',
+                  600: '#5d3d72',
+                  700: '#462e55',
+                  800: '#2e1e39',
+                  900: '#170f1c',
               },
           }),
 })
 
 export const themeSettings = (mode) => {
-    const colors = tokens(mode)
+    // const colors = tokens(mode)
     return {
         palette: {
             mode,
             ...(mode === 'dark'
                 ? {
                       primary: {
-                          main: colors.primary[500],
+                          main: '#3174dd',
                       },
                       secondary: {
-                          main: colors.greenAccent[500],
-                      },
-                      neutral: {
-                          dark: colors.grey[700],
-                          main: colors.grey[500],
-                          light: colors.grey[100],
+                          main: 'rgba(30, 80, 160, .8)',
                       },
                       background: {
-                          default: colors.primary[500],
+                          primaryOpacity: 'rgba(32,101, 209, .05)',
+                          default: '#161C24',
+                          main: '#212B36',
+                          paper: '#212B36',
+                          secondary: '#212B36',
                       },
-                      button: {
-                          default: colors.greenSecondAccent[500],
-                          hover: colors.greenSecondAccent[600],
-                      },
-                      purple: {
-                          default: colors.purpleAccent[600],
-                          hover: colors.purpleAccent[700],
+                      text: {
+                          primary: '#dfebf7',
+                          secondary: '#5e6b78',
                       },
                   }
                 : {
                       primary: {
-                          main: colors.primary[100],
+                          main: '#3174dd',
                       },
                       secondary: {
-                          main: colors.greenAccent[500],
-                      },
-                      neutral: {
-                          dark: colors.grey[700],
-                          main: colors.grey[500],
-                          light: colors.grey[100],
+                          main: 'rgba(30, 80, 160, .8)',
                       },
                       background: {
-                          default: '#fcfcfc',
+                          primaryOpacity: 'rgba(32,101, 209, .05)',
+                          default: '#e8edf1',
+                          main: '#ffffff',
+                          paper: '#ffffff',
+                          secondary: '#e8edf1',
                       },
-                      button: {
-                          default: colors.greenSecondAccent[500],
-                          hover: colors.greenSecondAccent[600],
-                      },
-                      purple: {
-                          default: colors.purpleAccent[600],
-                          hover: colors.purpleAccent[700],
+                      text: {
+                          primary: '#212b36',
+                          secondary: '#748290',
                       },
                   }),
         },
         components: {
-            MuiTableHead: {
-                styleOverrides: {
-                    root: {
-                        background:
-                            mode === 'dark' ? colors.primary[500] : 'white',
-                    },
-                },
-            },
-            MuiList: {
-                styleOverrides: {
-                    root: {
-                        background: colors.primary[400],
-                    },
-                },
-            },
+            // MuiTableHead: {
+            //     styleOverrides: {
+            //         root: {
+            //
+            //         },
+            //     },
+            // },
         },
         typography: {
             fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
@@ -283,12 +275,19 @@ export const ColorModeContext = createContext({
 })
 
 export const useMode = () => {
-    const [mode, setMode] = useState('dark')
+    const [mode, setMode] = useState(
+        localStorage.getItem('colorMode') || 'dark'
+    )
 
     const colorMode = useMemo(
         () => ({
-            toggleColorMode: () =>
-                setMode((prev) => (prev === 'light' ? 'dark' : 'light')),
+            toggleColorMode: () => {
+                setMode((prev) => {
+                    const modeOn = prev === 'light' ? 'dark' : 'light'
+                    localStorage.setItem('colorMode', modeOn)
+                    return modeOn
+                })
+            },
         }),
         []
     )

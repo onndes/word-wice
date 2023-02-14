@@ -1,24 +1,11 @@
-import { Box, Button, Paper } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import React from 'react'
-import useMyTheme from '../../hooks/useMyTheme'
+import { PaperLearn } from './PaperLearn'
 
 const Started = ({ handle }) => {
-    const { colors } = useMyTheme()
     return (
         <Box sx={{ maxWidth: '400px', margin: '0 auto ' }}>
-            <Paper
-                sx={{
-                    width: '100%',
-                    mb: 2,
-                    background: colors.primary[400],
-                    maxWidth: '400px',
-                    margin: '0 auto ',
-                    height: '300px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                }}
-            >
+            <PaperLearn>
                 <Box sx={{ padding: '20px' }} textAlign="center">
                     <Button
                         onClick={handle}
@@ -35,7 +22,7 @@ const Started = ({ handle }) => {
                         Start!
                     </Button>
                 </Box>
-            </Paper>
+            </PaperLearn>
         </Box>
     )
 }

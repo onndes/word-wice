@@ -3,13 +3,14 @@ import { useSelector } from 'react-redux'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import Typography from '@mui/material/Typography'
 import { Avatar, Paper, styled } from '@mui/material'
+import useMyTheme from '../hooks/useMyTheme'
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.background.default,
+const Item = styled(Paper)(({ theme, bg }) => ({
+    backgroundColor: bg,
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'center',
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
     marginBottom: theme.spacing(1),
     height: '100%',
     display: 'flex',
@@ -19,6 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }))
 
 const Profile = () => {
+    const { colors } = useMyTheme()
     const user = useSelector(({ user }) => user)
     const { newWords, inProcessWords, learnedWords } = useSelector(
         ({ words }) => words
@@ -30,7 +32,7 @@ const Profile = () => {
     const allWords = newWordsCount + inProcessWordsCount + learnedWordsCount
 
     return (
-        <Grid container spacing={0.5}>
+        <Grid container spacing={0.8}>
             <Grid xs={5}>
                 <Item>
                     <Avatar
@@ -47,50 +49,46 @@ const Profile = () => {
             </Grid>
             <Grid xs={7} direction="column" justifyContent="flex-start">
                 <Item>
-                    <Typography variant="h5" color="initial" mb={1}>
+                    <Typography variant="h5" mb={1}>
                         {user.displayName}
                     </Typography>
-                    <Typography variant="p" color="initial">
-                        {user.email}
-                    </Typography>
+                    <Typography variant="p">{user.email}</Typography>
                 </Item>
             </Grid>
             <Grid xs={12} direction="column" justifyContent="flex-start">
                 <Item>
-                    <Typography variant="h6" color="initial" mb={1}>
+                    <Typography variant="h6" mb={1}>
                         Words in the dictionary
                     </Typography>
-                    <Typography variant="h3" color="initial">
-                        {allWords}
-                    </Typography>
+                    <Typography variant="h3">{allWords}</Typography>
                 </Item>
             </Grid>
             <Grid xs={4} direction="column" justifyContent="flex-start">
-                <Item>
-                    <Typography variant="h6" color="initial" mb={1}>
+                <Item bg={colors.mocha[500]}>
+                    <Typography variant="h6" mb={1} color="white">
                         New words
                     </Typography>
-                    <Typography variant="h3" color="initial">
+                    <Typography variant="h3" color="white">
                         {newWordsCount}
                     </Typography>
                 </Item>
             </Grid>
             <Grid xs={4} direction="column" justifyContent="flex-start">
-                <Item>
-                    <Typography variant="h6" color="initial" mb={1}>
+                <Item bg={colors.emerald[500]}>
+                    <Typography variant="h6" mb={1} color="white">
                         In the study
                     </Typography>
-                    <Typography variant="h3" color="initial">
+                    <Typography variant="h3" color="white">
                         {inProcessWordsCount}
                     </Typography>
                 </Item>
             </Grid>
             <Grid xs={4} direction="column" justifyContent="flex-start">
-                <Item>
-                    <Typography variant="h6" color="initial" mb={1}>
+                <Item bg={colors.indigo[500]}>
+                    <Typography variant="h6" mb={1} color="white">
                         Learned
                     </Typography>
-                    <Typography variant="h3" color="initial">
+                    <Typography variant="h3" color="white">
                         {learnedWordsCount}
                     </Typography>
                 </Item>

@@ -26,39 +26,39 @@ export const knowWord = {
     A0: {
         code: 'A0',
         tittle: 'New',
-        color: '#757575',
+        color: '#d1d1d1',
     },
     A1: {
         code: 'A1',
         tittle: 'Learning',
-        color: '#37474f',
+        color: '#a18c85',
     },
     A2: {
         code: 'A2',
         tittle: 'Low',
-        color: '#afb42b',
+        color: '#517D6B',
     },
     B1: {
         code: 'B1',
         tittle: 'Medium',
-        color: '#fb8c00',
+        color: '#1AB074',
     },
     B2: {
         code: 'B2',
         tittle: 'Height',
-        color: '#43a047',
+        color: '#3bbb3f',
         timeStop: 2,
     },
     C1: {
         code: 'C1',
         tittle: 'Know',
-        color: '#42a5f5',
+        color: '#E673E0',
         timeStop: 24,
     },
     C2: {
         code: 'C2',
         tittle: 'Learned',
-        color: '#5e35b1',
+        color: '#8C1AB0',
         timeStop: 24,
     },
 }

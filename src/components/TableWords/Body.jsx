@@ -7,7 +7,6 @@ import TableBody from '@mui/material/TableBody'
 
 import { getComparator, stableSort } from '../../utils/utilsTable'
 import LinearIndeterminate from '../LinearIndeterminate'
-import { knowWord } from '../../utils/consts'
 import WordRank from '../WordRank'
 import { STATUS } from '../../utils/handleStatus'
 
@@ -77,10 +76,7 @@ const Body = ({
                                     {row.translation}
                                 </TableCell>
                                 <TableCell align="left">
-                                    <WordRank
-                                        word={knowWord[row.knowledge]}
-                                        countRepeat={row.countRepeat}
-                                    />
+                                    <WordRank word={row} />
                                 </TableCell>
                                 <TableCell align="left">
                                     {row.transcription}

@@ -1,26 +1,12 @@
-import { Box, Paper, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React from 'react'
 import MoodIcon from '@mui/icons-material/Mood'
-import useMyTheme from '../../hooks/useMyTheme'
+import { PaperLearn } from '../PaperLearn'
 
 const NoWords = () => {
-    const { colors } = useMyTheme()
-
     return (
         <Box sx={{ maxWidth: '400px', margin: '0 auto ' }}>
-            <Paper
-                sx={{
-                    width: '100%',
-                    mb: 2,
-                    background: colors.primary[400],
-                    maxWidth: '400px',
-                    margin: '0 auto ',
-                    height: '300px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                }}
-            >
+            <PaperLearn>
                 <Box sx={{ padding: '20px' }} textAlign="center">
                     <Box mb={9}>
                         <Typography variant="h4" color="" mb={1}>
@@ -32,7 +18,7 @@ const NoWords = () => {
                         <MoodIcon />
                     </Box>
                 </Box>
-            </Paper>
+            </PaperLearn>
         </Box>
     )
 }

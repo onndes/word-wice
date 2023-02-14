@@ -1,7 +1,6 @@
 import React from 'react'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
-import { alpha } from '@mui/material/styles'
 import Tooltip from '@mui/material/Tooltip'
 import PropTypes from 'prop-types'
 import IconButton from '@mui/material/IconButton'
@@ -15,13 +14,6 @@ const MyToolbar = ({ numSelected, handleDelete, handleSubmitForStudy }) => {
             sx={{
                 pl: { sm: 2 },
                 pr: { xs: 1, sm: 1 },
-                ...(numSelected > 0 && {
-                    bgcolor: (theme) =>
-                        alpha(
-                            theme.palette.primary.main,
-                            theme.palette.action.activatedOpacity
-                        ),
-                }),
             }}
         >
             {numSelected > 0 ? (
