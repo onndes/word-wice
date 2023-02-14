@@ -40,7 +40,6 @@ export default function TableWords() {
 
     const words = [...newWords, ...inProcessWords, ...learnedWords]
 
-    // console.log(words)
     const { rowsPerPage, order, orderBy, selected, page } = useSelector(
         ({ settingsApp }) => settingsApp.wordsList
     )
@@ -157,7 +156,7 @@ export default function TableWords() {
         remove these ${selected.length} word(s) from your dictionary?`
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', height: '50%' }}>
             <Paper
                 sx={{
                     width: '100%',
@@ -172,7 +171,7 @@ export default function TableWords() {
                         setOpenConfirmWordsForStudy(true)
                     }
                 />
-                <TableContainer>
+                <TableContainer sx={{ maxHeight: '550px' }}>
                     <Table
                         aria-labelledby="tableTitle"
                         size={dense ? 'small' : 'medium'}
@@ -199,15 +198,6 @@ export default function TableWords() {
                         />
                     </Table>
                 </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    component="div"
-                    count={words.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
             </Paper>
             <FormControlLabel
                 control={

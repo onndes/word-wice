@@ -52,7 +52,7 @@ export const knowWord = {
     C1: {
         code: 'C1',
         tittle: 'Know',
-        color: '#E673E0',
+        color: '#a569a2',
         timeStop: 24,
     },
     C2: {

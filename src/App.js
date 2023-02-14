@@ -16,6 +16,7 @@ import {
 import { handleStatus, setWords } from './redux/slices/wordsSlice/wordsSlice'
 import { subWords } from './redux/slices/wordsSlice/wordsAsync'
 import { subAppSettings } from './redux/slices/settingsAppSlice/settingsAppAsync'
+import './index.css'
 
 const unSubs = []
 
@@ -61,7 +62,7 @@ function App() {
             setIsAuth(true)
         })
     }, [])
-    console.log(theme)
+
     return (
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>

@@ -31,32 +31,30 @@ const CustomButton = styled(Button)(({ theme, mbg }) => {
 
 const NoWords = ({ setCheckWords, countWords, recommendForLearn }) => {
     return (
-        <Box sx={{ maxWidth: '400px', margin: '0 auto ' }}>
-            <PaperLearn>
-                <Box sx={{ padding: '20px' }} textAlign="center">
-                    <Box mb={9}>
-                        <Typography variant="h4" mb={1}>
-                            Not enough words to study
-                        </Typography>
-                        <Typography variant="h4" mb={1}>
-                            It takes at least - {recommendForLearn}
-                        </Typography>
-                        <Typography variant="h4">Now - {countWords}</Typography>
-                    </Box>
-                    <CustomButton mbg="green" variant="contained">
-                        <Link to={WORDS_ROUTE}>Added words</Link>
-                    </CustomButton>
-                    <CustomButton
-                        mbg="red"
-                        onClick={setCheckWords}
-                        variant="contained"
-                        disabled={countWords === 0}
-                    >
-                        Still continue
-                    </CustomButton>
-                </Box>
-            </PaperLearn>
-        </Box>
+        <PaperLearn>
+            <Box mb={9} textAlign="center">
+                <Typography variant="h4" mb={1}>
+                    Not enough words to study
+                </Typography>
+                <Typography variant="h4" mb={1}>
+                    It takes at least - {recommendForLearn}
+                </Typography>
+                <Typography variant="h4">Now - {countWords}</Typography>
+            </Box>
+            <Box display="flex" justifyContent="space-between">
+                <CustomButton mbg="green" variant="contained">
+                    <Link to={WORDS_ROUTE}>Added words</Link>
+                </CustomButton>
+                <CustomButton
+                    mbg="red"
+                    onClick={setCheckWords}
+                    variant="contained"
+                    disabled={countWords === 0}
+                >
+                    Still continue
+                </CustomButton>
+            </Box>
+        </PaperLearn>
     )
 }
 

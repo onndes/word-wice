@@ -231,13 +231,13 @@ export const themeSettings = (mode) => {
                   }),
         },
         components: {
-            // MuiTableHead: {
-            //     styleOverrides: {
-            //         root: {
-            //
-            //         },
-            //     },
-            // },
+            Paper: {
+                styleOverrides: {
+                    root: {
+                      
+                    },
+                },
+            },
         },
         typography: {
             fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),

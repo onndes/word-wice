@@ -86,61 +86,63 @@ const RepeatWordsCard = () => {
     if (!repeatWords.length) return <NoWords />
 
     return (
-        <Box sx={{ maxWidth: '400px', margin: '0 auto ' }}>
-            <PaperLearn>
-                <Box sx={{ padding: '20px' }}>
-                    <VisibleWordBlock
-                        word={repeatWords[currentWordIdx]}
-                        isWords={repeatWords.length > 0}
-                        title={fieldsData.translation.label}
-                        show={fieldsData.translation.name}
-                    />
-                    <Divider light />
-                    <HiddenWordBlock
-                        word={repeatWords[currentWordIdx]}
-                        isWords={repeatWords.length > 0}
-                        visibility={visibilityTranslate}
-                        onVisible={showTranslate}
-                        title={fieldsData.word.name}
-                        show={fieldsData.word.name}
-                    />
-                    <Divider light />
-                    <Box
-                        color="primary"
-                        aria-label=""
-                        mt={2}
-                        sx={{ display: 'flex', gap: '20px' }}
-                    >
-                        <Button
-                            disabled={!repeatWords}
-                            variant="contained"
-                            color="primary"
-                            onClick={handleRemembered}
-                            sx={{
-                                fontSize: '12px',
-                                textTransform: 'initial',
-                                width: '130px',
-                            }}
-                        >
-                            Remembered
-                        </Button>
-                        <Button
-                            disabled={!repeatWords}
-                            variant="contained"
-                            color="primary"
-                            onClick={handleDonNotKnow}
-                            sx={{
-                                fontSize: '12px',
-                                textTransform: 'initial',
-                                width: '130px',
-                            }}
-                        >
-                            Don{`'`}t know
-                        </Button>
-                    </Box>
-                </Box>
-            </PaperLearn>
-        </Box>
+        <PaperLearn>
+            <Box>
+                <VisibleWordBlock
+                    word={repeatWords[currentWordIdx]}
+                    isWords={repeatWords.length > 0}
+                    title={fieldsData.translation.label}
+                    show={fieldsData.translation.name}
+                />
+                <Divider light />
+                <HiddenWordBlock
+                    word={repeatWords[currentWordIdx]}
+                    isWords={repeatWords.length > 0}
+                    visibility={visibilityTranslate}
+                    onVisible={showTranslate}
+                    title={fieldsData.word.name}
+                    show={fieldsData.word.name}
+                />
+                <Divider light />
+            </Box>
+            <Box
+                color="primary"
+                aria-label=""
+                mt={2}
+                sx={{
+                    display: 'flex',
+                    gap: '20px',
+                    justifyContent: 'space-between',
+                }}
+            >
+                <Button
+                    disabled={!repeatWords}
+                    variant="contained"
+                    color="primary"
+                    onClick={handleRemembered}
+                    sx={{
+                        fontSize: '12px',
+                        textTransform: 'initial',
+                        width: '130px',
+                    }}
+                >
+                    Remembered
+                </Button>
+                <Button
+                    disabled={!repeatWords}
+                    variant="contained"
+                    color="primary"
+                    onClick={handleDonNotKnow}
+                    sx={{
+                        fontSize: '12px',
+                        textTransform: 'initial',
+                        width: '130px',
+                    }}
+                >
+                    Don{`'`}t know
+                </Button>
+            </Box>
+        </PaperLearn>
     )
 }
 
