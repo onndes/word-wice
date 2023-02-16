@@ -42,7 +42,7 @@ const RepeatWordsCard = () => {
         if (currentWordIdx === 0 && isMixed) {
             setWord()
         }
-    }, [learnedWords])
+    }, [learnedWords, isStarted])
 
     const nextWord = () => {
         const isLast = repeatWords.length - 1 === currentWordIdx
@@ -113,8 +113,9 @@ const RepeatWordsCard = () => {
                 mt={2}
                 sx={{
                     display: 'flex',
-                    gap: '20px',
+                    gap: '5px',
                     justifyContent: 'space-between',
+                    pb: '20px',
                 }}
             >
                 <Button
@@ -125,7 +126,8 @@ const RepeatWordsCard = () => {
                     sx={{
                         fontSize: '12px',
                         textTransform: 'initial',
-                        width: '130px',
+                        width: '160px',
+                        height: '50px',
                     }}
                 >
                     {t('Remembered')}
@@ -138,7 +140,8 @@ const RepeatWordsCard = () => {
                     sx={{
                         fontSize: '12px',
                         textTransform: 'initial',
-                        width: '130px',
+                        width: '160px',
+                        height: '50px',
                     }}
                 >
                     {t(`Don't know`)}

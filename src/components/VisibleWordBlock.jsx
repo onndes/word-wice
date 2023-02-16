@@ -19,7 +19,7 @@ const VisibleWordBlock = ({ word, isWords, title, show }) => {
                 {isWords && <WordRank word={word} />}
             </Box>
             <Typography ml={1} variant="h3" color="text.primary">
-                {isWords ? word[show] : 'Loading...'}
+                {word[show]}
             </Typography>
         </Box>
     )

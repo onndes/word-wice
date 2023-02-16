@@ -56,6 +56,12 @@ const RecommendForLearn = () => {
                             id="demo-simple-select"
                             value={recommendForLearn}
                             onChange={handleChange}
+                            sx={{ width: '100%' }}
+                            onClose={() => {
+                                setTimeout(() => {
+                                    document.activeElement.blur()
+                                }, 0)
+                            }}
                         >
                             {numbers.map((el) => {
                                 return (
@@ -76,7 +82,7 @@ const RecommendForLearn = () => {
                     alignItems: 'center',
                 }}
             >
-                <Box>{t("Show")}</Box>
+                <Box>{t('Show')}</Box>
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth size="small" variant="standard">
                         <Select
@@ -85,6 +91,12 @@ const RecommendForLearn = () => {
                             id="demo-simple-select"
                             value={show}
                             onChange={handleChangeShow}
+                            sx={{ width: '100%' }}
+                            onClose={() => {
+                                setTimeout(() => {
+                                    document.activeElement.blur()
+                                }, 0)
+                            }}
                         >
                             <MenuItem value={fieldsData.translation.name}>
                                 {t(fieldsData.translation.label)}

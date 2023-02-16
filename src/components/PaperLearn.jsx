@@ -5,7 +5,7 @@ export const PaperLearn = styled(Paper)(() => {
     const { mq } = useMyTheme()
 
     return {
-        padding: '20px',
+        padding: '15px',
         width: '100%',
         mb: 2,
         maxWidth: '400px',

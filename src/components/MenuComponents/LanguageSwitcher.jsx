@@ -36,6 +36,12 @@ const LanguageSwitcher = () => {
                             id="demo-simple-select"
                             value={i18n.language}
                             onChange={handleChange}
+                            sx={{ width: '100%' }}
+                            onClose={() => {
+                                setTimeout(() => {
+                                    document.activeElement.blur()
+                                }, 0)
+                            }}
                         >
                             <MenuItem value="en">
                                 <Box display="flex" alignItems="center">

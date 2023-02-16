@@ -47,14 +47,13 @@ const LearnWordsCard = ({ method }) => {
             if (isMixed) {
                 mixWords()
             }
-
             if (inProcessWords.length < recommendForLearn) {
                 dispatch(setCheckWords(true))
             } else {
                 dispatch(setCheckWords(false))
             }
         }
-    }, [inProcessWords])
+    }, [inProcessWords, isStarted])
 
     const mixWords = () => {
         if (inProcessWords.length > 0) {
@@ -66,6 +65,7 @@ const LearnWordsCard = ({ method }) => {
 
     const nextWord = () => {
         const isLast = mixed.length - 1 === currentWordIdx
+
         const idx = isLast ? 0 : currentWordIdx + 1
         dispatch(setCurrentWordIdx({ data: idx, method: 'inProcess' }))
         setVisibilityTranslate(false)
@@ -122,8 +122,8 @@ const LearnWordsCard = ({ method }) => {
             />
         )
     }
-
-    if (checkWords)
+    
+    if (checkWords || !mixed.length)
         return (
             <NoWords
                 setCheckWords={() => {
@@ -173,21 +173,28 @@ const LearnWordsCard = ({ method }) => {
                     }}
                 />
             </Box>
-            <Box display="flex" justifyContent="space-between">
+            <Box
+                display="flex"
+                justifyContent="space-between"
+                pb="40px"
+                gap="5px"
+            >
                 <Button
-                    disabled={!mixed.length}
+                    // size="small"
                     variant="contained"
                     color="secondary"
                     onClick={handleRemembered}
                     sx={{
                         fontSize: '12px',
                         textTransform: 'initial',
-                        width: '130px',
+                        width: '160px',
+                        height: '50px',
                     }}
                 >
                     {t('Remembered')}
                 </Button>
                 <Button
+                    size="large"
                     disabled={!mixed.length}
                     variant="contained"
                     color="secondary"
@@ -195,7 +202,8 @@ const LearnWordsCard = ({ method }) => {
                     sx={{
                         fontSize: '12px',
                         textTransform: 'initial',
-                        width: '130px',
+                        width: '160px',
+                        height: '50px',
                     }}
                 >
                     {t(`Don't know`)}

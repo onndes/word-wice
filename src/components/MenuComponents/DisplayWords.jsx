@@ -48,6 +48,12 @@ const DisplayWords = () => {
                             id="demo-simple-select"
                             value={orderBy}
                             onChange={handleChange}
+                            sx={{ width: '100%' }}
+                            onClose={() => {
+                                setTimeout(() => {
+                                    document.activeElement.blur()
+                                }, 0)
+                            }}
                         >
                             {headCells.map((el) => {
                                 return (
@@ -77,6 +83,12 @@ const DisplayWords = () => {
                             id="demo-simple-select"
                             value={order}
                             onChange={handleChangeOrder}
+                            sx={{ width: '100%' }}
+                            onClose={() => {
+                                setTimeout(() => {
+                                    document.activeElement.blur()
+                                }, 0)
+                            }}
                         >
                             <MenuItem value="asc">{t('asc')}</MenuItem>
                             <MenuItem value="desc">{t('desk')}</MenuItem>

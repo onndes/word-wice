@@ -47,6 +47,12 @@ const DeleteDuplicate = () => {
                             onChange={handleChange}
                             sx={{
                                 minWidth: '134px',
+                                width: '100%',
+                            }}
+                            onClose={() => {
+                                setTimeout(() => {
+                                    document.activeElement.blur()
+                                }, 100)
                             }}
                         >
                             <MenuItem value="lastUpdateWords">
