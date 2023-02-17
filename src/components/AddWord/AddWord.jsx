@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, IconButton } from '@mui/material'
+import { Box, IconButton } from '@mui/material'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
@@ -21,6 +21,7 @@ import {
     WORDS_ROUTE,
 } from '../../utils/consts'
 import useMyTheme from '../../hooks/useMyTheme'
+import MyButton from '../MyButton'
 
 const AddWord = () => {
     const { mq, t } = useMyTheme()
@@ -167,7 +168,7 @@ const AddWord = () => {
 
             <Box sx={{ display: 'flex', gap: 3 }}>
                 {mq && (
-                    <Button
+                    <MyButton
                         component={Link}
                         to={WORDS_ROUTE}
                         color="secondary"
@@ -181,21 +182,19 @@ const AddWord = () => {
                         }}
                     >
                         {t('Back')}
-                    </Button>
+                    </MyButton>
                 )}
-                <Button
-                    color="secondary"
-                    variant="contained"
+                <MyButton
                     type="submit"
-                    sx={() => ({
+                    sx={{
                         height: '50px',
                         width: mq ? '100%' : '140px',
                         fontSize: '18px',
                         mt: '10px',
-                    })}
+                    }}
                 >
                     {t('Add')}
-                </Button>
+                </MyButton>
             </Box>
 
             <MyAlertDialogSlide

@@ -10,6 +10,9 @@ const LanguageSwitcher = () => {
         i18n.changeLanguage(event.target.value)
     }
 
+    const imgGB = 'https://img.icons8.com/color/48/null/great-britain.png'
+    const imgUk = '"https://img.icons8.com/color/48/null/ukraine.png"'
+
     return (
         <Box
             sx={{
@@ -47,23 +50,16 @@ const LanguageSwitcher = () => {
                                 <Box display="flex" alignItems="center">
                                     <Box mr="10px">EN</Box>
                                     <Box display="flex" alignItems="center">
-                                        <img
-                                            width="30px"
-                                            src="https://img.icons8.com/color/48/null/great-britain.png"
-                                            alt=""
-                                        />
+                                        <img width="30px" src={imgGB} alt="" />
                                     </Box>
                                 </Box>
                             </MenuItem>
                             <MenuItem value="ua" display="flex">
                                 <Box display="flex" alignItems="center">
                                     <Box mr="10px">UA</Box>
-
-                                    <img
-                                        width="30px"
-                                        src="https://img.icons8.com/color/48/null/ukraine.png"
-                                        alt=""
-                                    />
+                                    <Box>
+                                        <img width="30px" src={imgUk} alt="" />
+                                    </Box>
                                 </Box>
                             </MenuItem>
                             <MenuItem value="ru">

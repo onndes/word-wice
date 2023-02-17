@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, Divider } from '@mui/material'
+import { Box, Divider } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -24,6 +24,7 @@ import { checkTimeStop } from '../../utils/checkTimeStop'
 import { fieldsData, knowWord } from '../../utils/consts'
 import { PaperLearn } from '../PaperLearn'
 import useMyTheme from '../../hooks/useMyTheme'
+import MyButton from '../MyButton'
 
 const LearnWordsCard = ({ method }) => {
     const dispatch = useDispatch()
@@ -122,7 +123,7 @@ const LearnWordsCard = ({ method }) => {
             />
         )
     }
-    
+
     if (checkWords || !mixed.length)
         return (
             <NoWords
@@ -179,25 +180,7 @@ const LearnWordsCard = ({ method }) => {
                 pb="40px"
                 gap="5px"
             >
-                <Button
-                    // size="small"
-                    variant="contained"
-                    color="secondary"
-                    onClick={handleRemembered}
-                    sx={{
-                        fontSize: '12px',
-                        textTransform: 'initial',
-                        width: '160px',
-                        height: '50px',
-                    }}
-                >
-                    {t('Remembered')}
-                </Button>
-                <Button
-                    size="large"
-                    disabled={!mixed.length}
-                    variant="contained"
-                    color="secondary"
+                <MyButton
                     onClick={handleDonNotKnow}
                     sx={{
                         fontSize: '12px',
@@ -207,7 +190,18 @@ const LearnWordsCard = ({ method }) => {
                     }}
                 >
                     {t(`Don't know`)}
-                </Button>
+                </MyButton>
+                <MyButton
+                    onClick={handleRemembered}
+                    sx={{
+                        fontSize: '12px',
+                        textTransform: 'initial',
+                        width: '160px',
+                        height: '50px',
+                    }}
+                >
+                    {t('Remembered')}
+                </MyButton>
             </Box>
         </PaperLearn>
     )

@@ -39,10 +39,8 @@ const Profile = () => {
                 <Item>
                     <Avatar
                         sx={{
-                            width: '100%',
-                            height: '100%',
-                            maxWidth: '100px',
-                            maxHeight: '100px',
+                            width: '100px',
+                            height: '100px',
                         }}
                         alt="Avatar"
                         src={user.photoURL}
