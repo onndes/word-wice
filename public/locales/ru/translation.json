@@ -53,11 +53,17 @@
     "It takes at least": "Нужно как минимум",
     "Now": "Сейчас",
     "Added words": "Добавить слова",
-    "Still continue": "Продолжить учить",
+    "Still continue": "Продовжити вчити",
     "Remembered": "Помню",
     "Don't know": "Не помню",
     "Learn new words": "Учить новые слова",
-    "word(s) for study is ready": "слов готово для изучения",
     "Repeat learned words": "Повторить выученные слова",
-    "word(s) for repeat is ready": "слов готово для повторения"
+    "for study is ready": "готово для изучения",
+    "for repeat is ready": "готово для повторения",
+    "word(s)": "слов",
+    "There are no words for repeating so far": "Слов для повторения нет",
+    "Time hasn't come yet": "Время ещё не пришло",
+
+    "Available": "Доступно",
+    "Add selectively": "Добавить выборочно"
 }

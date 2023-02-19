@@ -6,7 +6,7 @@ import { PaperLearn } from '../PaperLearn'
 import useMyTheme from '../../hooks/useMyTheme'
 
 const CustomButton = styled(Button)(({ theme, mbg }) => {
-    const { colors } = useMyTheme()
+    const { colors, mq } = useMyTheme()
     const bgRed = mbg === 'red' && colors.redAccent[500]
     const bgRedHover = mbg === 'red' && colors.redAccent[600]
     const bgGreen = mbg === 'green' && colors.greenAccent[600]
@@ -20,15 +20,24 @@ const CustomButton = styled(Button)(({ theme, mbg }) => {
             backgroundColor:
                 bgRedHover || bgGreenHover || theme.palette.primary,
         },
-        margin: '0 10px 0 0',
         a: {
             color: 'white',
             textDecoration: 'none',
         },
+        '&:focus': mq && {
+            // eslint-disable-next-line max-len
+            boxShadow: `0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)`,
+        },
     }
 })
 
-const NoWords = ({ setCheckWords, countWords, recommendForLearn }) => {
+const NoWords = ({
+    setCheckWords,
+    countWords,
+    recommendForLearn,
+    newWords,
+    addWords,
+}) => {
     const { t } = useMyTheme()
     return (
         <PaperLearn>
@@ -43,18 +52,31 @@ const NoWords = ({ setCheckWords, countWords, recommendForLearn }) => {
                     {t('Now')} - {countWords}
                 </Typography>
             </Box>
-            <Box display="flex" justifyContent="space-between">
-                <CustomButton mbg="green" variant="contained">
-                    <Link to={WORDS_ROUTE}>{t('Added words')}</Link>
-                </CustomButton>
-                <CustomButton
-                    mbg="red"
-                    onClick={setCheckWords}
-                    variant="contained"
-                    disabled={countWords === 0}
-                >
-                    {t('Still continue')}
-                </CustomButton>
+            <Box mb={4}>
+                <Box display="flex" justifyContent="center" mb={2}>
+                    <CustomButton
+                        fullWidth
+                        mbg="green"
+                        onClick={() => addWords()}
+                        variant="contained"
+                        disabled={!newWords.length}
+                    >
+                        {t('Add')}, {t('Available')}: {newWords.length}
+                    </CustomButton>
+                </Box>
+                <Box display="flex" justifyContent="space-between" gap={2}>
+                    <CustomButton variant="contained">
+                        <Link to={WORDS_ROUTE}>{t('Add selectively')}</Link>
+                    </CustomButton>
+                    <CustomButton
+                        mbg="red"
+                        onClick={setCheckWords}
+                        variant="contained"
+                        disabled={countWords === 0}
+                    >
+                        {t('Still continue')}
+                    </CustomButton>
+                </Box>
             </Box>
         </PaperLearn>
     )

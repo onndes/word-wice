@@ -27,21 +27,25 @@ export const knowWord = {
         code: 'A0',
         tittle: 'New',
         color: '#d1d1d1',
+        timeStop: 0,
     },
     A1: {
         code: 'A1',
         tittle: 'Learning',
         color: '#a18c85',
+        timeStop: 0,
     },
     A2: {
         code: 'A2',
         tittle: 'Low',
         color: '#517D6B',
+        timeStop: 0,
     },
     B1: {
         code: 'B1',
         tittle: 'Medium',
         color: '#1AB074',
+        timeStop: 0,
     },
     B2: {
         code: 'B2',

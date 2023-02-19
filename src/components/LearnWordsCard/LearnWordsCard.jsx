@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
     learnedWordDropToInProgress,
     submitWordsForLearned,
+    submitWordsForStudy,
     updateCountRepeat,
     updateKnowledgeInProcess,
 } from '../../redux/slices/wordsSlice/wordsAsync'
@@ -26,11 +27,25 @@ import { PaperLearn } from '../PaperLearn'
 import useMyTheme from '../../hooks/useMyTheme'
 import MyButton from '../MyButton'
 
+const sortArray = (nums) => {
+    const negativeNums = nums.filter((num) => num.dateCreated < 0)
+    const positiveNums = nums.filter((num) => num.dateCreated >= 0)
+
+    const sortedNegative = negativeNums.sort(
+        (a, b) => a.dateCreated - b.dateCreated
+    )
+    const sortedPositive = positiveNums.sort(
+        (a, b) => a.dateCreated - b.dateCreated
+    )
+
+    return sortedNegative.concat(sortedPositive)
+}
+
 const LearnWordsCard = ({ method }) => {
     const dispatch = useDispatch()
     const { t } = useMyTheme()
 
-    const inProcessWords = useSelector(({ words }) => words.inProcessWords)
+    const { inProcessWords, newWords } = useSelector(({ words }) => words)
     const { mixed, currentWordIdx, checkWords, isStarted } = useSelector(
         ({ words }) => words[method]
     )
@@ -40,6 +55,31 @@ const LearnWordsCard = ({ method }) => {
     )
 
     const [visibilityTranslate, setVisibilityTranslate] = useState(false)
+
+    const addWords = () => {
+        const countAddedWords = recommendForLearn - mixed.length
+
+        let wordsForAdded = []
+        let countAdded = 0
+        if (countAddedWords <= 0 || !newWords.length) return [[], 0]
+
+        if (newWords.length > 1 && newWords.length >= countAddedWords) {
+            const sortOnDate = sortArray(newWords)
+            wordsForAdded = sortOnDate.splice(0, countAddedWords)
+            countAdded = countAddedWords
+        } else {
+            wordsForAdded = newWords
+            countAdded = newWords.length
+        }
+
+        wordsForAdded.forEach((el) => {
+            if (el.knowledge === knowWord.A0.code) {
+                dispatch(submitWordsForStudy(el))
+            }
+        })
+
+        return [wordsForAdded, countAdded, countAddedWords]
+    }
 
     useEffect(() => {
         const isMixed = !mixed.length || mixed.length !== inProcessWords.length
@@ -132,6 +172,8 @@ const LearnWordsCard = ({ method }) => {
                 }}
                 countWords={mixed.length}
                 recommendForLearn={recommendForLearn}
+                addWords={addWords}
+                newWords={newWords}
             />
         )
 
@@ -177,8 +219,8 @@ const LearnWordsCard = ({ method }) => {
             <Box
                 display="flex"
                 justifyContent="space-between"
-                pb="40px"
-                gap="5px"
+                pb={4}
+                gap={2}
             >
                 <MyButton
                     onClick={handleDonNotKnow}

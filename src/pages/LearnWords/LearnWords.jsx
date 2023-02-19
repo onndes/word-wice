@@ -7,6 +7,52 @@ import { setReadyForStudyAndRepeat } from '../../redux/slices/wordsSlice/wordsSl
 import { checkTimeStop } from '../../utils/checkTimeStop'
 import useMyTheme from '../../hooks/useMyTheme'
 
+const ButtonLearn = ({ children, bgc, bgch, to, ...otherProps }) => {
+    return (
+        <Button
+            sx={() => ({
+                display: 'block',
+                textAlign: 'center',
+                fontWeight: 600,
+                color: 'white',
+                backgroundColor: bgc,
+                '&:hover': {
+                    backgroundColor: bgch,
+                },
+                mb: 2,
+                pt: 3,
+                pb: 2,
+            })}
+            component={Link}
+            to={to}
+            variant="contained"
+            color="primary"
+            size="large"
+            {...otherProps}
+        >
+            {children}
+        </Button>
+    )
+}
+
+const WordsCount = ({ count, color }) => {
+    const { t } = useMyTheme()
+    return (
+        <>
+            <Typography
+                variant="span"
+                color={color}
+                fontWeight={600}
+                backgroundColor="white"
+                padding="2px 6px"
+                borderRadius="5px"
+            >
+                {count} {t('word(s)')}
+            </Typography>{' '}
+        </>
+    )
+}
+
 const LearnWords = () => {
     const dispatch = useDispatch()
     const { colors, t } = useMyTheme()
@@ -26,6 +72,7 @@ const LearnWords = () => {
 
     useEffect(() => {
         const readyForRepeat = checkTimeStop(learnedWords)
+
         dispatch(
             setReadyForStudyAndRepeat({
                 count: readyForRepeat.length,
@@ -36,59 +83,39 @@ const LearnWords = () => {
 
     return (
         <Container maxWidth="xs">
-            <Button
-                sx={() => ({
-                    display: 'block',
-                    textAlign: 'center',
-                    fontWeight: 600,
-                    color: 'white',
-                    backgroundColor: colors.emerald[500],
-                    '&:hover': {
-                        backgroundColor: colors.emerald[600],
-                    },
-                    mb: 2,
-                    pt: 3,
-                    pb: 3,
-                })}
-                component={Link}
+            <ButtonLearn
+                bgc={colors.emerald[500]}
+                bgch={colors.emerald[600]}
                 to={LEARN_NEW_ROUTE}
-                variant="contained"
-                color="primary"
-                size="large"
             >
-                <Typography variant="p" display="block">
+                <Typography variant="p" display="block" letterSpacing={0.3}>
                     {t('Learn new words')}
                 </Typography>
-                <Typography variant="p">
-                    {inProcess.readyWordCount} {t('word(s) for study is ready')}
+                <Typography variant="p" letterSpacing={0.3}>
+                    <WordsCount
+                        count={inProcess.readyWordCount}
+                        color={colors.emerald[600]}
+                    />
+                    {t(`for study is ready`)}
                 </Typography>
-            </Button>
-            <Button
-                sx={() => ({
-                    display: 'block',
-                    backgroundColor: colors.indigo[500],
-                    textAlign: 'center',
-                    fontWeight: 600,
-                    '&:hover': {
-                        backgroundColor: colors.indigo[600],
-                    },
-                    mb: 2,
-                    pt: 3,
-                    pb: 3,
-                })}
-                component={Link}
+            </ButtonLearn>
+            <ButtonLearn
+                bgc={colors.indigo[500]}
+                bgch={colors.indigo[600]}
                 to={LEARN_REPEAT_ROUTE}
-                variant="contained"
-                color="primary"
-                size="large"
             >
-                <Typography variant="p" display="block">
+                <Typography variant="p" display="block" letterSpacing={0.3}>
                     {t('Repeat learned words')}
                 </Typography>
-                <Typography variant="p">
-                    {learned.readyWordCount} {t('word(s) for repeat is ready')}
+                <Typography variant="p" letterSpacing={0.3}>
+                    <WordsCount
+                        count={learned.readyWordCount}
+                        color={colors.indigo[600]}
+                    />
+
+                    {t('for repeat is ready')}
                 </Typography>
-            </Button>
+            </ButtonLearn>
         </Container>
     )
 }

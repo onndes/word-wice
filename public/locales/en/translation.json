@@ -57,7 +57,14 @@
     "Remembered": "Remembered",
     "Don't know": "Don't know",
     "Learn new words": "Learn new words",
-    "word(s) for study is ready": "word(s) for study is ready",
+    "for study is ready": "for study is ready",
+    "or repeat is ready": "for repeat is ready",
+    "word(s)": "word(s)",
     "Repeat learned words": "Repeat learned words",
-    "word(s) for repeat is ready": "word(s) for repeat is ready"
+
+    "There are no words for repeating so far": "There are no words for repeating so far",
+    "Time hasn't come yet": "Time hasn't come yet",
+
+    "Available": "Available",
+    "Add selectively": "Add selectively"
 }

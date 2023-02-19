@@ -1,16 +1,16 @@
 import * as React from 'react'
 import CssBaseline from '@mui/material/CssBaseline'
 import { styled } from '@mui/material/styles'
-import { Box, Container } from '@mui/material'
+import { Container } from '@mui/material'
 import AppRouter from '../AppRouter'
 import MyAppBar from './MyAppBar/MyAppBar'
 import { useAuth } from '../hooks/useAuth'
 import MyAppBarMobile from './MyAppBar/Mobile/MyAppBarMobile'
 import useMyTheme from '../hooks/useMyTheme'
 
-export const DrawerHeader = styled('div')(({ mq }) => ({
+const Indent = styled('div')(({ mq, bottom }) => ({
     paddingTop: mq ? '60px' : '72px',
-    justifyContent: 'flex-end',
+    paddingBottom: mq && bottom ? '72px' : 1,
 }))
 
 export default function Layout() {
@@ -22,19 +22,18 @@ export default function Layout() {
             <CssBaseline />
             {isAuth && <MyAppBar />}
             {mq && <MyAppBarMobile />}
-            <DrawerHeader mq={mq} />
+            <Indent mq={mq} />
             <Container
                 maxWidth="md"
                 sx={() => ({
                     height: '100%',
-                    mt: mq ? 1 : 2,
-                    pb: mq ? 10 : 1,
-                    pt: mq && 0.5,
+                    pt: mq ? 2 : 2,
+                    pb: mq ? 2 : 1,
                 })}
             >
                 <AppRouter />
-                <Box sx={{ paddingBottom: '1px' }} />
             </Container>
+            <Indent mq={mq} bottom />
         </>
     )
 }

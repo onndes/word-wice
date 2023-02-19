@@ -57,7 +57,14 @@
     "Remembered": "Пам'ятаю",
     "Don't know": "Не пам'ятаю",
     "Learn new words": "Вчити нові слова",
-    "word(s) for study is ready": "слов готовий для вивчення",
     "Repeat learned words": "Повторити вивчені слова",
-    "word(s) for repeat is ready": "слов готові для повторення"
+    "for study is ready": "готові для вивчення",
+    "for repeat is ready": "готові для повторення",
+    "word(s)": "слів",
+
+    "There are no words for repeating so far": "Поки що немає слів для повторення",
+    "Time hasn't come yet": "Час ще не настав",
+
+    "Available": "У наявності",
+    "Add selectively": "Додати вибірково"
 }
