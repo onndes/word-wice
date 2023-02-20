@@ -27,7 +27,7 @@ import ConfirmDialog from '../ConfirmDialog'
 export default function TableWords() {
     const dispatch = useDispatch()
     const { mq } = useMyTheme()
-    const { newWords, inProcessWords, learnedWords } = useSelector(
+    const { newWords, inProcessWords, learnedWords, filter } = useSelector(
         ({ words }) => words
     )
 
@@ -35,7 +35,11 @@ export default function TableWords() {
     const [openConfirmWordsForStudy, setOpenConfirmWordsForStudy] =
         useState(false)
 
-    const words = [...newWords, ...inProcessWords, ...learnedWords]
+    let words = []
+
+    if (filter.newWords) words = [...words, ...newWords]
+    if (filter.inProcessWords) words = [...words, ...inProcessWords]
+    if (filter.learnedWords) words = [...words, ...learnedWords]
 
     const { rowsPerPage, order, orderBy, selected, page } = useSelector(
         ({ settingsApp }) => settingsApp.wordsList

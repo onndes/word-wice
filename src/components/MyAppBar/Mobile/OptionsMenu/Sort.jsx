@@ -1,14 +1,14 @@
 import { Box, FormControl, MenuItem, Select } from '@mui/material'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import useMyTheme from '../../hooks/useMyTheme'
+import useMyTheme from '../../../../hooks/useMyTheme'
 import {
     setOrder,
     setOrderBy,
-} from '../../redux/slices/settingsAppSlice/settingsAppSlice'
-import { headCells } from '../TableWords/Head'
+} from '../../../../redux/slices/settingsAppSlice/settingsAppSlice'
+import { headCells } from '../../../TableWords/Head'
 
-const DisplayWords = () => {
+const Sort = () => {
     const { t } = useMyTheme()
     const dispatch = useDispatch()
     const { orderBy, order } = useSelector(
@@ -100,4 +100,4 @@ const DisplayWords = () => {
     )
 }
 
-export default DisplayWords
+export default Sort

@@ -11,7 +11,7 @@ const LanguageSwitcher = () => {
     }
 
     const imgGB = 'https://img.icons8.com/color/48/null/great-britain.png'
-    const imgUk = '"https://img.icons8.com/color/48/null/ukraine.png"'
+    const imgUk = 'https://img.icons8.com/color/48/null/ukraine.png'
 
     return (
         <Box
@@ -50,7 +50,12 @@ const LanguageSwitcher = () => {
                                 <Box display="flex" alignItems="center">
                                     <Box mr="10px">EN</Box>
                                     <Box display="flex" alignItems="center">
-                                        <img width="30px" src={imgGB} alt="" />
+                                        <img
+                                            width="30px"
+                                            height="30px"
+                                            src={imgGB}
+                                            alt=""
+                                        />
                                     </Box>
                                 </Box>
                             </MenuItem>
@@ -58,7 +63,12 @@ const LanguageSwitcher = () => {
                                 <Box display="flex" alignItems="center">
                                     <Box mr="10px">UA</Box>
                                     <Box>
-                                        <img width="30px" src={imgUk} alt="" />
+                                        <img
+                                            width="30px"
+                                            height="30px"
+                                            src={imgUk}
+                                            alt=""
+                                        />
                                     </Box>
                                 </Box>
                             </MenuItem>

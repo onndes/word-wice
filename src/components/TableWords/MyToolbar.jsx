@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddBoxIcon from '@mui/icons-material/AddBox'
 import { Box } from '@mui/material'
+import FilterMenu from './FilterMenu'
 
 const MyToolbar = ({ numSelected, handleDelete, handleSubmitForStudy }) => {
     return (
@@ -49,7 +50,9 @@ const MyToolbar = ({ numSelected, handleDelete, handleSubmitForStudy }) => {
                         </IconButton>
                     </Tooltip>
                 </Box>
-            ) : null}
+            ) : (
+                <FilterMenu />
+            )}
         </Toolbar>
     )
 }

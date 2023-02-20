@@ -19,6 +19,7 @@ const MyButton = ({
             variant={variant}
             color={color}
             onClick={onClick}
+            disableElevation
             sx={{
                 '&:focus': mq && {
                     // eslint-disable-next-line max-len

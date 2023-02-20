@@ -12,10 +12,15 @@ import LinearIndeterminate from '../LinearIndeterminate'
 
 const CardsWords = () => {
     const dispatch = useDispatch()
-    const { newWords, inProcessWords, learnedWords } = useSelector(
+    const { newWords, inProcessWords, learnedWords, filter } = useSelector(
         ({ words }) => words
     )
-    const words = [...newWords, ...inProcessWords, ...learnedWords]
+
+    let words = []
+
+    if (filter.newWords) words = [...words, ...newWords]
+    if (filter.inProcessWords) words = [...words, ...inProcessWords]
+    if (filter.learnedWords) words = [...words, ...learnedWords]
 
     const statusData = useSelector(
         selectStatusWords(['newWords', 'inProcessWords', 'learnedWords'])
@@ -73,10 +78,7 @@ const CardsWords = () => {
 
     return (
         <Container maxWidth="sm" disableGutters sx={{ mb: 10 }}>
-            {stableSort(
-                [...newWords, ...inProcessWords, ...learnedWords],
-                getComparator(order, orderBy)
-            ).map((row) => {
+            {stableSort(words, getComparator(order, orderBy)).map((row) => {
                 const isItemSelected = isSelected(row.id)
 
                 const date = row.dateCreated

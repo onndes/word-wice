@@ -2,7 +2,6 @@ import React from 'react'
 import { Typography, Paper, Container, styled } from '@mui/material'
 import ButtonToggleTheme from '../components/MenuComponents/ButtonToggleTheme'
 import LogOut from '../components/LogOut'
-import DisplayWords from '../components/MenuComponents/DisplayWords'
 import useMyTheme from '../hooks/useMyTheme'
 import RecommendForLearn from '../components/MenuComponents/RecommendForLearn'
 import DeleteDuplicate from '../components/MenuComponents/DeleteDuplicate'
@@ -23,7 +22,7 @@ const Block = styled(Paper, { shouldForwardProp: () => ({ elevation: 24 }) })(
 )
 
 const Menu = () => {
-    const { mq, t } = useMyTheme()
+    const { t } = useMyTheme()
 
     return (
         <Container
@@ -42,15 +41,6 @@ const Menu = () => {
                 <ButtonToggleTheme />
                 <LanguageSwitcher />
             </Block>
-
-            {mq && (
-                <>
-                    <Title variant="h5">{t('Display words')}</Title>
-                    <Block elevation={1}>
-                        <DisplayWords />
-                    </Block>
-                </>
-            )}
             <Title variant="h5">{t('Learn')}</Title>
             <Block elevation={1}>
                 <RecommendForLearn />

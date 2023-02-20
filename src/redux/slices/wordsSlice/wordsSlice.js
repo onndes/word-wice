@@ -29,7 +29,11 @@ const initialState = {
         isStarted: false,
         checkWords: false,
     },
-
+    filter: {
+        newWords: true,
+        inProcessWords: true,
+        learnedWords: true,
+    },
     status: [],
 }
 
@@ -81,6 +85,9 @@ const wordsSlice = createSlice({
                     return s
                 })
             }
+        },
+        setFilter(state, { payload }) {
+            state.filter[payload.filterName] = payload.filterData
         },
     },
     extraReducers: (builder) => {
@@ -149,6 +156,7 @@ export const {
     handleStatus,
     setReadyForStudyAndRepeat,
     setRepeatWord,
+    setFilter,
 } = wordsSlice.actions
 
 export default wordsSlice.reducer
