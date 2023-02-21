@@ -7,19 +7,22 @@ import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import Slide from '@mui/material/Slide'
 import { Paper } from '@mui/material'
+import useMyTheme from '../hooks/useMyTheme'
 
 const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />
 })
 
 export default function ConfirmDialog({
-    title,
     open,
     setOpen,
     onConfirm,
     onRefute,
+    title = 'Confirm',
     text = '',
 }) {
+    const { t } = useMyTheme()
+
     const handleOnConfirm = () => {
         setOpen(false)
         onConfirm()
@@ -43,7 +46,7 @@ export default function ConfirmDialog({
                 })}
             >
                 <DialogTitle color="text.primary" sx={{ fontSize: '20px' }}>
-                    {title}
+                    {t(title)}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText
@@ -55,10 +58,10 @@ export default function ConfirmDialog({
                 </DialogContent>
                 <DialogActions>
                     <Button color="error" onClick={handleOnRefute}>
-                        Disagree
+                        {t('Disagree')}
                     </Button>
                     <Button color="success" onClick={handleOnConfirm}>
-                        Agree
+                        {t('Agree')}
                     </Button>
                 </DialogActions>
             </Dialog>

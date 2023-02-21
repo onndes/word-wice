@@ -174,6 +174,7 @@ export const submitWordsForLearned = createAsyncThunk(
                         ...data.word,
                         knowledge: data.knowledge,
                         dateChange: Timestamp.fromDate(new Date()),
+                        dateLearned: Timestamp.fromDate(new Date()),
                     },
                 })
             )
@@ -211,6 +212,7 @@ export const updateCountRepeat = createAsyncThunk(
         }
     }
 )
+
 export const learnedWordDropToInProgress = createAsyncThunk(
     'words/learnedWordDropToInProgress',
     async (data, { thunkAPI, dispatch }) => {
@@ -228,6 +230,35 @@ export const learnedWordDropToInProgress = createAsyncThunk(
                         ...data.word,
                         countRepeat: data.countRepeat,
                         knowledge: data.knowledge,
+                        dateChange: Timestamp.fromDate(new Date()),
+                    },
+                })
+            )
+
+            return data
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e)
+        }
+    }
+)
+
+export const inProcessWordDropToNow = createAsyncThunk(
+    'words/inProcessWordDropToNow',
+    async (data, { thunkAPI, dispatch }) => {
+        try {
+            await dispatch(
+                deleteWords({
+                    collectionName: collectionNameWords.IN_PROCESS,
+                    words: [data.word],
+                })
+            )
+            await dispatch(
+                addWords({
+                    collectionName: collectionNameWords.NEW,
+                    word: {
+                        ...data.word,
+                        countRepeat: 0,
+                        knowledge: knowWord.A0.code,
                         dateChange: Timestamp.fromDate(new Date()),
                     },
                 })

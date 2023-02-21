@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { Paper, Typography, Container, Box } from '@mui/material'
 import { format } from 'date-fns'
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,11 +16,15 @@ const CardsWords = () => {
         ({ words }) => words
     )
 
-    let words = []
+    const words = useMemo(() => {
+        let result = []
 
-    if (filter.newWords) words = [...words, ...newWords]
-    if (filter.inProcessWords) words = [...words, ...inProcessWords]
-    if (filter.learnedWords) words = [...words, ...learnedWords]
+        if (filter.newWords) result = [...result, ...newWords]
+        if (filter.inProcessWords) result = [...result, ...inProcessWords]
+        if (filter.learnedWords) result = [...result, ...learnedWords]
+
+        return result
+    }, [newWords, inProcessWords, learnedWords, filter])
 
     const statusData = useSelector(
         selectStatusWords(['newWords', 'inProcessWords', 'learnedWords'])
@@ -54,7 +58,10 @@ const CardsWords = () => {
         dispatch(setSelected(newSelected))
     }
 
-    const isSelected = (wordId) => selected.some((el) => el.id === wordId)
+    const isSelected = useCallback(
+        (wordId) => selected.some((el) => el.id === wordId),
+        [selected]
+    )
 
     if (statusData.status === STATUS.loading)
         return (

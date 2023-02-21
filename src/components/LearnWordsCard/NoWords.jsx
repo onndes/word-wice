@@ -64,7 +64,12 @@ const NoWords = ({
                         {t('Add')}, {t('Available')}: {newWords.length}
                     </CustomButton>
                 </Box>
-                <Box display="flex" justifyContent="space-between" gap={2}>
+                <Box
+                    display="grid"
+                    justifyContent="space-between"
+                    gap={2}
+                    gridTemplateColumns="3fr 2fr"
+                >
                     <CustomButton variant="contained">
                         <Link to={WORDS_ROUTE}>{t('Add selectively')}</Link>
                     </CustomButton>

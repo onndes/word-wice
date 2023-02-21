@@ -49,11 +49,11 @@
     "Knowledge": "Знання",
     "Date created": "Дата створення",
 
-    "Not enough words to study": "Not enough words to study",
-    "It takes at least": "It takes at least",
-    "Now": "Now",
-    "Added words": "Added words",
-    "Still continue": "Still continue",
+    "Not enough words to study": "Недостатньо слів для вивчення",
+    "It takes at least": "Потрібно принаймні",
+    "Now": "Зараз",
+    "Added words": "Додані слова",
+    "Still continue": "Продовжити",
     "Remembered": "Пам'ятаю",
     "Don't know": "Не пам'ятаю",
     "Learn new words": "Вчити нові слова",
@@ -69,5 +69,15 @@
     "Add selectively": "Додати вибірково",
 
     "Filter": "Фільтр",
-    "Sort": "Сортування"
+    "Sort": "Сортування",
+
+    "Confirm": "Підтвердити",
+    "selected": "обрано",
+
+    "Disagree": "Відмінити",
+    "Agree": "Підтвердити",
+
+    "messageConfirm_study": "Ви впевнені, що хочете додати ці {{count}} слова до свого списку вивчення?",
+    "messageConfirm_delete": "Ви впевнені, що хочете видалити ці {{count}}  слова зі свого словника?",
+    "messageConfirm_toNow": "Ви впевнені, що хочете повернути ці {{count}} слова до списку нових?"
 }
