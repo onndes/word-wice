@@ -189,13 +189,13 @@ export const updateCountRepeat = createAsyncThunk(
     'words/updateCountRepeat',
     async (data, { thunkAPI, dispatch }) => {
         try {
-            await dispatch(
+            dispatch(
                 deleteWords({
                     collectionName: collectionNameWords.LEARNED,
                     words: [data.word],
                 })
             )
-            await dispatch(
+            dispatch(
                 addWords({
                     collectionName: collectionNameWords.LEARNED,
                     word: {
@@ -223,6 +223,7 @@ export const learnedWordDropToInProgress = createAsyncThunk(
                     words: [data.word],
                 })
             )
+
             await dispatch(
                 addWords({
                     collectionName: collectionNameWords.IN_PROCESS,

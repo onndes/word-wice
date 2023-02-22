@@ -1,10 +1,10 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 import MoodIcon from '@mui/icons-material/Mood'
-import { PaperLearn } from '../PaperLearn'
-import useMyTheme from '../../hooks/useMyTheme'
+import { PaperLearn } from '../../PaperLearn'
+import useMyTheme from '../../../hooks/useMyTheme'
 
-const NoWords = () => {
+const NoWordsRepeat = () => {
     const { t } = useMyTheme()
 
     return (
@@ -24,4 +24,4 @@ const NoWords = () => {
     )
 }
 
-export default NoWords
+export default NoWordsRepeat

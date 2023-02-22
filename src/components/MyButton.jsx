@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Button } from '@mui/material'
 import React from 'react'
 import useMyTheme from '../hooks/useMyTheme'
@@ -9,6 +10,9 @@ const MyButton = ({
     sx,
     variant = 'contained',
     color = 'secondary',
+    c,
+    bgc,
+    bgch,
     ...rest
 }) => {
     const { mq } = useMyTheme()
@@ -19,14 +23,19 @@ const MyButton = ({
             variant={variant}
             color={color}
             onClick={onClick}
-            disableElevation
-            sx={{
+            sx={(theme) => ({
+                boxShadow: `0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)`,
                 '&:focus': mq && {
-                    // eslint-disable-next-line max-len
                     boxShadow: `0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)`,
                 },
+                '&:hover': mq && {
+                    backgroundColor: bgch || theme.palette.secondary.main,
+                    boxShadow: `0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)`,
+                },
+                color: c && c,
+                backgroundColor: bgc && bgc,
                 ...sx,
-            }}
+            })}
             {...rest}
         >
             {children}

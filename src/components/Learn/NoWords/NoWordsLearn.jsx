@@ -1,9 +1,9 @@
 import { Box, Button, styled, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { WORDS_ROUTE } from '../../utils/consts'
-import { PaperLearn } from '../PaperLearn'
-import useMyTheme from '../../hooks/useMyTheme'
+import { WORDS_ROUTE } from '../../../utils/consts'
+import { PaperLearn } from '../../PaperLearn'
+import useMyTheme from '../../../hooks/useMyTheme'
 
 const CustomButton = styled(Button)(({ theme, mbg }) => {
     const { colors, mq } = useMyTheme()
@@ -31,7 +31,7 @@ const CustomButton = styled(Button)(({ theme, mbg }) => {
     }
 })
 
-const NoWords = ({
+const NoWordsLearn = ({
     setCheckWords,
     countWords,
     recommendForLearn,
@@ -87,4 +87,4 @@ const NoWords = ({
     )
 }
 
-export default NoWords
+export default NoWordsLearn

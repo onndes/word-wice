@@ -78,5 +78,7 @@
 
     "messageConfirm_study": "Вы уверены, что хотите добавить эти {{count}} слово в свой список изучения?",
     "messageConfirm_delete": "Вы уверены, что хотите удалить эти {{count}} слово из своего словаря?",
-    "messageConfirm_toNow": "Вы уверены, что хотите вернуть эти {{count}} слово в список новых?"
+    "messageConfirm_toNow": "Вы уверены, что хотите вернуть эти {{count}} слово в список новых?",
+
+    "Are you sure you don't remember this word?": "Ви впевнені, що не пам'ятаєте це слово?"
 }

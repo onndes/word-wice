@@ -89,6 +89,9 @@ const wordsSlice = createSlice({
         setFilter(state, { payload }) {
             state.filter[payload.filterName] = payload.filterData
         },
+        setLearnedWords(state, { payload }) {
+            state.learnedWords = payload
+        },
     },
     extraReducers: (builder) => {
         // addWords
@@ -157,6 +160,7 @@ export const {
     setReadyForStudyAndRepeat,
     setRepeatWord,
     setFilter,
+    setLearnedWords,
 } = wordsSlice.actions
 
 export default wordsSlice.reducer

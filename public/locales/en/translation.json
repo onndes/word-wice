@@ -79,5 +79,7 @@
 
     "messageConfirm_study": "Are you certain that you wish to add these {{count}} word(s) to your study list?",
     "messageConfirm_delete": "Are you certain that you wish to remove these {{count}}  word(s) from your dictionary?",
-    "messageConfirm_toNow": "Are you sure you want to return these {{count}} word(s) to the list of new?"
+    "messageConfirm_toNow": "Are you sure you want to return these {{count}} word(s) to the list of new?",
+
+    "Are you sure you don't remember this word?": "Are you sure you don't remember this word?"
 }

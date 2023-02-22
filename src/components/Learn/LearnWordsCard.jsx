@@ -9,9 +9,9 @@ import {
     updateCountRepeat,
     updateKnowledgeInProcess,
 } from '../../redux/slices/wordsSlice/wordsAsync'
-import NoWords from './NoWords'
-import VisibleWordBlock from '../VisibleWordBlock'
-import HiddenWordBlock from '../HiddenWordBlock'
+import NoWordsLearn from './NoWords/NoWordsLearn'
+import VisibleWordBlock from './VisibleWordBlock'
+import HiddenWordBlock from './HiddenWordBlock'
 import { shuffleArray } from '../../utils/shuffleArray'
 import { defineNextKnow } from '../../utils/defineNextKnow'
 import {
@@ -20,12 +20,12 @@ import {
     setMixedWords,
     setStarted,
 } from '../../redux/slices/wordsSlice/wordsSlice'
-import Started from '../Started'
+import Started from './Started'
 import { checkTimeStop } from '../../utils/checkTimeStop'
 import { fieldsData, knowWord } from '../../utils/consts'
 import { PaperLearn } from '../PaperLearn'
 import useMyTheme from '../../hooks/useMyTheme'
-import MyButton from '../MyButton'
+import Buttons from './Buttons'
 
 const sortArray = (nums) => {
     const negativeNums = nums.filter((num) => num.dateCreated < 0)
@@ -166,7 +166,7 @@ const LearnWordsCard = ({ method }) => {
 
     if (checkWords || !mixed.length)
         return (
-            <NoWords
+            <NoWordsLearn
                 setCheckWords={() => {
                     dispatch(setCheckWords(false))
                 }}
@@ -216,35 +216,10 @@ const LearnWordsCard = ({ method }) => {
                     }}
                 />
             </Box>
-            <Box
-                display="flex"
-                justifyContent="space-between"
-                pb={4}
-                gap={2}
-            >
-                <MyButton
-                    onClick={handleDonNotKnow}
-                    sx={{
-                        fontSize: '12px',
-                        textTransform: 'initial',
-                        width: '160px',
-                        height: '50px',
-                    }}
-                >
-                    {t(`Don't know`)}
-                </MyButton>
-                <MyButton
-                    onClick={handleRemembered}
-                    sx={{
-                        fontSize: '12px',
-                        textTransform: 'initial',
-                        width: '160px',
-                        height: '50px',
-                    }}
-                >
-                    {t('Remembered')}
-                </MyButton>
-            </Box>
+            <Buttons
+                handleDonNotKnow={handleDonNotKnow}
+                handleRemembered={handleRemembered}
+            />
         </PaperLearn>
     )
 }

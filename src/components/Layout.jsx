@@ -8,10 +8,10 @@ import { useAuth } from '../hooks/useAuth'
 import MyAppBarMobile from './MyAppBar/Mobile/MyAppBarMobile'
 import useMyTheme from '../hooks/useMyTheme'
 
-
 const Indent = styled('div')(({ mq, bottom }) => ({
-    paddingTop: mq ? '60px' : '72px',
-    paddingBottom: mq && bottom ? '5px' : 1,
+    // eslint-disable-next-line no-nested-ternary
+    paddingTop: mq && !bottom ? '60px' : bottom ? '0px' : '72px',
+    paddingBottom: mq && bottom ? '72px' : 1,
 }))
 
 export default function Layout() {

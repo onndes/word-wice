@@ -1,7 +1,7 @@
 import { Box, Button } from '@mui/material'
 import React from 'react'
-import useMyTheme from '../hooks/useMyTheme'
-import { PaperLearn } from './PaperLearn'
+import useMyTheme from '../../hooks/useMyTheme'
+import { PaperLearn } from '../PaperLearn'
 
 const Started = ({ handle }) => {
     const { t } = useMyTheme()
@@ -18,7 +18,7 @@ const Started = ({ handle }) => {
                 }}
             >
                 <Button
-                    onClick={handle}
+                    onClick={() => handle()}
                     variant="contained"
                     color="success"
                     display="flex"

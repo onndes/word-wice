@@ -1,5 +1,5 @@
 import React from 'react'
-import RepeatWordsCard from '../../components/RepeatWordsCard/RepeatWordsCard'
+import RepeatWordsCard from '../../components/Learn/RepeatWordsCard'
 
 const LearnRepeat = () => {
     return <RepeatWordsCard method="learned" />

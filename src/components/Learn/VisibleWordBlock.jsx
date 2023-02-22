@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
-import WordRank from './WordRank'
+import WordRank from '../WordRank'
 
 const VisibleWordBlock = ({ word, isWords, title, show }) => {
     return (
