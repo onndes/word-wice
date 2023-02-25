@@ -92,6 +92,17 @@ export const tokens = (mode) => ({
                   800: '#2e1e39',
                   900: '#170f1c',
               },
+              orange: {
+                  100: '#ffe9cc',
+                  200: '#ffd399',
+                  300: '#ffbd66',
+                  400: '#ffa733',
+                  500: '#ff9100',
+                  600: '#cc7400',
+                  700: '#995700',
+                  800: '#663a00',
+                  900: '#331d00',
+              },
           }
         : {
               grey: {
@@ -182,6 +193,17 @@ export const tokens = (mode) => ({
                   800: '#2e1e39',
                   900: '#170f1c',
               },
+              orange: {
+                  900: '#331d00',
+                  800: '#663a00',
+                  700: '#995700',
+                  600: '#cc7400',
+                  500: '#ff9100',
+                  400: '#ffa733',
+                  300: '#ffbd66',
+                  200: '#ffd399',
+                  100: '#ffe9cc',
+              },
           }),
 })
 
@@ -233,9 +255,7 @@ export const themeSettings = (mode) => {
         components: {
             Paper: {
                 styleOverrides: {
-                    root: {
-                      
-                    },
+                    root: {},
                 },
             },
         },

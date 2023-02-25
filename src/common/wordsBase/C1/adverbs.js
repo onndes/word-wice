@@ -1,0 +1,62 @@
+const words = [
+    { en: 'Head-to-tail', t: '[hɛd-tuː-teɪl]', ru: 'От начала до конца' },
+    {
+        en: 'Extensively',
+        t: '[ɪksˈtɛnsɪvli]',
+        ru: 'Широко, основательно, подробно',
+    },
+    { en: 'Mistakenly', t: '[mɪsˈteɪkənli]', ru: 'Ошибочно' },
+    { en: 'Initially', t: '[ɪˈnɪʃəli]', ru: 'Первоначально, изначально' },
+    { en: 'Remarkably', t: '[rɪˈmɑːkəbli]', ru: 'Замечательно, удивительно' },
+    { en: 'Broadly', t: '[ˈbrɔːdli]', ru: 'Широко, обширно, значительно' },
+    { en: 'Posthumously', t: '[ˈpɒstjʊməsli]', ru: 'Посмертно, подспудно' },
+    {
+        en: 'Respectively',
+        t: '[rɪsˈpɛktɪvli]',
+        ru: 'Соответственно, следовательно',
+    },
+    {
+        en: 'Clumsily',
+        t: '[ˈklʌmzɪli]',
+        ru: 'Неуклюже, грубо, неудачно, бестолково',
+    },
+    { en: 'Deliberately', t: '[dɪˈlɪbərɪtli]', ru: 'Сознательно' },
+    {
+        en: 'Subconsciously.',
+        t: '[ˌsʌbˈkɒnʃəsli]',
+        ru: 'Подсознательно, неосознанно',
+    },
+    { en: 'Irrespective', t: '[ˌɪrɪsˈpɛktɪv]', ru: 'Независимо' },
+    { en: 'Albeit', t: '[ɔːlˈbiːɪt]', ru: 'Хотя, однако, несмотря' },
+    { en: 'Strictly', t: '[ˈstrɪktli]', ru: 'Строго, неукоснительно, жестко' },
+    { en: 'Fiercely', t: '[ˈfɪəsli]', ru: 'Яростно, свирепо, решительно' },
+    { en: 'Arguably', t: '[ˈɑːgjʊəbli]', ru: 'Спорно, предположительно' },
+    {
+        en: 'Unremittingly',
+        t: '[ˌʌnrɪˈmɪtɪŋli]',
+        ru: 'Неослабно, решительно, безоговорочно',
+    },
+    { en: 'Justifiably', t: '[ˈʤʌstɪfaɪəbli]', ru: 'Оправданно' },
+    { en: 'Undeniably', t: '[ˌʌndɪˈnaɪəbli]', ru: 'Неоспоримо' },
+    { en: 'Candidly', t: '[ˈkændɪdli]', ru: 'Откровенно, честно, искренне' },
+    { en: 'Allegedly', t: '[əˈlɛʤdli]', ru: 'Предположительно' },
+    { en: 'Chronically', t: '[ˈkrɒnɪk(ə)li]', ru: 'Хронически' },
+    { en: 'Improperly', t: '[ɪmˈprɒpəli]', ru: 'Неправильно, неправомерно' },
+    { en: 'Unconsciously', t: '[ʌnˈkɒnʃəsli]', ru: 'Бессознательно' },
+    { en: 'Worrisomely', t: '[ˈwʌrɪsəmli]', ru: 'Тревожно' },
+    { en: 'Oftentimes', t: '[ˈɒfntaɪmz]', ru: 'Нередко, зачастую, часто' },
+    {
+        en: 'Self-perpetuatingly',
+        t: '[sɛlf-pəˈpɛʧʊeɪtɪŋli]',
+        ru: 'Самостоятельно',
+    },
+    {
+        en: 'Radically',
+        t: '[ˈrædɪkəli]',
+        ru: 'В корне, радикально, принципиально',
+    },
+    { en: 'Wrongfully', t: '[ˈrɒŋfʊli]', ru: 'Несправедливо, ошибочно' },
+    { en: 'Indisputable', t: '[ˌɪndɪsˈpjuːtəbl]', ru: 'Бесспорно, неоспоримо' },
+]
+
+export default words

@@ -10,7 +10,7 @@ export const PaperLearn = styled(Paper)(() => {
         mb: 2,
         maxWidth: '400px',
         margin: '0 auto ',
-        height: mq ? '100%' : '300px',
+        height: mq ? '100%' : '370px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: mq ? 'space-between' : 'center',

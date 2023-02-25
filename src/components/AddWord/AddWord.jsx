@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, IconButton } from '@mui/material'
+import { Box, Button, IconButton } from '@mui/material'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,6 +7,7 @@ import GTranslateIcon from '@mui/icons-material/GTranslate'
 import { nanoid } from 'nanoid'
 import { Timestamp } from 'firebase/firestore'
 import { Link, redirect } from 'react-router-dom'
+import PostAddIcon from '@mui/icons-material/PostAdd'
 import {
     addWords,
     translateWord,
@@ -15,6 +16,7 @@ import { schemaFormAddWord } from '../../utils/schemaFormAddWord'
 import MyInput from './MyInput'
 import MyAlertDialogSlide from '../MyAlertDialogSlide'
 import {
+    BASE_WORDS_ROUTE,
     collectionNameWords,
     fieldsData,
     knowWord,
@@ -24,7 +26,7 @@ import useMyTheme from '../../hooks/useMyTheme'
 import MyButton from '../MyButton'
 
 const AddWord = () => {
-    const { mq, t } = useMyTheme()
+    const { mq, t, colors } = useMyTheme()
     const dispatch = useDispatch()
     const [formData, setFormData] = useState(null)
 
@@ -166,7 +168,7 @@ const AddWord = () => {
                 name={transcription.name}
             />
 
-            <Box sx={{ display: 'flex', gap: 3 }}>
+            <Box sx={{ display: 'flex', gap: 2 }}>
                 {mq && (
                     <MyButton
                         component={Link}
@@ -195,6 +197,36 @@ const AddWord = () => {
                 >
                     {t('Add')}
                 </MyButton>
+                {!mq && (
+                    <Box>
+                        <Button
+                            component={Link}
+                            to={BASE_WORDS_ROUTE}
+                            variant="contained"
+                            size="large"
+                            sx={{
+                                mt: '12px',
+                                background: colors.orange[600],
+                                display: 'flex',
+                                fontWeight: 600,
+                                borderRadius: '50%',
+                                boxShadow: `0px 0px 10px 2px ${colors.orange[500]}`,
+                                backdropFilter: 'blur(4px)',
+                                height: '45px',
+                                width: '45px',
+                                minWidth: '0px',
+                                '&:hover': {
+                                    backgroundColor: colors.orange[500],
+                                    boxShadow: `0px 0px 10px 2px ${colors.orange[500]}`,
+                                },
+                            }}
+                        >
+                            <Box sx={{ display: 'flex', pl: '2px', pb: '2px' }}>
+                                <PostAddIcon fontSize="large" />
+                            </Box>
+                        </Button>
+                    </Box>
+                )}
             </Box>
 
             <MyAlertDialogSlide

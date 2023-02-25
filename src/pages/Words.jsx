@@ -4,6 +4,7 @@ import TableWords from '../components/TableWords/TableWords'
 import usePosition from '../hooks/usePosition'
 import useMyTheme from '../hooks/useMyTheme'
 import CardsWords from '../components/CardsWords/CardsWords'
+import MobileButton from '../components/DataBaseWords/MobileButton'
 
 const Words = () => {
     const { mq } = useMyTheme()
@@ -12,6 +13,7 @@ const Words = () => {
     return (
         <>
             {mq && currentPosition < 20 && <AddWordMobile />}
+            {mq && currentPosition < 20 && <MobileButton />}
             {!mq && <AddWord />}
             {mq ? <CardsWords /> : <TableWords />}
         </>

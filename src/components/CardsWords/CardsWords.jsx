@@ -119,12 +119,18 @@ const CardsWords = () => {
                             </Typography>
                             <Typography
                                 variant="p"
-                                fontSize="13px"
+                                fontSize="14px"
                                 color="text.secondary"
                             >
                                 {row.translation}
                             </Typography>
-                            <Typography>{row.transcription}</Typography>
+                            <Typography
+                                variant="p"
+                                fontSize="14px"
+                                color="text.secondary"
+                            >
+                                {row.transcription}
+                            </Typography>
                         </Box>
                         <Box
                             display="flex"

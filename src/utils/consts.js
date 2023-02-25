@@ -6,6 +6,8 @@ export const ADD_WORD_ROUTE = '/add-word'
 export const PROFILE_ROUTE = '/profile'
 export const LEARN_NEW_ROUTE = '/learn/new'
 export const LEARN_REPEAT_ROUTE = '/learn/repeat'
+export const BASE_WORDS_ROUTE = '/words/words-base'
+export const LEVEL_BASE_WORDS_ROUTE = '/words/words-base/level'
 
 export const fieldsData = {
     word: {

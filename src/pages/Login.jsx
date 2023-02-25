@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Container, Button, Box } from '@mui/material'
 import { getAuthUser } from '../redux/slices/userSlice/userAsync'
-import icon from '../common/images/icon-256x256.png'
+import icon from '../assets/images/icon-256x256.png'
 
 export default function Login() {
     const dispatch = useDispatch()

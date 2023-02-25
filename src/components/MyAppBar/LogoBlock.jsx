@@ -8,7 +8,7 @@ import {
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { WORDS_ROUTE } from '../../utils/consts'
-import icon from '../../common/images/icon-72x72.png'
+import icon from '../../assets/images/icon-72x72.png'
 import DisplayOnline from '../DisplayOnline'
 
 const LogoBlock = ({ isOnline }) => {
@@ -25,7 +25,12 @@ const LogoBlock = ({ isOnline }) => {
             }}
         >
             <ListItemButton disableGutters dense>
-                <img width={mq ? '53px' : '63px'} src={icon} alt="" />
+                <img
+                    width={mq ? '53px' : '63px'}
+                    height={mq ? '53px' : '63px'}
+                    src={icon}
+                    alt=""
+                />
                 <Box>
                     <Typography
                         variant={mq ? 'h5' : 'h3'}

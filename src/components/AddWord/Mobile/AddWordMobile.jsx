@@ -27,8 +27,7 @@ const AddWordMobile = () => {
                 sx={{
                     fontWeight: 600,
                     borderRadius: '5px',
-                    boxShadow: 
-                      `0px 0px 10px 2px ${theme.palette.secondary.main}`,
+                    boxShadow: `0px 0px 10px 2px ${theme.palette.secondary.main}`,
                     backdropFilter: 'blur(4px)',
                 }}
             >
