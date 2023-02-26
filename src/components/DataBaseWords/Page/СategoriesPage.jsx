@@ -8,7 +8,7 @@ const СategoriesPage = () => {
     const { colors, t } = useMyTheme()
 
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" disableGutters>
             <ButtonDataBase
                 to={LEVEL_BASE_WORDS_ROUTE}
                 text={t('By level of English')}

@@ -47,8 +47,11 @@ export default function MyAppBarMobile() {
                 {!selected.length && !isVisibleBtnBack && <Box width="36px" />}
                 {isVisibleBtnBack && (
                     <IconButton
+                        disableFocusRipple
+                        disableRipple
                         aria-label="back"
                         onClick={() => navigate(backPage)}
+                        p={2}
                     >
                         <ArrowBackIosIcon />
                     </IconButton>
