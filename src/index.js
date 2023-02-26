@@ -7,12 +7,13 @@ import './firebase'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
 import App from './App'
+import LoaderPage from './components/LoaderPage/LoaderPage'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <Provider store={store}>
         <BrowserRouter>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<LoaderPage />}>
                 <App />
             </Suspense>
         </BrowserRouter>

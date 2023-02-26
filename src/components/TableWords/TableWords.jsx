@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Box from '@mui/material/Box'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -24,7 +24,7 @@ import BasicAlerts from '../BasicAlerts'
 import useMyTheme from '../../hooks/useMyTheme'
 import ConfirmDialog from '../ConfirmDialog'
 
-export default function TableWords() {
+const TableWords = () => {
     const dispatch = useDispatch()
     const { mq } = useMyTheme()
     const { newWords, inProcessWords, learnedWords, filter } = useSelector(
@@ -35,11 +35,15 @@ export default function TableWords() {
     const [openConfirmWordsForStudy, setOpenConfirmWordsForStudy] =
         useState(false)
 
-    let words = []
+    const words = useMemo(() => {
+        let result = []
 
-    if (filter.newWords) words = [...words, ...newWords]
-    if (filter.inProcessWords) words = [...words, ...inProcessWords]
-    if (filter.learnedWords) words = [...words, ...learnedWords]
+        if (filter.newWords) result = [...result, ...newWords]
+        if (filter.inProcessWords) result = [...result, ...inProcessWords]
+        if (filter.learnedWords) result = [...result, ...learnedWords]
+
+        return result
+    }, [newWords, inProcessWords, learnedWords, filter])
 
     const { rowsPerPage, order, orderBy, selected, page } = useSelector(
         ({ settingsApp }) => settingsApp.wordsList
@@ -228,3 +232,5 @@ export default function TableWords() {
         </Box>
     )
 }
+
+export default TableWords

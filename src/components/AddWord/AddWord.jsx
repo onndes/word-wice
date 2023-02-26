@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import { Box, Button, IconButton } from '@mui/material'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
@@ -15,15 +15,10 @@ import {
 import { schemaFormAddWord } from '../../utils/schemaFormAddWord'
 import MyInput from './MyInput'
 import MyAlertDialogSlide from '../MyAlertDialogSlide'
-import {
-    BASE_WORDS_ROUTE,
-    collectionNameWords,
-    fieldsData,
-    knowWord,
-    WORDS_ROUTE,
-} from '../../utils/consts'
+import { collectionNameWords, fieldsData, knowWord } from '../../utils/consts'
 import useMyTheme from '../../hooks/useMyTheme'
 import MyButton from '../MyButton'
+import { BASE_WORDS_ROUTE, WORDS_ROUTE } from '../../common/consts/ROUTES'
 
 const AddWord = () => {
     const { mq, t, colors } = useMyTheme()
@@ -210,14 +205,13 @@ const AddWord = () => {
                                 display: 'flex',
                                 fontWeight: 600,
                                 borderRadius: '50%',
-                                boxShadow: `0px 0px 10px 2px ${colors.orange[500]}`,
+
                                 backdropFilter: 'blur(4px)',
                                 height: '45px',
                                 width: '45px',
                                 minWidth: '0px',
                                 '&:hover': {
                                     backgroundColor: colors.orange[500],
-                                    boxShadow: `0px 0px 10px 2px ${colors.orange[500]}`,
                                 },
                             }}
                         >

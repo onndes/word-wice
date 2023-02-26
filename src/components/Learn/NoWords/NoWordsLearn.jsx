@@ -1,7 +1,7 @@
 import { Box, Button, styled, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { WORDS_ROUTE } from '../../../utils/consts'
+import { WORDS_ROUTE } from '../../../common/consts/ROUTES'
 import { PaperLearn } from '../../PaperLearn'
 import useMyTheme from '../../../hooks/useMyTheme'
 

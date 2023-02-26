@@ -20,7 +20,7 @@ import {
     MENU_ROUTE,
     PROFILE_ROUTE,
     WORDS_ROUTE,
-} from './utils/consts'
+} from './common/consts/ROUTES'
 
 export const publicRoutes = [
     {

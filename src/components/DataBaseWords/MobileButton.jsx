@@ -1,12 +1,12 @@
 import React from 'react'
-import { Box, Button, IconButton } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import PostAddIcon from '@mui/icons-material/PostAdd'
 import { Link } from 'react-router-dom'
-import { ADD_WORD_ROUTE, BASE_WORDS_ROUTE } from '../../utils/consts'
 import useMyTheme from '../../hooks/useMyTheme'
+import { BASE_WORDS_ROUTE } from '../../common/consts/ROUTES'
 
 const MobileButton = () => {
-    const { theme, t, colors } = useMyTheme()
+    const { colors } = useMyTheme()
 
     return (
         <Box

@@ -1,12 +1,9 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import TopicsPage from './components/DataBaseWords/Page/LevelsPage'
 import { useAuth } from './hooks/useAuth'
-import Profile from './pages/Profile'
-import WordsBase from './pages/WordsBase'
 
 import { privateRoutes, publicRoutes } from './routes'
-import { LOGIN_ROUTE, PROFILE_ROUTE } from './utils/consts'
+import { LOGIN_ROUTE, PROFILE_ROUTE } from './common/consts/ROUTES'
 
 const AppRouter = () => {
     const { isAuth } = useAuth()

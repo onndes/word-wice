@@ -1,8 +1,16 @@
-import React from 'react'
-import СategoriesPage from '../components/DataBaseWords/Page/СategoriesPage'
+import React, { lazy, Suspense } from 'react'
+import LoaderPage from '../components/LoaderPage/LoaderPage'
+
+const DynamicСategoriesPage = lazy(() =>
+    import('../components/DataBaseWords/Page/СategoriesPage')
+)
 
 const WordsBase = () => {
-    return <СategoriesPage />
+    return (
+        <Suspense fallback={<LoaderPage />}>
+            <DynamicСategoriesPage />
+        </Suspense>
+    )
 }
 
 export default WordsBase

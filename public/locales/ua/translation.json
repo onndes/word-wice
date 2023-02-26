@@ -81,5 +81,26 @@
     "messageConfirm_delete": "Ви впевнені, що хочете видалити ці {{count}}  слова зі свого словника?",
     "messageConfirm_toNow": "Ви впевнені, що хочете повернути ці {{count}} слова до списку нових?",
 
-    "Are you sure you don't remember this word?": "Are you sure you don't remember this word?"
+    "Are you sure you don't remember this word?": "Are you sure you don't remember this word?",
+    "By level of English": "За рівнем англійської",
+
+    "Adjectives": "Прикметники",
+    "Adverbs": "Прислівники",
+    "Verbs": "Дієслова",
+    "Family": "Сім'я",
+    "Social communication": "Соціальне спілкування",
+    "The World": "Світ",
+    "Tourist": "Туризм",
+    "Career and professional development": "Кар'єра та професійний розвиток",
+    "Climate nature protection": "Захист клімату та природи",
+    "Entertainment and recreation": "Розваги та відпочинок",
+    "Life successes and failures": "Успіхи та невдачі в житті",
+    "Social interaction in the Post COVID period": "Соціальна взаємодія в пост-COVID період",
+    "Youth modern manners": "Сучасні манери молоді",
+    "Modern education": "Сучасна освіта",
+    "Modern literature": "Сучасна література",
+    "Social trends": "Соціальні тенденції",
+    "Personality and social behavior": "Особистість та соціальна поведінка",
+    "Scientific research": "Наукові дослідження",
+    "TheEarth": "Земля"
 }

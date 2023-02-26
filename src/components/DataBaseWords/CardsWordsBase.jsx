@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import {
     Paper,
     Typography,
@@ -9,7 +9,8 @@ import {
 } from '@mui/material'
 import AddBoxIcon from '@mui/icons-material/AddBox'
 import { nanoid } from 'nanoid'
-import { useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { Timestamp } from 'firebase/firestore'
 import ConfirmDialog from '../ConfirmDialog'
 import { collectionNameWords, knowWord } from '../../utils/consts'
@@ -17,29 +18,42 @@ import { addWords } from '../../redux/slices/wordsSlice/wordsAsync'
 
 const CardsWordsBase = ({ words }) => {
     const dispatch = useDispatch()
+    const { i18n } = useTranslation()
+
+    const { newWords, inProcessWords, learnedWords } = useSelector(
+        ({ words }) => words
+    )
     const [openConfirmAdd, setOpenConfirmAdd] = useState(false)
     const [selected, setSelected] = useState([])
     const [currentAddWords, setCurrentAddWords] = useState(null)
 
-    const handleClick = (_, word) => {
-        const selectedIndex = selected.indexOf(word)
-        let newSelected = []
+    const vocEnWords = useMemo(() => {
+        const wordsVoc = [...newWords, ...inProcessWords, ...learnedWords]
+        return wordsVoc.map((el) => {
+            return el.word.toLowerCase()
+        })
+    }, [newWords, inProcessWords, learnedWords])
+    const lang = i18n.language === 'en' ? 'ru' : i18n.language
 
-        if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, word)
-        } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1))
-        } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1))
-        } else if (selectedIndex > 0) {
-            newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1)
-            )
-        }
+    // const handleClick = (word) => {
+    //     const selectedIndex = selected.indexOf(word)
+    //     let newSelected = []
 
-        setSelected(newSelected)
-    }
+    //     if (selectedIndex === -1) {
+    //         newSelected = newSelected.concat(selected, word)
+    //     } else if (selectedIndex === 0) {
+    //         newSelected = newSelected.concat(selected.slice(1))
+    //     } else if (selectedIndex === selected.length - 1) {
+    //         newSelected = newSelected.concat(selected.slice(0, -1))
+    //     } else if (selectedIndex > 0) {
+    //         newSelected = newSelected.concat(
+    //             selected.slice(0, selectedIndex),
+    //             selected.slice(selectedIndex + 1)
+    //         )
+    //     }
+
+    //     setSelected(newSelected)
+    // }
 
     const isSelected = useCallback(
         (wordId) => selected.some((el) => el.en === wordId),
@@ -48,10 +62,11 @@ const CardsWordsBase = ({ words }) => {
 
     const handleClickAdd = () => {
         const collectionName = collectionNameWords.NEW
+
         const word = {
             word: currentAddWords.en,
             transcription: currentAddWords.t,
-            translation: currentAddWords.ru,
+            translation: currentAddWords?.[lang] || currentAddWords.ru,
             id: nanoid(),
             dateCreated: Timestamp.fromDate(new Date()),
             dateChange: Timestamp.fromDate(new Date()),
@@ -69,6 +84,8 @@ const CardsWordsBase = ({ words }) => {
         <Container maxWidth="sm" disableGutters sx={{ pb: 10 }}>
             {words.map((row) => {
                 const isItemSelected = isSelected(row.en)
+                const isInStock =
+                    vocEnWords?.indexOf(row.en.toLowerCase().trim()) !== -1
 
                 return (
                     <Paper
@@ -78,13 +95,13 @@ const CardsWordsBase = ({ words }) => {
                             padding: 0,
                             width: '100%',
                             mb: 0.5,
+                            opacity: isInStock ? 0.3 : 1,
                             backgroundColor: isItemSelected
                                 ? theme.palette.background.default
                                 : theme.palette.background.main,
-                            gap: 3,
                             display: 'flex',
                             justifyContent: 'space-between',
-                            alightItems: 'center',
+                            alignItems: 'center',
                         })}
                     >
                         <Box
@@ -92,7 +109,7 @@ const CardsWordsBase = ({ words }) => {
                             flexDirection="column"
                             p={1}
                             width="100%"
-                            onClick={(event) => handleClick(event, row)}
+                            // onClick={() => !isInStock && handleClick(row)}
                         >
                             <Typography
                                 variant="p"
@@ -106,22 +123,25 @@ const CardsWordsBase = ({ words }) => {
                                 fontSize="13px"
                                 color="text.secondary"
                             >
-                                {row.ru}
+                                {row?.[lang] || row.ru}
                             </Typography>
                             <Typography>{row.transcription}</Typography>
                         </Box>
+                        <Divider orientation="vertical" light flexItem />
+
                         <Box
                             sx={{
                                 display: 'flex',
-                                justifyContent: 'center',
-                                alightItems: 'center',
+                                alignItems: 'center',
                             }}
                         >
-                            <Divider orientation="vertical" light flexItem />
                             <IconButton
-                            disabled
+                                disabled={isInStock}
                                 size="large"
-                                aria-label=""
+                                aria-label={`add word ${row.en}`}
+                                sx={{
+                                    margin: 0.5,
+                                }}
                                 onClick={() => {
                                     setOpenConfirmAdd(true)
                                     setCurrentAddWords(row)

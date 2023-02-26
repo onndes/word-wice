@@ -1,8 +1,8 @@
 import { Container } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 import React from 'react'
+import { LEVEL_BASE_WORDS_ROUTE } from '../../../common/consts/ROUTES'
 import useMyTheme from '../../../hooks/useMyTheme'
-import { LEVEL_BASE_WORDS_ROUTE } from '../../../utils/consts'
 import ButtonDataBase from '../ButtonDataBase'
 
 const LevelsPage = () => {

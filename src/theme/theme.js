@@ -226,10 +226,11 @@ export const themeSettings = (mode) => {
                           main: '#212B36',
                           paper: '#212B36',
                           secondary: '#212B36',
+                          disabled: 'rgba(33, 43, 54, 0)',
                       },
                       text: {
                           primary: '#dfebf7',
-                          secondary: '#5e6b78',
+                          secondary: '#525252',
                       },
                   }
                 : {
@@ -245,6 +246,7 @@ export const themeSettings = (mode) => {
                           main: '#ffffff',
                           paper: '#ffffff',
                           secondary: '#e8edf1',
+                          disabled: 'rgba(33, 43, 54, 0)',
                       },
                       text: {
                           primary: '#212b36',
@@ -260,30 +262,30 @@ export const themeSettings = (mode) => {
             },
         },
         typography: {
-            fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
+            fontFamily: ['Roboto', 'sans-serif'].join(','),
             fontSize: 12,
             h1: {
-                fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
+                fontFamily: ['Roboto', 'sans-serif'].join(','),
                 fontSize: 40,
             },
             h2: {
-                fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
+                fontFamily: ['Roboto', 'sans-serif'].join(','),
                 fontSize: 32,
             },
             h3: {
-                fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
+                fontFamily: ['Roboto', 'sans-serif'].join(','),
                 fontSize: 24,
             },
             h4: {
-                fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
+                fontFamily: ['Roboto', 'sans-serif'].join(','),
                 fontSize: 20,
             },
             h5: {
-                fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
+                fontFamily: ['Roboto', 'sans-serif'].join(','),
                 fontSize: 18,
             },
             h6: {
-                fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
+                fontFamily: ['Roboto', 'sans-serif'].join(','),
                 fontSize: 14,
             },
         },

@@ -85,10 +85,20 @@ const Profile = () => {
             </Grid>
             <Grid xs={4} direction="column" justifyContent="flex-start">
                 <Item bg={colors.indigo[500]}>
-                    <Typography variant="h6" mb={1} color="white">
+                    <Typography
+                        variant="h6"
+                        mb={1}
+                        color="white"
+                        justifySelf="flex-start"
+                    >
                         {t('Learned')}
                     </Typography>
-                    <Typography variant="h3" color="white">
+                    <Typography
+                        variant="h3"
+                        color="white"
+                        display="flex"
+                        justifySelf="flex-end"
+                    >
                         {learnedWordsCount}
                     </Typography>
                 </Item>

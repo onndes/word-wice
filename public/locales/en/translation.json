@@ -81,5 +81,27 @@
     "messageConfirm_delete": "Are you certain that you wish to remove these {{count}}  word(s) from your dictionary?",
     "messageConfirm_toNow": "Are you sure you want to return these {{count}} word(s) to the list of new?",
 
-    "Are you sure you don't remember this word?": "Are you sure you don't remember this word?"
+    "Are you sure you don't remember this word?": "Are you sure you don't remember this word?",
+
+    "By level of English": "By level of English",
+
+    "Adjectives": "Adjectives",
+    "Adverbs": "Adverbs",
+    "Verbs": "Verbs",
+    "Family": "Family",
+    "Social communication": "Social communication",
+    "The World": "The World",
+    "Tourist": "Tourist",
+    "Career and professional development": "Career and professional development",
+    "Climate nature protection": "Climate nature protection",
+    "Entertainment and recreation": "Entertainment and recreation",
+    "Life successes and failures": "Life successes and failures",
+    "Social interaction in the Post COVID period": "Social interaction in the Post COVID period",
+    "Youth modern manners": "Youth modern manners",
+    "Modern education": "Modern education",
+    "Modern literature": "Modern literature",
+    "Social trends": "Social trends",
+    "Personality and social behavior": "Personality and social behavior",
+    "Scientific research": "Scientific research",
+    "TheEarth": "TheEarth"
 }

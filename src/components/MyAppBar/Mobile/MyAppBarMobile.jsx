@@ -1,16 +1,24 @@
 import { useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
-import { alpha, AppBar, Box, Toolbar } from '@mui/material'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { alpha, AppBar, Box, Toolbar, IconButton } from '@mui/material'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import useIsOnline from '../../../hooks/useIsOnline'
 import LogoBlock from '../LogoBlock'
 import ToolbarWordsCards from './ToolbarWordsCards'
 import OptionsMenu from './OptionsMenu/OptionsMenu'
-import { WORDS_ROUTE } from '../../../utils/consts'
+import { WORDS_ROUTE } from '../../../common/consts/ROUTES'
 
 export default function MyAppBarMobile() {
     const isOnline = useIsOnline()
     const { selected } = useSelector(({ settingsApp }) => settingsApp.wordsList)
     const { pathname } = useLocation()
+    const navigate = useNavigate()
+
+    const pathSplit = pathname.split('/')
+    const pathLength = pathSplit.length
+    const backPage = pathSplit.slice(0, pathLength - 1).join('/')
+
+    const isVisibleBtnBack = pathLength > 2 && !selected.length
 
     return (
         <AppBar
@@ -36,7 +44,16 @@ export default function MyAppBarMobile() {
                     alignItems: 'center',
                 }}
             >
-                {!selected.length && <Box width="36px" />}
+                {!selected.length && !isVisibleBtnBack && <Box width="36px" />}
+                {isVisibleBtnBack && (
+                    <IconButton
+                        aria-label="back"
+                        onClick={() => navigate(backPage)}
+                    >
+                        <ArrowBackIosIcon />
+                    </IconButton>
+                )}
+
                 {selected.length ? (
                     <ToolbarWordsCards />
                 ) : (
@@ -46,7 +63,10 @@ export default function MyAppBarMobile() {
                 {pathname === WORDS_ROUTE && !selected.length && (
                     <OptionsMenu />
                 )}
-                {pathname !== WORDS_ROUTE && <Box width="36px" />}
+                {pathname !== WORDS_ROUTE && !isVisibleBtnBack && (
+                    <Box width="36px" />
+                )}
+                {isVisibleBtnBack && <Box width="36px" />}
             </Toolbar>
         </AppBar>
     )

@@ -114,13 +114,15 @@ const CardsWords = () => {
                                 variant="p"
                                 fontSize="16px"
                                 color="text.primary"
+                                fontWeight="500"
                             >
                                 {row.word}
                             </Typography>
                             <Typography
                                 variant="p"
                                 fontSize="14px"
-                                color="text.secondary"
+                                color="text.primary"
+                                fontWeight="300"
                             >
                                 {row.translation}
                             </Typography>

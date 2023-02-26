@@ -15,7 +15,7 @@ const initialState = {
     user: {
         recommendForLearn: +localStorage.getItem('recommendForLearn') || 5,
         variantDelDuplicate: variantDelDup.data,
-        show: fieldsData.translation.name
+        show: fieldsData.translation.name,
     },
     isOnline: true,
     status: [],
