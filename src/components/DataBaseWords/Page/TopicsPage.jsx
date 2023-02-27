@@ -2,7 +2,7 @@ import React from 'react'
 import { Container } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { topics } from '../../../common/consts/topics'
-import words from '../../../common/wordsBase'
+import { words } from '../../../common/wordsBase'
 import useMyTheme from '../../../hooks/useMyTheme'
 import ButtonDataBase from '../ButtonDataBase'
 import CardsWordsBase from '../CardsWordsBase'
@@ -23,7 +23,6 @@ const TopicsPage = () => {
                     key={el.title}
                     to={`${LEVEL_BASE_WORDS_ROUTE}/${params.id}/${el.id}`}
                     text={t(el.title)}
-                    // color={theme.palette}
                     mb
                 />
             ))}

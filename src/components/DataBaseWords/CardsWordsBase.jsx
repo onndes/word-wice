@@ -65,7 +65,7 @@ const CardsWordsBase = ({ words }) => {
 
         const word = {
             word: currentAddWords.en,
-            transcription: currentAddWords.t,
+            transcription: currentAddWords?.t || '',
             translation: currentAddWords?.[lang] || currentAddWords.ru,
             id: nanoid(),
             dateCreated: Timestamp.fromDate(new Date()),
@@ -89,7 +89,7 @@ const CardsWordsBase = ({ words }) => {
 
                 return (
                     <Paper
-                        key={row.en}
+                        key={`${row.en}`}
                         elevation={1}
                         sx={(theme) => ({
                             padding: 0,

@@ -19,8 +19,10 @@ import {
     LOGIN_ROUTE,
     MENU_ROUTE,
     PROFILE_ROUTE,
+    TOP1000_BASE_WORDS_ROUTE,
     WORDS_ROUTE,
 } from './common/consts/ROUTES'
+import TopThousandWordsPage from './components/DataBaseWords/Page/TopThousandWordsPage'
 
 export const publicRoutes = [
     {
@@ -73,5 +75,9 @@ export const privateRoutes = [
     {
         path: `${LEVEL_BASE_WORDS_ROUTE}/:id/:topic`,
         Component: <TopicsPage />,
+    },
+    {
+        path: TOP1000_BASE_WORDS_ROUTE,
+        Component: <TopThousandWordsPage />,
     },
 ]
