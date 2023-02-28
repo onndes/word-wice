@@ -18,6 +18,7 @@ import { subWords } from './redux/slices/wordsSlice/wordsAsync'
 import { subAppSettings } from './redux/slices/settingsAppSlice/settingsAppAsync'
 import './index.css'
 import './i18n'
+import WelcomeModal from './components/WelcomeModal'
 
 const unSubs = []
 
@@ -64,11 +65,14 @@ function App() {
         })
     }, [])
 
+    const checkWelcomeModal = window.localStorage.getItem('WelcomeModal')
+
     return (
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
                 <CssBaseline enableColorScheme />
                 {isAuth ? <Layout /> : <LoaderPage />}
+                {!checkWelcomeModal && <WelcomeModal />}
             </ThemeProvider>
         </ColorModeContext.Provider>
     )

@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, IconButton } from '@mui/material'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
@@ -8,6 +8,7 @@ import { nanoid } from 'nanoid'
 import { Timestamp } from 'firebase/firestore'
 import { Link, redirect } from 'react-router-dom'
 import PostAddIcon from '@mui/icons-material/PostAdd'
+import { useTranslation } from 'react-i18next'
 import {
     addWords,
     translateWord,
@@ -22,6 +23,7 @@ import { BASE_WORDS_ROUTE, WORDS_ROUTE } from '../../common/consts/ROUTES'
 
 const AddWord = () => {
     const { mq, t, colors } = useMyTheme()
+    const { i18n } = useTranslation()
     const dispatch = useDispatch()
     const [formData, setFormData] = useState(null)
 
@@ -87,14 +89,15 @@ const AddWord = () => {
     const handleTranslate = () => {
         const wordEng = getValues().word
         const wordRu = getValues().translation
+        const lang = i18n.language === 'ua' ? 'uk' : 'ru'
         if (!wordRu && wordEng) {
             setValue(translation.name, '')
-            translateWord(wordEng, 'en', 'ru').then((e) =>
+            translateWord(wordEng, 'en', lang).then((e) =>
                 setValue(translation.name, e)
             )
         } else if (!wordEng && wordRu) {
             setValue(word.name, '')
-            translateWord(wordRu, 'ru', 'en').then((e) => {
+            translateWord(wordRu, lang, 'en').then((e) => {
                 setValue(word.name, e)
             })
         }

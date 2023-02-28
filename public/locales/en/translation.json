@@ -104,5 +104,24 @@
     "Personality and social behavior": "Personality and social behavior",
     "Scientific research": "Scientific research",
     "TheEarth": "TheEarth",
-    "Top 1000 words": "Top 1000 words"
+    "Top 1000 words": "Top 1000 words",
+
+    "welcome_message": "Word Wice",
+    "appDesk#1": "The application is designed for those who want to expand their foreign language vocabulary. Inside you will find a convenient table - a dictionary, where you can add new words, as well as a page for studying these words.",
+    "appDesk#2": "Each word in our application has several levels of knowledge - from A0 (new word) to C2 (learned word). Knowledge levels help determine the level of knowledge of each word and determine how often it needs to be repeated for memorization.",
+    "appDesk#3": "A0 - New / A1 - Beginner / A2 - Low / B1 - Intermediate / B2 - High / C1 - Proficient / C2 - Mastered",
+    "appDesk#4": "Each word will appear on flashcards for study with a specific time delay between levels. For example, the time delay between B2 and C1 is two hours, and between C1 and C2 is 24 hours. In addition, learned words (C2) will be repeated up to 5 times every 3 days, with an increase in the number of repetitions increasing the time.",
+    "appDesk#5": "Learning in the app follows the 'remember / don't remember' method. If you remember a word and mark that you remember it, its level increases by one, and if not, its level decreases.",
+    "appDesk#6": "After a word reaches C2, it moves into the category of learned words and will no longer appear on flashcards for study, but will appear on review flashcards. If you forget a learned word, it is reset to B2 level and the number of repetitions is also reset.",
+    "appDesk#7": "The default number of words recommended for study is 5, but you can increase this number up to 50 words. If the number of words is less than 5, a notification will appear before starting the study session, indicating a lack of words, and you can automatically update the level of words in your dictionary from A0, 'New', to A1, 'In the process of learning'.",
+    "appDesk#8": "The application also has the ability to work offline on both browser and mobile devices, so you can use it anywhere and anytime, even if you don't have access to the internet. In addition, the application synchronizes with the server when you connect to the internet, so all your data is saved and available on all your devices. During synchronization, if one device was offline and the other was online, words are duplicated as you may have achieved different levels of word learning on your devices, so by default the word that was edited earlier is deleted. However, this can be changed in the settings to delete words based on their level of knowledge.",
+    "appDesk#9": "The application also includes small dictionaries that can help you start learning a new language. You can choose a dictionary that matches your language proficiency level and the topic you want to study, and add words from this set of words to your own dictionary. This can be useful if you don't have the opportunity to add the necessary words to your dictionary yourself at the moment.",
+    "appDesk#10": "You can also customize the application to meet your individual needs and learning style. You can change the number of words you want to learn at once, adjust the delay time between word repetitions (not available yet), and choose which words you want to delete when syncing.",
+    "appDesk#11": "If you have any questions or issues with the application, you can contact me using the email provided in the menu - 'About the app'. I will try to respond as soon as possible and resolve any problems you may have.",
+    "appDesk#12": "We hope that our application will help you effectively and interestingly learn new words and improve your level of knowledge of a foreign language. If you have any suggestions for improving the application or new ideas that you would like to see in future updates, please let me know! I am always open to feedback and strive to make this application as convenient and useful for users, and for myself :) ",
+
+    "See": "See",
+    "Contacts": "Contacts",
+    "Close": "Close",
+    "About the app": "About the app"
 }

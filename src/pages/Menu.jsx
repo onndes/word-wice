@@ -6,6 +6,8 @@ import useMyTheme from '../hooks/useMyTheme'
 import RecommendForLearn from '../components/MenuComponents/RecommendForLearn'
 import DeleteDuplicate from '../components/MenuComponents/DeleteDuplicate'
 import LanguageSwitcher from '../components/MenuComponents/LanguageSwitcher'
+import AboutApp from '../components/MenuComponents/AboutApp'
+import Contacts from '../components/MenuComponents/Contacts'
 
 const Title = styled(Typography)(({ theme }) => ({
     marginLeft: theme.spacing(1.5),
@@ -40,6 +42,7 @@ const Menu = () => {
             <Block elevation={1}>
                 <ButtonToggleTheme />
                 <LanguageSwitcher />
+                <AboutApp />
             </Block>
             <Title variant="h5">{t('Learn')}</Title>
             <Block elevation={1}>
@@ -52,6 +55,10 @@ const Menu = () => {
             <Title variant="h5">{t('Account')}</Title>
             <Block elevation={1}>
                 <LogOut />
+            </Block>
+            <Title variant="h5">{t('Contacts')}</Title>
+            <Block elevation={1}>
+                <Contacts />
             </Block>
         </Container>
     )

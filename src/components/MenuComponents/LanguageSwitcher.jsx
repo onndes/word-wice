@@ -20,6 +20,7 @@ const LanguageSwitcher = () => {
                 flexDirection: 'column',
                 gap: 2.5,
                 alignItems: 'space-between',
+                mb: 2,
             }}
         >
             <Box

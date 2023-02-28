@@ -10,6 +10,7 @@ import Profile from './pages/Profile'
 import Words from './pages/Words'
 import WordsBase from './pages/WordsBase'
 import {
+  ABOUT_APP_ROUTE,
     ADD_WORD_ROUTE,
     BASE_WORDS_ROUTE,
     LEARN_NEW_ROUTE,
@@ -23,6 +24,7 @@ import {
     WORDS_ROUTE,
 } from './common/consts/ROUTES'
 import TopThousandWordsPage from './components/DataBaseWords/Page/TopThousandWordsPage'
+import AboutTheApp from './pages/AboutTheApp'
 
 export const publicRoutes = [
     {
@@ -79,5 +81,9 @@ export const privateRoutes = [
     {
         path: TOP1000_BASE_WORDS_ROUTE,
         Component: <TopThousandWordsPage />,
+    },
+    {
+        path: ABOUT_APP_ROUTE,
+        Component: <AboutTheApp />,
     },
 ]
