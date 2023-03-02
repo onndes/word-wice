@@ -1,10 +1,17 @@
-import AddWord from '../components/AddWord/AddWord'
+import { lazy } from 'react'
 import AddWordMobile from '../components/AddWord/Mobile/AddWordMobile'
-import TableWords from '../components/TableWords/TableWords'
 import usePosition from '../hooks/usePosition'
 import useMyTheme from '../hooks/useMyTheme'
-import CardsWords from '../components/CardsWords/CardsWords'
 import MobileButton from '../components/DataBaseWords/MobileButton'
+
+const DynamicAddWord = lazy(() => import('../components/AddWord/AddWord'))
+
+const DynamicCardsWords = lazy(() =>
+    import('../components/CardsWords/CardsWords')
+)
+const DynamicTableWords = lazy(() =>
+    import('../components/TableWords/TableWords')
+)
 
 const Words = () => {
     const { mq } = useMyTheme()
@@ -14,8 +21,8 @@ const Words = () => {
         <>
             {mq && currentPosition < 20 && <AddWordMobile />}
             {mq && currentPosition < 20 && <MobileButton />}
-            {!mq && <AddWord />}
-            {mq ? <CardsWords /> : <TableWords />}
+            {!mq && <DynamicAddWord />}
+            {mq ? <DynamicCardsWords /> : <DynamicTableWords />}
         </>
     )
 }

@@ -23,13 +23,16 @@ const MyButton = ({
             variant={variant}
             color={color}
             onClick={onClick}
+            disableElevation
             sx={(theme) => ({
                 boxShadow: `0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)`,
                 '&:focus': mq && {
                     boxShadow: `0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)`,
                 },
                 '&:hover': {
-                    backgroundColor: bgch || theme.palette.primary.main,
+                    backgroundColor: mq
+                        ? bgch || theme.palette.secondary
+                        : bgch || theme.palette.primary,
                     boxShadow:
                         mq &&
                         `0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)`,

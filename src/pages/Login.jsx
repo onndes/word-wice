@@ -2,9 +2,11 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Container, Button, Box } from '@mui/material'
 import { getAuthUser } from '../redux/slices/userSlice/userAsync'
+import useMyTheme from '../hooks/useMyTheme'
 import icon from '../assets/images/icon-256x256.png'
 
 export default function Login() {
+    const { t } = useMyTheme()
     const dispatch = useDispatch()
     return (
         <Container fixed maxWidth="lg">
@@ -31,7 +33,7 @@ export default function Login() {
                     }}
                     onClick={() => dispatch(getAuthUser())}
                 >
-                    login with google
+                    {t('Login with google')}
                 </Button>
             </Box>
         </Container>

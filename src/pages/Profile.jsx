@@ -32,7 +32,8 @@ const Profile = () => {
     const newWordsCount = newWords.length
     const inProcessWordsCount = inProcessWords.length
     const learnedWordsCount = learnedWords.length
-    const allWords = newWordsCount + inProcessWordsCount + learnedWordsCount
+    const allWordsLength =
+        newWordsCount + inProcessWordsCount + learnedWordsCount
 
     return (
         <Grid container spacing={0.8}>
@@ -61,7 +62,7 @@ const Profile = () => {
                     <Typography variant="h6" mb={1}>
                         {t('Words in the dictionary')}
                     </Typography>
-                    <Typography variant="h3">{allWords}</Typography>
+                    <Typography variant="h3">{allWordsLength}</Typography>
                 </Item>
             </Grid>
             <Grid xs={4} direction="column" justifyContent="flex-start">

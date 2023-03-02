@@ -9,6 +9,7 @@ import {
 
 import 'firebase/compat/auth'
 import 'firebase/compat/firestore'
+import { getPerformance } from 'firebase/performance'
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -21,6 +22,8 @@ const firebaseConfig = {
 }
 
 const firebaseApp = initializeApp(firebaseConfig)
+
+export const perf = getPerformance(firebaseApp)
 
 const auth = getAuth(firebaseApp)
 

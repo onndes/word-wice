@@ -15,7 +15,7 @@ export default function Contacts() {
             </ListItemAvatar>
             <ListItemText
                 primary="Email"
-                secondary="mail@mail.com"
+                secondary="wordwice@gmail.com"
                 secondaryTypographyProps={{
                     sx: { color: 'text.primary', fontSize: '14px' },
                 }}

@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
@@ -7,6 +6,8 @@ import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import Slide from '@mui/material/Slide'
 import { Box, FormControlLabel, Checkbox } from '@mui/material'
+import MyButton from './MyButton'
+import useMyTheme from '../hooks/useMyTheme'
 
 const Transition = React.forwardRef((props, ref) => (
     <Slide direction="up" ref={ref} {...props} />
@@ -19,6 +20,8 @@ export default function MyAlertDialogSlide({
     hideConfirm,
     setHideConfirm,
 }) {
+    const { t } = useMyTheme()
+
     const handleCloseCancellation = () => {
         setOpen(false)
     }
@@ -30,56 +33,72 @@ export default function MyAlertDialogSlide({
     return (
         <Box>
             <Dialog
-                PaperProps={{
-                    sx: {
+                sx={(theme) => ({
+                    '& 	.MuiDialog-paper': {
                         width: '100%',
+                        maxWidth: '400px',
                         mb: 2,
-                        background: 'background',
+                        background: theme.palette.background.main,
+                        margin: 1,
                     },
-                }}
+                })}
                 open={open}
                 TransitionComponent={Transition}
                 keepMounted
                 onClose={handleCloseCancellation}
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle>Translator</DialogTitle>
+                <DialogTitle fontSize="19px">{t("Translator")}</DialogTitle>
                 <DialogContent>
                     <DialogContentText
+                        fontSize="17  px"
                         id="alert-dialog-slide-description"
-                        color="red"
+                        color='text.primary'
                     >
-                        This translation may not be accurate
+                        {t("This translation may not be accurate")}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions
-                    sx={{ display: 'flex', justifyContent: 'space-between' }}
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexDirection: 'column',
+                        gap: 1,
+                    }}
                 >
                     <FormControlLabel
-                        label="No longer show?"
+                        label={t("No longer show?")}
                         sx={{ ml: 0.5 }}
                         control={
                             <Checkbox
                                 value=""
                                 checked={hideConfirm}
                                 onChange={() => setHideConfirm(!hideConfirm)}
-                                color="secondary"
+                                color="primary"
                             />
                         }
                     />
-                    <Box>
-                        <Button
-                            color="secondary"
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            gap: 2,
+                            justifyContent: 'flex-end',
+                        }}
+                    >
+                        <MyButton
+                            color="primary"
+                            variant="outlined"
                             onClick={handleCloseCancellation}
                         >
-                            Cancellation
-                        </Button>
-                        <Button
-                            color="secondary"
+                            {t("Cancellation")}
+                        </MyButton>
+                        <MyButton
+                            variant="outlined"
+                            color="primary"
                             onClick={handleCloseTranslate}
                         >
-                            Translate
-                        </Button>
+                            {t("Translate")}
+                        </MyButton>
                     </Box>
                 </DialogActions>
             </Dialog>

@@ -167,23 +167,6 @@ const AddWord = () => {
             />
 
             <Box sx={{ display: 'flex', gap: 2 }}>
-                {mq && (
-                    <MyButton
-                        component={Link}
-                        to={WORDS_ROUTE}
-                        color="secondary"
-                        variant="contained"
-                        type="submit"
-                        sx={{
-                            height: '50px',
-                            width: mq ? '100%' : '140px',
-                            fontSize: '18px',
-                            mt: '10px',
-                        }}
-                    >
-                        {t('Back')}
-                    </MyButton>
-                )}
                 <MyButton
                     type="submit"
                     sx={{

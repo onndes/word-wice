@@ -22,7 +22,7 @@ export default function Layout() {
         <>
             <CssBaseline />
             {isAuth && <MyAppBar />}
-            {mq && <MyAppBarMobile />}
+            {isAuth && mq && <MyAppBarMobile />}
             <Indent mq={mq} />
             <Container
                 maxWidth="md"

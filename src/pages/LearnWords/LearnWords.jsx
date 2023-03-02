@@ -62,6 +62,7 @@ const LearnWords = () => {
 
     useEffect(() => {
         const readyForStudy = checkTimeStop(inProcessWords)
+
         dispatch(
             setReadyForStudyAndRepeat({
                 count: readyForStudy.length,

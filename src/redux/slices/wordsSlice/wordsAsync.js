@@ -38,7 +38,7 @@ export const subWords = (
                 const data = snapshot.data()
 
                 const { uniq, duplicate } = handleDuplicateWords(
-                    data.words || [],
+                    data?.words || [],
                     variantDelDuplicate
                 )
 
