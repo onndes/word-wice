@@ -84,7 +84,7 @@ const CardsWords = () => {
         )
 
     return (
-        <Container maxWidth="sm" disableGutters sx={{ mb: 10 }}>
+        <Container maxWidth="sm" disableGutters sx={{ pb: 10 }}>
             {stableSort(words, getComparator(order, orderBy)).map((row) => {
                 const isItemSelected = isSelected(row.id)
 
