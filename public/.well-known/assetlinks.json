@@ -1,0 +1,10 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.wordwice.twa",
+      "sha256_cert_fingerprints": ["08:3D:62:33:DA:E3:C6:CF:32:E7:AC:EA:12:47:75:F8:57:88:77:D9:7F:EF:7E:21:C0:EF:3C:E7:91:67:F7:EB"]
+
+    }
+  }]
+  

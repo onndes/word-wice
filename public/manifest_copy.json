@@ -1,15 +1,21 @@
 {
     "name": "WordWice",
     "short_name": "WordWice",
-    "theme_color": "#212B36",
-    "background_color": "#212B36",
+    "theme_color": "#161C24",
+    "background_color": "#161C24",
     "display": "standalone",
-    "display_override": ["standalone", "window-controls-overlay"],
+    "display_override": ["window-controls-overlay"],
     "orientation": "portrait",
     "scope": "/",
-    "start_url": "/",
+    "start_url": ".",
     "prefer_related_applications": true,
     "icons": [
+        {
+            "src": "favicon.ico",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon",
+            "purpose": "any maskable"
+        },
         {
             "src": "icons/icon-48x48.png",
             "sizes": "48x48",
