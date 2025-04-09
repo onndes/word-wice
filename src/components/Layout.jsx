@@ -12,7 +12,6 @@ const Indent = styled('div')(({ mq, bottom }) => ({
     // eslint-disable-next-line no-nested-ternary
     paddingTop: mq && !bottom ? '60px' : bottom ? '0px' : '72px',
     paddingBottom: mq && bottom ? '72px' : 1,
-    background: 'red',
 }))
 
 const LayoutWrapper = styled('div')({
