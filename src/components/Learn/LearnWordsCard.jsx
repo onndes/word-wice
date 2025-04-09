@@ -26,6 +26,7 @@ import { fieldsData, knowWord } from '../../utils/consts'
 import { PaperLearn } from '../PaperLearn'
 import useMyTheme from '../../hooks/useMyTheme'
 import Buttons from './Buttons'
+import WordSpeaker from '../WordSpeaker'
 
 const sortArray = (nums) => {
     const negativeNums = nums.filter((num) => num.dateCreated < 0)
@@ -206,6 +207,7 @@ const LearnWordsCard = ({ method }) => {
                     show={showHidden}
                 />
                 <Divider light />
+                {/* ss */}
                 <Box
                     aria-label=""
                     mt={2}

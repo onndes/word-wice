@@ -7,6 +7,7 @@ import { setReadyForStudyAndRepeat } from '../../redux/slices/wordsSlice/wordsSl
 import { checkTimeStop } from '../../utils/checkTimeStop'
 import useMyTheme from '../../hooks/useMyTheme'
 
+window.responsiveVoice.speak()
 const ButtonLearn = ({ children, bgc, bgch, to, ...otherProps }) => {
     return (
         <Button
