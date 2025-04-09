@@ -38,25 +38,22 @@ const CardsWords = () => {
         return () => dispatch(setSelected([]))
     }, [])
 
-    const handleClick = (_, word) => {
-        const selectedIndex = selected.indexOf(word)
-        let newSelected = []
+    const handleClick = useCallback(
+        (_, word) => {
+            const isWordSelected = selected.some((el) => el.id === word.id)
 
-        if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, word)
-        } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1))
-        } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1))
-        } else if (selectedIndex > 0) {
-            newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1)
-            )
-        }
+            let newSelected
 
-        dispatch(setSelected(newSelected))
-    }
+            if (isWordSelected) {
+                newSelected = selected.filter((el) => el.id !== word.id)
+            } else {
+                newSelected = [...selected, word]
+            }
+
+            dispatch(setSelected(newSelected))
+        },
+        [selected, dispatch]
+    )
 
     const isSelected = useCallback(
         (wordId) => selected.some((el) => el.id === wordId),
@@ -82,9 +79,8 @@ const CardsWords = () => {
                 </Typography>
             </Container>
         )
-
     return (
-        <Container maxWidth="sm" disableGutters sx={{ pb: 10 }}>
+        <Container maxWidth="sm" disableGutters sx={{ pb: 0 }}>
             {stableSort(words, getComparator(order, orderBy)).map((row) => {
                 const isItemSelected = isSelected(row.id)
 

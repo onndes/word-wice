@@ -12,29 +12,43 @@ const Indent = styled('div')(({ mq, bottom }) => ({
     // eslint-disable-next-line no-nested-ternary
     paddingTop: mq && !bottom ? '60px' : bottom ? '0px' : '72px',
     paddingBottom: mq && bottom ? '72px' : 1,
+    background: 'red',
 }))
+
+const LayoutWrapper = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+})
+
+const ContentWrapper = styled('div')({
+    flexGrow: 1, // Контент будет занимать всё пространство
+    // paddingBottom: '60px',
+})
 
 export default function Layout() {
     const { mq } = useMyTheme()
     const { isAuth } = useAuth()
 
     return (
-        <>
+        <LayoutWrapper>
             <CssBaseline />
             {isAuth && <MyAppBar />}
             {isAuth && mq && <MyAppBarMobile />}
             <Indent mq={mq} />
-            <Container
-                maxWidth="md"
-                sx={() => ({
-                    height: '100%',
-                    pt: mq ? 2 : 2,
-                    pb: mq ? 2 : 1,
-                })}
-            >
-                <AppRouter />
-            </Container>
+            <ContentWrapper>
+                <Container
+                    maxWidth="md"
+                    sx={{
+                        height: '100%',
+                        pt: mq ? 2 : 2,
+                        pb: mq ? 2 : 1,
+                    }}
+                >
+                    <AppRouter />
+                </Container>
+            </ContentWrapper>
             <Indent mq={mq} bottom />
-        </>
+        </LayoutWrapper>
     )
 }
