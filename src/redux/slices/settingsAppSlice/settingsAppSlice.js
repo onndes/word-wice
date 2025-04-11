@@ -7,8 +7,8 @@ import { setSettings } from './settingsAppAsync'
 const initialState = {
     wordsList: {
         rowsPerPage: +localStorage.getItem('rowsPerPage') || 5,
-        order: 'desc',
-        orderBy: 'dateCreated',
+        order: localStorage.getItem('wordsListOrder') || 'desc',
+        orderBy: localStorage.getItem('wordsListOrderBy') || 'dateCreated',
         selected: [],
         page: 0,
     },
@@ -37,9 +37,11 @@ const settingsAppSlice = createSlice({
         },
         setOrder(state, { payload }) {
             state.wordsList.order = payload
+            localStorage.setItem('wordsListOrder', payload)
         },
         setOrderBy(state, { payload }) {
             state.wordsList.orderBy = payload
+            localStorage.setItem('wordsListOrderBy', payload)
         },
         setSelected(state, { payload }) {
             state.wordsList.selected = payload

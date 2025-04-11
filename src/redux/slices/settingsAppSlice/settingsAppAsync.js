@@ -19,8 +19,9 @@ export const subAppSettings = (
     )
 
     return onSnapshot(qsUsers, { includeMetadataChanges: true }, (snapshot) => {
-        if (snapshot.data().settings)
+        if (snapshot.data().settings) {
             dispatch(setUserSettings(snapshot.data().settings))
+        }
         dispatch(
             handleStatus({
                 nameCollection: 'userSettings',

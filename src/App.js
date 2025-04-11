@@ -24,9 +24,14 @@ const unSubs = []
 
 function App() {
     const [theme, colorMode] = useMode()
+
+    // variantDelDuplicate выбор варианта
+    // для удаления дубликатов, при появлении из-за
+    // одновременной работы онлайн и оффлайн
     const { variantDelDuplicate } = useSelector(
         ({ settingsApp }) => settingsApp.user
     )
+
     const [isAuth, setIsAuth] = React.useState(false)
     const isOnline = useIsOnline()
     const dispatch = useDispatch()
