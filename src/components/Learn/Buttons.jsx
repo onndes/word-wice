@@ -1,11 +1,17 @@
 import { Box } from '@mui/material'
 import React from 'react'
+import LockIcon from '@mui/icons-material/Lock'
 import useMyTheme from '../../hooks/useMyTheme'
 import MyButton from '../MyButton'
 
-const Buttons = ({ handleDonNotKnow, handleRemembered }) => {
+const Buttons = ({
+    handleDonNotKnow,
+    handleRemembered,
+    isEaseMode,
+    isCorrectAnswer,
+    isDisabledInput,
+}) => {
     const { t, mq } = useMyTheme()
-
     return (
         <Box
             display="grid"
@@ -23,7 +29,6 @@ const Buttons = ({ handleDonNotKnow, handleRemembered }) => {
                 sx={{
                     fontSize: '15px',
                     textTransform: 'initial',
-                    // maxWidth: '160px',
                     width: '100%',
                     height: '50px',
                     fontWeight: '600',
@@ -33,18 +38,21 @@ const Buttons = ({ handleDonNotKnow, handleRemembered }) => {
             </MyButton>
             <MyButton
                 onClick={handleRemembered}
+                disabled={!isEaseMode && !isCorrectAnswer && !isEaseMode}
                 bgc="#c8e6c9"
                 bgch={mq ? '#c8e6c9' : '#a5d6a7'}
                 c="#43a047"
                 sx={{
                     fontSize: '15px',
                     textTransform: 'initial',
-                    // maxWidth: '160px',
                     height: '50px',
                     fontWeight: '600',
                 }}
             >
                 {t('Remembered')}
+                {isEaseMode
+                    ? ''
+                    : isDisabledInput && <LockIcon fontSize="small" />}
             </MyButton>
         </Box>
     )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, IconButton, Tooltip, Typography } from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import WordSpeaker from '../WordSpeaker'
@@ -10,7 +10,17 @@ const HiddenWordBlock = ({
     onVisible,
     title,
     show,
+    isCorrectAnswer,
+    hiddenTranslate,
 }) => {
+    useEffect(() => {
+        if (isCorrectAnswer) {
+            onVisible()
+        } else {
+            hiddenTranslate()
+        }
+    }, [isCorrectAnswer])
+
     return (
         <Box mt={2} mb={2} ml={1}>
             <Typography mb={1} variant="h6" color="text.secondary">
@@ -29,7 +39,11 @@ const HiddenWordBlock = ({
                 </Box>
             ) : (
                 <Tooltip title="Add to study">
-                    <IconButton aria-label="Show translate" onClick={onVisible}>
+                    <IconButton
+                        aria-label="Show translate"
+                        // disabled={!isEaseMode}
+                        onClick={onVisible}
+                    >
                         <VisibilityIcon fontSize="medium" />
                     </IconButton>
                 </Tooltip>

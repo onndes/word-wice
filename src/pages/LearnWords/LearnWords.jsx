@@ -6,6 +6,8 @@ import { LEARN_NEW_ROUTE, LEARN_REPEAT_ROUTE } from '../../common/consts/ROUTES'
 import { setReadyForStudyAndRepeat } from '../../redux/slices/wordsSlice/wordsSlice'
 import { checkTimeStop } from '../../utils/checkTimeStop'
 import useMyTheme from '../../hooks/useMyTheme'
+import StudyModeToggle from './components/StudyModeToggle'
+import { setEaseMode } from '../../redux/slices/settingsAppSlice/settingsAppSlice'
 
 window.responsiveVoice.speak()
 const ButtonLearn = ({ children, bgc, bgch, to, ...otherProps }) => {
@@ -57,9 +59,15 @@ const WordsCount = ({ count, color }) => {
 const LearnWords = () => {
     const dispatch = useDispatch()
     const { colors, t } = useMyTheme()
+
     const { inProcess, learned, inProcessWords, learnedWords } = useSelector(
         ({ words }) => words
     )
+    const { isEaseMode } = useSelector(({ settingsApp }) => settingsApp.user)
+
+    const handleClickSwitchMode = () => {
+        dispatch(setEaseMode(!isEaseMode))
+    }
 
     useEffect(() => {
         const readyForStudy = checkTimeStop(inProcessWords)
@@ -85,6 +93,10 @@ const LearnWords = () => {
 
     return (
         <Container maxWidth="xs">
+            <StudyModeToggle
+                isEasyMode={isEaseMode}
+                onToggle={() => handleClickSwitchMode()}
+            />
             <ButtonLearn
                 bgc={colors.emerald[500]}
                 bgch={colors.emerald[600]}

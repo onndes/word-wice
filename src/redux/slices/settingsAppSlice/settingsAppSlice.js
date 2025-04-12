@@ -3,6 +3,7 @@ import { fieldsData } from '../../../utils/consts'
 import { variantDelDup } from '../../../utils/handleDuplicateWords'
 import { setStatus } from '../../../utils/handleStatus'
 import { setSettings } from './settingsAppAsync'
+import { ModeLearn } from '../../../common/consts/const'
 
 const initialState = {
     wordsList: {
@@ -12,10 +13,14 @@ const initialState = {
         selected: [],
         page: 0,
     },
+    wordLearn: {
+        isDisabledInput: false,
+    },
     user: {
         recommendForLearn: +localStorage.getItem('recommendForLearn') || 5,
         variantDelDuplicate: variantDelDup.data,
         show: fieldsData.translation.name,
+        isEaseMode: localStorage.getItem('isEaseMode') || ModeLearn.normal,
     },
     isOnline: true,
     status: [],
@@ -36,12 +41,12 @@ const settingsAppSlice = createSlice({
             state.isOnline = payload
         },
         setOrder(state, { payload }) {
-            state.wordsList.order = payload
             localStorage.setItem('wordsListOrder', payload)
+            state.wordsList.order = payload
         },
         setOrderBy(state, { payload }) {
-            state.wordsList.orderBy = payload
             localStorage.setItem('wordsListOrderBy', payload)
+            state.wordsList.orderBy = payload
         },
         setSelected(state, { payload }) {
             state.wordsList.selected = payload
@@ -58,6 +63,13 @@ const settingsAppSlice = createSlice({
 
                 localStorage.setItem('recommendForLearn', payload)
             }
+        },
+        setEaseMode(state, { payload }) {
+            localStorage.setItem('isEaseMode', payload)
+            state.user.isEaseMode = payload
+        },
+        setDisabledInput(state, { payload }) {
+            state.wordLearn.isDisabledInput = payload
         },
     },
     extraReducers: (builder) => {
@@ -84,6 +96,8 @@ export const {
     setOrderBy,
     setPage,
     setUserSettings,
+    setEaseMode,
+    setDisabledInput,
 } = settingsAppSlice.actions
 
 export default settingsAppSlice.reducer

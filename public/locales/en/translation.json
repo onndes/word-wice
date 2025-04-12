@@ -127,5 +127,9 @@
     "Contacts": "Contacts",
     "Close": "Close",
     "Login with google": "Login with google",
-    "About the app": "About the app"
+    "About the app": "About the app",
+
+    "Check": "Check",
+    "Easy Mode": "⚠️ Easy Mode (Not Recommended)",
+    "Normal Mode": "💪 Normal Mode"
 }

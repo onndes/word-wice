@@ -4,7 +4,13 @@ import { Controller } from 'react-hook-form'
 import { Box } from '@mui/material'
 import useMyTheme from '../../hooks/useMyTheme'
 
-export default function MyInput({ label, name, control }) {
+export default function MyInput({
+    label,
+    name,
+    control,
+    variant = 'filled',
+    disabled = false,
+}) {
     const { colors, mq, t } = useMyTheme()
 
     return (
@@ -15,12 +21,13 @@ export default function MyInput({ label, name, control }) {
             render={({ field, fieldState: { error } }) => (
                 <Box sx={{ mr: mq ? 0 : 2, mb: 2 }}>
                     <TextField
-                        variant="filled"
+                        variant={variant}
                         label={t(label)}
                         error={!!error}
                         helperText={error ? error.message : null}
                         autoComplete="off"
                         fullWidth
+                        disabled={disabled}
                         sx={() => ({
                             '& .Mui-focused.MuiInputLabel-root': {
                                 color: 'primary',

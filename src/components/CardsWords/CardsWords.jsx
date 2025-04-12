@@ -79,6 +79,7 @@ const CardsWords = () => {
                 </Typography>
             </Container>
         )
+
     return (
         <Container maxWidth="sm" disableGutters sx={{ pb: 0 }}>
             {stableSort(words, getComparator(order, orderBy)).map((row) => {

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Box, Divider } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { useForm } from 'react-hook-form'
 import {
     learnedWordDropToInProgress,
     submitWordsForLearned,
@@ -26,7 +27,8 @@ import { fieldsData, knowWord } from '../../utils/consts'
 import { PaperLearn } from '../PaperLearn'
 import useMyTheme from '../../hooks/useMyTheme'
 import Buttons from './Buttons'
-import WordSpeaker from '../WordSpeaker'
+import InputAnswer from './InputAnswer'
+import { setDisabledInput } from '../../redux/slices/settingsAppSlice/settingsAppSlice'
 
 const sortArray = (nums) => {
     const negativeNums = nums.filter((num) => num.dateCreated < 0)
@@ -43,17 +45,39 @@ const sortArray = (nums) => {
 }
 
 const LearnWordsCard = ({ method }) => {
+    const inputAnswerRef = useRef(null)
     const dispatch = useDispatch()
     const { t } = useMyTheme()
 
+    // const [isDisabledInput, setDisableInput] = useState(false)
     const { inProcessWords, newWords } = useSelector(({ words }) => words)
     const { mixed, currentWordIdx, checkWords, isStarted } = useSelector(
         ({ words }) => words[method]
     )
 
-    const { recommendForLearn, show } = useSelector(
+    const { control: controlAnswer, reset: resetInputAnswer, watch } = useForm()
+    const answerData = watch(['answer'])[0]
+
+    const { recommendForLearn, show, isEaseMode } = useSelector(
         ({ settingsApp }) => settingsApp.user
     )
+    const { isDisabledInput } = useSelector(
+        ({ settingsApp }) => settingsApp.wordLearn
+    )
+    const handleHideKeyboard = () => {
+        if (inputAnswerRef.current) {
+            inputAnswerRef.current.blur()
+        }
+    }
+    const isCorrectAnswer =
+        answerData?.trim()?.toLowerCase() ===
+        mixed[currentWordIdx]?.word?.trim()?.toLowerCase()
+
+    useEffect(() => {
+        if (isCorrectAnswer) {
+            handleHideKeyboard()
+        }
+    }, [isCorrectAnswer])
 
     const [visibilityTranslate, setVisibilityTranslate] = useState(false)
 
@@ -97,6 +121,10 @@ const LearnWordsCard = ({ method }) => {
         }
     }, [inProcessWords, isStarted])
 
+    useEffect(() => {
+        return () => dispatch(setDisabledInput(false))
+    }, [])
+
     const mixWords = () => {
         if (inProcessWords.length > 0) {
             const mixWords = shuffleArray(inProcessWords)
@@ -118,10 +146,18 @@ const LearnWordsCard = ({ method }) => {
     }
 
     const showTranslate = () => {
+        if (!isCorrectAnswer) {
+            dispatch(setDisabledInput(true))
+        }
         setVisibilityTranslate(true)
+    }
+    const hiddenTranslate = () => {
+        setVisibilityTranslate(false)
     }
 
     const handleRemembered = () => {
+        resetInputAnswer()
+        dispatch(setDisabledInput(false))
         const word = mixed[currentWordIdx]
         const isLast = mixed.length - 1 === currentWordIdx
         const knowledge = defineNextKnow('next', word.knowledge)
@@ -140,6 +176,8 @@ const LearnWordsCard = ({ method }) => {
     }
 
     const handleDonNotKnow = () => {
+        resetInputAnswer()
+        dispatch(setDisabledInput(false))
         const word = mixed[currentWordIdx]
         const isLast = mixed.length - 1 === currentWordIdx
         const knowledge = defineNextKnow('prev', word.knowledge)
@@ -188,6 +226,8 @@ const LearnWordsCard = ({ method }) => {
             ? fieldsData.translation.name
             : fieldsData.word.name
 
+    const handleClickCheckWord = () => {}
+
     return (
         <PaperLearn>
             <Box>
@@ -205,8 +245,20 @@ const LearnWordsCard = ({ method }) => {
                     onVisible={showTranslate}
                     title={t(titleHidden)}
                     show={showHidden}
+                    isEaseMode={isEaseMode}
+                    isCorrectAnswer={isCorrectAnswer}
+                    hiddenTranslate={hiddenTranslate}
                 />
                 <Divider light />
+                {/* <Button onClick={hiddenTranslate}>Show</Button> */}
+                <InputAnswer
+                    handleClick={handleClickCheckWord}
+                    word={mixed[currentWordIdx]}
+                    control={controlAnswer}
+                    title="Answer"
+                    isDisabledInput={isDisabledInput}
+                    inputAnswerRef={inputAnswerRef}
+                />
                 {/* ss */}
                 <Box
                     aria-label=""
@@ -221,6 +273,9 @@ const LearnWordsCard = ({ method }) => {
             <Buttons
                 handleDonNotKnow={handleDonNotKnow}
                 handleRemembered={handleRemembered}
+                isCorrectAnswer={isCorrectAnswer}
+                isEaseMode={isEaseMode}
+                isDisabledInput={isDisabledInput}
             />
         </PaperLearn>
     )
