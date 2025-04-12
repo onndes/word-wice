@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { styled, Tab, Tabs } from '@mui/material'
+import { alpha, styled, Tab, Tabs } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import MenuBook from '@mui/icons-material/MenuBook'
 import School from '@mui/icons-material/School'
@@ -17,7 +17,16 @@ import useMyTheme from '../../hooks/useMyTheme'
 const TabsCustom = styled(Tabs)(({ theme }) => {
     const { mq } = useMyTheme()
     return {
-        letterSpacing: '.4px',
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        backgroundColor: alpha(theme.palette.background.main, 0.96),
+        // backdropFilter: 'blur(6px)', // <- сам блюр
+        WebkitBackdropFilter: 'blur(6px)', // <- для Safari
+        paddingBottom: 'env(safe-area-inset-bottom)', // <-- тут магия
+        // borderTop: `1px solid ${theme.palette.divider}`,
         '.MuiTab-root': mq
             ? {
                   padding: '0px',

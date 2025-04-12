@@ -17,7 +17,7 @@ const Indent = styled('div')(({ mq, bottom }) => ({
 const LayoutWrapper = styled('div')({
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '100vh',
+    minHeight: '100%',
 })
 
 const ContentWrapper = styled('div')({

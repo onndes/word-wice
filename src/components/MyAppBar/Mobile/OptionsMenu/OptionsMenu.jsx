@@ -30,6 +30,7 @@ const StyledMenu = styled((props) => (
         marginTop: theme.spacing(1),
         marginRight: theme.spacing(2),
         minWidth: 180,
+
         color:
             theme.palette.mode === 'light'
                 ? 'rgb(55, 65, 81)'
