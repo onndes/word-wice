@@ -17,16 +17,19 @@ import useMyTheme from '../../hooks/useMyTheme'
 const TabsCustom = styled(Tabs)(({ theme }) => {
     const { mq } = useMyTheme()
     return {
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        backgroundColor: alpha(theme.palette.background.main, 0.96),
-        // backdropFilter: 'blur(6px)', // <- сам блюр
-        WebkitBackdropFilter: 'blur(6px)', // <- для Safari
-        paddingBottom: 'env(safe-area-inset-bottom)', // <-- тут магия
-        // borderTop: `1px solid ${theme.palette.divider}`,
+        letterSpacing: '.4px',
+
+        // position: 'fixed',
+        // bottom: 0,
+        // left: 0,
+        // right: 0,
+        // zIndex: 100,
+        // backgroundColor: alpha(theme.palette.background.main, 0.96),
+        // // backdropFilter: 'blur(6px)', // <- сам блюр
+        // WebkitBackdropFilter: 'blur(6px)', // <- для Safari
+        // paddingBottom: 'env(safe-area-inset-bottom)', // <-- тут магия
+        // // borderTop: `1px solid ${theme.palette.divider}`,
+
         '.MuiTab-root': mq
             ? {
                   padding: '0px',
