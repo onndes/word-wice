@@ -1,4 +1,4 @@
-import { Box, TextField, Typography } from '@mui/material'
+import { Box, InputAdornment, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import LockIcon from '@mui/icons-material/Lock'
@@ -17,18 +17,10 @@ const InputAnswer = ({ control, title, isDisabledInput, inputAnswerRef }) => {
                 mb={1}
                 variant="h6"
                 color={isDisabledInput ? 'text.secondary' : 'text.success'}
-                // color="text.secondary"
             >
                 {title}
             </Typography>
             <Box>
-                {/* <MyInput
-                    control={control}
-                    // label={isDisabledInput ? <LockIcon /> : ''}
-                    name="answer"
-                    variant="standard"
-                    // disabled={isDisabledInput}
-                /> */}
                 <Controller
                     control={control}
                     defaultValue=""
@@ -38,17 +30,33 @@ const InputAnswer = ({ control, title, isDisabledInput, inputAnswerRef }) => {
                             <TextField
                                 inputRef={inputAnswerRef}
                                 variant="standard"
-                                // label={t(label)}
                                 error={!!error}
-                                label={
-                                    isDisabledInput && (
-                                        <LockIcon fontSize="small" />
-                                    )
-                                }
                                 helperText={error ? error.message : null}
                                 autoComplete="off"
                                 fullWidth
                                 disabled={isDisabledInput}
+                                InputProps={{
+                                    startAdornment: isDisabledInput ? (
+                                        <InputAdornment
+                                            position="start"
+                                            sx={{
+                                                opacity: isDisabledInput
+                                                    ? 1
+                                                    : 0,
+                                                transition: 'opacity 0.3s ease',
+                                            }}
+                                        >
+                                            <Box>
+                                                <LockIcon
+                                                    fontSize="small"
+                                                    sx={{
+                                                        color: 'text.disabled',
+                                                    }}
+                                                />
+                                            </Box>
+                                        </InputAdornment>
+                                    ) : null,
+                                }}
                                 sx={() => ({
                                     '& .Mui-focused.MuiInputLabel-root': {
                                         color: 'primary',
@@ -66,21 +74,6 @@ const InputAnswer = ({ control, title, isDisabledInput, inputAnswerRef }) => {
                         </Box>
                     )}
                 />
-                {/* <MyButton
-                    onClick={handleClick}
-                    bgc="#c8e6c9"
-                    bgch={mq ? '#c8e6c9' : '#a5d6a7'}
-                    c="#43a047"
-                    sx={{
-                        fontSize: '15px',
-                        textTransform: 'initial',
-                        // maxWidth: '160px',
-                        height: '50px',
-                        fontWeight: '600',
-                    }}
-                >
-                    {t('Check')}
-                </MyButton> */}
             </Box>
         </Box>
     )

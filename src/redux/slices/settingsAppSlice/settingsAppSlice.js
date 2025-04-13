@@ -5,6 +5,11 @@ import { setStatus } from '../../../utils/handleStatus'
 import { setSettings } from './settingsAppAsync'
 import { ModeLearn } from '../../../common/consts/const'
 
+console.log(
+    'sssss',
+    localStorage.getItem('isEaseMode') === 'true',
+    localStorage.getItem('isEaseMode')
+)
 const initialState = {
     wordsList: {
         rowsPerPage: +localStorage.getItem('rowsPerPage') || 5,
@@ -20,7 +25,8 @@ const initialState = {
         recommendForLearn: +localStorage.getItem('recommendForLearn') || 5,
         variantDelDuplicate: variantDelDup.data,
         show: fieldsData.translation.name,
-        isEaseMode: localStorage.getItem('isEaseMode') || ModeLearn.normal,
+        isEaseMode:
+            JSON.parse(localStorage.getItem('isEaseMode')) || ModeLearn.normal,
     },
     isOnline: true,
     status: [],
