@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Container, Typography } from '@mui/material'
+import { Box, Button, Container, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { LEARN_NEW_ROUTE, LEARN_REPEAT_ROUTE } from '../../common/consts/ROUTES'
 import { setReadyForStudyAndRepeat } from '../../redux/slices/wordsSlice/wordsSlice'
@@ -113,6 +113,20 @@ const LearnWords = () => {
                     {t(`for study is ready`)}
                 </Typography>
             </ButtonLearn>
+            <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                pt={1}
+                mb={1}
+                flexDirection="row"
+                gap={1}
+                // wrap="wrap"
+            >
+                <Typography variant="subtitle2" color="success.main">
+                    {t('💪 Only normal mode')}
+                </Typography>
+            </Box>
             <ButtonLearn
                 bgc={colors.indigo[500]}
                 bgch={colors.indigo[600]}

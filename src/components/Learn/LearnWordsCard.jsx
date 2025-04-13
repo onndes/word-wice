@@ -79,6 +79,12 @@ const LearnWordsCard = ({ method }) => {
         }
     }, [isCorrectAnswer])
 
+    useEffect(() => {
+        return () => {
+            dispatch(setDisabledInput(false))
+        }
+    }, [])
+
     const [visibilityTranslate, setVisibilityTranslate] = useState(false)
 
     const addWords = () => {
@@ -120,10 +126,6 @@ const LearnWordsCard = ({ method }) => {
             }
         }
     }, [inProcessWords, isStarted])
-
-    useEffect(() => {
-        return () => dispatch(setDisabledInput(false))
-    }, [])
 
     const mixWords = () => {
         if (inProcessWords.length > 0) {
@@ -245,7 +247,7 @@ const LearnWordsCard = ({ method }) => {
                     onVisible={showTranslate}
                     title={t(titleHidden)}
                     show={showHidden}
-                    isEaseMode={isEaseMode}
+                    isEaseMode={false}
                     isCorrectAnswer={isCorrectAnswer}
                     hiddenTranslate={hiddenTranslate}
                 />

@@ -21,8 +21,8 @@ export default function StudyModeToggle({ isEasyMode, onToggle }) {
         <Box
             display="flex"
             alignItems="center"
-            justifyContent="end"
-            mb={2}
+            justifyContent="space-between"
+            mb={1}
             flexDirection="row"
             gap={1}
             // wrap="wrap"

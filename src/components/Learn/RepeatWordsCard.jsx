@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Box, Divider } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { useForm } from 'react-hook-form'
 import {
     learnedWordDropToInProgress,
     updateCountRepeat,
@@ -23,8 +24,11 @@ import { PaperLearn } from '../PaperLearn'
 import useMyTheme from '../../hooks/useMyTheme'
 import ConfirmDialog from '../ConfirmDialog'
 import Buttons from './Buttons'
+import { setDisabledInput } from '../../redux/slices/settingsAppSlice/settingsAppSlice'
+import InputAnswer from './InputAnswer'
 
 const RepeatWordsCard = () => {
+    const inputAnswerRef = useRef(null)
     const dispatch = useDispatch()
     const { t } = useMyTheme()
 
@@ -34,6 +38,32 @@ const RepeatWordsCard = () => {
     )
     const [visibilityTranslate, setVisibilityTranslate] = useState(false)
     const [confirmDonNotKnow, setConfirmDonNotKnow] = useState(false)
+    const { control: controlAnswer, reset: resetInputAnswer, watch } = useForm()
+    const answerData = watch(['answer'])[0]
+
+    const { isDisabledInput } = useSelector(
+        ({ settingsApp }) => settingsApp.wordLearn
+    )
+    const handleHideKeyboard = () => {
+        if (inputAnswerRef.current) {
+            inputAnswerRef.current.blur()
+        }
+    }
+    const isCorrectAnswer =
+        answerData?.trim()?.toLowerCase() ===
+        repeatWords[currentWordIdx]?.word?.trim()?.toLowerCase()
+
+    useEffect(() => {
+        if (isCorrectAnswer) {
+            handleHideKeyboard()
+        }
+    }, [isCorrectAnswer])
+
+    useEffect(() => {
+        return () => {
+            dispatch(setDisabledInput(false))
+        }
+    }, [])
 
     const setWord = () => {
         if (!learnedWords.length) return
@@ -61,10 +91,15 @@ const RepeatWordsCard = () => {
     }
 
     const showTranslate = () => {
+        if (!isCorrectAnswer) {
+            dispatch(setDisabledInput(true))
+        }
         setVisibilityTranslate(true)
     }
 
     const handleRemembered = () => {
+        resetInputAnswer()
+        dispatch(setDisabledInput(false))
         const word = repeatWords[currentWordIdx]
         const countRepeat = repeatWords[currentWordIdx].countRepeat + 1
         dispatch(updateCountRepeat({ word, countRepeat }))
@@ -72,6 +107,8 @@ const RepeatWordsCard = () => {
     }
 
     const handleDonNotKnow = () => {
+        resetInputAnswer()
+        dispatch(setDisabledInput(false))
         const word = repeatWords[currentWordIdx]
         const knowledge = defineNextKnow('prev', word.knowledge)
         const countRepeat = 0
@@ -91,6 +128,12 @@ const RepeatWordsCard = () => {
             />
         )
     }
+
+    const hiddenTranslate = () => {
+        setVisibilityTranslate(false)
+    }
+    const handleClickCheckWord = () => {}
+
     return (
         <>
             <PaperLearn>
@@ -109,12 +152,32 @@ const RepeatWordsCard = () => {
                         onVisible={showTranslate}
                         title={t(fieldsData.word.label)}
                         show={fieldsData.word.name}
+                        isEaseMode={false}
+                        isCorrectAnswer={isCorrectAnswer}
+                        hiddenTranslate={hiddenTranslate}
                     />
                     <Divider light />
+                    <InputAnswer
+                        handleClick={handleClickCheckWord}
+                        word={repeatWords[currentWordIdx]}
+                        control={controlAnswer}
+                        title="Answer"
+                        isDisabledInput={isDisabledInput}
+                        inputAnswerRef={inputAnswerRef}
+                    />
                 </Box>
                 <Buttons
-                    handleDonNotKnow={() => setConfirmDonNotKnow(true)}
+                    handleDonNotKnow={() => {
+                        if (isDisabledInput) {
+                            handleDonNotKnow()
+                        } else {
+                            setConfirmDonNotKnow(true)
+                        }
+                    }}
                     handleRemembered={handleRemembered}
+                    isCorrectAnswer={isCorrectAnswer}
+                    isEaseMode={false}
+                    isDisabledInput={isDisabledInput}
                 />
             </PaperLearn>
             <ConfirmDialog

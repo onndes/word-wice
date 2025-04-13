@@ -5,11 +5,6 @@ import { setStatus } from '../../../utils/handleStatus'
 import { setSettings } from './settingsAppAsync'
 import { ModeLearn } from '../../../common/consts/const'
 
-console.log(
-    'sssss',
-    localStorage.getItem('isEaseMode') === 'true',
-    localStorage.getItem('isEaseMode')
-)
 const initialState = {
     wordsList: {
         rowsPerPage: +localStorage.getItem('rowsPerPage') || 5,
