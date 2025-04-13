@@ -10,7 +10,14 @@ import StudyModeToggle from './components/StudyModeToggle'
 import { setEaseMode } from '../../redux/slices/settingsAppSlice/settingsAppSlice'
 
 window.responsiveVoice.speak()
-const ButtonLearn = ({ children, bgc, bgch, to, ...otherProps }) => {
+const ButtonLearn = ({
+    children,
+    bgc,
+    bgch,
+    to,
+    isEaseMode,
+    ...otherProps
+}) => {
     return (
         <Button
             sx={() => ({
@@ -26,6 +33,7 @@ const ButtonLearn = ({ children, bgc, bgch, to, ...otherProps }) => {
                 pt: 3,
                 pb: 2,
             })}
+            disabled={isEaseMode}
             component={Link}
             to={to}
             variant="contained"
@@ -38,17 +46,21 @@ const ButtonLearn = ({ children, bgc, bgch, to, ...otherProps }) => {
     )
 }
 
-const WordsCount = ({ count, color }) => {
+const WordsCount = ({ count, color, isEaseMode }) => {
     const { t } = useMyTheme()
     return (
         <>
             <Typography
                 variant="span"
-                color={color}
+                color={isEaseMode ? 'darkgray' : color}
                 fontWeight={600}
-                backgroundColor="white"
+                backgroundColor={isEaseMode ? 'gray' : 'white'}
                 padding="2px 6px"
                 borderRadius="5px"
+                sx={{
+                    transition:
+                        'background-color 0.1s ease-in-out,  color 0.1s ease-in-out',
+                }}
             >
                 {count} {t('word(s)')}
             </Typography>{' '}
@@ -92,7 +104,7 @@ const LearnWords = () => {
     }, [learnedWords])
 
     return (
-        <Container maxWidth="xs">
+        <Box maxWidth="400px" m="auto">
             <StudyModeToggle
                 isEasyMode={isEaseMode}
                 onToggle={() => handleClickSwitchMode()}
@@ -113,7 +125,7 @@ const LearnWords = () => {
                     {t(`for study is ready`)}
                 </Typography>
             </ButtonLearn>
-            <Box
+            {/* <Box
                 display="flex"
                 alignItems="center"
                 justifyContent="space-between"
@@ -126,11 +138,12 @@ const LearnWords = () => {
                 <Typography variant="subtitle2" color="success.main">
                     {t('💪 Only normal mode')}
                 </Typography>
-            </Box>
+            </Box> */}
             <ButtonLearn
                 bgc={colors.indigo[500]}
                 bgch={colors.indigo[600]}
                 to={LEARN_REPEAT_ROUTE}
+                isEaseMode={isEaseMode}
             >
                 <Typography variant="p" display="block" letterSpacing={0.3}>
                     {t('Repeat learned words')}
@@ -139,12 +152,13 @@ const LearnWords = () => {
                     <WordsCount
                         count={learned.readyWordCount}
                         color={colors.indigo[600]}
+                        isEaseMode={isEaseMode}
                     />
 
                     {t('for repeat is ready')}
                 </Typography>
             </ButtonLearn>
-        </Container>
+        </Box>
     )
 }
 
