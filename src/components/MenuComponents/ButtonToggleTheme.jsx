@@ -16,17 +16,19 @@ export default function ButtonToggleTheme() {
             mb={1}
         >
             {t('Dark mode')}
-
             {/* New switcher - test */}
             <FormControlLabel
-                control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
-                // label="MUI switch"
-                checked={theme.palette.mode === 'dark'}
-                onChange={colorMode.toggleColorMode}
-                inputProps={{ 'aria-label': 'controlled' }}
+                control={
+                    <MaterialUISwitch
+                        sx={{ m: 1 }}
+                        checked={theme.palette.mode === 'dark'}
+                        onChange={colorMode.toggleColorMode}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+                label={t('Dark mode')}
                 sx={{ margin: 0 }}
             />
-
             {/* Old switcher */}
             {/* <Switch
                 color="secondary"
