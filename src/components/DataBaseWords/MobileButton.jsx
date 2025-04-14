@@ -1,3 +1,4 @@
+// MobileButtonNeo.tsx
 import React from 'react'
 import { Box, Button } from '@mui/material'
 import PostAddIcon from '@mui/icons-material/PostAdd'
@@ -5,42 +6,47 @@ import { Link } from 'react-router-dom'
 import useMyTheme from '../../hooks/useMyTheme'
 import { BASE_WORDS_ROUTE } from '../../common/consts/ROUTES'
 
-const MobileButton = () => {
+const MobileButtonNeo = () => {
     const { colors } = useMyTheme()
 
     return (
         <Box
             sx={{
-                display: 'block',
-                zIndex: 1000,
                 position: 'fixed',
-                bottom: '90px',
-                right: '16px',
+                bottom: 90,
+                right: 16,
+                zIndex: 1200,
             }}
         >
             <Button
                 component={Link}
                 to={BASE_WORDS_ROUTE}
-                variant="contained"
-                size="large"
                 sx={{
-                    background: colors.orange[600],
-                    display: 'flex',
-                    fontWeight: 600,
+                    width: 56,
+                    height: 56,
+                    minWidth: 0,
                     borderRadius: '50%',
-                    boxShadow: `0px 0px 10px 2px ${colors.orange[500]}`,
-                    backdropFilter: 'blur(4px)',
-                    height: '46px',
-                    width: '46px',
-                    minWidth: '0px',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    backdropFilter: 'blur(8px)',
+                    boxShadow: `
+                        6px 6px 12px rgba(0, 0, 0, 0.4),
+                        -6px -6px 12px rgba(255, 255, 255, 0.05)
+                    `,
+                    color: '#fff',
+                    transition: 'all 0.2s ease-in-out',
+                    '&:hover': {
+                        boxShadow: `
+                            0 0 18px ${colors.orange[400]},
+                            0 0 4px ${colors.orange[200]}
+                        `,
+                        transform: 'scale(1.1)',
+                    },
                 }}
             >
-                <Box sx={{ display: 'flex', pl: '2px', pb: '2px' }}>
-                    <PostAddIcon fontSize="large" />
-                </Box>
+                <PostAddIcon fontSize="medium" />
             </Button>
         </Box>
     )
 }
 
-export default MobileButton
+export default MobileButtonNeo

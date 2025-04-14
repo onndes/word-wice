@@ -1,35 +1,43 @@
+// AddWordMobileGlass.tsx
 import React from 'react'
 import { Box, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 import useMyTheme from '../../../hooks/useMyTheme'
 import { ADD_WORD_ROUTE } from '../../../common/consts/ROUTES'
 
-const AddWordMobile = () => {
+const AddWordMobileGlass = () => {
     const { theme, t } = useMyTheme()
 
     return (
         <Box
             sx={{
-                display: 'block',
-                zIndex: 1000,
                 position: 'fixed',
-                bottom: '90px',
+                bottom: 90,
                 left: '50%',
                 transform: 'translateX(-50%)',
+                zIndex: 1200,
             }}
         >
             <Button
                 component={Link}
                 to={ADD_WORD_ROUTE}
-                variant="contained"
-                color="secondary"
                 size="large"
                 sx={{
-                    fontWeight: 600,
-                    borderRadius: '5px',
-                    boxShadow: 
-                      `0px 0px 10px 2px ${theme.palette.secondary.main}`,
-                    backdropFilter: 'blur(4px)',
+                    px: 4,
+                    py: 1.5,
+                    borderRadius: '12px',
+                    fontWeight: 700,
+                    color: '#fff',
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    backdropFilter: 'blur(10px)',
+                    border: `1px solid ${theme.palette.secondary.main}50`,
+                    boxShadow: `0 0 14px 2px ${theme.palette.secondary.main}40`,
+                    transition: 'all 0.25s ease-in-out',
+                    '&:hover': {
+                        background: theme.palette.secondary.main,
+                        boxShadow: `0 0 20px 4px ${theme.palette.secondary.main}80`,
+                        transform: 'scale(1.05)',
+                    },
                 }}
             >
                 {t('Add Word')}
@@ -38,4 +46,4 @@ const AddWordMobile = () => {
     )
 }
 
-export default AddWordMobile
+export default AddWordMobileGlass

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { alpha, styled, Tab, Tabs } from '@mui/material'
+import { styled, Tab, Tabs } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import MenuBook from '@mui/icons-material/MenuBook'
 import School from '@mui/icons-material/School'
