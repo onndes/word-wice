@@ -58,15 +58,18 @@ const InputAnswer = ({ control, title, isDisabledInput, inputAnswerRef }) => {
                                     ) : null,
                                 }}
                                 sx={() => ({
+                                    '& .MuiInputBase-root': {
+                                        fontSize: 16,
+                                    },
                                     '& .Mui-focused.MuiInputLabel-root': {
                                         color: 'primary',
-                                        fontSize: 14,
+                                        fontSize: 16,
                                     },
                                     // eslint-disable-next-line max-len
                                     '& .Mui-focused.MuiInputLabel-root.Mui-error':
                                         {
                                             color: colors.redAccent[400],
-                                            fontSize: 14,
+                                            fontSize: 16,
                                         },
                                 })}
                                 {...field}
