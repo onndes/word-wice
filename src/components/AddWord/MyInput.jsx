@@ -29,6 +29,9 @@ export default function MyInput({
                         fullWidth
                         disabled={disabled}
                         sx={() => ({
+                            '& .MuiInputBase-root': {
+                                fontSize: 16,
+                            },
                             '& .Mui-focused.MuiInputLabel-root': {
                                 color: 'primary',
                                 fontSize: 14,

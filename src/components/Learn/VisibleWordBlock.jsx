@@ -4,7 +4,7 @@ import WordRank from '../WordRank'
 
 const VisibleWordBlock = ({ word, isWords, title, show }) => {
     return (
-        <Box mb={2} ml={1}>
+        <Box mb={1} ml={1}>
             <Box
                 sx={{
                     display: 'flex',

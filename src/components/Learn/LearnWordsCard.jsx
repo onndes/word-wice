@@ -55,9 +55,14 @@ const LearnWordsCard = ({ method }) => {
         ({ words }) => words[method]
     )
 
-    const { control: controlAnswer, reset: resetInputAnswer, watch } = useForm()
+    const {
+        control: controlAnswer,
+        reset: resetInputAnswer,
+        watch,
+    } = useForm()
     const answerData = watch(['answer'])[0]
 
+    // console.log('trigger', trigger('answer'))
     const { recommendForLearn, show, isEaseMode } = useSelector(
         ({ settingsApp }) => settingsApp.user
     )
@@ -69,6 +74,7 @@ const LearnWordsCard = ({ method }) => {
             inputAnswerRef.current.blur()
         }
     }
+
     const isCorrectAnswer =
         answerData?.trim()?.toLowerCase() ===
         mixed[currentWordIdx]?.word?.trim()?.toLowerCase()
@@ -264,7 +270,7 @@ const LearnWordsCard = ({ method }) => {
                 {/* ss */}
                 <Box
                     aria-label=""
-                    mt={2}
+                    mt={1}
                     sx={{
                         display: 'flex',
                         gap: '20px',

@@ -22,7 +22,7 @@ const HiddenWordBlock = ({
     }, [isCorrectAnswer])
 
     return (
-        <Box mt={2} mb={2} ml={1}>
+        <Box mt={1} mb={1} ml={1}>
             <Typography mb={1} variant="h6" color="text.secondary">
                 {title}
             </Typography>
