@@ -11,7 +11,7 @@ import useMyTheme from '../hooks/useMyTheme'
 const Indent = styled('div')(({ mq, bottom }) => ({
     // eslint-disable-next-line no-nested-ternary
     paddingTop: mq && !bottom ? '60px' : bottom ? '0px' : '72px',
-    paddingBottom: mq && bottom ? '72px' : 1,
+    paddingBottom: mq && bottom ? '96px' : 1,
 }))
 
 const LayoutWrapper = styled('div')({

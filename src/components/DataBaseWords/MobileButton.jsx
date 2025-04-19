@@ -13,7 +13,7 @@ const MobileButtonNeo = () => {
         <Box
             sx={{
                 position: 'fixed',
-                bottom: 90,
+                bottom: 120,
                 right: 16,
                 zIndex: 1200,
             }}
