@@ -43,6 +43,23 @@ function App() {
     }, [isOnline])
 
     React.useEffect(() => {
+        let previousHeight = window.visualViewport?.height || 0;
+
+        const fixResize = () => {
+            if (window.visualViewport.height > previousHeight) {
+                window.scrollTo(0, 0)
+                document.getElementById('root').style.height = '100%'
+            }
+            previousHeight = window.visualViewport.height
+        }
+
+        window.visualViewport?.addEventListener('resize', fixResize)
+        return () => {
+            window.visualViewport?.removeEventListener('resize', fixResize)
+        }
+    }, [])
+
+    React.useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (!user) {
                 dispatch(removeUser())

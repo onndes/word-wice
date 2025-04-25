@@ -13,16 +13,13 @@ body {
 #root {
     display: flex;
     flex-direction: column;
-    overflow: auto;
-}
-
-body {
-    position: relative;
+    overflow: hidden;
 }
 
 main {
     flex: 1;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .safe-area-bottom {
