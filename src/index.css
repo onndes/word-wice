@@ -2,14 +2,38 @@ html,
 body,
 #root {
     height: 100%;
+    min-height: -webkit-fill-available;
+}
+
+html,
+body {
+    overflow: hidden;
 }
 
 #root {
     display: flex;
     flex-direction: column;
+    overflow: auto;
+}
+
+body {
+    position: relative;
 }
 
 main {
     flex: 1;
     overflow-y: auto;
+}
+.safe-area-bottom {
+    /* Добавляем паддинг снизу ТОЛЬКО если сейчас нет фокусированного input/textarea */
+    :root:not(
+            :has(
+                    input:focus-visible,
+                    textarea:focus-visible,
+                    [contenteditable]:focus-visible
+                )
+        )
+        & {
+        padding-bottom: env(safe-area-inset-bottom, 0);
+    }
 }

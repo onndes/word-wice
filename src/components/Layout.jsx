@@ -18,6 +18,7 @@ const LayoutWrapper = styled('div')({
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100%',
+    // position: 'relative',
 })
 
 const ContentWrapper = styled('div')({
@@ -32,8 +33,8 @@ export default function Layout() {
     return (
         <LayoutWrapper>
             <CssBaseline />
-            {isAuth && <MyAppBar />}
             {isAuth && mq && <MyAppBarMobile />}
+
             <Indent mq={mq} />
             <ContentWrapper>
                 <Container
@@ -48,6 +49,7 @@ export default function Layout() {
                 </Container>
             </ContentWrapper>
             <Indent mq={mq} bottom />
+            {isAuth && <MyAppBar />}
         </LayoutWrapper>
     )
 }
