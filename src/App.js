@@ -43,7 +43,12 @@ function App() {
     }, [isOnline])
 
     React.useEffect(() => {
-        let previousHeight = window.visualViewport?.height || 0;
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+        if (!isIOS) {
+            return undefined
+        }
+
+        let previousHeight = window.visualViewport?.height || 0
 
         const fixResize = () => {
             if (window.visualViewport.height > previousHeight) {
@@ -54,6 +59,7 @@ function App() {
         }
 
         window.visualViewport?.addEventListener('resize', fixResize)
+
         return () => {
             window.visualViewport?.removeEventListener('resize', fixResize)
         }
