@@ -18,11 +18,12 @@ const LayoutWrapper = styled('div')({
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100%',
+    // position: 'relative',
+    overflow: 'auto',
 })
 
 const ContentWrapper = styled('div')({
     flexGrow: 1, // Контент будет занимать всё пространство
-    // paddingBottom: '60px',
 })
 
 export default function Layout() {
@@ -32,8 +33,8 @@ export default function Layout() {
     return (
         <LayoutWrapper>
             <CssBaseline />
-            {isAuth && <MyAppBar />}
             {isAuth && mq && <MyAppBarMobile />}
+
             <Indent mq={mq} />
             <ContentWrapper>
                 <Container
@@ -48,6 +49,7 @@ export default function Layout() {
                 </Container>
             </ContentWrapper>
             <Indent mq={mq} bottom />
+            {isAuth && <MyAppBar />}
         </LayoutWrapper>
     )
 }

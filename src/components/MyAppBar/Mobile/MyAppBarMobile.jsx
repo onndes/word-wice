@@ -30,6 +30,8 @@ export default function MyAppBarMobile() {
                 backdropFilter: 'blur(3px)',
                 color: theme.palette.text.primary,
                 height: '60px',
+                top: 0,
+                bottom: 'auto',
                 zIndex: 1000,
                 borderBottom:
                     theme.palette.mode === 'light'
