@@ -24,6 +24,7 @@ main {
     flex: 1;
     overflow-y: auto;
 }
+
 .safe-area-bottom {
     /* Добавляем паддинг снизу ТОЛЬКО если сейчас нет фокусированного input/textarea */
     :root:not(

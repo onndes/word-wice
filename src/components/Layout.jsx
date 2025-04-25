@@ -19,11 +19,11 @@ const LayoutWrapper = styled('div')({
     flexDirection: 'column',
     minHeight: '100%',
     // position: 'relative',
+    overflow: 'auto',
 })
 
 const ContentWrapper = styled('div')({
     flexGrow: 1, // Контент будет занимать всё пространство
-    // paddingBottom: '60px',
 })
 
 export default function Layout() {
