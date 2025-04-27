@@ -1,7 +1,8 @@
 import { Container } from '@mui/material'
 import React from 'react'
 import {
-    LEVEL_BASE_WORDS_ROUTE,
+    LEVEL_V1_WORDS_ROUTE,
+    LEVEL_V2_WORDS_ROUTE,
     TOP1000_BASE_WORDS_ROUTE,
 } from '../../../common/consts/ROUTES'
 import useMyTheme from '../../../hooks/useMyTheme'
@@ -12,13 +13,21 @@ const СategoriesPage = () => {
 
     return (
         <Container maxWidth="sm" disableGutters>
+            {/* <ButtonDataBase
+                to={LEVEL_V2_WORDS_ROUTE}
+                text={t('By level of English V2')}
+                bgc={colors.greenAccent[600]}
+                bgch={colors.greenAccent[700]}
+                mb
+            /> */}
             <ButtonDataBase
-                to={LEVEL_BASE_WORDS_ROUTE}
-                text={t('By level of English')}
+                to={LEVEL_V1_WORDS_ROUTE}
+                text={t('By level of English (old)')}
                 bgc={colors.orange[600]}
                 bgch={colors.orange[700]}
                 mb
             />
+
             <ButtonDataBase
                 disabled
                 to={TOP1000_BASE_WORDS_ROUTE}

@@ -6,9 +6,8 @@ import { words } from '../../../common/wordsBase'
 import useMyTheme from '../../../hooks/useMyTheme'
 import ButtonDataBase from '../ButtonDataBase'
 import CardsWordsBase from '../CardsWordsBase'
-import { LEVEL_BASE_WORDS_ROUTE } from '../../../common/consts/ROUTES'
 
-const TopicsPage = () => {
+const TopicsPage = ({ linkbase }) => {
     const { t } = useMyTheme()
     const params = useParams()
 
@@ -21,7 +20,7 @@ const TopicsPage = () => {
             {topics[params.id].map((el) => (
                 <ButtonDataBase
                     key={el.title}
-                    to={`${LEVEL_BASE_WORDS_ROUTE}/${params.id}/${el.id}`}
+                    to={`${linkbase}/${params.id}/${el.id}`}
                     text={t(el.title)}
                     mb
                 />

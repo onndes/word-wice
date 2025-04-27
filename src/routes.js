@@ -10,13 +10,14 @@ import Profile from './pages/Profile'
 import Words from './pages/Words'
 import WordsBase from './pages/WordsBase'
 import {
-  ABOUT_APP_ROUTE,
+    ABOUT_APP_ROUTE,
     ADD_WORD_ROUTE,
     BASE_WORDS_ROUTE,
     LEARN_NEW_ROUTE,
     LEARN_REPEAT_ROUTE,
     LEARN_WORDS_ROUTE,
-    LEVEL_BASE_WORDS_ROUTE,
+    LEVEL_V1_WORDS_ROUTE,
+    LEVEL_V2_WORDS_ROUTE,
     LOGIN_ROUTE,
     MENU_ROUTE,
     PROFILE_ROUTE,
@@ -66,18 +67,34 @@ export const privateRoutes = [
         path: BASE_WORDS_ROUTE,
         Component: <WordsBase />,
     },
+    // words base v1 (old)
     {
-        path: LEVEL_BASE_WORDS_ROUTE,
-        Component: <LevelsPage />,
+        path: LEVEL_V1_WORDS_ROUTE,
+        Component: <LevelsPage linkbase={LEVEL_V1_WORDS_ROUTE} />,
     },
     {
-        path: `${LEVEL_BASE_WORDS_ROUTE}/:id`,
-        Component: <TopicsPage />,
+        path: `${LEVEL_V1_WORDS_ROUTE}/:id`,
+        Component: <TopicsPage linkbase={LEVEL_V1_WORDS_ROUTE} />,
     },
     {
-        path: `${LEVEL_BASE_WORDS_ROUTE}/:id/:topic`,
-        Component: <TopicsPage />,
+        path: `${LEVEL_V1_WORDS_ROUTE}/:id/:topic`,
+        Component: <TopicsPage linkbase={LEVEL_V1_WORDS_ROUTE} />,
     },
+    // ---------------------
+    // words base v2 (new)
+    {
+        path: LEVEL_V2_WORDS_ROUTE,
+        Component: <LevelsPage linkbase={LEVEL_V2_WORDS_ROUTE} />,
+    },
+    {
+        path: `${LEVEL_V2_WORDS_ROUTE}/:id`,
+        Component: <TopicsPage linkbase={LEVEL_V2_WORDS_ROUTE} />,
+    },
+    {
+        path: `${LEVEL_V2_WORDS_ROUTE}/:id/:topic`,
+        Component: <TopicsPage linkbase={LEVEL_V2_WORDS_ROUTE} />,
+    },
+    // ---------------------
     {
         path: TOP1000_BASE_WORDS_ROUTE,
         Component: <TopThousandWordsPage />,
