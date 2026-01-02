@@ -6,6 +6,14 @@ The application focuses on **controlled word progression**, **adaptive repetitio
 
 ---
 
+## 🌐 Website
+
+👉 [Visit the website](https://my-vocabulary-fc24b.firebaseapp.com/)
+
+The application was primarily designed with a mobile-first approach.
+
+---
+
 ## 🧠 Core Concept
 
 The main goal of Word Wice is to make vocabulary learning:
