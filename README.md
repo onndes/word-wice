@@ -1,70 +1,158 @@
-# Getting Started with Create React App
+# 📘 Word Wice
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Word Wice is a vocabulary learning application designed to help users systematically build and reinforce foreign language vocabulary.
 
-## Available Scripts
+The application focuses on **controlled word progression**, **adaptive repetition**, and **offline-first usage**, allowing users to study consistently across different devices and connection states.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🧠 Core Concept
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The main goal of Word Wice is to make vocabulary learning:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Structured
+- Predictable
+- Adaptive to memory retention
+- Suitable for short, regular study sessions
 
-### `npm test`
+The app is built around the idea that **each word has a measurable knowledge state**, and repetition frequency should be derived from that state.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 📊 Knowledge Levels System
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Each word is assigned a **knowledge level** that represents how well the user remembers it:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **A0** — New  
+- **A1** — Started  
+- **A2** — Low  
+- **B1** — Medium  
+- **B2** — High  
+- **C1** — Known  
+- **C2** — Learned  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+These levels directly influence:
+- When a word appears for study
+- How often it should be repeated
+- Whether it belongs to learning or repetition flows
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🔁 Learning & Repetition Logic
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The learning process is intentionally simple and decision-based:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Remembered** → level increases by one
+- **Forgotten** → level decreases by one
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Each level has an associated **time delay** before the word becomes available again.
 
-## Learn More
+Examples:
+- **B2 → C1**: approximately 2 hours  
+- **C1 → C2**: approximately 24 hours  
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Once a word reaches **C2**, it is moved to the *learned* category.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 🔄 Learned Words Repetition
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Learned words follow a separate repetition flow:
 
-### Analyzing the Bundle Size
+- Repeated up to **five times**
+- Initial repetition interval: **~3 days**
+- Interval increases with each successful repetition
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+If a learned word is forgotten:
+- Its level is reset to **B2**
+- Repetition counter is reset
 
-### Making a Progressive Web App
+This prevents false long-term retention and keeps vocabulary accurate.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 📚 Vocabulary Management
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Recommended active learning size: **5 words**
+- Configurable up to **50 words per session**
 
-### Deployment
+If the vocabulary size is too small:
+- The application notifies the user
+- Words can be automatically promoted from **A0** to **A1**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+This ensures a continuous learning flow.
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🌐 Offline-First Architecture
+
+Word Wice is designed to function fully **without an active internet connection**:
+
+- All learning actions are available offline
+- Local data is persisted on the device
+- Synchronization occurs automatically once connectivity is restored
+
+### Synchronization Strategy
+
+When multiple devices are used:
+- Conflicts may occur due to different progress states
+- By default, older edits are discarded
+
+An alternative strategy is available:
+- Conflict resolution based on **knowledge level priority**
+
+---
+
+## 📦 Built-in Dictionaries
+
+The application includes predefined vocabulary sets:
+
+- Grouped by language level
+- Categorized by topic
+
+These dictionaries allow users to quickly populate their vocabulary, especially when starting a new language or learning a new topic.
+
+---
+
+## ⚙️ Customization Options
+
+Users can configure:
+- Number of words per learning session
+- Conflict resolution strategy during synchronization
+- Learning flow preferences
+
+Some advanced timing controls are planned but not yet implemented.
+
+---
+
+## 🛠️ Technologies & Technical Approach
+
+### Frontend
+- **React**
+- **TypeScript**
+- Component-based UI architecture
+- Custom hooks for learning and repetition logic
+
+### State Management
+- Centralized state for vocabulary and learning sessions
+- Predictable state transitions based on user actions
+- Separation between learning and repetition flows
+
+### Offline & Storage
+- Local persistence (offline-first)
+- Deferred synchronization
+- Conflict detection and resolution strategies
+
+### Architecture Principles
+- Clear separation between UI and learning logic
+- Deterministic word progression rules
+- Extensible level and timing system
+- Focus on maintainability over premature optimization
+
+---
+
+## 🚧 Project Status
+
+The application is under active conceptual development.
+Some features are still in progress and may evolve as the project grows.
+
